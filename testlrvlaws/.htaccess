@@ -1,9 +1,9 @@
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
-        Options +FollowSymLinks -Indexes
     </IfModule>
     
+    Options +FollowSymLinks -Indexes
     RewriteEngine On
 
     # Handle Authorization Header
