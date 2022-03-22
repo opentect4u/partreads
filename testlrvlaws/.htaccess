@@ -1,12 +1,9 @@
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
+        Options +FollowSymLinks -Indexes
     </IfModule>
-    <Directory /var/www/html/testlrvlaws/public/>
-        Options Indexes FollowSymLinks
-        AllowOverride All
-        Require all granted
-    </Directory>
+    
     RewriteEngine On
 
     # Handle Authorization Header
