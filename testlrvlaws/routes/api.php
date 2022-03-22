@@ -19,22 +19,22 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 // check some test
-Route::get('/test',[App\Http\Controllers\HomeController::class, 'Test']);
-Route::get('/testing',[App\Http\Controllers\TestController::class, 'Test']);
-Route::get('/testing1',[App\Http\Controllers\TestController::class, 'Test1']);
-Route::get('/testing3',[App\Http\Controllers\TestController::class, 'Test3']);
-Route::get('/testing4',[App\Http\Controllers\TestController::class, 'Test4']);
-Route::get('/testing5',[App\Http\Controllers\TestController::class, 'Test5']);
-Route::get('/testing6',[App\Http\Controllers\TestController::class, 'Test6']);
+// Route::get('/test',[App\Http\Controllers\HomeController::class, 'Test']);
+// Route::get('/testing',[App\Http\Controllers\TestController::class, 'Test']);
+// Route::get('/testing1',[App\Http\Controllers\TestController::class, 'Test1']);
+// Route::get('/testing3',[App\Http\Controllers\TestController::class, 'Test3']);
+// Route::get('/testing4',[App\Http\Controllers\TestController::class, 'Test4']);
+// Route::get('/testing5',[App\Http\Controllers\TestController::class, 'Test5']);
+// Route::get('/testing6',[App\Http\Controllers\TestController::class, 'Test6']);
 
-Route::get('/testing8',[App\Http\Controllers\TestController::class, 'Test8']);
-Route::get('/testing9',[App\Http\Controllers\TestController::class, 'Test9']);
+// Route::get('/testing8',[App\Http\Controllers\TestController::class, 'Test8']);
+// Route::get('/testing9',[App\Http\Controllers\TestController::class, 'Test9']);
 
-Route::get('/sendemail',[App\Http\Controllers\TestController::class, 'Sendemail']);
+// Route::get('/sendemail',[App\Http\Controllers\TestController::class, 'Sendemail']);
 
-Route::post('/fileupload',[App\Http\Controllers\TestController::class, 'Fileupload'])->name('fileupload');
+// Route::post('/fileupload',[App\Http\Controllers\TestController::class, 'Fileupload'])->name('fileupload');
 
-Route::get('/testing12',[App\Http\Controllers\TestController::class, 'Test12']);
+// Route::get('/testing12',[App\Http\Controllers\TestController::class, 'Test12']);
 
 // main api URL
 
