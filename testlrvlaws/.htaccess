@@ -1,14 +1,11 @@
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
-        Options Indexes FollowSymLinks
-        AllowOverride All
-        Require all granted
     </IfModule>
 
     RewriteEngine On
-    #RewriteBase /
-
+    RewriteBase /testlrvlaws/
+    
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
