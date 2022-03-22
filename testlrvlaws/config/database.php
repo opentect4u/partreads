@@ -45,11 +45,11 @@ return [
         'mongodb' => [
             'driver'   => 'mongodb',
             'host'     => [
-                            'cluster0-shard-00-02.gu5u9.mongodb.net:27017',
-                            'cluster0-shard-00-01.gu5u9.mongodb.net:27017',
                             'cluster0-shard-00-00.gu5u9.mongodb.net:27017',
+                            'cluster0-shard-00-01.gu5u9.mongodb.net:27017',
+                            'cluster0-shard-00-02.gu5u9.mongodb.net:27017'
                         ],
-            // 'port'     => env('DB_PORT', 27017),
+            'port'     => env('DB_PORT', 27017),
             'database' => env('DB_DATABASE'),
             'username' => env('DB_USERNAME'),
             'password' => env('DB_PASSWORD'),
