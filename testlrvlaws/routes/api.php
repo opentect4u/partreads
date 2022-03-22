@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 // check some test
-/*Route::get('/test',[App\Http\Controllers\HomeController::class, 'Test']);
+Route::get('/test',[App\Http\Controllers\HomeController::class, 'Test']);
 Route::get('/testing',[App\Http\Controllers\TestController::class, 'Test']);
 Route::get('/testing1',[App\Http\Controllers\TestController::class, 'Test1']);
 Route::get('/testing3',[App\Http\Controllers\TestController::class, 'Test3']);
@@ -34,7 +34,7 @@ Route::get('/sendemail',[App\Http\Controllers\TestController::class, 'Sendemail'
 
 Route::post('/fileupload',[App\Http\Controllers\TestController::class, 'Fileupload'])->name('fileupload');
 
-Route::get('/testing12',[App\Http\Controllers\TestController::class, 'Test12']);*/
+Route::get('/testing12',[App\Http\Controllers\TestController::class, 'Test12']);
 
 // main api URL
 
