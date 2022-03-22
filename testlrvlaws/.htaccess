@@ -5,7 +5,7 @@
     
     #Options FollowSymLinks 
     RewriteEngine On
-    #RewriteBase /
+    RewriteBase /
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
