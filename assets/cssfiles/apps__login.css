@@ -79,10 +79,10 @@ img {
 .loginContainerSub{max-width: 1110px; width: 100%; margin:80px auto; display: flex;}
 
 .loginContainerSub .loginLeft{padding: 22px; background: #fff; border-radius: 10px 0 0 10px;}
-.loginContainerSub .loginLeft .logoLogin{margin-bottom: 22px;}
+.loginContainerSub .loginLeft .logoLogin{margin-bottom: 22px; cursor: pointer;}
 .loginContainerSub .loginLeft .leftLoginSec{text-align: center;}
 .loginContainerSub .loginLeft .leftLoginSec img{margin-bottom: 25px;}
-.loginContainerSub .loginLeft .leftLoginSec h2{color: #5a81e9; font-size: 30px; font-weight: 200; margin-bottom: 20px;}
+.loginContainerSub .loginLeft .leftLoginSec h2{color: #5a81e9; font-size: 30px; font-weight: 400; margin-bottom: 20px;}
 .loginContainerSub .loginLeft .leftLoginSec p{color: #434242; font-size: 16px; margin-bottom: 16px;}
 
 .loginContainerSub .loginRight{padding:80px 45px 45px 45px; background: #4c56c0; border-radius: 0 10px 10px 0;}
@@ -90,9 +90,16 @@ img {
 .loginContainerSub .loginRight p{color: #fcfcff; font-size: 14px; line-height: 20px; margin-bottom: 30px;}
 .loginContainerSub .loginRight .loginForm{}
 .loginContainerSub .loginRight .loginForm label{width: 100%; font-size: 16px; color: #dee1fc; margin-bottom: 6px;}
-.loginContainerSub .loginRight .loginForm input[type="text"]{background: #3d46a7; color: #fff; border: none; font-size: 14px; margin-bottom: 22px; height: 45px;}
-.loginContainerSub .loginRight .loginForm input[type="password"]{background: #3d46a7; color: #fff; border: none; font-size: 14px; margin-bottom: 8px; height: 45px;}
-.loginContainerSub .loginRight .loginForm .form-control::placeholder{color: #fff;}
+.loginContainerSub .loginRight .loginForm input[type="text"], 
+.loginContainerSub .loginRight .loginForm input[type="email"]{background: #3d46a7; color: #fff; border: none; font-size: 14px; margin-bottom: 10px; height: 45px;}
+.loginContainerSub .loginRight .loginForm select{background: #3d46a7; color: #fff; border: none; font-size: 14px; margin-bottom: 10px; height: 45px;}
+
+.loginContainerSub .loginRight .loginForm input[type="password"]{background: #3d46a7; color: #fff; border: none; font-size: 14px; margin-bottom: 10px; height: 45px;}
+
+
+
+
+.loginContainerSub .loginRight .loginForm .form-control::placeholder{color: #fff; font-size: 14px;}
 .loginContainerSub .loginRight .loginForm .forgetPass{font-size: 14px; color: #dee1fc; float: right;}
 .loginContainerSub .loginRight .loginForm label.forgetPass a{color: #fff; text-decoration: none;}
 .loginContainerSub .loginRight .loginForm label.forgetPass a:hover{text-decoration: underline;}
