@@ -1,0 +1,354 @@
+<app-adminheader></app-adminheader>
+
+
+<div class="page-body-wrapper">
+    <app-adminsidebar></app-adminsidebar>
+
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <!-- <nav aria-label="breadcrumb" class="main-breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item active" aria-current="page">User Details</li>
+                </ol>
+              </nav> -->
+            <!-- <div class="row gutters-sm">
+            <div class="col-4 mb-3">
+                    <div class="d-flex flex-column align-items-center text-center">
+                    <img src="{{profile}}" alt="Publisher" class="rounded-circle" width="140"    style="height:140px!important;">
+                    
+                    </div>
+
+                <div class="card mt-3" *ngIf="book_details!=''" >
+                <div class="card-header">
+                    <nav aria-label="breadcrumb" class="main-breadcrumb">
+                       <h5>Recent last 5 books</h5>
+                      </nav>
+                </div>
+                    <ul class="p-4 fs-4" id="itemList">
+                        <li  *ngFor="let x of book_details let i=index" (click)="slidedown(i)">
+                          <h6><i class="fa fa-chevron-right" style="font-size: 8px;"></i> {{x.book_details[0].book_name}} by {{x.book_details[0].author_name}} ({{x.book_details[0].publisher_name}})</h6> 
+                            <ul  class="ml-4 text-muted" id="book_detail_{{i}}"   [ngStyle]="{'display': i==0 ? 'block' : 'none'}">
+                                <li >
+                                    <strong class="customList">
+                                        Edition:
+                                    </strong>
+                                    {{x.book_details[0].edition}}
+                                </li>
+                                <li >
+                                  <strong class="customList">
+                                     ISBN:
+                                  </strong>
+                                  {{x.book_details[0].isbn_no}}
+                                </li>
+                                <li >
+                              <strong class="customList">
+                                  Price:
+                              </strong>
+                              <i class="fa fa-inr" aria-hidden="true"></i>{{x.book_details[0].price}}
+                                </li>
+                                <li >
+                          <strong class="customList">
+                              Category:
+                          </strong>
+                         {{x.book_details[0].category_name}}
+                                </li>    
+                            </ul>
+                            <hr/>
+                        </li>
+                    </ul>
+                
+                </div>
+            </div>
+            <div class="col-8 mb-3">
+                <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Full Name</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary customText">
+                       {{p_name}}
+                    </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Email</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary customText">
+                        {{p_email}}
+                    </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Phone</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary customText">
+                        {{p_phone}}
+                    </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Address</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary customText">
+                        {{p_street}}, {{p_city}} {{p_pin}}, {{p_state}}, {{p_country}}
+                    </div>
+                    </div>
+                    <hr>
+                     <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Pincode</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary customText">
+                          {{p_pincode}}
+                        </div>
+                     </div>
+                </div>
+               </div>
+               <div class="row gutters-sm">
+                <div class="col-12">
+                   <div class="card">
+                       <div class="card-header">
+                           <h5>Users search trending</h5>
+                       </div>
+                         <canvas id="pie1" style="width:100%;height:30vh;margin-top:5px;margin-bottom:5px" ></canvas>
+                   </div>
+                </div>
+            </div>
+            </div>
+             </div> -->
+             <div id="cover-spin" [hidden]="load"></div>
+             <div class="row gutters-sm" [hidden]="!load">
+                 <div class="col-12">
+                 <div class="card">
+                     <div class="card-header">
+                        <nav aria-label="breadcrumb" class="main-breadcrumb">
+                            <h5>User Details</h5>
+                           </nav>
+                     </div>
+                     <div class="card-body">
+                         <div class="row">
+                         <div class="col-2">
+                            <div class="customImageBackground">
+                                <img src="{{profile}}" alt="Publisher" class="rounded-circle" width="140"    style="height:140px!important;">
+                            </div>
+                         </div>
+                         <div class="col-10 p-0">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Full Name</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary customText">
+                                   {{p_name}}
+                                </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Email</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary customText">
+                                    {{p_email}}
+                                </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Phone</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary customText">
+                                    {{p_phone}}
+                                </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Type</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary customText">
+                                    {{u_type}}
+                                </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Address</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary customText">
+                                    {{p_street}}&nbsp;{{p_city}}&nbsp;{{p_pin}}&nbsp;{{p_state}}&nbsp;{{p_country}}
+                                </div>
+                                </div>
+                                <hr>
+                                 <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Pincode</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary customText">
+                                      {{p_pincode}}
+                                    </div>
+                                 </div>
+
+                         </div>
+                         </div>
+                     </div>
+                 </div>
+                </div>
+             </div>
+
+             <div class="row gutters-sm" [hidden]="!load">
+                 <div class="col-6">
+                    <div class="card mt-3" >
+                        <div class="card-header">
+                            <nav aria-label="breadcrumb" class="main-breadcrumb">
+                               <h5>Recently visited books by {{p_name}} (last 5)</h5>
+                              </nav>
+                        </div>
+                        <div class="card-body">
+                            <ul class="p-4 fs-4" id="itemList" *ngIf="book_details!=''">
+                                <li  *ngFor="let x of book_details let i=index" (click)="slidedown(i)" style="cursor:pointer">
+                                  <h6><i class="fa fa-chevron-right" style="font-size: 8px;"></i> {{x.book_details[0]?.book_name}} by {{x.book_details[0]?.author_name}} ({{x.book_details[0]?.publisher_name}})</h6> 
+                                    <ul  class="ml-4 text-muted" id="book_detail_{{i}}"   [ngStyle]="{'display': i==0 ? 'block' : 'none'}">
+                                        <li > 
+                                            <strong class="customList">
+                                                Edition:
+                                            </strong>
+                                            {{x.book_details[0]?.edition}}
+                                        </li>
+                                        <li >
+                                          <strong class="customList">
+                                             ISBN:
+                                          </strong>
+                                          {{x.book_details[0]?.isbn_no}}
+                                        </li>
+                                        <li >
+                                      <strong class="customList">
+                                          Price:
+                                      </strong>
+                                      <i class="fa fa-inr" aria-hidden="true"></i>{{x.book_details[0]?.price}}
+                                        </li>
+                                        <li >
+                                  <strong class="customList">
+                                      Category:
+                                  </strong>
+                                 {{x.book_details[0]?.category_name}}
+                                        </li>    
+                                    </ul>
+                                    <hr/>
+                                </li>
+                            </ul>
+
+                            <ul *ngIf="book_details==''">
+                                <li class="text-center"><img src="/assets/images/no-read-book-icons-set-260nw-299610074.jpg" height="150" width="150"/></li>
+                                <li><h2 class="customh2">This user hasn't visited any book yet </h2></li>
+                            </ul>
+                        
+                        </div>
+                        
+                   </div>
+                 </div>
+                 <div class="col-6 mt-3">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <nav aria-label="breadcrumb" class="main-breadcrumb">
+                            <h5>{{p_name}} search trending</h5></nav>
+                        </div>
+                        <div class="card-body">
+                            <h2 *ngIf="chartPercentage.length == 0 && chartPercentage.length == 0" class="customh2">No search trending available for {{p_name}}</h2>
+
+                            <!-- <div *ngIf="chartPercentage.length > 0 && chartPercentage.length > 0"> -->
+                            <canvas id="pie1" style="width: 503px;height: 231px;margin:auto" ></canvas>
+                               <!-- </div> -->
+                        </div>
+                       
+
+                    </div>
+                 </div>
+               
+             </div>
+
+             <div class="row gutters-sm mt-3" [hidden]="!load">
+                 <div class="col-12">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <nav aria-label="breadcrumb" class="main-breadcrumb">
+                                <h5>Payment Chart</h5>
+                               </nav>
+                        </div>
+                        <div class="card-body" >
+                           <h2  class="customh2 p-5" *ngIf="pay_date.length == 0 && tot_pay.length == 0">{{p_name}} has not done any payment yet!!</h2>
+                           <canvas id="bar1" style="width:100%;height:50vh;"></canvas>
+
+                        </div>
+                    </div>
+                 </div>
+  
+             </div>
+            <div class="row gutters-sm mt-3" [hidden]="!load">
+              <div class="col-12">
+                  <div class="card">
+                      <div class="card-header">
+                          <nav aria-label="breadcrumb" class="main-breadcrumb">
+                            <h5>Coupons used by {{p_name}}</h5>
+                          </nav>
+                      </div>
+                      <div class="card-body"*ngIf="coupon_used.length > 0">
+                        <mat-form-field appearance="standard">
+                            <mat-label>Search</mat-label>
+                            <input matInput (keyup)="applyFilter($event)" #input placeholder="Search by book name,Coupon code and date">
+                          </mat-form-field>
+                          
+                          <div class="mat-elevation-z8">
+                            <table mat-table [dataSource]="dataSource" matSort>
+                          
+                              <!-- ID Column -->
+                              <ng-container matColumnDef="No.">
+                                <th mat-header-cell *matHeaderCellDef> Sl No. </th>
+                                <td mat-cell *matCellDef="let row;let i=index">{{i+1}}</td>
+                              </ng-container>
+                          
+                              <!-- Progress Column -->
+                              <ng-container matColumnDef="coupon used">
+                                <th mat-header-cell *matHeaderCellDef> Coupon </th>
+                                <td mat-cell *matCellDef="let row">{{row.coupon_code}}</td>
+                              </ng-container>
+                
+                                <!-- Progress Column -->
+                                <ng-container matColumnDef="book name">
+                                    <th mat-header-cell *matHeaderCellDef> Book </th>
+                                    <td mat-cell *matCellDef="let row">{{row.book_name}}</td>
+                                  </ng-container>
+                          
+                              <!-- Name Column -->
+                              <ng-container matColumnDef="date">
+                                <th mat-header-cell *matHeaderCellDef> Date </th>
+                                <td mat-cell *matCellDef="let row">{{row.created_at |  date:'dd/MM/YYYY h:mma'}}</td>
+                              </ng-container>
+                             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                          
+                              <!-- Row shown when there is no matching data. -->
+                              <tr class="mat-row" *matNoDataRow>
+                                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                              </tr>
+                            </table>
+                          
+                            <mat-paginator [pageSizeOptions]="[50, 100, 200]" aria-label="Select page of users"></mat-paginator>
+                          </div>
+                      </div>
+                      <div class="card-body"    *ngIf="coupon_used.length == 0" >
+                                <h3 class="text-muted text-center p-5">{{p_name}} has not used any coupons yet!!</h3> 
+                      </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+       
+
+
+    </div>
+</div>
+
+

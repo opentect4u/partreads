@@ -1,0 +1,37 @@
+.ng-autocomplete {/*For AutoComplete search*/
+    width:100%;
+    max-width: 800px;
+    display: table;
+    margin: 0 auto;
+    margin-left:-5px;
+  }
+  .item {/*For AutoComplete search dropdown*/
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    white-space: nowrap;
+    line-height: 45px;
+    height: 45px;
+    padding: 0 16px;
+    text-align: left;
+    max-width: 100%;
+    box-sizing: border-box;
+    font-size: 13px;
+  }
+  span {
+    margin-left: 5px;
+  }
+  .search_sec{/*For Advance Search*/
+    cursor: pointer; float:right;
+  }
+  .ortxt{
+    margin-top: -29px;
+    margin-right: -20px;
+      float:right;
+    font-size: 14px;
+  }
+.example-margin {margin: 4px 0 1px 0px;}/*For material checkbox*/
+/* .customDiv{font-size: 13px;} */
+.form-control{font-size: 18px!important;}
+.btn{font-size: 14px!important;}
+/* .customWordsInput{width:90%!important;} */

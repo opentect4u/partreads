@@ -1,0 +1,64 @@
+<app-userheaderafterlogin></app-userheaderafterlogin>
+<!-- <div class="breadcrumb">
+    <ul>
+        <li><a routerLinkActive="true" routerLink="/user/user_view">Home</a></li>
+        <li>&gt;</li>
+        <li>Search Results</li>
+    </ul>
+</div> -->
+<!-- <div class="filterDiv">
+        <div class="col-sm-4 float-left">
+            <select [(ngModel)]="cat_value" data-placeholder="Select Author" class="chosen-select" #cats id="cats" (change)="show_cat()">
+                <option value="">--Select Category--</option>
+                <option *ngFor="let i of catdata" [ngValue]="i._id">{{i.name}}</option>
+               
+            </select>
+        </div>
+        <div class="col-sm-4 float-left">
+            <select [(ngModel)]="sub_value" data-placeholder="Select Author" class="chosen-select" #subcats (change)="show_subcat()">
+                <option value="">--Select Sub-Category--</option>
+                <option *ngFor="let m of subcatdata" [ngValue]="m._id">{{m.name}}</option>
+            </select>
+        </div>
+    </div> -->
+<div class="bodyContainer">
+
+    <div class="book_loadMain" *ngIf="loader">
+
+        <div class="loader loader-1">
+            <div class="loader-outter"></div>
+            <div class="loader-inner"></div>
+        </div>
+
+
+    </div>
+
+    <!-- <div class="spinner-border book_load" *ngIf="loader"></div> -->
+
+    <div class="wrapperCustome">
+        <div style="text-align: center;" [hidden]="!showmsg" class="inputfont">{{nomatch}}</div>
+
+        <div class="bookList-col" *ngFor="let x of bookdata | paginate: { itemsPerPage: 15, currentPage: p }">
+            <div class="bookList">
+
+                <div class="bookPro"><img [src]="x.book_image_path" alt="" /></div>
+                <div class="bookProDetails">
+                    <p>{{x.book_name}}<br>
+                        <span> {{x.author_name}}</span>
+                    </p>
+                    <p class="price"><i class="fa fa-inr" aria-hidden="true"></i> {{x.price}}</p>
+                    <a (click)="showdetails(x.book_id,x.publisher_id)" href="javascript:void(0)" class="btnDetails">Read
+                        More</a>
+                </div>
+            </div>
+        </div>
+
+        <br clear="all">
+
+    </div>
+    <div style="text-align:center;">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+</div>
+
+<app-site-footer></app-site-footer>

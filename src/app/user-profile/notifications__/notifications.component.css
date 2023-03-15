@@ -1,0 +1,53 @@
+/* .P_Tag{
+    display: inline-block;
+} */
+/* .P_Tag  p{
+    padding-top:10px;
+    padding-left:12px;
+    word-spacing:2px;
+} */
+
+.P_Tag  p{
+  word-spacing: 2px;
+  padding: 9px;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  /* td, th {
+    width: 17%;
+  } */
+
+
+  .Table_profilePic{
+    text-align: center;
+    /* border: #fff solid 1px; */
+    overflow: hidden;
+    box-shadow: 0px 0 7px 4px #dfdfdf;
+    margin: 0 auto 20px auto;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    height: 50px !important;
+    width: 50px !important;
+  }
+  .book_pic{
+    text-align: center;
+    /* border: #fff solid 1px; */
+    overflow: hidden;
+    box-shadow: 0px 0 7px 4px #dfdfdf;
+    margin: 0 auto 20px auto;
+    /* border-radius: 50%; */
+    display: flex;
+    align-items: center;
+    height: 50px !important;
+    width: 50px !important;
+  }

@@ -1,0 +1,160 @@
+<app-adminheader></app-adminheader>
+
+<div class="page-body-wrapper">
+  <app-adminsidebar></app-adminsidebar>
+
+  <div class="main-panel">
+    <div class="content-wrapper">
+      <div class="card">
+        <div class="card-body">
+          <div class="titleSec">
+
+            <h2>Create Coupon</h2>
+          </div>
+          <div class="row mt-3 mb-3">
+              <div class="col-6">
+                <mat-radio-group aria-label="Select an option">
+                    <mat-radio-button value="B" color="primary" checked  (change)="checkmode($event)">Book Specific</mat-radio-button>
+                    <mat-radio-button value="G" color="primary" class="ml-3" (change)="checkmode($event)">General</mat-radio-button>
+                  </mat-radio-group>
+              </div>
+              <div class="col-6">
+
+              </div>
+              <div class="col-12">
+                <div class="alert alert-success" role="alert" [hidden]="view_coupon">
+                  Coupon has been generated successfully! <a (click)="clickToPreview()" class="text-sucess" style="cursor: pointer;text-decoration:underline;">  view coupon</a>
+                </div>
+              </div>
+          </div>
+
+
+
+
+     
+<form #LogForm="ngForm" (ngSubmit)="submit(LogForm)">
+ <div id="cover-spin" *ngIf="load"><div class="innerspin">Generating Coupon...<span *ngIf="this.total_coupon > 0 "> ({{this.counterend}}/{{this.total_coupon}})</span></div></div>
+
+<div class="row" *ngIf="flag=='B'">
+<div class="col-6">
+<mat-form-field appearance="outline">
+<mat-label>Book Name</mat-label>
+<!-- <select  class="selectpicker" matNativeControl name="bookname" #bookname="ngModel" ngModel required >
+    <option  value="">Select book name</option>
+    <option  *ngFor="let books of ActivelBooks" value="{{books.book_id}}">
+    {{books.book_name}} | {{books.isbn_no}}
+    </option>
+  </select> -->
+<input matInput  type="text"  name="bookname" #bookname="ngModel" ngModel required >
+
+<mat-error *ngIf="bookname.errors?.required && (bookname.touched || bookname.dirty)" >
+    *Please Provide Book Name
+</mat-error>
+
+<!-- <select class="selectpicker" data-live-search="true">
+  <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
+  <option data-tokens="mustard">Burger, Shake and a Smile</option>
+  <option data-tokens="frosting">Sugar, Spice and all things nice</option>
+</select> -->
+
+</mat-form-field>
+</div>
+<div class="col-6">
+<mat-form-field appearance="outline">
+<mat-label>No of Coupon</mat-label>
+<input matInput  type="number" name="no_of_coupon" #no_of_coupon="ngModel" ngModel required >
+<mat-error *ngIf="no_of_coupon.errors?.required && (no_of_coupon.touched || no_of_coupon.dirty)" >
+    *Please Provide No Of Coupon
+</mat-error>
+</mat-form-field>
+
+</div>
+</div>
+<div class="row mt-4" *ngIf="flag=='B'">
+<div class="col-6">
+<mat-form-field class="example-full-width" appearance="outline">
+<mat-label>Coupon Start Date</mat-label>
+<input type="date" matInput name="startDate" #startDate="ngModel" ngModel required [min]="getToday()" (change)="get_start_date(startDate.value)"/>
+<mat-error *ngIf="startDate.errors?.required && (startDate.touched || startDate.dirty)" >
+    *Please Provide Coupon Start Date
+</mat-error>
+</mat-form-field>
+</div>
+<div class="col-6">
+<mat-form-field class="example-full-width" appearance="outline">
+<mat-label>Coupon End Date</mat-label>
+<input type="date" matInput name="endDate" #endDate="ngModel" ngModel required [min]="getToday()" (change)="get_end_date(endDate.value)"/>
+<mat-error *ngIf="endDate.errors?.required && (endDate.touched || endDate.dirty)" >
+    *Please Provide Coupon End Date
+</mat-error>
+</mat-form-field>
+
+</div>
+</div>
+<div class="row mt-4" *ngIf="flag=='B'">
+<div class="col-6">
+<mat-form-field class="example-full-width" appearance="outline">
+<mat-label>Book Start Date</mat-label>
+<input type="date" matInput name="bookstartDate" #bookstartDate="ngModel" ngModel required [min]="LogForm.value.startDate?LogForm.value.startDate:getToday()" [max]="LogForm.value.startDate?LogForm.value.startDate:''"/>
+<mat-error *ngIf="bookstartDate.errors?.required && (bookstartDate.touched || bookstartDate.dirty)" >
+    *Please Provide Book Start Date
+</mat-error>
+</mat-form-field>
+</div>
+<div class="col-6">
+<mat-form-field class="example-full-width" appearance="outline">
+<mat-label>Book End Date</mat-label>
+<input type="date" matInput name="bookendDate" #bookendDate="ngModel" ngModel required [min]="LogForm.value.endDate?LogForm.value.endDate:getToday()"/>
+<mat-error *ngIf="bookendDate.errors?.required && (bookendDate.touched || bookendDate.dirty)" >
+    *Please Provide Book End Date
+</mat-error>
+</mat-form-field>
+</div>
+
+</div>
+<div class="row" *ngIf="flag=='G'">
+<div class="col-6">
+    <mat-form-field class="example-full-width" appearance="outline">
+    <mat-label>Start Date</mat-label>
+    <input type="date" matInput name="StartDate" #StartDate="ngModel" ngModel required [min]="getToday()"/>
+    <mat-error *ngIf="StartDate.errors?.required && (StartDate.touched || StartDate.dirty)" >
+        *Please Provide Start Date
+    </mat-error>
+</mat-form-field>
+</div>
+<div class="col-6">
+    <mat-form-field class="example-full-width" appearance="outline">
+    <mat-label>End Date</mat-label>
+    <input type="date" matInput name="EndDate" #EndDate="ngModel" ngModel required [min]="getToday()"/>
+    <mat-error *ngIf="EndDate.errors?.required && (EndDate.touched || EndDate.dirty)" >
+        *Please Provide End Date
+    </mat-error>
+</mat-form-field>
+</div>
+
+
+</div>
+<div class="row" *ngIf="flag=='G'">
+<div class="col-6">
+<mat-form-field class="example-full-width" appearance="outline">
+<mat-label>₹ Credit Amount</mat-label>
+<input type="number" matInput name="creaditammount" #creaditammount="ngModel" ngModel required/>
+<mat-error *ngIf="creaditammount.errors?.required && (creaditammount.touched || creaditammount.dirty)" >
+    *Please Provide Credit Amount 
+</mat-error>
+</mat-form-field>
+</div>
+</div>
+<div class="row" >
+<div class="col-6 btnSubmitSec">
+<input type="submit" class="btn btn-info" value="Create" [disabled]="LogForm.invalid"/>
+<input type="reset" class="btn btn-info" value="RESET" id="Reset" hidden (click)="LogForm.resetForm()"/>
+</div>
+</div>
+</form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

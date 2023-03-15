@@ -1,0 +1,181 @@
+
+<!--div class="topBanner">
+    <div class="wrapper_top">
+      <div class="col-sm-3 float-left logo"><a href="#"><img src="/assets/images/logo.png" alt=""></a></div>
+      <div class="col-sm-9 float-left">
+        <div class="navSectionAfterLog">
+          <div class="searchSectionAfterLog"><input class="form-control" type="search"
+              placeholder="Search by Name, Author, ISBN" aria-label="Search"><input type="submit" value="Search"></div>
+
+          <div class="loginDetaiTop">
+
+            <ul>
+              <li> <a href="#"><i class="fa fa-bell" aria-hidden="true"></i></a></li>
+              <li class="thumbnailLi"> <a (click)="show()" class="dropbtn loginThumb"
+                  style="background: url('/assets/images/thumnailBig.jpg') no-repeat center center; background-size: cover;">&nbsp;</a>
+
+                <div id="myDropdown" class="dropdown-content">
+                  <a href="#home"><i class="fa fa-user-o" aria-hidden="true"></i> My Profile</a>
+                  <a href="#about"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Change Password</a>
+                  <a (click)="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a>
+                </div>
+
+              </li>
+
+
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div-->
+  <app-site-header></app-site-header>
+  <!-- <div class="breadcrumb" appNoright>
+    <ul>
+      <li><a routerLinkActive="true" routerLink="/publisher/publisher-dashboard">Home</a></li>
+      <li>&gt;</li>
+      <li>Book Details</li>
+    </ul>
+  </div> -->
+  
+  <div class="bodyContainer" appNoright >
+    <div class="wrapperCustome" appNoright>
+    
+      <app-site-side-bar></app-site-side-bar>
+      <div class="col-sm-9 float-left" appNoright>
+        <div class="rightSection" appNoright>
+
+          <!-- <div class="loader" ></div> -->
+          <div id="cover-spin" [hidden]="load"></div>
+
+            <div class="row" [hidden]="!load">
+                <div class="col-12">
+                    <h2>Book Details
+                      <button *ngIf="active_inactive=='A'" class="btn finalSubmitButton float-right" [routerLink]="['/publisher/editbooks',book_details?._id,book_details?.book_id]"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  Edit</button>
+                        <!-- <button class="btn finalSubmitButton float-right" [routerLink]="['/publisher/editbooks',book_details?._id,book_details?.book_id]"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  Edit</button> -->
+                    </h2>
+                </div>
+                <hr>
+            </div>
+
+           <div class="row mt-5" [hidden]="!load">
+               <div class="col-4 text-center Container">
+                   <img class="imgThumbnail" src="{{img_url}}"/>
+                   <div class="middle">
+                    <div class="text" data-toggle="modal" data-target="#previewPdf">Preview</div>
+                  </div>
+                </div>
+               <div class="col-4">
+                     <ul class="pubBookDetails_Ut">
+                         <li class="customli"><strong class="customStrong"> Book: </strong> {{book_details?.book_name}}</li>
+                         <li class="customli" id="customAuthor"><strong class="customStrong"> Author: </strong> {{book_details?.author_name}}
+                            <!-- <div class="hide"> -->
+                                <!-- <mat-card><mat-card-subtitle>About Author</mat-card-subtitle><hr><mat-card-body>
+                                    {{book_details?.about_author}}
+                                </mat-card-body></mat-card> -->
+                            <!-- </div> -->
+                        </li>
+                         <li class="customli"><strong class="customStrong"> Publisher: </strong> {{book_details?.publisher_name}}</li>
+                         <li class="customli"><strong class="customStrong"> Date Of publication: </strong>{{book_details?.publication_date | date:'dd-MM-YYYY'}}</li>
+                         <li class="customli"><strong class="customStrong"> Edition: </strong> {{book_details?.edition}}</li>
+                         <li class="customli"><strong class="customStrong"> ISBN: </strong>{{book_details?.isbn_no}}</li>
+                         <li class="customli" id="section"><strong class="customStrong"> Sub-category: </strong>{{book_details?.sub_category?.name}} <span *ngIf="book_details?.sub_category_id_1!=''"> ,{{book_details?.sub_category_1?.name}}</span> <span *ngIf="book_details?.sub_category_id_2!=''"> , {{book_details?.sub_category_2?.name}}</span></li>
+                         <li class="customli"><strong class="customStrong"> Category: </strong> {{book_details?.category?.name}} <span *ngIf="book_details?.category_id_1!=''"> , </span>{{book_details?.category_1?.name}} <span *ngIf="book_details?.category_id_2!=''"> , </span>{{book_details?.category_2?.name}}</li>
+                         <!--
+                         <li class="customli"><strong class="customStrong"> Price (Full E-book): </strong><i class="fa fa-inr"></i> {{book_details?.price_fullbook}}</li>
+                         <li class="customli"><strong class="customStrong"> MRP (Hard copy book): </strong><i class="fa fa-inr"></i> {{book_details?.print_book_mrp}}</li>
+                         <li class="customli"><strong class="customStrong"> Offer Price (Hard copy book): </strong><i class="fa fa-inr"></i> {{book_details?.print_book_offermrp}}</li>
+                         <li class="customli"><strong class="customStrong"> Delivery Charge (Hard copy book): </strong><i class="fa fa-inr"></i> {{book_details?.print_book_deliverycharge}}</li> -->
+
+
+                     </ul>
+               </div>
+               <div class="col-4">
+                           <div class="bookDetailsPub_Ut">
+                               <ul class="customUl">
+                                   <li class="customcardli"><strong class="customStrong">Per Page Credits: </strong> <i class="fa fa-inr"></i>{{book_details?.price}}</li>
+                                   <li class="customcardli"><strong class="customStrong">Full E-book Price: </strong> <i class="fa fa-inr"></i>{{book_details?.price_fullbook}}</li>
+                                   <li class="customcardli"><strong class="customStrong">MRP (Hard Copy): </strong> <i class="fa fa-inr"></i>{{book_details?.print_book_mrp}}</li>
+                                   <li class="customcardli"><strong class="customStrong"> Offer Price (Hard copy): </strong> <i class="fa fa-inr"></i>{{book_details?.print_book_offermrp}}</li>
+                                   <li class="customcardli"><strong class="customStrong">  Delivery Charge (Hard copy): </strong> <i class="fa fa-inr"></i>{{book_details?.print_book_deliverycharge}}</li>
+                                </ul>
+                              </div>
+               </div>
+           </div>
+
+           <div class="row mt-5" [hidden]="!load">
+            <div class="col-12 mb-2">
+              <h2 *ngIf="active_inactive=='A'">Subscribed Pages</h2>
+              <h2 *ngIf="active_inactive=='I'">Active Pages</h2>
+             </div>
+               <div class="col-12">
+                <mat-form-field appearance="standard">
+                  <mat-label>Search</mat-label>
+                  <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+                </mat-form-field>
+                
+                <div class="mat-elevation-z8">
+                  <table mat-table [dataSource]="dataSource" matSort>
+                
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="id">
+                      <th mat-header-cell *matHeaderCellDef class="text-center"> SL No.</th>
+                      <td mat-cell *matCellDef="let row;let i=index"> {{i+1}} </td>
+                    </ng-container>
+                
+                    <!-- Progress Column -->
+                    <ng-container matColumnDef="Page No">
+                      <th mat-header-cell *matHeaderCellDef class="text-center"> Page No</th>
+                      <td mat-cell *matCellDef="let row"> {{row.book_page_no}} </td>
+                    </ng-container>
+                
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="user count">
+                      <th mat-header-cell *matHeaderCellDef class="text-center"> No Of User </th>
+                      <td mat-cell *matCellDef="let row"> {{row.count_user}} </td>
+                    </ng-container>               
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                
+                    <!-- Row shown when there is no matching data. -->
+                    <tr class="mat-row" *matNoDataRow>
+                      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                    </tr>
+                  </table>
+                
+                  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+                </div>
+               </div>
+           </div>
+        
+         </div>
+      </div>
+  
+  
+      <br clear="all">
+    </div>
+  </div>
+  
+  <div id="previewPdf" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title text-center">{{book_details?.book_name}}</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            
+          <ngx-extended-pdf-viewer [zoom]="'page-width'" src="{{pdf_url}}" [useBrowserLocale]="false" height="80vh"></ngx-extended-pdf-viewer>
+        </div>
+        <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div> -->
+      </div>
+  
+    </div>
+  </div>
+  <app-site-footer></app-site-footer>

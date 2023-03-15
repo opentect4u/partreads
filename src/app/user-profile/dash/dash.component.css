@@ -1,0 +1,188 @@
+/* .loader {
+    border: 2px solid #febc07;
+    border-radius: 50%;
+    border-top: 2px solid black;
+    width: 80px;
+    height: 80px;
+    -webkit-animation: spin 2s linear infinite; 
+    animation: spin 2s linear infinite;
+    margin-left:40%;
+  }
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }} */
+    .loader {
+      /* border: 2px solid #febc07; */
+      border: 2px solid #164d8d;
+      border-radius: 50%;
+      /* border-top: 2px solid black; */
+      border-top: 1px solid white;
+      /* width: 80px;
+      height: 80px; */
+      width: 35px;
+      height: 35px;
+      -webkit-animation: spin 2s linear infinite; /* Safari */
+      animation: spin 2s linear infinite;
+      margin-left:40%;
+    }
+    @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }}
+    .dashclass{
+      background-color: white;
+      margin-top: 15px;;
+    }
+  .dashclass{
+    background-color: white;
+    margin-top: 15px;;
+  }
+mat-form-field{width:100%;font-size: 13px;}
+mat-error{font-size: 13px;font-weight: 500px;}
+
+
+
+
+
+/* on hover on book */
+.textbox .book_details01 h4{
+  /* font-size: 16px;  */
+  font-size: 14px; 
+  margin-bottom: 12px;
+}
+ .textbox .book_details01 h5{
+   /* font-size: 16px; */
+   font-size: 15px;
+    margin-top: 21px;}
+ .textbox .book_details01 h4.slider_price{font-size: 16px; margin-top: 20px;}
+.bookPro .textbox {
+  /* width:100px; height:150px; position:absolute;  bottom:0; left:1; right:1; margin-bottom:-200px; background-color: rgba(0,0,0,0.65); color:#FFFFFF; line-height:20px; padding-top:40px;  */
+
+  width: 100%;
+  height: 100%;
+  /* height: auto; */
+  position: absolute;
+  bottom: 0;
+  left: 1;
+  right: 1;
+  margin-bottom: -200px;
+  background-color: rgba(0,0,0,0.65);
+  color: #FFFFFF;
+  line-height: 20px;
+  padding-top: 40px;
+  border-radius: 5px;
+  text-align: center;
+  }
+  .bookPro:hover .textbox {
+  margin-bottom:0;
+  }
+  .text {
+  padding-top: 50px;
+  color:#FFFFFF;
+  text-transform:uppercase;
+  font-size:14px;
+  }
+  
+  .text span {
+  font-size:10px;
+  text-align:center;
+  clear:both;
+  
+  
+  }
+  
+  
+  .book_details01 {
+  color:#FFFFFF;
+  /* font-size:20px!important; */
+  text-align:center;
+  clear:both;
+  /* line-height: 41px!important; */
+  font-family: 'latoregular';
+  
+  
+  }
+  
+  .textbox {
+  -webkit-transition: all 0.7s ease; transition: all 0.7s ease;
+  }
+  .textbox .slider_price strong{font-family: 'Rupee_Foradian';}
+  
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  .container {margin-left:inherit;}
+  }
+  
+  @media only screen and (min-width: 768px) and (max-width: 900px) {
+  .container {margin-left:10%;}
+  }
+  .customMore{color: #164d8d;float: right;font-size: 15px;}
+  .customHr{height:0}
+
+  .container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    background: #eee;
+}
+.container:before {
+    content: "";
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+.container .spinner-frame {
+  display: inline-block;
+  vertical-align: middle;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  border: 5px solid #fff;
+  padding: 10px;
+}
+.container .spinner-frame .spinner-cover {
+  background: #fff;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: relative;
+  z-index: 2;
+}
+.container .spinner-frame .spinner-bar {
+  background: #29d;
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 100% 0 0 0;
+  -webkit-animation: spinny 2s linear infinite;
+  transform-origin: 100% 100%;
+}
+@-webkit-keyframes spinny {
+  0% {
+      transform: rotate(0deg);
+      background: #29d;
+  }
+  50% {
+      transform: rotate(180deg);
+      background: #00427c;
+  }
+  100% {
+      transform: rotate(360deg);
+      background: #29d;
+  }
+}

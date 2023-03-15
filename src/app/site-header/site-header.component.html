@@ -1,0 +1,254 @@
+
+<div class="topBanner">
+  <div class="wrapper_top">
+    <div class="col-sm-3 float-left logo"><a routerLinkActive="true" routerLink="/publisher/publisher-dashboard"><img
+          src="/assets/images/logo.png" alt=""></a></div>
+    
+    
+    <div class="col-sm-9 float-left">
+
+      <div class="navSection">
+
+      <div class="searchSection">
+        <div class="searchFieldCont">
+            <ng-autocomplete [data]="searchData" [searchKeyword]="searchKeyWord"
+                placeholder="Search by name, author or ISBN">
+            </ng-autocomplete>
+
+   
+
+            <ng-template #notFoundTemplate let-notFound>
+                <div style="font-size:medium;" [innerHTML]="notFound"></div>
+            </ng-template>
+            <!-- <a class="search_sec" data-toggle="modal" data-target="#advancedSearch">Advanced Search</a> -->
+        </div>
+        <input type="submit" value="Search" >
+    </div>
+
+  <div class="loginDetaiTop">
+
+    <ul>
+      <li> 
+        <div class="dropdown">
+          <!-- <button  style="margin-top:-32%;outline: none;
+          box-shadow: none;" (click)="count_it()" class="btn cart" type="button" data-toggle="dropdown"> -->
+          <button  style="margin-top:-32%;outline: none;
+          box-shadow: none;" (click)="count_it()" data-toggle="dropdown" class="btn cart" type="button">
+          <i class="fa fa-bell" aria-hidden="true"></i>
+            <div class="count" [hidden]="counter" ><strong *ngIf="let_count<10">{{let_count}}</strong><strong *ngIf="let_count>=10">9+</strong></div>
+          </button>
+          <!-- <ul class="dropdown-menu drop_notif" >
+           <li *ngIf="!show_notif">
+             <div  class="loader"></div>
+            
+            </li>
+           
+            <li style="cursor: pointer;" routerLink='/publisher/notification' routerLinkActive="true" *ngFor="let row of showNotification">
+             
+                <div *ngIf="row.subject=='BookUpload'; then ifblock"></div>
+                <ng-template #ifblock>
+                          <div *ngIf="row.body=='Reject'">
+                            <h4 class="text-danger full">Rejected!</h4> 
+                            <p class="text-muted smallTxt"> {{row.book_name}}. </p>
+                          </div>
+                          <div *ngIf="row.body=='Approved'"> 
+                            <h4 class="text-success full">Approved!</h4>
+                            <p class="text-muted smallTxt">{{row.book_name}}. </p>
+                          </div>
+                      </ng-template>
+            </li>
+           
+            <br>
+            <li [hidden]="!show_notif"><a routerLink='/publisher/notification' routerLinkActive="true" class="float:right">Show all</a></li>
+          </ul> -->
+          <div class="Notification" id="pub_notification">
+            <div class="Notification-header"><h3>Notifications</h3></div>
+            <div style="cursor: pointer;"  routerLink='/publisher/notification'   routerLinkActive="true" *ngFor="let row of showNotification" [hidden]="!show_notif" >
+          
+            <div class="pub_NotificationBody" *ngIf="row.subject=='BookUpload'">
+              <h4 *ngIf="row.body=='Reject'">{{row.book_name}} <span class="float-right text-danger">Rejected!</span></h4>
+              <h4 *ngIf="row.body=='Approved'">{{row.book_name}} <span class="float-right text-success">Approved!</span></h4>
+            </div>
+            </div>
+            <div class="text-center" *ngIf="!show_notif"><div  class="loader" ></div></div>
+            <div class="Notification-footer" [hidden]="!show_notif"><button class="btn btn-block btn-primary"  routerLink='/publisher/notification' routerLinkActive="true">Show all</button></div>
+          </div>
+        
+        
+        </div>
+      </li>
+        <li class="thumbnailLi"> <a *ngIf="profile!=undefined" #matTooltip matTooltip="{{Name}}" (click)="show()" class="dropbtn loginThumb"
+          style="background: url({{profile}}) no-repeat center center; background-size: cover;">&nbsp;</a>
+          <a #matTooltip matTooltip="{{Name}}" *ngIf="profile==undefined" (click)="show()" class="dropbtn loginThumb"
+          style="background: url(/assets/images/no_dp.png) no-repeat center center; background-size: cover; margin-left: 12px;">&nbsp;</a>
+        <div id="myDropdown" class="dropdown-content">
+          <a routerLinkActive="true" routerLink="/publisher/edit"><i class="fa fa-user-o" aria-hidden="true"></i>
+            My Profile</a>
+          <a style="cursor: pointer;" (click)="openmodal()" data-toggle="modal" data-target="#mymodal_changepass"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Change Password</a>
+          <!-- <a  style="cursor: pointer;" data-toggle="modal" data-target="#mymodal"><i class="fa fa-sign-out" aria-hidden="true"></i> Log
+            Out</a> -->
+            <a  style="cursor: pointer;" (click)="Logout()"><i class="fa fa-sign-out" aria-hidden="true"></i> Log
+              Out</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  </div>
+    </div>
+  </div>
+  <br clear="all">
+</div>
+
+
+
+
+
+<!-- For Logout Modal -->
+<div class="modal fade" id="mymodal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <!-- <h4 class="modal-title">Modal Header</h4> -->
+      </div>
+      <div class="modal-body">
+        <p class="p">Are you sure you want to log out?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn button-no" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn button-yes" data-dismiss="modal" (click)="logout()">OK</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<!-- For Change Password -->
+<!-- <div class="modal fade" id="mymodal_changepass" role="dialog">
+  <div class="modal-dialog">
+  
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Change Password</h4>
+
+        
+      </div>
+      <div class="modal-body">
+        <input type="password" class="form-control inputfont" id="old_pss" #old_password placeholder="Enter old password"><br><br>
+        <input type="password" class="form-control inputfont" id="pss" #password placeholder="Enter new password"><br><br>
+        <input type="password" class="form-control inputfont" id="con_pss" #conpassword placeholder="Confirm new password"><br><br>
+        <div class="form-check">
+     <input type="checkbox" class="form-check-input inputfont" id="show_pass" (click)="change_type()"/>
+     <label class="form-check-label inputfont pl-2" for="show_pass">Show Password</label>
+     </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn button-no" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn button-yes"  (click)="change_pass(password.value,conpassword.value,old_password.value)">OK</button>
+      </div>
+    </div>
+    
+  </div>
+</div> -->
+
+
+<!-- For Change Password -->
+<div class="modal fade" id="mymodal_changepass" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Change Password</h4>
+        <button type="button" class="close" data-dismiss="modal" id='close_mymodal_changepass'>&times;</button>
+        
+      </div>
+      <div class="modal-body">
+  <div class="row">
+    <div class="col-12 mb-2">
+      <!-- <label>Old Password:</label> -->
+
+      <div class="form-group">
+        <!-- <label class="inputWraper">
+          <input id="old_pss" type="password" class="form-control"  #old_password>
+         
+          <span
+            id="iconshow" class="p-viewer">
+            <i id="eye" class="fa fa-eye-slash viewPas" aria-hidden="true" (click)="change_type('old_pass')"></i>
+          </span>
+        </label> -->
+        <mat-form-field appearance="outline">
+          <mat-label>Old password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" id="old_pss" #old_password>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-12 mb-2">
+      <!-- <label>New Password:</label> -->
+      <!-- <input type="password" class="form-control inputfont" id="pss" #password placeholder="Enter new password"> -->
+
+      <div class="form-group">
+        <!-- <label class="inputWraper">
+          <input  type="password" class="form-control"  id="pss" #password>
+          <span
+            id="iconshow" class="p-viewer">
+            <i id="eye" class="fa fa-eye-slash viewPas" aria-hidden="true" (click)="change_type('new_pass')"></i>
+          </span></label> -->
+
+          <mat-form-field appearance="outline">
+            <mat-label>New password</mat-label>
+            <input matInput id="pss" [type]="hide1 ? 'password' : 'text'" #password>
+            <button mat-icon-button matSuffix (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+   
+      </div>
+    </div>
+    <div class="col-12 mb-2">
+      <!-- <label>Confirm Password</label> -->
+      <!-- <input type="password" class="form-control inputfont" id="con_pss" #conpassword placeholder="Confirm new password"> -->
+
+      <div class="form-group">
+        <!-- <label class="inputWraper">
+          <input  type="password" class="form-control"  id="con_pss" #conpassword>
+          <span
+            id="iconshow" class="p-viewer">
+            <i id="eye" class="fa fa-eye-slash viewPas" aria-hidden="true" (click)="change_type('con_pass')"></i>
+          </span></label> -->
+          <mat-form-field appearance="outline">
+            <mat-label>Confirm password</mat-label>
+            <input matInput [type]="hide2 ? 'password' : 'text'" id="con_pss" #conpassword>
+            <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+      </div>
+    </div>
+
+  </div>
+
+
+        <!-- <div class="form-check">
+     <input type="checkbox" class="form-check-input inputfont" id="show_pass" (click)="change_type('cons_pass')"/>
+     <label class="form-check-label inputfont pl-2" for="show_pass">Show Password</label>
+     </div> -->
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn button-no" data-dismiss="modal">Cancel</button> -->
+        <button type="button" class="finalSubmitButton" [disabled]="password.value=='' || conpassword.value=='' || old_password.value==''"  (click)="change_pass(password.value,conpassword.value,old_password.value)">
+          <div [hidden]="!show_loader">OK</div>
+          <div [hidden]="show_loader" class="spinner-border text-light"></div>
+
+
+        </button>
+      </div>
+    </div>
+    
+  </div>
+</div>

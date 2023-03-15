@@ -1,0 +1,40 @@
+.verification-code--inputs input[type=tel] {
+    border: 1x solid #164d8d;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    color: #263238;
+    border: none;
+    border-bottom: 3px solid #385fc0;
+    font-family: inherit;
+    text-align: left;
+    background-color: #fff; 
+    width: 34px;
+    /* height: 38px; */
+    padding: 10px;
+    text-align: center;
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 8px;
+}
+
+
+/* .customTerms{
+    font-weight: 600;
+    font-size: 14px;
+    width: 100%;
+    text-transform: none;
+    color: #a2a5aa!important;
+    margin-bottom: 0;
+  
+  }
+  .TermsPolicy{
+    line-height: 140%;
+    font-style: normal;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: underline;
+  } */
+
+#success{display:none}
+#error{display:none}

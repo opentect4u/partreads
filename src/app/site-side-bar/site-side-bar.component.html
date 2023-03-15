@@ -1,0 +1,48 @@
+<div class="wrapperCustome">
+  <div class="col-sm-3 float-left">
+    <div class="leftSideBar">
+      <!-- <div class="sideBarInf"><button routerLinkActive="true" routerLink="/publisher/edit" class="editeBtn"><i
+            class="fa fa-edit"></i>Edit</button>
+        <div class="profilePic"><span *ngIf="profile!=null || profile!='' || profile!=undefined"><img [src]="profile" alt="" /></span><span *ngIf="profile==''|| profile==null || profile==undefined" class="text-muted"> <img src="/assets/images/no_dp.png" alt="" /></span></div>
+        <div class="nameInfo">
+          <h4>{{name}}</h4>
+          <a routerLinkActive="true" routerLink="/publisher/edit"><i class="fa fa-envelope"></i><span>{{email}}</span><span *ngIf="email==''||email==undefined||email==null" class="text-muted">Add/Edit email</span></a><br>
+          <a routerLinkActive="true" routerLink="/publisher/edit"><i class="fa fa-phone"></i><span >{{p_phone}}</span><span *ngIf="p_phone==''||p_phone==undefined||p_phone==null" class="text-muted">Add/Edit phone</span></a><br>
+          <a>
+
+            <p routerLinkActive="true" routerLink="/publisher/edit"><i class="fa fa-map-marker" style="font-size:22px" aria-hidden="true"></i><span *ngIf="p_street==''||p_street==undefined||p_street==null || p_city==undefined||p_city==null||p_city==''" class="text-muted">Add/Edit Address</span><span  *ngIf="p_street!=''||p_street!=undefined||p_street!=null || p_city!=undefined||p_city!=null||p_city!=''">{{p_street}} {{p_city}} - {{p_pin}}. <br> {{p_state}}, {{p_country}}</span></p>
+          </a>
+        </div>
+      </div> -->
+
+      <div class="leftSideNav">
+        <div class="leftBottomImg leftNavSec">
+          <ul>
+            <li routerLinkActive="active"><a 
+                routerLink="/publisher/publisher-dashboard"><i class="fa fa-tachometer" aria-hidden="true"></i>
+                Dashboard</a></li>
+            <li routerLinkActive="active"><a 
+                routerLink="/publisher/ebookupload"><i class="fa fa-upload" aria-hidden="true"></i> Upload</a>
+            </li>
+            <li routerLinkActive="active"><a 
+                routerLink="/publisher/book-list"><i class="fa fa-list" aria-hidden="true"></i> List of Books</a></li>
+              <!-- <li><a ><i class="fa fa-history" aria-hidden="true"></i> Report / Payment History</a></li> -->
+              <!-- <li class="{{notif_show}}"><a (click)="make_active_notif()" routerLinkActive="true" routerLink="/publisher/notification"><i class="fa fa-bell" aria-hidden="true"></i> Notifications</a></li> -->
+            <li routerLinkActive="active"><a   routerLink="/publisher/activepages"><i class="fa fa-file-text-o" aria-hidden="true" ></i> Inactive Books</a></li>
+            <li routerLinkActive="active"><a   routerLink="/publisher/pubCommission"><i class="fa fa-inr" aria-hidden="true"></i> Commisssion History</a></li>
+            <li routerLinkActive="active"><a   routerLink="/publisher/paymenthistory"><i class="fa fa-inr" aria-hidden="true"></i> 
+              <!-- Payment History -->
+              Subscription History
+            </a></li>
+
+            <li routerLinkActive="active"><a  routerLink="/reports"><i class="fa fa-history" aria-hidden="true"></i>
+              <!-- Reports discrepancy -->
+              Contacts
+            </a></li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

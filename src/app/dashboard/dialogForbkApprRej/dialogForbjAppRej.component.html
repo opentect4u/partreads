@@ -1,0 +1,36 @@
+<div mat-dialog-title class="dialog-title">
+    <h4 >{{data.mode == 'A' ? 'Approve' : (data.mode == 'R' ? 'Reject' : 'Preview')}} {{data.book_name}}</h4>
+    
+    <button mat-icon-button title="Close" [mat-dialog-close]="" align="end">
+        <mat-icon >close</mat-icon>
+      </button>
+</div>
+<mat-dialog-content *ngIf="data.mode != 'V'">
+   <h4 [class]="data.mode == 'A' ? 'text-center' : 'text-left'">Are you sure you want to {{data.mode == 'A' ? 'approve' : 'reject'}} {{data.book_name}}?</h4>
+    <ng-container *ngIf="data.mode == 'R'">
+        <form [formGroup]="__rejectBk">
+            <div class="row">
+                <div class="col-sm-12">
+                    <mat-form-field class="example-full-width w-100" appearance="outline">
+                        <mat-label>Reason</mat-label>
+                        <textarea matInput rows="10" cols="12" formControlName="remarks"></textarea>
+                      </mat-form-field>
+                </div>
+            </div>
+         </form>
+    </ng-container>
+ 
+</mat-dialog-content>
+<mat-dialog-content *ngIf="data.mode == 'V'">
+    <ngx-extended-pdf-viewer [src]="data.pdf" [useBrowserLocale]="false" height="80vh" [textLayer]="true"
+      [contextMenuAllowed]="false" [enablePrint]="false" [ignoreKeyboard]="true" [showOpenFileButton]="false"
+      [showPagingButtons]="true" [showSidebarButton]="false" [showBookmarkButton]="false" zoom="100%"
+      [showDownloadButton]="false" [showSidebarButton]="false" [sidebarVisible]="false" [showFindButton]="false"
+      [showPresentationModeButton]="true"></ngx-extended-pdf-viewer>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end" *ngIf="data.mode != 'V'">
+    <button  mat-raised-button [disabled]="__rejectBk.invalid" (click)="changeStatus()" [color]="data.mode == 'A' ? 'primary' : 'warn'">
+        {{data.mode == 'A' ? 'Approve' : 'Reject'}}
+      </button>
+</mat-dialog-actions>

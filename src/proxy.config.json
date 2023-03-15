@@ -1,0 +1,8 @@
+{
+    "/api":{
+        "target":"https://partreads.opentech4u.co.in/partreads_api/*",
+        "secure":false,
+        "loglevel":"debug",
+        "changeOrigin": true
+    }
+}

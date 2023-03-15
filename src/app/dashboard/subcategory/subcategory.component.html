@@ -1,0 +1,157 @@
+<app-adminheader></app-adminheader>
+	
+<div class="page-body-wrapper">
+      
+    <app-adminsidebar></app-adminsidebar>
+	
+	<div class="main-panel">
+		<div class="content-wrapper">
+			<div class="card">
+			 <div class="card-body">
+				 
+				 
+				 <div class="titleSec" >
+					 <a type="button" routerLinkActive="true" [routerLink]="['/admin/createsubcategory',0]" class="btn btn-primary">Create</a>
+				 <h2>Sub-Category</h2> 
+				 </div>
+				 
+				<div class="row">
+					 <div class="col-sm-12"> 
+			<!-- <table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Action</th>
+                </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>System Architect</td>
+                <td><a href="updateSubcategory.html" data-toggle="tooltip" data-placement="bottom" title="Edit" class="updateCustom"><i class="fa fa-rocket" aria-hidden="true"></i> Update</a></td>
+                </tr>
+            <tr>
+                <td>Accountant</td>
+                <td>
+<a href="updateSubcategory.html" data-toggle="tooltip" data-placement="bottom" title="Edit" class="updateCustom"><i class="fa fa-rocket" aria-hidden="true"></i> Update</a>
+				</td>
+                </tr>
+            <tr>
+                <td>Junior Technical Author</td>
+                <td><a href="updateSubcategory.html" data-toggle="tooltip" data-placement="bottom" title="Edit" class="updateCustom"><i class="fa fa-rocket" aria-hidden="true"></i> Update</a></td>
+                </tr>
+            <tr>
+                <td>Senior Javascript Developer</td>
+                <td><a href="updateSubcategory.html" data-toggle="tooltip" data-placement="bottom" title="Edit" class="updateCustom"><i class="fa fa-rocket" aria-hidden="true"></i> Update</a></td>
+                </tr>
+            <tr>
+                <td>Accountant</td>
+                <td><a href="updateSubcategory.html" data-toggle="tooltip" data-placement="bottom" title="Edit" class="updateCustom"><i class="fa fa-rocket" aria-hidden="true"></i> Update</a></td>
+                </tr>
+            <tr>
+                <td>Integration Specialist</td>
+                <td><a href="updateSubcategory.html" data-toggle="tooltip" data-placement="bottom" title="Edit" class="updateCustom"><i class="fa fa-rocket" aria-hidden="true"></i> Update</a></td>
+                </tr>
+            <tr>
+                <td>Sales Assistant</td>
+                <td><a href="updateSubcategory.html" data-toggle="tooltip" data-placement="bottom" title="Edit" class="updateCustom"><i class="fa fa-rocket" aria-hidden="true"></i> Update</a></td>
+                </tr>
+            <tr>
+                <td>Integration Specialist</td>
+                <td><a href="updateSubcategory.html" data-toggle="tooltip" data-placement="bottom" title="Edit" class="updateCustom"><i class="fa fa-rocket" aria-hidden="true"></i> Update</a></td>
+                </tr>
+			<tr>
+                <td>Integration Specialist</td>
+                <td><a href="updateSubcategory.html" data-toggle="tooltip" data-placement="bottom" title="Edit" class="updateCustom"><i class="fa fa-rocket" aria-hidden="true"></i> Update</a></td>
+                </tr>
+			<tr>
+                <td>Integration Specialist</td>
+                <td><a href="updateSubcategory.html" data-toggle="tooltip" data-placement="bottom" title="Edit" class="updateCustom"><i class="fa fa-rocket" aria-hidden="true"></i> Update</a></td>
+                </tr>
+			<tr>
+                <td>Integration Specialist</td>
+                <td><a href="updateSubcategory.html" data-toggle="tooltip" data-placement="bottom" title="Edit" class="updateCustom"><i class="fa fa-rocket" aria-hidden="true"></i> Update</a></td>
+                </tr>
+			<tr>
+                <td>Integration Specialist</td>
+                <td><a href="updateSubcategory.html" data-toggle="tooltip" data-placement="bottom" title="Edit" class="updateCustom"><i class="fa fa-rocket" aria-hidden="true"></i> Update</a></td>
+                </tr>
+			
+
+		</tbody>
+        <tfoot>
+            <tr>
+                <th>Position</th>
+                <th>Action</th>
+                </tr>
+        </tfoot>
+    </table> -->
+   
+   <!-- For Admin subcategory spinner-->
+    <div class="text-center">
+        <!-- <div class="spinner-border text-primary" *ngIf="loading"></div> -->
+        <div id="cover-spin" *ngIf="loading"></div>
+     </div>
+
+		<!-- <div class="row">
+            <div class="col-5">    -->
+                 <mat-form-field>
+                <mat-label>Search</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Search by Sub-Category name or Category name" #input>
+              </mat-form-field>
+            <!-- </div> -->
+            <!-- <div class="col-7"></div>
+
+        </div>	        -->
+ 
+      
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+           <!-- ID Column -->
+           <ng-container matColumnDef="No">
+            <th mat-header-cell *matHeaderCellDef>#</th>
+            <td mat-cell *matCellDef="let row;index as i" >{{i+1}}</td>
+          </ng-container>
+      
+          <!-- ID Column -->
+          <ng-container matColumnDef="Name">
+            <th mat-header-cell *matHeaderCellDef>SubCategory</th>
+            <td mat-cell *matCellDef="let row" >{{row.name}}</td>
+          </ng-container>
+
+             <!-- ID Column -->
+             <ng-container matColumnDef="Category">
+                <th mat-header-cell *matHeaderCellDef>Category</th>
+                <td mat-cell *matCellDef="let row" >{{row.category_name}}</td>
+              </ng-container>
+      
+          <!-- Progress Column -->
+          <ng-container matColumnDef="Action">
+            <th mat-header-cell *matHeaderCellDef >Action</th>
+            <!-- <td mat-cell *matCellDef="let row" style="text-align:left"><button class="btn btn-primary" (click)="update_subcate(row.name,row._id,row.category_id)">Update</button></td> -->
+            <td mat-cell *matCellDef="let row" > <a   class="btn btn-primary " (click)="update_subcate(row.name,row._id,row.category_id)" data-toggle="tooltip" data-placement="bottom" title="Edit" class="updateCustom"><i class="fa fa-rocket" aria-hidden="true"></i> Update</a></td>
+          </ng-container>
+      
+    
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+          <!-- Row shown when there is no matching data. -->
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+          </tr>
+        </table>
+      
+        <mat-paginator [pageSizeOptions]="[50, 100, 200]" showFirstLastButtons ></mat-paginator>
+      </div>
+
+
+
+
+
+                   </div>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>

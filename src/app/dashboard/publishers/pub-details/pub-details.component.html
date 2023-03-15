@@ -1,0 +1,174 @@
+<app-adminheader></app-adminheader>
+
+
+<div class="page-body-wrapper">
+    <app-adminsidebar></app-adminsidebar>
+
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <!-- <div class="card mb-2">
+                <div class="card-body">
+
+
+                    <div class="titleSec">
+                        <h2>Publisher Details</h2> 
+                    </div>
+                </div>
+
+            </div> -->
+
+           <!--  <div class="card mt-3">
+              <div class="text-center">
+             </div>
+                <div class="card-body">
+                  <div class="row pb-4">
+                       <div class="col-4"></div>
+                       <div class="col-4">
+                        <span class="round_class" *ngIf="profile!=null || profile!='' || profile!=undefined"><img src="{{profile}}" alt="" /></span><span *ngIf="profile==''|| profile==null || profile==undefined" class="text-muted"> <img src="/assets/images/no_dp.png" alt="" /></span>
+                       </div>
+                       <div class="col-4"></div>
+                  </div>
+                <div class="row fs-4 pb-3">
+                    <div class="col-4">
+                        <strong>Name:</strong> {{p_name}}
+                    </div>
+                    <div class="col-4">
+                        <strong>Phone:</strong> {{p_phone}}
+                    </div>
+                    <div class="col-4"> 
+                        <strong>Email:</strong>{{p_email}}
+                    </div>
+                </div>
+                <div class="row fs-4">
+                    <div class="col-12">
+                        <strong>Address: </strong>
+                        {{p_street}}, {{p_city}} {{p_pin}}, {{p_state}}, {{p_country}}
+                    </div>
+                </div>
+                      
+                      
+                  
+                </div>
+
+
+
+            </div> -->
+            <div id="cover-spin" [hidden]="load"></div>
+          
+            <nav aria-label="breadcrumb" class="main-breadcrumb" [hidden]="!load">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item active" aria-current="page">Publisher Details</li>
+                </ol>
+              </nav>
+              <div class="card" [hidden]="!load">
+                  <div class="card-body">
+                    <div class="row gutters-sm">
+                        <div class="col-2">
+                                <div class="customImageBackground">
+                                    <!-- {{profile}} -->
+                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" *ngIf="profile==''" alt="Publisher" class="rounded-circle" width="150">
+                                <img src="{{profile}}"  *ngIf="profile!=''" alt="Publisher" class="rounded-circle" width="140"    style="height:140px!important;">
+                            </div>
+                        </div>
+                        <div class="col-10">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Full Name</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary customText">
+                                   {{p_name}}
+                                </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Email</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary customText">
+                                    {{p_email}}
+                                </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Phone</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary customText">
+                                    {{p_phone}}
+                                </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Address</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary customText">
+                                  {{p_add}}
+                                </div>
+                                </div>
+                                <hr>
+                                 <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Pincode</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary customText">
+                                      {{p_pin}}
+                                    </div>
+                               </div>
+                               <hr>
+                               <div class="row gutters-sm">
+                                   <div class="col-sm-3">
+                                       <h6 class="mb-0">GSTIN </h6>
+                                   </div>
+                                   <div class="col-sm-9 text-secondary customText">
+                                          {{gst_no}}
+                                   </div>
+                               </div>
+                        </div>
+                     </div>
+                  </div>
+              </div>
+
+                <div class="card mt-3" [hidden]="!load">
+                    <div class="card-header">
+                        <nav aria-label="breadcrumb" class="main-breadcrumb">
+                            <h5>Bank Details</h5>
+                            </nav>
+                    </div>
+                    <div class="card-body">
+                        <div class="row gutters-sm">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Bank Name</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary customText">
+                                    {{b_name}}
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="row gutters-sm">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Account No</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary customText">
+                                    {{acc_no}}
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="row gutters-sm">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Ifsc Code</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary customText">
+                                   {{ifsc_code}}
+                            </div>
+                        </div>
+                  
+                        <!-- <hr/> -->
+
+                    </div>
+                </div>
+           
+         
+       
+</div></div></div>
+

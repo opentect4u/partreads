@@ -1,0 +1,142 @@
+<!-- 
+*  This is the html part of allbooks component of the website. 
+* This allbooks is used in the pages without login  
+ -->
+<app-index-nav-header ></app-index-nav-header> <!--This is header part without login-->
+<!-- <div class="breadcrumb">
+    <ul>
+        <li><a routerLinkActive="true" routerLink="">Home</a></li>
+        <li>&gt;</li>
+        <li>List of Active Books</li>
+    </ul>
+</div> -->
+<div class="bodyContainer" appNorightclick> <!--Main Div-->
+    <div class="book_loadMain" *ngIf="loader" >
+
+        <div class="loader loader-1">
+            <div class="loader-outter"></div>
+            <div class="loader-inner"></div>
+          </div>
+
+          <!-- <div class="spinner-border book_load" *ngIf="loader"></div> -->
+        </div>	
+    <!-- <div class="spinner-border book_load" *ngIf="loader"></div> -->
+
+    <div class="wrapperCustome bodyContainerMinHeight" > <!--usage: contain list of books published by the user,it contain the rating of the books, name of books,image of book, price & author name of the book -->
+        <div style="text-align: center;" [hidden]="!showmsg" class="inputfont">{{nomatch}}</div> <!--usage: If there is no books in the list ,the this div will show and it says No Books available-->
+        <div class="bookList-col" *ngFor="let i of bookdata | paginate: { itemsPerPage: 15, currentPage: p }; let j=index"><!--usage: bind the array in this div-->
+            <div class="bookList" >
+
+                <div class="bookPro"><img src="{{i.book_image_path}}" alt="" /></div><!--usage: This div contain image section -->
+                <div class="bookProDetails" >
+                    <div class="dropdown" (mouseenter)="onMouseEnter($event,i.book_id,i.book_name)">
+                        <div class="dropdown-content">
+                            <a class="fs-5 mt-2">Reader ratings</a>
+                            <h2> {{avgrt}} </h2> <p class="text-muted fs-5">out of 5 </p>  <!--usage: This div contain rating section -->
+                      <div class="text-muted fs-5 mt-2">{{reviewData1.length}} rating(s)</div>
+                       
+                      <div *ngIf="reviewData.length" class="container" style="padding-left: 8%;"><!--usage: After hover on the rating this dropdown will get shown. It shows number of rating number of reviews-->
+                        <ol reversed><!--usage: It contains progress bar section -->
+                    
+                            <li style="font-size:14px;    margin-bottom: 6px;"> <mat-progress-bar 
+                                class="example-margin"
+                                [color]="color1"
+                                [mode]="mode"
+                                [value]="t5"
+                                [bufferValue]="bufferValue">
+                            </mat-progress-bar> 
+                             </li>
+                             <li style="font-size:14px;    margin-bottom: 6px;">
+                                <mat-progress-bar
+                                class="example-margin"
+                                [color]="color1"
+                                [mode]="mode"
+                                [value]="t4"
+                                [bufferValue]="bufferValue">
+                            </mat-progress-bar>
+                             </li>
+                             <li style="font-size:14px;    margin-bottom: 6px;;">
+                                <mat-progress-bar
+                                class="example-margin"
+                                [color]="color1"
+                                [mode]="mode"
+                                [value]="t3"
+                                [bufferValue]="bufferValue">
+                            </mat-progress-bar>
+                             </li>
+                             <li style="font-size:14px;    margin-bottom: 6px;;">
+                                <mat-progress-bar
+                                class="example-margin"
+                                [color]="color1"
+                                [mode]="mode"
+                                [value]="t2"
+                                [bufferValue]="bufferValue">
+                            </mat-progress-bar>
+                            
+                             </li>
+                             <li style="font-size:14px;    margin-bottom: 6px;;">
+                                <mat-progress-bar
+                                class="example-margin"
+                                [color]="color1"
+                                [mode]="mode"
+                                [value]="t1"
+                                [bufferValue]="bufferValue">
+                            </mat-progress-bar>
+                            
+                             </li>
+                         </ol>
+                    </div>
+                      <hr *ngIf="reviewData.length">
+                  <!-- <small><button hidden type="button" data-toggle="modal" id="open_modal" data-target="#reviewModal" >Reviews</button> </small>	 -->
+                       <a *ngIf="reviewData.length" data-toggle="modal" style="cursor: pointer; color: black;" id="open_modal" data-target="#reviewModal">Reader reviews</a>
+                      </div>
+                <p class="nameoverflow">  <ngb-rating [max]="5" [(rate)]="avgRate[j]" (mouseenter)="onMouseEnter($event,i.book_id,i.book_name)" (mouseleave)="onmouseleave($event)" [readonly]="true" style="font-size:30px;color:rgb(254,188,7);margin-top:5px"></ngb-rating></p> <!--usage: Rating Section -->
+              </div>
+                    <p  class="nameoverflow" title="{{i.book_name}}">{{i.book_name}}<br><!--usage: Name of book section-->
+                       <span> {{i.author_name}}</span></p><!--usage: Author of book section-->
+                       <small><button hidden type="button" data-toggle="modal" id="open_modal" data-target="#reviewModal" >Reader reviews</button> </small> <!--usage: Review section,After click on review review modal will open  -->
+                    <p class="price"><i class="fa fa-inr" aria-hidden="true"></i> {{i.price}}</p><!--usage: Price of book section-->
+                    <a class="btnDetails" style="cursor: pointer;" (click)="showdetails(i.book_id,i.publisher_id)">Read More</a><!--usage: ReadMore Section ,After click on this button,navigate to luser login page ,After submitting user credential,user can show this book details-->
+                
+                </div>
+            </div>
+        </div>
+
+      <br clear="all">
+    </div>
+    <div style="text-align:center;"><pagination-controls (pageChange)="p = $event" ></pagination-controls></div><!--usage: Pagination Section-->
+</div>
+
+
+<!-- Review Modal -->
+<div class="modal fade " id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel" style="font-size: medium;">Reviews for {{reviewBookName}}  <span style="color: white;font-size: medium;" class="badge badge-pill badge-warning"><i class="fa fa-star" style="color: white;" aria-hidden="true"></i> {{avgrt}}</span></h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+            <div class="container reviewList" *ngFor="let i of reviewData">
+			
+				<span style="color: white;" class="badge badge-pill badge-success"><i class="fa fa-star" style="color: white;" aria-hidden="true"></i> {{i.rating}}</span>
+              {{i.review}}
+			
+		
+			</div>
+		</div>
+		<div class="modal-footer">
+      <p class="text-muted mt-3" *ngIf="maxRange<reviewData1.length" >{{minRange+1}} - {{maxRange}} of {{reviewData1.length}} results</p>
+			<p class="text-muted mt-3" *ngIf="maxRange>reviewData1.length&&minRange!=0" >{{minRange+1}}th of {{reviewData1.length}} results</p>
+			<p class="text-muted mt-3" *ngIf="maxRange>reviewData1.length&&minRange==0" >{{minRange+1}}st of {{reviewData1.length}} result</p>
+			<button *ngIf="minRange>0" style="font-size:8px; color: white;" (click)="prev()" class="btn btn-dark"> <i class="fa fa-chevron-left"></i></button>
+			<button *ngIf="maxRange<reviewData1.length" style="font-size:8px; color: white;"  (click)="next()" class="btn btn-dark"> <i class="fa fa-chevron-right"></i></button>
+		</div>
+	  </div>
+	</div>
+  </div>
+
+
+<app-site-footer style="position: relative;"></app-site-footer><!--Footer of the page-->

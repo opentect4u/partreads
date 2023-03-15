@@ -1,0 +1,8 @@
+.main-panel{
+    margin-left:10%;
+}
+
+/*For error page take me to the home page*/
+.go_back{
+    cursor:pointer;
+}

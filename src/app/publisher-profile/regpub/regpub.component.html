@@ -1,0 +1,271 @@
+<!-- <app-publogregheader></app-publogregheader>
+
+
+
+<div class="bodyContainerLogin">
+
+  <div class="loginWraper" style="margin-top:-8.5%;"
+    >
+
+    <div @fade class="alert alertLogin" id="uploaded" [hidden]="alert_show_okay">
+      <span class="closebtn_1" (click)="close_alert()">&times;</span>
+      {{invalid}}
+
+    </div>
+    <div @fade class="alert1 alertLogin" id="uploaded_1" [hidden]="alert_show_wrong">
+      <span class="closebtn" (click)="close_alert_1()">&times;</span>
+      {{invalid}}
+
+    </div>
+    <div class="col-sm-12">
+      <h1>Publisher Sign Up</h1>
+      <form #userForm="ngForm">
+        <div class="form-group">
+          <label class="inputWraper"><i class="fa fa-user" aria-hidden="true"></i>
+            <input id="p_nm" type="text" class="form-control" placeholder="Name" name="pname" #pname required></label>
+            <span class="text-danger fieldAleart">{{check_name}}</span>
+        </div>
+        <div class="form-group">
+          <label class="inputWraper"><i class="fa fa-envelope-o" aria-hidden="true"></i>
+            <input id="p_em" type="email" class="form-control" placeholder="Email" #pemail
+              (change)="check_email_validity($event)"></label>
+              <span class="text-danger fieldAleart">{{check_email}}</span>
+                <span class="text-danger fieldAleart">{{confirm_email}}</span>
+        </div>
+         
+        <div class="form-group">
+          <label class="inputWraper"><i class="fa fa-user" aria-hidden="true"></i>
+            <input id="p_phone" type="text" class="form-control" placeholder="Mobile number" name="phone" #phone required></label>
+            <span class="text-danger fieldAleart">{{mobile_number}}</span>
+        </div>
+      
+
+
+
+
+        <div class="form-group">
+          <label class="inputWraper"><i class="fa fa-lock" aria-hidden="true"></i>
+            <input id="passwd" type="password" class="form-control" placeholder="Password" #ppwd required
+              (change)="show_input($event)" (keyup)="check_valid_pass($event)"><span id="iconshow" style="z-index: 9999;
+                position: absolute;
+                top: 5%;
+                right: 40px;" class="p-viewer">
+              <i id="eye" class="fa fa-eye-slash" aria-hidden="true" (click)="show_hide_pass()"></i>
+            </span></label>
+            <span class="text-danger fieldAleart">{{check_password}}</span>
+            <span class="text-danger fieldAleart">{{pass_message}}</span>
+        </div>
+
+        <div class="form-group">
+          <label class="inputWraper"><i class="fa fa-lock" aria-hidden="true"></i>
+            <input id="conf_passwd" type="password" class="form-control" placeholder="Confirm Password" required
+              (keyup)="confirm_password($event)"><span id="iconshow" style="z-index: 9999;
+                position: absolute;
+                top: 5%;
+                right: 40px;" class="p-viewer">
+              <i id="eye_conf" class="fa fa-eye-slash" aria-hidden="true" (click)="show_hide_conf()"></i>
+            </span></label>
+            <span class="text-danger fieldAleart">{{conf_message}}</span>
+        </div>
+
+        <div class="checkBoxCustomeMain">
+          <label class="checkBoxCustom">
+            <input type="checkbox" checked="checked" (change)="check_terms_and_condition($event)">
+            <span class="checkmarkText"></span>
+          </label>
+          <a  type='button' data-toggle="modal" data-target="#terms_condition">Terms &amp; Condition Apply</a>
+        </div>
+
+        <div class="form-group">
+            <button [disabled]='disabled_button' class="btn btnRed widthFull" (click)="show(pname.value,pemail.value,ppwd.value,phone.value)"
+            > <div [hidden]="!show_loader">
+              Sign up now 
+            </div> <div [hidden]="show_loader" class="spinner-border text-light"></div> </button>
+        </div>
+      </form>
+
+    </div>
+    <br clear="all">
+  </div>
+
+</div>
+
+<app-site-footer></app-site-footer> -->
+
+
+
+
+<div class="loginContainer">
+	<div class="loginContainerSub">
+	<div class="col-sm-7 loginLeft float-left">
+		<img src="/assets/images/logo.png" alt="" class="logoLogin"  routerLink="/"/>
+<div class="leftLoginSec">
+		<img src="/assets/images/imgLogin.png" alt=""/> 
+		<h2>Welcome To PartReads</h2>
+	<!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> -->
+		</div>
+	</div>
+	<div class="col-sm-5 loginRight float-left">
+		
+    <div @fade class="alert alertLogin" id="uploaded" [hidden]="alert_show_okay">
+      <span class="closebtn_1" (click)="close_alert()">&times;</span>
+      {{invalid}}
+
+    </div>
+    <!-- <div @fade class="alert1 alertLogin" id="uploaded_1" [hidden]="alert_show_wrong">
+      <span class="closebtn" (click)="close_alert_1()">&times;</span>
+      {{invalid}}
+
+    </div> -->
+		<h1>Publisher Sign Up</h1> 
+    
+
+    <div class="loginForm">
+      <form #userForm="ngForm">
+
+    <!-- <label>Name <i class="fa fa-user" aria-hidden="true"></i></label>
+    <input id="uname" type="text" class="form-control" placeholder="Name" required #u_name>
+    <span class="text-danger fieldAleart">{{check_name}}</span> -->
+    <label> Name 
+      <!-- <i class="fa fa-user" aria-hidden="true"></i> -->
+      <input id="p_nm" type="text" class="form-control" name="pname" #pname required></label>
+      <!-- <span class="text-danger fieldAleart">{{check_name}}</span> -->
+      <span class="error" id="checkName">{{check_name}}</span>
+
+
+    <!-- <label>Email <i class="fa fa-envelope-o" aria-hidden="true"></i></label>
+    <input id="uemail" type="email" class="form-control" placeholder="Email" required #u_email (change)="check_valid_email($event)">
+    <span class="text-danger fieldAleart">{{check_email}}</span>
+    <span class="text-danger fieldAleart">{{confirm_email}}</span> -->
+
+    <label> Email 
+      <!-- <i class="fa fa-envelope-o" aria-hidden="true"></i> -->
+      <input id="p_em" type="email" class="form-control"  #pemail
+        (change)="check_email_validity($event)"></label>
+        <!-- <span class="text-danger fieldAleart">{{check_email}}</span>
+          -->
+          <span class="error" id="checkEmail">{{check_email}}</span>
+          <!-- <span class="text-danger fieldAleart">{{confirm_email}}</span>  -->
+          <span class="error_conEmail" id="confEmail">{{confirm_email}}</span>
+
+    
+    <!-- <label>Mobile <i class="fa fa-phone" aria-hidden="true"></i></label>
+    <input id="p_nm" type="text" class="form-control" placeholder="Mobile number" name="phone" #phone required>
+    <span class="text-danger fieldAleart">{{check_phone_number}}</span> -->
+
+    <label>Mobile 
+      <!-- <i class="fa fa-phone" aria-hidden="true"></i> -->
+      <input id="p_phone" type="text" class="form-control" (keypress)="preventNonNumericalInput($event)"  name="phone" #phone required maxLength="10"></label>
+      <!-- <span class="text-danger fieldAleart">{{mobile_number}}</span> -->
+      <span class="error" id="mobileNumber">{{mobile_number}}</span>
+    
+
+    <!-- <label>Password <i class="fa fa-lock" aria-hidden="true"></i></label>
+    <input id="passwd" type="password" class="form-control" placeholder="Password" required #u_pass
+        (change)="show_input_user($event)" (keyup)="check_valid($event)">
+    <span class="text-danger fieldAleart">{{check_pass}}</span>
+    <span class="text-danger fieldAleart">{{pass_message}}</span> -->
+
+    <label> Password 
+      <!-- <i class="fa fa-lock" aria-hidden="true"></i> -->
+      <input id="passwd" type="password" class="form-control" #ppwd required
+        (change)="show_input($event)" (keyup)="check_valid_pass($event)">
+        <!-- <span id="iconshow" style="z-index: 9999;
+          position: absolute;
+          top: 5%;
+          right: 40px;" class="p-viewer">
+        <i id="eye" class="fa fa-eye-slash" aria-hidden="true" (click)="show_hide_pass()"></i>
+      </span> -->
+      <mat-hint>Passwords should be atleast 4 characters long</mat-hint>
+    </label>
+      <!-- <span class="text-danger fieldAleart">{{check_password}}</span>
+      <span class="text-danger fieldAleart">{{pass_message}}</span> -->
+      <span class="error_pass" id="passNew">{{check_password}}</span>
+      <!-- <span class="text-danger fieldAleart">{{pass_message}}</span> -->
+
+
+    <!-- <label>Confirm Password <i class="fa fa-lock" aria-hidden="true"></i></label>
+    <input id="conf_passwd" type="password" class="form-control" placeholder="Confirm Password" required (keyup)="confirm_pass_user($event)">
+    <span class="text-danger fieldAleart">{{confirm_message}}</span> -->
+
+    <label> Confirm Password 
+      <!-- <i class="fa fa-lock" aria-hidden="true"></i> -->
+      <input id="conf_passwd" type="password" class="form-control"  required
+        (keyup)="confirm_password($event)">
+        <!-- <span id="iconshow" style="z-index: 9999;
+          position: absolute;
+          top: 5%;
+          right: 40px;" class="p-viewer">
+        <i id="eye_conf" class="fa fa-eye-slash" aria-hidden="true" (click)="show_hide_conf()"></i>
+      </span>-->
+    </label>
+      <!-- <span class="text-danger fieldAleart">{{conf_message}}</span> -->
+      <span class="error_conf" id="confPassword">{{conf_message}}</span>
+    
+
+    <div class="checkBoxCustomeMain">
+      <label class="checkBoxCustom">
+        <input type="checkbox" checked="checked" (change)="check_terms_and_condition($event)">
+        <span class="checkmarkText"></span>
+      </label>
+      <a  type='button' data-toggle="modal" data-target="#terms_condition">Terms &amp; Condition Apply</a>
+    </div>
+
+   
+    <!-- <input [disabled]='disable_button' type="submit" class="loginBtn" value="Sign up now" (click)="u_register(u_name.value,u_email.value,u_pass.value,phone.value)">
+    <div [hidden]="show_loader" class="spinner-border text-light"></div> -->
+
+    <button [disabled]='disabled_button' class="loginBtn" (click)="show(pname.value,pemail.value,ppwd.value,phone.value)"
+    > <div [hidden]="!show_loader">
+      Sign up now 
+    </div> <div [hidden]="show_loader" class="spinner-border text-light"></div> </button>
+
+    </form>
+
+    <!-- <div class="buttonSecPop" >
+    <a href="#" class="gmailLogin">
+      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill-rule="evenodd" viewBox="0 0 24 24"><path class="icon_svg-fill_as_stroke" d="M20.16 12.193c0-.603-.054-1.182-.155-1.739H12v3.288h4.575a3.91 3.91 0 0 1-1.696 2.565v2.133h2.747c1.607-1.48 2.535-3.659 2.535-6.248z" fill="#4285f4"></path><path class="icon_svg-fill_as_stroke" d="M12 20.5c2.295 0 4.219-.761 5.625-2.059l-2.747-2.133c-.761.51-1.735.811-2.878.811-2.214 0-4.088-1.495-4.756-3.504h-2.84v2.202A8.497 8.497 0 0 0 12 20.5z" fill="#34a853"></path><path class="icon_svg-fill_as_stroke" d="M7.244 13.615A5.11 5.11 0 0 1 6.977 12a5.11 5.11 0 0 1 .267-1.615V8.183h-2.84C3.828 9.33 3.5 10.628 3.5 12s.328 2.67.904 3.817l2.84-2.202z" fill="#fbbc05"></path><path class="icon_svg-fill_as_stroke" d="M12 6.881c1.248 0 2.368.429 3.249 1.271l2.438-2.438C16.215 4.342 14.291 3.5 12 3.5a8.497 8.497 0 0 0-7.596 4.683l2.84 2.202C7.912 8.376 9.786 6.881 12 6.881z" fill="#ea4335"></path></svg> <span>
+    Continue with Google 
+    </span></a>
+    
+    <a href="#" class="facebookLogin"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="icon_svg-fill_as_stroke" fill-rule="evenodd" clip-rule="evenodd" d="M20.5 12a8.5 8.5 0 1 0-9.83 8.397v-5.94H8.513v-2.458h2.159v-1.872c0-2.13 1.269-3.307 3.21-3.307.93 0 1.903.166 1.903.166v2.091h-1.072c-1.056 0-1.385.656-1.385 1.328V12h2.358l-.377 2.457h-1.98v5.94A8.503 8.503 0 0 0 20.5 12Z" fill="#1877F2"></path></svg> <span> 
+                Continue with Facebook
+    </span></a>
+    </div> -->
+
+
+    <p class="signUpTxt mt-3">Already have an account? <a routerLinkActive="true" routerLink="/publisher/publishernav">Login</a></p>
+    </div>
+	</div>
+	</div>
+
+</div>
+
+
+
+<div id="snackbar">{{this.caps_lock}}</div>
+
+
+<div class="modal fade" id="terms_condition"  role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Terms & Conditions</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Modal body..
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,132 @@
+<!-- 
+      * This is the Reports page for both user & publisher *
+ -->
+
+<!--This is the Header Section(u_type=='U'= User Header Will be Shown : u_type=='P' = Publisher Header will be shown)-->
+<app-userheaderafterlogin *ngIf="u_type=='U'"></app-userheaderafterlogin>
+<app-site-header *ngIf="u_type=='P'"></app-site-header>
+<!-- END -->
+<!-- This is the Main body after header section -->
+<div class="bodyContainer">
+	<div class="wrapperCustome">
+        <!-- This is the Sidebar section (u_type=='U'= User Sidebar Will be Shown : u_type=='P' = Publisher Sidebar will be shown)-->
+		<app-usersidebar *ngIf="u_type=='U'"></app-usersidebar>
+        <app-site-side-bar *ngIf="u_type=='P'"></app-site-side-bar>
+         <!-- END -->
+        <div id="cover-spin" [hidden]="loading"></div><!--This is the loader of this page-->
+        <!-- For User Section -->
+		<div class="col-sm-9 rightSideBarnewCus float-left" *ngIf="u_type=='U'">
+            <form #logForm="ngForm" (ngSubmit)="submit(logForm.value)">
+            <div class="row">
+                <!-- This is the subject input field -->
+                <div class="form-group form_group_custome">
+                <div class="col-sm-12">
+                 <mat-form-field appearance="outline">
+                    <mat-label>Subject</mat-label>
+                    <input matInput name="subject" #subject="ngModel"  ngModel required>
+                    <mat-error *ngIf="subject.errors?.required && (subject.touched || subject.dirty)" class="text-danger">
+                        *Please Provide Subject
+                      </mat-error>
+                  </mat-form-field>
+                </div>
+                </div>
+                <!-- END -->
+            <!-- This is the Description Text Area-->
+            <div class="form-group form_group_custome">
+                <div class="col-sm-12 mt-2">
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput name="description" #description="ngModel"  rows="10" ngModel required></textarea>
+                        <mat-error *ngIf="description.errors?.required && (description.touched || description.dirty)" class="text-danger">
+                            *Please Provide Description
+                          </mat-error> 
+                    </mat-form-field>
+             
+                </div>
+            </div>
+           <!-- END -->
+            <!-- This is the File section-->
+            <div class="fomr-group form-group_custome">
+                <div class="col-sm-6">
+                    <input type="file" name="file" #file="ngModel" ngModel class="form-control" accept=".png, .jpg, .jpeg,.pdf,.docx,.doc" (change)="fileChangeevent($event)" required/>
+                    <mat-hint>Note: jpg,jpeg,png,pdf,doc,docx and excel can be uploaded</mat-hint>
+                    <mat-error *ngIf="file.errors?.required && (file.touched || file.dirty)" class="text-danger">
+                        *Please Provide File
+                      </mat-error>
+                </div>
+            </div>
+            <!-- END -->
+            <!-- This is the Button Area-->
+            <div class="col-sm-12 mt-4">
+                <input type="submit"  value="Submit" [disabled]="logForm.invalid" [ngClass]="logForm.invalid ? 'disabledButton float-left' : 'finalSubmitButton float-left'"/>
+                <!-- <input type="reset" class="finalSubmitButton float-left" value="RESET" id="reset" hidden (click)="logForm.reset()"/> -->
+            </div>
+            <!-- END -->
+            </div>
+            </form>
+        </div>
+
+        <!-- For Publisher Section -->
+        <div class="col-sm-9 float-left" *ngIf="u_type=='P'">
+			<!-- <div class="rightSection"> -->
+                <form #logForm="ngForm" (ngSubmit)="submit(logForm)">
+                    <div class="row">
+                        <!-- This is the publisher Subject Area -->
+                        <div class="form-group form_group_custome">
+                        <div class="col-sm-12">
+                         <mat-form-field appearance="outline">
+                            <mat-label>Subject</mat-label>
+                            <input matInput name="subject" #subject="ngModel"  ngModel required>
+                            <mat-error *ngIf="subject.errors?.required && (subject.touched || subject.dirty)">
+                                *Please Provide Subject
+                              </mat-error>
+                          </mat-form-field>
+                       
+                         
+                        </div>
+                        </div>
+                        <!-- END -->
+                     <!-- This is the publisher Description Area -->
+                    <div class="form-group form_group_custome">
+                        <div class="col-sm-12 mt-2">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Description</mat-label>
+                                <textarea matInput name="description" #description="ngModel"  rows="10" ngModel required></textarea>
+                                <mat-error *ngIf="description.errors?.required && (description.touched || description.dirty)">
+                                   *Please Provide Description
+                                  </mat-error>  
+                            </mat-form-field>
+                             
+                        </div>
+                    </div>
+                    <!-- END -->
+                     <!-- This is the publisher File Section -->
+                    <div class="fomr-group form-group_custome">
+                        <div class="col-sm-6">
+                            <input type="file" name="file" #file="ngModel" ngModel class="form-control" accept=".png, .jpg, .jpeg,.pdf,.docx,.doc" (change)="fileChangeevent($event)" required/>
+                            <mat-hint>Note: jpg,jpeg,png,pdf,doc,docx and excel can be uploaded</mat-hint>
+                           
+                            <mat-error *ngIf="file.errors?.required && (file.touched || file.dirty)" class="text-danger">
+                                *Please Provide File
+                              </mat-error>
+                        </div>
+                    </div>
+                    <!-- END -->
+                     <!-- This is the publisher Button Section -->
+                    <div class="col-sm-12 mt-4">
+                        <input type="submit"  value="Submit" [disabled]="logForm.invalid" [ngClass]="logForm.invalid ? 'disabledButton float-left' : 'finalSubmitButton float-left'"/>
+                        <input type="button" class="finalSubmitButton float-left" value="RESET" hidden id="reset" #Reset  (click)="logForm.reset()"/>
+                    </div>
+                    <!-- END -->
+                    </div>
+                    </form>
+
+        </div>
+    </div>
+    <br clear="all"/>
+</div>
+<!-- END -->
+
+<app-site-footer></app-site-footer><!--This is the footer section-->
+

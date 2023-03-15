@@ -1,0 +1,125 @@
+/* .P_Tag{
+    display: inline-block;
+   
+}
+.P_Tag  p{
+    padding-top:10px;
+    padding-left:12px;
+    word-spacing:2px;
+  
+} */
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+.mat-cell,
+.mat-header-cell:first-child{
+  width: 10%;
+  text-align:center;
+}
+.notificationContainer {
+  width: 70%!important;
+  text-align: left!important;
+}
+.mat-cell,
+.mat-header-cell:first-child{
+  width: 10%;
+  text-align:center;
+}
+/*FOR ADMIN SPINNER */
+.spinner-border{
+  width: 40px; 
+  height: 40px;
+  font-size:20px;
+}
+
+.mat-cell .mat-header-cell p{
+font-size: 14px;
+font-weight: 500;
+}
+.mat-cell .mat-header-cell small{
+color:gray;
+font-weight: 500;
+}
+tr.mat-row, tr.mat-footer-row {
+height: 60px;
+}
+.Table_profilePic{
+text-align: center;
+/* border: #fff solid 1px; */
+overflow: hidden;
+box-shadow: 0px 0 7px 4px #dfdfdf;
+margin: 0 auto 20px auto;
+border-radius: 50%;
+display: flex;
+align-items: center;
+height: 50px !important;
+width: 50px !important;
+}
+
+/* ::ng-deep.mat-checkbox-inner-container {margin-right: 3px!important;}
+::ng-deep .mat-checkbox-layout .mat-checkbox-label{font-size: 13px;}
+::ng-deep .mat-checkbox-checked .mat-checkbox-background, 
+.mat-checkbox-indeterminate .mat-checkbox-background {background-color: #164d8d !important;} */
+
+/* ::ng-deep .mat-checkbox:not(.mat-checkbox-disabled) .mat-checkbox-ripple .mat-ripple-element {
+background-color: #164e8d62 !important;
+} */
+.mat-card-content h4{padding: 10px 15px;
+}
+.example-header-image {
+background-image: url('https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png');
+background-size: cover;
+}
+
+.noti-sub-heading {
+font-size: 13px;
+font-weight: 500;
+color: #898989;
+}
+
+.noti-heading {
+font-weight: 600;
+font-size: 16px;
+}
+
+.noti-content{
+align-items: center !important;
+}
+/* .mat-card{
+border-left: solid 3px #0170bd;
+height: 70px;
+border-radius: 12px;
+} */
+.row {
+align-items: center !important;
+}
+.mat-card {
+padding: 4px !important;
+}
+
+.card-container{
+margin: 30px 30px 0px 30px;
+}
+.heading{
+color: #164d8d;
+}
+
+table {
+width: 100%;
+}
+.notify{
+font-size: 400%;
+padding-left: 40px;
+}
+.example-section{
+  padding-left: 32px;
+}
+.example-section button{
+  margin-left: 32px;
+}
+

@@ -1,0 +1,135 @@
+
+<app-adminheader></app-adminheader>
+
+<div class="page-body-wrapper">
+
+    <app-adminsidebar></app-adminsidebar>
+
+
+<div class="main-panel">
+
+
+    <div class="content-wrapper">
+        <div class="card">
+         <div class="card-body">
+             
+             
+             <div class="titleSec" >
+                 <a type="button"   routerLinkActive="true" routerLink="/admin/createcategory" class="btn btn-primary" >Create</a>
+             <h2>Category</h2> 
+             </div>
+             
+            <div class="row">
+                 <div class="col-sm-12"> 
+<!-- For Admin category spinner-->
+<div class="text-center">
+   <!-- <div class="spinner-border text-primary" *ngIf="loading"></div> -->
+   <div id="cover-spin" *ngIf="loading"></div>
+</div>
+
+        <mat-form-field>
+            <mat-label>Search</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Search by Category name" #input>
+          </mat-form-field>
+  <div class="mat-elevation-z8" >
+    <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="No">
+            <th mat-header-cell *matHeaderCellDef >#</th>
+            <td mat-cell *matCellDef="let row;index as i">{{i+1}}</td>
+          </ng-container>
+  
+      <!-- ID Column -->
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef >Name</th>
+        <td mat-cell *matCellDef="let row">{{row.name}}</td>
+      </ng-container>
+  
+      <!-- Progress Column -->
+      <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef >Action</th>
+        <!-- <td mat-cell *matCellDef="let row" style="text-align:left"><button class="btn btn-primary" routerLinkActive="true" (click)="show_index(row._id,row.name)">Update</button></td> -->
+
+        <td mat-cell *matCellDef="let row">
+            <a   routerLinkActive="true" (click)="show_index(row._id,row.name)"  data-toggle="tooltip" data-placement="bottom" title="Edit" class="updateCustom"><i class="fa fa-rocket" aria-hidden="true"></i> Update</a>
+             <a  routerLinkActive="true" class="updateCustom" data-toggle="modal" data-target="#show_subcat" (click)="store_id(row._id,row.name)"> Add/View SubCategory</a>
+        
+        </td>
+      </ng-container>
+  
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[50, 100, 200]" showFirstLastButtons ></mat-paginator>
+  </div>
+
+
+
+
+
+
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<div class="modal fade popupCouponCodeTop" id="show_subcat"  role="dialog">
+	<div class="modal-dialog modal-md modal-dialog-centered">
+	  <div class="modal-content">
+  
+		<!-- Modal Header -->
+		<div class="modal-header">
+		  <h3 class="modal-title">Subcategories under {{add_subcat_name}}</h3>
+        <button type="button" class="close fs-1" data-dismiss="modal" id="close">&times;</button>
+
+		</div>
+  
+		<!-- Modal body -->
+		<div class="modal-body">
+            <div class="row">
+                <!-- <div class="col-10 my-auto">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Sub-category</mat-label>
+                        <input matInput id="subcatval" #catVal placeholder="Please add a sub-category..."/>
+                      </mat-form-field>
+                </div>
+                <div class="col-2 my-auto">
+                    <a class="updateCustom " (click)="add(catVal.value)">Add</a>
+                </div> -->
+              
+                 <div class="col-12 my-auto">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Sub-category</mat-label>
+                        <input matInput id="subcatval" #catVal placeholder="Add sub-category..."/>
+                      </mat-form-field>
+                 </div>
+          
+            </div>
+		    <ul>  
+                <li><h4 class="p-2">Subcategory Lists</h4></li>     
+                <mat-divider></mat-divider>
+                <li  *ngFor="let x of subcatdata" class="customLi">
+                    {{x.name}}
+                </li>
+                
+            </ul>
+		</div>
+  
+		<!-- Modal footer -->
+		<div class="modal-footer">
+		  <!-- <button type="button" class="btn btn-block" data-dismiss="modal">Close</button> -->
+          <button class="btn btn-block finalSUbmitButton" (click)="add(catVal.value)" [disabled]="catVal.value == ''">Add</button>
+		</div>
+	  </div>
+	</div>
+  </div> 

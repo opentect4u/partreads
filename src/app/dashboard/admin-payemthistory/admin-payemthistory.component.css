@@ -1,0 +1,6 @@
+/* table{width:100%;} */
+td,th{text-align: center;}
+mat-form-field{width:100%;font-size: 13px;}
+.finalSubmitButton{ background-color: #405189;color: #ffffff;border-radius: 3px;text-transform: none;outline: none;border: #405189;font-size: 15px;letter-spacing: .0107142857em;font-weight: 400;padding: 6px 25px;line-height: 25px;}
+.searchDate{border: #c0bfbe solid 1px;box-shadow: 0 0 3px 1px #dfdede;border-radius: 6px;padding-bottom: 15px;min-height: 100px;padding: 15px;margin-bottom:13px}
+mat-error{font-size: 13px;font-weight: 500;}

@@ -1,0 +1,170 @@
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+     /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    /* background-color: rgb(0,0,0);  */
+    background-color: rgba(0,0,0,0.4);
+  }
+  .inputfont{
+    font-size:15px !important;
+  }
+  /* Modal Content */
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+  }
+  .modal-dialog{
+    top: 30%; 
+   /* left: 50%; */
+   /* transform: translate(-50%, -50%); */
+}
+  /* Modal Content */
+  /* .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+  } */
+  .modal-footer{
+    padding: 0px 6px 0px 0px !important;
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #3d3c3c;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .customText{font-size: 15px;font-weight: 400;cursor: pointer;padding-left: 8px;}
+  mat-radio-button{font-size: 12px;padding: 7px;}
+  .customSpan{font-size: 17px;padding-left: 13px;}
+
+  /* .image {
+  } */
+.overlayIcon {position: absolute;top: 0;
+    position: absolute;
+    top: 14px;
+    bottom: 2;
+    height: 148px;
+    width: 148px;
+    opacity: 0;
+    transition: .3s ease;
+    background-color: #2b2929c7;
+    border-radius: 50%;
+  }
+  
+  .image:hover .overlayIcon {
+    opacity: 1;
+  }
+  
+  .icon {
+    color: white!important;
+    font-size: 64px;
+    position: absolute;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .fa-times:hover {
+    color: #eee;
+  }
+  .verify{width: auto;height: 36px;background: rgba(248,175,69,.2);border-radius: 4px;display: -webkit-flex;display: -moz-box;display: flex;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    align-items: center;
+    -webkit-justify-content: space-evenly;
+    -moz-box-pack: space-evenly;
+    justify-content: space-evenly;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    color: #f8af45;
+
+  }
+  mat-hint{font-size: 13px;font-weight: 800;color: #164d8d;text-decoration: underline;cursor:pointer!important}
+  .didnotRecieve{font-size: 14px;color:rgb(156, 156, 156)}
+  
+  .verification-code--inputs input[type=tel] {border: 1px solid #164d8d;
+    border: 1px solid #164d8d;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    color: #263238;
+    border: none;
+    border-bottom: 1px solid #385fc0;
+    font-family: inherit;
+    text-align: left;
+    background-color: #f3f6f9;
+    width: 34px;
+    padding: 10px;
+    text-align: center;
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 8px;
+  
+}
+
+.verification-code--inputs input[type=tel]:focus{outline:none;border:none;border-bottom:1px solid blue;}
+.verification-code--inputs span{font-size: 21px;color: #b4b4b5;}
+.customTimer{font-size: 16px;font-weight: 700;margin-left:2px}
+#resendOtp{display: none;cursor: pointer;color:#164d8d;}
+#coupon{display:none;}
+.customcouponCode{color:gray;font-size: 14px;}
+
+.phone-field {
+  margin: 50px;
+  font-size: 20px;
+}
+
+.phone-input {
+  width: 13px;
+  text-align: center;
+  font-size: 16px !important;
+  height: 1.75em;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 2px solid #ddd;
+  margin-right: 2px;
+  margin-left: 2px;
+}
+
+[placeholder]:focus::-webkit-input-placeholder {
+  transition: opacity 0.5s 0.0s ease;
+  opacity: 0;
+}
+mat-label{font-size: 14px;
+  color: black;
+  font-weight: 700;}
+.otpTimer{display: flex;flex-direction: row;justify-content: center;}
+mat-form-field{font-size: 15px;width:100%}
+input#myfile {margin-top: 5px;height: 55px!important;}
+input[type=text]{  height: 55px!important;}
+#counter_left{display:none;}
+
+
+/* ::ng-deep .matFormField .mat-form-field-outline {
+  color: rgb(4, 121, 56)!important;
+} */

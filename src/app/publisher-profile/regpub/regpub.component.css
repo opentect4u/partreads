@@ -1,0 +1,105 @@
+.alert {
+    padding: 20px;
+    background-color: #01b86b; /* Red */
+    color: rgb(1, 77, 17);
+    margin-bottom: 15px;
+  }
+  .alert1{
+    /* padding: 20px;
+    background-color: #920101;
+    color: rgb(253, 252, 252);
+    margin-bottom: 15px; */
+
+    padding: 6px;
+    background-color: #831f1f;
+    color: rgb(253, 252, 252);
+    margin-bottom: 15px;
+  }
+  
+  /* The close button */
+  .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .closebtn_1{
+    margin-left: 15px;
+    color: rgb(1, 77, 17);
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  #snackbar {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 250px; /* Set a default minimum width */
+    margin-left: -125px; /* Divide value of min-width by 2 */
+    background-color: #333; /* Black background color */
+    color: #fff; /* White text color */
+    text-align: center; /* Centered text */
+    border-radius: 2px; /* Rounded borders */
+    padding: 16px; /* Padding */
+    position: fixed; /* Sit on top of the screen */
+    z-index: 1; /* Add a z-index if needed */
+    left: 50%; /* Center the snackbar */
+    bottom: 30px; /* 30px from the bottom */
+    font-size: large;
+  }
+
+
+  #snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  
+  @-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+.signUpbtn{
+  background: #fa607e!important;
+    padding: 7px 14px;
+    border-radius: 0;
+    width: 100%;
+    font-size: 17px!important;
+    color: #fff!important;
+    border: none;
+    height: 45px;
+    font-weight: 500;
+}
+.text-danger{color: #0c0323 !important;font-size: 15px; font-weight: 500;}
+.error_conf{position: absolute;top: 61%;right: 10px;padding: 1%;border-radius: 3px;background-color: #d25445c9;color: #ffffff;font-size: 14px;
+    border-radius: 7px;
+}
+
+#mobileNumber{display:none}
+#checkEmail{display: none;}
+#checkName{display: none;}
+#passNew{display:none;}
+#confPassword{display:none}
+#confEmail{display:none;}
+mat-hint{font-size: 12px;font-weight: 800;}

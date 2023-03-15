@@ -1,0 +1,114 @@
+<app-adminheader></app-adminheader>
+
+<div class="page-body-wrapper">
+  <app-adminsidebar></app-adminsidebar>
+
+  <div class="main-panel">
+    <div class="content-wrapper">
+      <div class="card">
+        <div class="card-body">
+            <div class="titleSec">
+                <h2>Sent Email</h2> 
+            </div>
+            <div id="cover-spin" *ngIf="loading"></div>
+
+            <form #form="ngForm" [formGroup]="_sentEmail" (ngSubmit)="SendEmail()">
+
+            <div class="row">
+              <div class="col-12 mb-5">
+                <mat-radio-group color="primary" formControlName="_flag"  [(ngModel)]="_submitEmail.flag">
+                  <mat-radio-button value="U">users</mat-radio-button>
+                  <mat-radio-button value="P">Publishers</mat-radio-button>
+                </mat-radio-group>
+              </div>
+                 <ng-container *ngIf="f._flag.value == 'U'">
+                  
+                   <div class="col-6">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Choose an option</mat-label>
+                      <mat-select formControlName="_user_type" [(ngModel)]="_submitEmail.user_type" (selectionChange)="onusertypeChange($event)">
+                      <mat-option value="">--Select User type--</mat-option>
+                      <mat-option *ngFor="let userType of _userType" value="{{userType._id}}" >{{userType.name}}</mat-option>
+                     </mat-select>
+                   </mat-form-field>
+                   </div>
+                   <div class="col-6">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Select Users</mat-label>
+                      <mat-select (closed)="onCloseMethod(select)" formControlName="_user" [(ngModel)]="_submitEmail.user" multiple #select>
+                        <mat-select-trigger>
+                          {{f._user.value?.length > 0 ? f._user.value[0].name : ''}}
+                          <span *ngIf="f._user.value?.length > 1" class="additional-selection">
+                            (+{{f._user.value.length - 1}} {{f._user.value?.length === 3 ? 'other' : 'others'}})
+                          </span>
+                        </mat-select-trigger>
+                        <mat-optgroup >
+                          <mat-form-field style="width:100%;">
+                           <input  #multiSearch formControlName="_searchusers" type="text" autocomplete="off" matInput placeholder="Search By User Name" (keydown)="onInputChange($event)"/>
+                           <button [disableRipple]="true" *ngIf="multiSearch.value" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearch($event)">
+                           <mat-icon >close</mat-icon>
+                         </button>
+                                </mat-form-field>
+                           </mat-optgroup>
+                           <mat-optgroup *ngIf="_users.length == 0">
+                             <h4 class="text-left"><strong>No results found!</strong></h4>
+                           </mat-optgroup>
+
+                        <mat-checkbox *ngIf="multiSearch.value == ''" (change)="selAll($event)"  color="primary" [checked]="f._user.value?.length == _users.length">Select All Users</mat-checkbox>
+                      <mat-option *ngFor="let _user of _users" [value]="_user.user_details">{{_user.user_details.name}}</mat-option>
+                     </mat-select>
+                   </mat-form-field>
+                   </div>
+                 </ng-container>
+               <!-- <div class="col-12"> -->
+                 <ng-container *ngIf="f._flag.value == 'P'">
+                     <div class="col-12">
+                      <mat-form-field  appearance="outline">
+                        <mat-label>Select Publishers</mat-label>
+                      <mat-select (closed)="onCloseMethod(select)"   formControlName="_publishers" multiple [(ngModel)]="_submitEmail.publisher" #select_pub>
+                        <mat-select-trigger>
+                          {{f._publishers.value?.length > 0 ? f._publishers.value[0].user_name : ''}}
+                          <span *ngIf="f._publishers.value?.length > 1" class="additional-selection">
+                            (+{{f._publishers.value.length - 1}} {{f._publishers.value?.length === 3 ? 'other' : 'others'}})
+                          </span>
+                        </mat-select-trigger>
+                         <mat-optgroup >
+                         <mat-form-field style="width:100%;">
+                          <input  #multiUserSearch formControlName="searchPub" type="text" autocomplete="off" matInput placeholder="Search By Publisher Name" (keydown)="onInputChange($event)"/>
+                          <button [disableRipple]="true" *ngIf="multiUserSearch.value" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearch($event)">
+                          <mat-icon >close</mat-icon>
+                        </button>
+                               </mat-form-field>
+                          </mat-optgroup>
+                          <mat-optgroup *ngIf="publishers.length == 0">
+                            <h4 class="text-left"><strong>No results found!</strong></h4>
+                          </mat-optgroup>
+                        <mat-checkbox  *ngIf="multiUserSearch.value==''" (change)="selAll($event)"  color="primary" [checked]="f._publishers.value?.length == publishers.length">Select All Publishers</mat-checkbox>
+                        <mat-option *ngFor="let pub of publishers " [value]="pub">{{pub.user_name}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                     </div>
+                  </ng-container>
+               <!-- </div> -->
+               <div class="col-12">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Email Heading</mat-label>
+                  <input type="email" matInput formControlName="_headers" [(ngModel)]="_submitEmail.header" 
+                         placeholder="Email Header">
+                </mat-form-field>
+              </div>
+               <div class="col-12 mt-4">
+                <angular-editor formControlName="_bodyText"  [(ngModel)]="_submitEmail.email_body" [config]="config"></angular-editor>
+               </div>
+               <div class="col-12 mt-5"> 
+                 <input type="submit" value="Send Mail" class="finalSubmitButton" [disabled]="(f._flag.value == 'P' ? !_submitEmail.publisher :  _submitEmail.user_type == '') || _submitEmail.email_body == '' || _submitEmail.header== ''"/>
+               </div>
+            </div>
+          </form>
+
+        </div>
+
+    </div>
+    </div>
+  </div>
+</div>

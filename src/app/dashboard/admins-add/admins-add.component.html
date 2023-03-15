@@ -1,0 +1,232 @@
+<app-adminheader></app-adminheader>
+
+
+<div class="page-body-wrapper">
+    <app-adminsidebar></app-adminsidebar>
+
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="card">
+                <div class="card-body">
+
+
+                    <div class="titleSec">
+                        <!-- <button type="button" class="btn btn-primary" routerLink="/admins_add">Add</button> -->
+                        <h2>Add Admin</h2> 
+                    </div>
+                </div>
+
+            </div>
+          
+            <div class="card mt-3 p-3">
+              <div class="card-body">
+                    <!-- <div class="loginWraper"
+                    > -->
+                   <div class="cover-spin" *ngIf="load"></div>
+                   
+                     
+                    <div class="col-sm-12 mt-5 p-3">
+                 
+                     <div class="row pb-3">
+                         <div class="col-6">
+                            <div class="form-group">
+                                <mat-form-field appearance="outline">
+                                  <mat-label>Name</mat-label>
+                                  <input matInput placeholder="Enter Name" type="text" id="a_nm" value="{{adminName}}" name="aname" #a_name required/>
+                                </mat-form-field>
+                              </div>
+                         </div>
+                         <div class="col-6">
+                            <div class="form-group">
+                              
+                              <mat-form-field appearance="outline">
+                                        <mat-label>Email</mat-label>
+                                        <input matInput id="a_em" [readonly]="readonly" type="email" #a_email value="{{adminEmail}}"/>
+                                      </mat-form-field>
+                              </div>
+                         </div>
+                     </div>
+                       
+                        <div class="row pb-3">
+                            <div class="col-12">
+                                <div class="form-group">
+                                  <mat-form-field appearance="outline">
+                                        <mat-label>Phone</mat-label>
+                                        <input matInput id="a_phone" type="text"  value="{{adminPhone}}" name="aphone" #a_phone required/>
+                                      </mat-form-field>
+                                  </div>
+                            </div>
+                           
+                        </div>
+                          <form >
+                          <h2 class="mb-5" style="font-weight: 400">Privileges:</h2>
+                            <div class="row pb-3 mt-3">
+                                <div class="col-3">
+                                    <div class="checkBoxCustomeMain">
+                                        <label class="checkBoxCustom">
+                                          <input type="checkbox" id="pub1" (click)="check_privilege($event,1)">
+                                          <span class="checkmarkText"></span>
+                                        </label>
+                                        <a  type='button' >Publisher Mangement</a>
+                                      </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="checkBoxCustomeMain">
+                                        <label class="checkBoxCustom">
+                                          <input type="checkbox" id="u2" (click)="check_privilege($event,2)">
+                                          <span class="checkmarkText"></span>
+                                        </label>
+                                        <a  type='button' >User Management</a>
+                                      </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="checkBoxCustomeMain">
+                                        <label class="checkBoxCustom">
+                                          <input type="checkbox" id="c3" (click)="check_privilege($event,3)">
+                                          <span class="checkmarkText"></span>
+                                        </label>
+                                        <a  type='button' >Category</a>
+                                      </div>
+                                </div>
+                            <!-- </div> -->
+                                <div class="col-3">
+                                    <div class="checkBoxCustomeMain">
+                                        <label class="checkBoxCustom">
+                                          <input type="checkbox" id="s4" (click)="check_privilege($event,4)">
+                                          <span class="checkmarkText"></span>
+                                        </label>
+                                        <a  type='button' >Sub-Category</a>
+                                      </div>
+                                </div>
+                              </div>
+                            <div class="row pb-3 mt-3">
+
+                                <div class="col-3">
+                                    <div class="checkBoxCustomeMain">
+                                        <label class="checkBoxCustom">
+                                          <input type="checkbox" id="a5" (click)="check_privilege($event,5)">
+                                          <span class="checkmarkText"></span>
+                                        </label>
+                                        <a  type='button' >All Books</a>
+                                      </div>
+                                </div>
+                                <div class="col-3">
+                                  <div class="checkBoxCustomeMain">
+                                      <label class="checkBoxCustom">
+                                        <input type="checkbox" id="r6" (click)="check_privilege($event,6)">
+                                        <span class="checkmarkText"></span>
+                                      </label>
+                                      <a  type='button' >Review/Ratings</a>
+                                    </div>
+                              </div>
+                              <div class="col-3">
+                                <div class="checkBoxCustomeMain">
+                                    <label class="checkBoxCustom">
+                                      <input type="checkbox" id="h7" (click)="check_privilege($event,7)">
+                                      <span class="checkmarkText"></span>
+                                    </label>
+                                    <a  type='button' >Hard Copy</a>
+                                  </div>
+                            </div>
+                            <div class="col-3">
+                              <div class="checkBoxCustomeMain">
+                                  <label class="checkBoxCustom">
+                                    <input type="checkbox" id="u8" (click)="check_privilege($event,8)">
+                                    <span class="checkmarkText"></span>
+                                  </label>
+                                  <a  type='button' >User Reports</a>
+                                </div>
+                          </div>
+                            </div>
+                            <div class="row pb-3 mt-3" >
+
+                              <div class="col-3">
+                                  <div class="checkBoxCustomeMain">
+                                      <label class="checkBoxCustom">
+                                        <input type="checkbox" id="p9" (click)="check_privilege($event,9)">
+                                        <span class="checkmarkText"></span>
+                                      </label>
+                                      <a  type='button' >Publisher Reoprts</a>
+                                    </div>
+                              </div>
+                              <div class="col-3">
+                                <div class="checkBoxCustomeMain">
+                                    <label class="checkBoxCustom">
+                                      <input type="checkbox" id="ph10" (click)="check_privilege($event,10)">
+                                      <span class="checkmarkText"></span>
+                                    </label>
+                                    <a  type='button' >Payment History</a>
+                                  </div>
+                            </div>
+                            <div class="col-3">
+                              <div class="checkBoxCustomeMain">
+                                  <label class="checkBoxCustom">
+                                    <input type="checkbox" id="cm11" (click)="check_privilege($event,11)">
+                                    <span class="checkmarkText"></span>
+                                  </label>
+                                  <a  type='button' >Comminssion Management</a>
+                                </div>
+                          </div>
+                          <div class="col-3">
+                            <div class="checkBoxCustomeMain">
+                                <label class="checkBoxCustom">
+                                  <input type="checkbox" id="gc12" (click)="check_privilege($event,12)">
+                                  <span class="checkmarkText"></span>
+                                </label>
+                                <a  type='button'>Coupon Manage</a>
+                              </div>
+                        </div>
+                          </div>
+                          <div class="row pb-3 mt-3" >
+                            <div class="col-3">
+                              <div class="checkBoxCustomeMain">
+                                <label class="checkBoxCustom">
+                                  <input type="checkbox" id="uc13" (click)="check_privilege($event,13)">
+                                  <span class="checkmarkText"></span>
+                                </label>
+                                <a  type='button' >Used Coupon</a>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                        <!-- <div class="checkBoxCustomeMain">
+                          <label class="checkBoxCustom">
+                            <input type="checkbox" checked="checked">
+                            <span class="checkmarkText"></span>
+                          </label>
+                          <a  type='button' >Terms &amp; Condition Apply</a>
+                        </div> -->
+                
+                        <div class="form-group">
+                            <div class="titleSec">
+                              <button type="button" [hidden]="readonly" class="btn btn-primary" (click)="add_admin(a_name.value,a_email.value,a_phone.value)" >Add</button>
+                              <button type="button" [hidden]="!readonly" class="btn btn-primary" (click)="edit_admin(a_name.value,a_email.value,a_phone.value)" >Update</button>
+
+                            </div>
+                
+                          <!-- <input type="submit" [disabled]='disabled_button' class="btn btnRed widthFull" (click)="show(pname.value,pemail.value,ppwd.value,phone.value)"
+                            value="Sign up now"> -->
+                            <!-- <button [disabled]='disabled_button' class="btn btnRed widthFull" (click)="show(pname.value,pemail.value,ppwd.value,phone.value)"
+                            > 
+                            <div [hidden]="!show_loader">
+                              Sign up now 
+                            </div> <div [hidden]="show_loader" class="spinner-border text-light"></div> </button> -->
+                        </div>
+                     
+                
+                    </div>
+                    <br clear="all">
+                  <!-- </div> -->
+                      
+                  
+                </div>
+                  </div>
+
+        </div>
+       
+
+
+    </div>
+</div>
+<div id="snackbar">{{m}}</div>
+

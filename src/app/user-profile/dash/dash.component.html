@@ -1,0 +1,155 @@
+
+ <!-- 
+    * This is the Landing page , when a user logged In he redirects to this page first
+    * this part contain header,body and footer of the project
+ -->
+ 
+ <app-userheaderafterlogin></app-userheaderafterlogin><!--This is the header part (After Loggedin as user)   -->
+ <div class="bodyContainer"  appNorightclick><!--This is the main body-->
+   <div class="wrapperCustome" ><!--Sub div of main div which contain sidebar and body content-->
+   
+       <app-usersidebar></app-usersidebar><!--This is the  sidebar of the project (use as a selector)-->
+     <div class="col-sm-9 rightSideBarnewCus float-right" appNorightclick><!--This div contain main content-->
+    
+      <div class="row" appNorightclick>
+       <div class="dashBoardFlex" appNorightclick><!--Usage:Contain All Books-->
+        <div class="col-sm-12">
+          <div class="dashBoardGraph">
+            <div class="titleSec"><!--Usage: Header part of this div-->
+             <h2>All Books<span></span>
+              <a class="customMore" routerLink="/user/user_dashboard">More>></a><!--Usage: by clicking on this button, you are navigate to Store page (Where all active books are shown))-->
+            </h2> <hr class="customHr"/>
+            </div>
+             <div *ngIf="show_notif" class="loader"></div><!--Usage: This is the loader-->
+            <div class="row" *ngIf="recent_share?.allbooks.length > 0 && !show_notif" ><!--Usage:The books(only 4) which are uploaded by the publisher are to be shown here, If There are no books uploaded then this div will be hidden-->
+              <div class="col-sm-3 col_sm_3BooksView" *ngFor="let allbook of recent_share.allbooks">
+                <div class="bookList" (click)="gotobookdetailspage(allbook.book_id,allbook.publisher_id)"><!--Usage: By clicking on this div you will be navigate to the  particular book (on which you are clicked) details page.(Page Route: http://localhost:4200/#/user/bookdetails)-->
+                <div class="bookPro" style="cursor:pointer">
+                  <img [src]="allbook.book_image_path" alt="" /><!--Usage: In this div book image will be shown-->
+                    <div class="textbox">
+                    <div class="book_details01">
+                      <h4>{{allbook.book_name}}</h4><!--Usage: In this div book name will be shown-->
+                    <h5>{{allbook.author_name}} </h5>	<!--Usage: In this div author of the book  will be shown-->
+                     <h4 class="slider_price"><!--Usage: In this div price per page of the book will be shown-->
+                       <i class="fa fa-inr" aria-hidden="true"></i> {{allbook.price}} &nbsp;<small class="text-light">(Per Page)</small></h4>
+                      </div>
+                     </div>
+                </div>
+                </div>
+              </div>
+             </div>
+             <div class="row" *ngIf="recent_share?.allbooks.length == 0 && !show_notif"><!--Usage: This div will be shown if there is no books uploaded by the publisher,It contains a default image of no books available and a text message -->
+                 <div class="col-12 text-center"  >
+                     <img src="/assets/images/no-read-book-icons-set-260nw-299610074.jpg" style="height:172px"/><!--Usage: This is the image of no books available (Location: src/assets/images/no-read-book-icons-set-260nw-299610074.jpg)-->
+                     <h4 class="customAllbooks">No Books Available</h4><!--Usage: This is the message if no books available-->
+                 </div>
+             </div>
+          </div>        
+        </div>
+      </div>
+        <div class="dashBoardFlex" appNorightclick><!--Usage: Contain All Books which are recently uploaded-->
+          <div class="col-sm-12">
+            <div class="dashBoardGraph">
+              <div class="titleSec"><!--Usage: Header part of this div-->
+              <h2>Recently Uploaded Books <span>(Latest four books)</span>
+               <a class="customMore"  routerLink="/user/user_dashboard">More>></a><!--Usage: by clicking on this button, you are navigate to Store page (Where all active books are shown))-->
+              </h2>
+              <hr class="customHr"/>
+              </div>
+                  <div  *ngIf="show_notif" class="loader"></div><!--Usage: This is the loader-->
+
+              <div class="row" *ngIf="books.length > 0 && !show_notif"><!--Usage:The books(only 4) which are uploaded recently by the publisher are to be shown here, If There are no books uploaded then this div will be hidden-->
+                <div class="col-sm-3 col_sm_3BooksView" *ngFor="let book of books">
+                  <div class="bookList" (click)="gotobookdetailspage(book.book_id,book.publisher_id)"><!--Usage: By clicking on this div you will be navigate to the  particular book (on which you are clicked) details page.(Page Route: http://localhost:4200/#/user/bookdetails)-->
+                  <div class="bookPro" style="cursor:pointer">
+                    <img [src]="book.book_image_path" alt="" /><!--Usage: In this div book image will be shown-->
+                      <div class="textbox">
+                      <div class="book_details01">
+                        <h4>{{book.book_name}}</h4><!--Usage: In this div books name will be shown-->
+                      <h5>{{book.author_name}} </h5><!--Usage: In this div author of books  will be shown-->
+                       <h4 class="slider_price"><i class="fa fa-inr" aria-hidden="true"></i> {{book.price}} &nbsp;<small class="text-light">(Per Page)</small></h4><!--Usage: In this div per page price of books  will be shown-->
+                      </div>
+                       </div>
+                  </div>
+                  </div>
+                </div>
+               </div>
+
+               <div class="row" *ngIf="books.length == 0 && !show_notif"><!--Usage: If There are no books uploaded then this div will be shown,,It contains a default image of no books available and a text message -->
+                <div class="col-12 text-center"  >
+                    <img src="/assets/images/no-read-book-icons-set-260nw-299610074.jpg" style="height:172px"/><!--Usage: This is the image of no books available (Location: src/assets/images/no-read-book-icons-set-260nw-299610074.jpg)-->
+                    <h4 class="customAllbooks">No Books Uploaded Yet!</h4><!--Usage: This is the message if no books available-->
+                </div>
+            </div>
+            </div>        
+          </div>
+      </div>
+
+    <div class="dashBoardFlex" appNorightclick><!--Usage: Contain Books(5 books) which are recently viewed by the user-->
+
+      <div class="col-sm-6 float-left">
+      <div class="dashBoardGraph">
+      <div class="titleSec"><!--Usage: Header part of this div-->
+      <h2>Recently Viewed <span> (five recent entries) </span></h2></div>
+     
+
+      <ul class="showlist list-group listOfBookDash" *ngIf="recent_share?.td_recent_visit_book.length > 0 && !show_notif"><!--Usage: This is the list of recently viewed book,this list will be hidden if no books viewed by the user-->
+
+
+      <div *ngIf="show_notif" class="loader"></div><!--Usage:Loader of the div -->
+
+
+
+      <li *ngFor="let x of recent_share.td_recent_visit_book" style="cursor: pointer;" (click)="go_to_book(x.book_id,x.publisher_id)" ><i class="fa fa-angle-right" aria-hidden="true"></i><!--Usage:Book list which are recently viewed-->
+      {{x.book_name}} <!--Usage:display the name of the books user visited-->
+      <span> 
+      ({{x.created_at | date:'medium'}}) <!--Usage:display the date of the viewed book-->      
+      </span>
+      </li>
+      </ul>
+
+      <div class="row text-center" *ngIf="recent_share?.td_recent_visit_book.length==0 && !show_notif"><!--This list will be shown if no books viewed by the user-->
+        <div class="col-12"><img src="/assets/images/noView.png" style="height:150px"/><!--This image will be shown if no books viewed by the user (Location: src/assets/images/noView.png)-->
+          <h4 class="customAllbooks">No Books Are Viewed Yet!</h4><!--Usage: this message will be shown if no books viewed by the user--></div>
+        </div>
+
+      </div>
+      </div>
+
+      <div class="col-sm-6 float-left">
+      <div class="dashBoardGraph"><!--Usage: Contain Books (5 books) which are recently shared by the user-->
+        <div class="titleSec"><!--Usage: Header part of this div-->
+      <h2>Recently Shared <span> (five recent entries) </span></h2>
+    </div>
+
+      <ul class="showlist list-group listOfBookDash" *ngIf="recent_share?.td_recent_share_book.length > 0 && !show_notif"><!--Usage: This is the list of recently viewed book,this list will be hidden if no books shared by the user-->
+      <div *ngIf="show_notif" class="loader"></div><!--Loader of this div-->
+
+      <li *ngFor="let x of recent_share.td_recent_share_book"><!--Usage:List of Shared book by user-->
+        <i class="fa fa-angle-right" aria-hidden="true"></i>{{x.book_name}}<!--Usage:Display name of the shared books -->
+      </li>
+     
+      </ul>
+      <div class="row text-center" *ngIf="recent_share?.td_recent_share_book.length==0 && !show_notif"><!--Usage: This div will be shown if no books shared by the user-->
+        <div class="col-12"><img src="/assets/images/noShare.jpg" style="height:150px"/><!--Usage: This image will be shown when no shared book available (Location : src/assets/images/noShare.jpg)-->
+          <h4 class="customAllbooks">No Books Shared Yet!</h4></div><!--Usage: This text will be shown when no shared book available-->
+        </div>
+      
+      </div>
+
+
+
+
+
+
+      </div>
+    </div>
+
+
+      </div>
+
+      
+    </div>
+ <br clear="all">
+ </div></div>
+ <app-site-footer></app-site-footer><!--Usage Footer of the page-->

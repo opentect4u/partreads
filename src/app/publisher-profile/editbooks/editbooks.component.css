@@ -1,0 +1,25 @@
+.alert {
+    padding: 20px;
+    background-color: #febc07; /* Red */
+    color: rgb(5, 5, 5);
+    margin-bottom: 15px;
+  }
+  .inputfont{
+    font-size:15px !important;
+  }
+  select{
+    padding:75% !important;
+  }
+  /* .ng-invalid{
+    border: red solid 1px;
+  } */
+  mat-form-field{width:100%;font-size:15px;}
+  input[type="text"]{border:none!important}
+  mat-error{font-size: 13px;font-weight: 600;}
+  textarea[type="text"]{border:none!important;}
+  input[type="number"]{border:none!important;}
+  input.form-control[type="file"]{height:59px!important;}
+  img {border: 1px solid #ddd;border-radius: 4px;padding: 5px;width: 150px;}
+  .customBtn{background-color: #ffd400;font-size: 15px;font-weight: 500;border: none;margin: 2px;border-radius: 2px;}
+  .modal-header h4{margin-right: auto;}
+  mat-hint{font-size: 13px;font-weight: 500;}

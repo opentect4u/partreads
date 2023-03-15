@@ -1,0 +1,67 @@
+<app-adminheader></app-adminheader>
+	
+<div class="page-body-wrapper">
+    <app-adminsidebar></app-adminsidebar>
+    	<div class="main-panel">
+            <div class="content-wrapper">
+                <div class="card">
+                 <div class="card-body">
+                     
+                     
+                     <div class="titleSec">
+                     <h2>Create Sub-Category</h2> 
+                     </div>
+                     
+                    <div class="row">
+                         <div class="col-sm-6"> 
+    <form>
+      
+                        
+      <div class="form-group row">
+        
+        <div class="col-sm-6">
+
+            <!-- <select name="category_id" id="category_id" #cat class="form-select p-3" (click)="dispcat(cat.value)">
+                <option   value=""  [selected]="this.id=='' || this.id=='undefined'">Select a Category</option>
+                <option   [value]="cat._id" [selected]='cat._id==this.id'  *ngFor="let cat of userData" >{{cat.name}}</option>
+              </select> -->
+              <mat-form-field appearance="outline">
+                <mat-label>Category</mat-label>
+                <select matNativeControl name="category_id" id="Category_id" #cat  (change)="dispcat($event)" >
+                  <option value="">Select Category</option>
+                  <option [value]="cat._id"   *ngFor="let cat of userData">{{cat.name}}</option>
+                </select>
+              </mat-form-field>
+
+              <span class="text-danger fieldAleart" [hidden]="chooseoption">{{messagealert}}</span>
+              </div>
+            <!-- <input placeholder="enter subcategory name" type="text" id="category_name" #nm/> -->
+            <div class="col-sm-6">
+          <!-- <input type="text" class="form-control" placeholder="Enter Sub-Category"   id="category_name" #nm> -->
+          <mat-form-field appearance="outline">
+            <mat-label>Sub-category</mat-label>
+            <input matInput type="text"  placeholder="Enter Sub-Category" id="category_name"  id="category_name" #nm/>
+          </mat-form-field>
+          <span class="text-danger fieldAleart" [hidden]="!messageshow">{{messagealert1}}</span>
+        </div>
+      </div>
+                        
+    <div class="form-group row">
+        <div class="col-sm-12 btnSubmitSec">
+          <input type="submit"  (click)="create_subcat(nm.value,cat.value)"  class="btn btn-info" id="submit" name="submit" value="Create">
+    <!--		<input type="reset" onclick="" class="btn btn-info" value="Cancel">-->
+
+    <!-- <button class="btn btn-primary" (click)="create_subcat(nm.value,cat.value)">Create</button> -->
+        </div>
+      </div>				
+                        
+    </form> 
+                             
+                             
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>

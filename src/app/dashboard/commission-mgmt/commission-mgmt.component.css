@@ -1,0 +1,10 @@
+table{width:100%}
+mat-form-field{font-size:15px;width:100%}
+td,th{width:11.1%}
+mat-radio-button{padding:0px 7px 0px 4px;font-size: 14px;}
+span{padding-left: 5px!important}
+th.mat-header-cell.cdk-header-cell{text-align:center}
+td.mat-cell{text-align:center}
+.customBtn{padding: 5px;font-size: 15px;background-color: #2c2e3e;border: 1px solid #2c2e3e;border-radius: 4px;width: 50%;}
+button.btn.btn-default {font-size: 15px;font-weight: 600;background: #38384f;color: white;margin-top: 0px!important; margin-bottom: 0px!important;}
+.mat-error{font-size: 12px;font-weight: 600;}

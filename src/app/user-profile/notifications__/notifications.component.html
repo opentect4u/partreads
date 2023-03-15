@@ -1,0 +1,165 @@
+<app-userheaderafterlogin></app-userheaderafterlogin>
+<!-- <div class="breadcrumb">
+    <ul>
+        <li><a routerLinkActive="true" routerLink="/user/user_view">Home</a></li>
+        <li>&gt;</li>
+        <li>Notifications</li>
+    </ul>
+</div> -->
+
+<div class="bodyContainer">
+    <div class="wrapperCustome">
+        <app-usersidebar></app-usersidebar>
+
+        <div class="col-sm-9 float-left">
+    
+
+            <div class="rightNotification">
+
+                <!-- <h1>Notifications</h1> -->
+               
+               <!--  <div class="book_loadMain" *ngIf="loader">
+
+                    <div class="loader loader-1">
+                        <div class="loader-outter"></div>
+                        <div class="loader-inner"></div>
+                      </div>
+               </div>	 -->
+               <div id="cover-spin" *ngIf="loader"></div>
+                <div class="mainnotificationdiv" *ngIf="userData.length > 0">
+                    <div *ngFor="let row of userData;let i=index">
+                      <mat-card class="matCard" *ngIf="row.subject=='BookUpload'">
+                              <mat-card-header>
+                                <mat-card-title> 
+                                <h2 class="matcardtitleh2">
+                                  <a><i class="fa fa-book" aria-hidden="true"></i></a>
+                                  New book uploaded 
+                                  <a class="float-right matIcon"  (click)="clear_all_notification('O',row._id,i)"><mat-icon>close</mat-icon></a> 
+                                  <a class="float-right matIcon" (click)="expandMore(i)"><mat-icon>expand_more</mat-icon></a>
+                                  <span style="display:none" id="date_{{i}}" class="customnotificationspan">{{row.date | date:'dd-MM-yyyy h:mma'}}</span>
+                                </h2>
+                                <p class="customcardtext" id="Date_{{i}}">{{row.date | date:'dd-MM-yyyy h:mma'}}</p>
+                            </mat-card-title>
+                             </mat-card-header>
+                
+                                <mat-card-content style="display:none"  id="matcard{{i}}">     
+                                    <h4 class="matcardcontenth4" (click)="got_book_details_page(row.book_id,row.publisher_id)"> 
+                                      {{row.publisher_name}} has
+                                      {{msg}}
+                                      {{row.book_name}} at {{row.date | date:'dd-MM-yyyy h:mma'}}.
+                        
+                                    
+                                    </h4>
+                                </mat-card-content>
+                      </mat-card>
+                       <mat-card class="matCard" *ngIf="row.subject=='BuyBookPages'">
+                             
+                        <mat-card-header>
+                
+                          <mat-card-title> 
+                          <h2 class="matcardtitleh2">
+                            <a><i class="fa fa-inr" aria-hidden="true"></i> </a>
+                             New transaction has been done successfully.
+                            <!-- <a class="float-right matIcon"><mat-icon>close</mat-icon></a> 
+                            <a class="float-right matIcon" ><mat-icon>expand_more</mat-icon></a> -->
+                            <a class="float-right matIcon"  (click)="clear_all_notification('O',row._id,i)"><mat-icon>close</mat-icon></a> 
+                            <a class="float-right matIcon" (click)="expandMore(i)"><mat-icon>expand_more</mat-icon></a>
+                            <span style="display:none" id="date_{{i}}" class="customnotificationspan">{{row.date | date:'dd-MM-yyyy h:mma'}}</span>
+                
+                          </h2>
+                          <p class="customcardtext" id="Date_{{i}}">{{row.date | date:'dd-MM-yyyy h:mma'}}</p>
+                      </mat-card-title>
+                       </mat-card-header>
+                
+                          <mat-card-content style="display:none"  id="matcard{{i}}">    
+                            <h4  class="matcardcontenth4" (click)="got_book_details_page(row.book_id,row.publisher_id)"> Transaction for {{row.book_name}}  <span *ngIf="row.body!=''">( <i>Pages: {{row.body}} </i>) </span>  has been successfully made. </h4> 
+                              <!-- <h4 [routerLink]="['/admin/user_details',row.from_user_id]" class="matcardcontenth4" *ngIf="row.subject=='NewUserRegister'"> {{row.from_user_name}} has been registered as a user.</h4>
+                              <h4 [routerLink]="['/admin/pub_details',row.from_user_id]" class="matcardcontenth4" *ngIf="row.subject=='NewPublisherRegister'"> {{row.from_user_name}} has been registered as a publisher.</h4> -->
+                            </mat-card-content>
+                      </mat-card>
+                
+                   <mat-card class="matCard" *ngIf="row.subject=='LinkShare'">
+                             
+                        <mat-card-header>
+                
+                          <mat-card-title> 
+                          <h2 class="matcardtitleh2">
+                            <a><i class="fa fa-inr" aria-hidden="true"></i> </a>
+                           Link shared.
+                            <!-- <a class="float-right matIcon" ><mat-icon>close</mat-icon></a> 
+                            <a class="float-right matIcon" ><mat-icon>expand_more</mat-icon></a> -->
+                            <a class="float-right matIcon"  (click)="clear_all_notification('O',row._id,i)"><mat-icon>close</mat-icon></a> 
+                            <a class="float-right matIcon" (click)="expandMore(i)"><mat-icon>expand_more</mat-icon></a>
+                            <span style="display:none" id="date_{{i}}" class="customnotificationspan">{{row.date | date:'dd-MM-yyyy h:mma'}}</span>
+                
+                          </h2>
+                          <p class="customcardtext" id="Date_{{i}}">{{row.date | date:'dd-MM-yyyy h:mma'}}</p>
+                      </mat-card-title>
+                       </mat-card-header>
+                
+                          <mat-card-content style="display:none"  id="matcard{{i}}">     
+                              <h4 class="matcardcontenth4">{{row.publisher_name}} has shared the link of {{row.book_name}}  
+                                <!-- <img src="{{row.book_image}}" height="30" width="25" alt="">   -->
+                                ( <i>Pages: {{row.body}} </i>) 
+                              
+                              </h4>
+                          </mat-card-content>
+                      </mat-card> 
+
+
+                      <mat-card class="matCard" *ngIf="row.subject=='BuyBookPayment'">
+                             
+                        <mat-card-header>
+                
+                          <mat-card-title> 
+                          <h2 class="matcardtitleh2">
+                            <a><i class="fa fa-inr" aria-hidden="true"></i> </a>
+                            New payment has been done.
+                            <!-- <a class="float-right matIcon" ><mat-icon>close</mat-icon></a> 
+                            <a class="float-right matIcon" ><mat-icon>expand_more</mat-icon></a> -->
+                            <a class="float-right matIcon"  (click)="clear_all_notification('O',row._id,i)"><mat-icon>close</mat-icon></a> 
+                            <a class="float-right matIcon" (click)="expandMore(i)"><mat-icon>expand_more</mat-icon></a>
+                            <span style="display:none" id="date_{{i}}" class="customnotificationspan">{{row.date | date:'dd-MM-yyyy h:mma'}}</span>
+                
+                          </h2>
+                          <p class="customcardtext" id="Date_{{i}}">{{row.date | date:'dd-MM-yyyy h:mma'}}</p>
+                      </mat-card-title>
+                       </mat-card-header>
+                
+                          <mat-card-content style="display:none"  id="matcard{{i}}">     
+                              <h4 class="matcardcontenth4">Payment of  <i>Rs: {{row.body}}/- </i> has been made successfully</h4>
+                          </mat-card-content>
+                      </mat-card> 
+                
+                    </div>
+                    </div>
+                 
+
+                      <div class="row mb-2 mt-2" *ngIf="userData.length > 0">
+                        <div class="col-2">
+                        </div>
+                        <div class="col-6"></div>
+                        <div class="col-4">
+                         <div class="deleteNotification">
+                           <span (click)="clear_all_notification('A','','-1')">Clear all notification</span>
+                    
+                         </div>
+                        </div>
+                      </div>
+                       <div class="row" *ngIf="userData.length == 0" class="mt-5">
+                         <div class="col-12 text-center">
+                           <img src="/assets/images/trnnonotification.png" class="img-fluid" style="height:160px"/>
+                                <h2 class="text-muted">no new notification</h2>
+                         </div>
+                       </div>
+                 
+                 
+                  </div>
+
+        </div>
+        <br clear="all">
+    </div>
+
+</div>
+
+<app-site-footer></app-site-footer>

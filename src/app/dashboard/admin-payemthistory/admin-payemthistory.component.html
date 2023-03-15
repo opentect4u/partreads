@@ -1,0 +1,138 @@
+
+<app-adminheader></app-adminheader>
+
+
+<div class="page-body-wrapper">
+    <app-adminsidebar></app-adminsidebar>
+
+    <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="card  mb-3">
+            <div class="card-body">
+              <form #logForm="ngForm" (ngSubmit)="submitDate(logForm.value)">
+                <div class="row">
+                    <div class="col-5">
+                        <label>&nbsp;</label>
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Start Date</mat-label>
+                            <input type="date" matInput name="startDate" id="StartDate" #startDate="ngModel" ngModel required [max]="getToday()"/>
+                            <mat-error *ngIf="startDate.errors?.required && (startDate.touched || startDate.dirty)" class="text-danger">
+                                *Please Enter Start Date
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-5">
+                        <label>&nbsp;</label>
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>End Date</mat-label>
+                            <input type="date" matInput name="endDate" id="EndDate" #endDate="ngModel" ngModel required [max]="getToday()"/>
+                            <mat-error *ngIf="endDate.errors?.required && (endDate.touched || endDate.dirty)" class="text-danger">
+                                *Please Enter End Date
+                            </mat-error>
+                            <mat-error *ngIf="logForm.value.startDate > logForm.value.endDate" class="text-danger">
+                                *Please provide valid date range
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-2 my-auto">
+                        <input type="submit" value="Search" class="finalSubmitButton float-right" [disabled]="logForm.invalid"/>
+                    </div>
+                </div>
+               </form>
+             </div>
+          </div>
+          <div id="cover-spin" *ngIf="loading"></div>
+
+            <div class="card">
+              <!-- <div class="text-center">
+                <div class="spinner-border text-primary" *ngIf="loading"></div>
+             </div> -->
+           
+                <div class="card-body">
+                  <h1>Payment History<button title="Download as CSV" class="finalSubmitButton float-right" (click)="importAsXlsx()"><i class="fa fa-download" aria-hidden="true"></i> 
+                    <!-- CSV -->
+                    Download
+                  </button></h1>
+               
+                  <mat-form-field>
+                      <mat-label>Search</mat-label>
+                      <input matInput (keyup)="applyFilter($event)" placeholder="Search by book name,publisher name,author name,order Id,pages,amount and date" #input>
+                    </mat-form-field>
+                    
+                    <div class="mat-elevation-z8">
+                      <table mat-table [dataSource]="dataSource" matSort id="data_table">
+                    
+                        <!-- ID Column -->
+                        <ng-container matColumnDef="No">
+                          <th mat-header-cell *matHeaderCellDef >#</th>
+                          <td mat-cell *matCellDef="let row;let i=index"> {{i+1}} </td>
+                        </ng-container>
+                    
+                        <!-- Progress Column -->
+                        <ng-container matColumnDef="bookname">
+                          <th mat-header-cell *matHeaderCellDef >Book</th>
+                          <td mat-cell *matCellDef="let row"> <p class="nameoverflow mt-3" #tooltip="matTooltip"
+                              matTooltip="{{row.book_name}}"
+                              matTooltipClass="custom-tooltip"
+                              matTooltipPosition="below">{{row.book_name}} </p> </td>
+                        </ng-container>
+                        <ng-container matColumnDef="publishername">
+                          <th mat-header-cell *matHeaderCellDef >Publisher</th>
+                          <td mat-cell *matCellDef="let row" > <p>{{row.publisher_name}}</p> </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="authorname">
+                          <th mat-header-cell *matHeaderCellDef>Author</th>
+                          <td mat-cell *matCellDef="let row" > <p>{{row.author_name}}</p> </td>
+                        </ng-container>
+                    
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="orderId">
+                          <th mat-header-cell *matHeaderCellDef >Order ID</th>
+                          <td mat-cell *matCellDef="let row">{{row.order_id}}</td>
+                        </ng-container>
+                    
+                        <!-- Color Column -->
+                        <ng-container matColumnDef="TotalPurchasedPages">
+                          <th mat-header-cell *matHeaderCellDef >Pages</th>
+                          <td mat-cell *matCellDef="let row"> <p class="nameoverflow mt-3"  
+                              matTooltipClass="custom-tooltip"
+                              matTooltipPosition="below">{{row.book_page_no}}</p>  </td>
+                        </ng-container>
+                        
+                        <ng-container matColumnDef="Amount">
+                          <th mat-header-cell *matHeaderCellDef >Amount</th>
+                          <td mat-cell *matCellDef="let row"> &#8377;{{row.total_price!= null ? row.total_price : 0}} </td>
+                        </ng-container>
+                        
+                        <ng-container matColumnDef="DateOfPurchase">
+                          <th mat-header-cell *matHeaderCellDef >Date </th>
+                          <td mat-cell *matCellDef="let row"> {{row.date | date:'dd/MM/YYYY'}} </td>
+                        </ng-container>
+                    
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    
+                        <!-- Row shown when there is no matching data. -->
+                        <tr class="mat-row" *matNoDataRow>
+                          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                        </tr>
+                      </table>
+                    
+                      <!-- <mat-paginator [pageSizeOptions]="[20, 40, 80, 100]" showFirstLastButtons></mat-paginator> -->
+                    </div>
+
+                      
+                  
+                </div>
+
+
+
+            </div>
+
+        </div>
+       
+
+
+    </div>
+</div>

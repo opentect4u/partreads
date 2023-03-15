@@ -1,0 +1,46 @@
+
+.fl-fl {
+    background: #164d8d;
+    /* text-transform: uppercase; */
+    letter-spacing: 1px;
+    /* width: 190px; */
+    width: 236px;
+    position: fixed;
+    /* right: -152px; */
+    right: -197px;
+    z-index: 1000;
+    top:50%;
+    font: normal normal 10px Arial;
+    -webkit-transition: all .25s ease;
+    -moz-transition: all .25s ease;
+    -ms-transition: all .25s ease;
+    -o-transition: all .25s ease;
+    transition: all .25s ease;
+    display: flex;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+  }
+  
+  .fl-fl:hover {
+    right: 0;
+  }
+  .fl-fl h4 {
+    color: #fff !important;
+    text-decoration: none;
+    text-align: center;
+    line-height: 43px!important;
+    /* font-size: 17px; */
+    font-size: 14px;
+    font-weight: 500;
+
+  }
+.TelephoneAnchor{color:#fff;text-decoration: none;}
+  .fl-fl .fa{
+    font-size: 23px;
+    padding: 11px;
+    color: white;
+  }
+  
+  .float-tw {
+    top: 215px;
+  }

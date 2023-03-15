@@ -1,0 +1,38 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 10%;
+ 
+}
+.p{
+  font-size:large;
+  text-align: center;
+}
+.modal{
+  /* position: flex; */
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.spinner-border{
+  width: 40px; 
+  height: 40px;
+  font-size:20px;
+}
+
+
+.Activebtn{
+  cursor: pointer;
+}
+mat-form-field{width:100%;font-size: 15px;}
+::ng-deep .cdk-overlay-container {z-index: 9000!important;}
+.spinner-border{width: 20px!important;height: 20px!important;}
+

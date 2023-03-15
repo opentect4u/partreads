@@ -1,0 +1,192 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!--IE Compatibility modes-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--Mobile first-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Table</title>
+
+    <meta name="description" content="Free Admin Template Based On Twitter Bootstrap 3.x">
+    <meta name="author" content="">
+
+    <meta name="msapplication-TileColor" content="#5bc0de" />
+    
+
+</head>
+
+<body class="  ">
+    <div class="bg-dark dk" id="wrap">
+        <div id="top">
+            <!-- .navbar -->
+            <nav class="navbar navbar-inverse navbar-static-top">
+                <div class="container-fluid">
+
+
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <header class="navbar-header">
+
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target=".navbar-ex1-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a href="index.html" class="navbar-brand"><img src="/assets/img/logo.png" alt=""></a>
+
+                    </header>
+
+
+
+                    <div class="topnav">
+
+
+                        <div class="btn-group">
+                            <a (click)="logout()" data-toggle="tooltip" data-original-title="Logout"
+                                data-placement="bottom" class="btn btn-metis-1 btn-sm">
+                                <i class="fa fa-power-off"></i>
+                            </a>
+                        </div>
+
+                    </div>
+
+
+
+
+                    <div class="collapse navbar-collapse navbar-ex1-collapse">
+
+
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+
+        </div>
+        <!-- /#top -->
+        <div id="left">
+            <div class="media user-media bg-dark dker">
+                <div class="user-media-toggleHover">
+                    <span class="fa fa-user"></span>
+                </div>
+                <div class="user-wrapper bg-dark">
+                    <a class="user-link" href="">
+                        <img class="media-object img-thumbnail user-img" alt="User Picture" src="/assets/img/user.gif">
+                        <span class="label label-danger user-label">16</span>
+                    </a>
+
+                    <div class="media-body">
+                        <h5 class="media-heading">Archie</h5>
+                        <ul class="list-unstyled user-info">
+                            <li><a href="">Administrator</a></li>
+                            <li>Last Access : <br>
+                                <small><i class="fa fa-calendar"></i>&nbsp;16 Mar 16:32</small>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- #menu -->
+            <ul id="menu" class="bg-blue dker">
+                <li class="nav-header">Menu</li>
+                <li class="nav-divider"></li>
+                <li class="">
+                    <a routerLinkActive="true" routerLink="/admin/dashboard">
+                        <i class="fa fa-dashboard"></i><span class="link-title">&nbsp;Dashboard</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a routerLinkActive="true" routerLink="/admin/publisher">
+                        <i class="fa fa-newspaper-o"></i><span class="link-title">&nbsp;Publisher Management</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a routerLinkActive="true" routerLink="/admin/users">
+                        <i class="fa fa-user"></i><span class="link-title">&nbsp;User Management</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a routerLinkActive="true" routerLink="/admin/category">
+                        <i class="fa fa-tag"></i><span class="link-title">&nbsp;Category</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a routerLinkActive="true" routerLink="/admin/subcategory">
+                        <i class="fa fa-tag"></i><span class="link-title">&nbsp;Sub-Category</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a routerLinkActive="true" routerLink="/admin/publisherbooks">
+                        <i class="fa fa-tag"></i><span class="link-title">&nbsp;All Books</span>
+                    </a>
+                </li>
+            </ul>
+           
+            <!-- /#menu -->
+        </div>
+        <!-- /#left -->
+        <div id="content">
+            <div class="outer">
+                <div class="inner bg-light lter">
+                    <!--Begin Datatables-->
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="box">
+                                <header>
+                                    <div class="icons"><i class="fa fa-table"></i></div>
+                                    <h5>Dynamic Table</h5>
+                                </header>
+                                <div id="collapse4" class="body">
+                                    <table id="dataTable"
+                                        class="table table-bordered table-condensed table-hover table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Sl No</th>
+                                                <th>Name</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let cat of category;let i=index">
+                                                <td>{{i+1}} </td>
+                                                <td>{{cat}} </td>
+                                                
+                                                <td> <button class="btn btn-primary" (click)="show_index(i)">Update</button></td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                
+                                                <td>Win 95+</td>
+                                                <td>4</td>
+                                                <td>X</td>
+                                            </tr>
+                                            <tr>
+                                                
+                                                <td>Win 95+</td>
+                                                <td>5</td>
+                                                <td>C</td>
+                                            </tr>
+                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                </div>  
+            </div>
+        </div>
+    </div>
+    <!-- /#wrap -->
+    <footer class="Footer bg-dark dker">
+        <p>2017 &copy; Metis Bootstrap Admin Template v2.4.2</p>
+    </footer>
+    <!-- /#footer -->
+    
+</body>
+
+</html>

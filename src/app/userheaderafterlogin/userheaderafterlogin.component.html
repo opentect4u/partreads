@@ -1,0 +1,222 @@
+<div class="topBanner" >
+  <div class="wrapper_top">
+      <div class="col-sm-3 float-left logo"><a routerLinkActive="true" routerLink="/user/user_view"><img
+                  src="/assets/images/logo.png" alt=""></a></div>
+      <div class="col-sm-9 float-left">
+
+        <div class="navSection">
+
+          <div class="searchSection">
+            <div class="searchFieldCont">
+              <ng-autocomplete  [data]="bookname" [searchKeyword]="keyword"
+              placeholder='Search by name, author, publisher or ISBN' (selected)='selectEvent($event)'
+              (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)'
+              [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate" >
+          </ng-autocomplete>
+
+          <ng-template #itemTemplate let-item>
+              <div class="item">
+                  <img [src]="item.book_image_path"
+                      style="width:25px;height:25px;align-items: left;border: thick;">
+                  <span [innerHTML]="item.book_name"></span> &nbsp; | &nbsp;
+                  <small>Author: {{item.author_name}}</small> &nbsp; | &nbsp;
+                  <small>Publisher: {{item.publisher_name}}</small> &nbsp; | &nbsp;
+                  <small>ISBN: {{item.isbn_no}}</small>
+              </div>
+          </ng-template>
+
+          <ng-template #notFoundTemplate let-notFound>
+              <div style="font-size:medium;" [innerHTML]="notFound"></div>
+          </ng-template>
+          <a class="search_sec" data-toggle="modal" data-backdrop="false" data-target="#advancedSearch">Advanced Search</a>
+
+      </div>
+      <input type="submit" value="Search" (click)="show_result()">
+
+        </div>
+
+        <div class="loginDetaiTop">
+
+          <ul>
+            <li class="couponCodLInkTxt">
+               <a class="CouponCode" (click)="openModal()" data-toggle="modal"  data-target="#couponModal">Have a coupon code?</a>
+            </li>
+            <li class="belNotiNav"> 
+            <div class="dropdown">
+                <button  style="margin-top:-32%;outline: none;
+                box-shadow: none;" (click)="count_it()" data-toggle="dropdown" class="btn cart" type="button"><i class="fa fa-bell" aria-hidden="true"></i>
+                  <div class="count" [hidden]="counter" ><span *ngIf="let_count<10">{{let_count}}</span><span *ngIf="let_count>=10">9+</span></div>
+                </button>
+                <div class="Notification" id="notification">
+                  <div class="Notification-header"><h3>Notifications</h3></div>
+                  <div *ngFor="let row of showNotification" style="cursor:pointer" [hidden]="!show_notif"  routerLink='/user/notifications' routerLinkActive="true">
+                  <!-- <div class="Notification-body" *ngIf="row.subject=='BookUpload'" ><img src="{{row.from_user_image}}"/><div class="NotificationContent"><h4>New book!</h4></div></div> -->
+                    <!-- <div class="Notification-body" *ngIf="row.subject=='BuyBookPayment'" ><img src="{{row.book_image}}"/><div class="NotificationContent"><h4>Transaction done!</h4></div></div> -->
+                    <!-- <div class="Notification-body" *ngIf="row.subject=='BuyBookPages'" ><img src="{{row.book_image}}"/><div class="NotificationContent"><h4>Pages bought successfully!</h4></div></div> -->
+                    <!-- <div class="Notification-body" *ngIf="row.subject=='LinkShare'"><img  src="{{row.book_image}}"/><div class="NotificationContent"><h4>New Link!</h4></div></div> -->
+                    <div class="Notification-body" *ngIf="row.subject=='BookUpload'" ><img src="{{row.user_details.image_url}}"/><div class="NotificationContent"><h4>New book!</h4></div></div>
+                    <div class="Notification-body" *ngIf="row.subject=='BuyBookPayment'" ><img src="{{bk_url}}{{row.bookdetails.book_image}}"/><div class="NotificationContent"><h4>Transaction done!</h4></div></div>
+                    <div class="Notification-body" *ngIf="row.subject=='BuyBookPages'" ><img src="{{bk_url}}{{row.bookdetails.book_image}}"/><div class="NotificationContent"><h4>Pages bought successfully!</h4></div></div>
+                    <div class="Notification-body" *ngIf="row.subject=='LinkShare'"><img  src="{{bk_url}}{{row.bookdetails.book_image}}"/><div class="NotificationContent"><h4>New Link!</h4></div></div>
+                  </div>
+                  <div class="text-center" *ngIf="!show_notif"><div  class="loader" ></div></div>
+                  <div class="Notification-footer" [hidden]="!show_notif"><button class="btn btn-block btn-primary" routerLink='/user/notifications' routerLinkActive="true">Show all</button></div>
+                </div>
+               
+              </div>
+            </li>
+
+              <li class="cartLiCus">
+                <a class="cart" style="font-size: larger;" (click)="go(c)"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <div  *ngIf="c!=0" class="count"><span *ngIf="c<10">{{c}}</span><span *ngIf="c>=10">9+</span></div>
+                </a>
+             </li>
+              <li class="thumbnailLi" > <a #tooltip="matTooltip"
+                matTooltip="{{name}}" *ngIf="profile!=undefined" (click)="show()" class="dropbtn loginThumb"
+                      style="background: url({{profile}}) no-repeat center center; background-size: cover;">&nbsp;</a>
+                      <a *ngIf="profile==undefined" #tooltip="matTooltip"
+                      matTooltip="{{name}}" (click)="show()" class="dropbtn loginThumb"
+                      style="background: url(/assets/images/no_dp.png) no-repeat center center; background-size: cover;">&nbsp;</a>
+
+                  <div id="myDropdown" class="dropdown-content">
+                      <a routerLinkActive="true" routerLink="/user/edit-user"><i class="fa fa-user-o"
+                              aria-hidden="true"></i> My Profile</a>
+                      <!-- <a style="cursor: pointer;" data-toggle="modal" data-target="#mymodal_changepass"><i class="fa fa-unlock-alt" aria-hidden="true" ></i> Change Password</a> -->
+                      <!-- <a style="cursor: pointer;" data-toggle="modal" data-target="#mymodal"><i class="fa fa-sign-out"
+                              aria-hidden="true"></i> Log Out</a> -->
+                              <a style="cursor: pointer;" (click)="openDialog()"><i class="fa fa-sign-out"
+                                aria-hidden="true"></i> Log Out</a>
+                  </div>
+
+              </li>
+             
+
+
+          </ul>
+      </div>
+
+        </div>
+        
+      </div>
+  </div>
+  <br clear="all">
+</div>
+
+
+<div id="snackbar">You don't have anything in cart.</div>
+
+<div class="modal fade advancedSearch_Ut" id="advancedSearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header"><!--This is the modal header ,which contain a header title  and a cross button-->
+        <h5 class="modal-title" id="exampleModalLongTitle">Advanced Search</h5><!--This is the modal header title-->
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><!--This is the cross button, after click on this button modal gets closed-->
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body"><!--This is the modal body-->
+       <div class="row row_main">
+           <div class="col-4">
+             <!-- <input type="checkbox" name="" id="">  Contain <b>All</b> of these words: -->
+             <h5 class="body_Mod_Title"> Contain <b>All</b> of these words:</h5>
+           </div>
+           <div class="col-5 col_7_Ut">
+               <div class="allWord_Full_Ut"> <input type="text" class="form-control"></div> 
+               <div class="allWord_checkBox_Ut">
+                  <div class="allWord_checkBox_Ut_Sub"><mat-checkbox class="example-margin" color="primary" > </mat-checkbox></div>
+                  <div class="allWord_checkBox_Ut_Sub">Must appear withid</div>
+                  <div class="allWord_checkBox_Ut_Sub"><input type="number" class="form-control"> </div>
+                  <div class="allWord_checkBox_Ut_Sub">Word of each other </div>
+              </div>
+          </div>
+          <div class="col-3 notesAdvanceSer">Option to insert multiple word separated by inverted commas</div>
+       </div>
+       <div class="row row_main">
+          <div class="col-4">
+              <h5 class="body_Mod_Title">Contain the <b>exact</b> phrase:</h5>
+          </div>
+          <div class="col-5"> <input type="text" class="form-control"> </div>
+          <div class="col-3 notesAdvanceSer">Option to enter the exact phrase</div>
+      </div>
+      <div class="row row_main">
+          <div class="col-4">
+              <h5 class="body_Mod_Title">Contain <b>Any</b> of these words:</h5>
+          </div>
+          <div class="col-5">
+              <div class="row">
+                  <div class="col-4">
+                      <input type="text" class="form-control customWordsInput"> 
+                  <span class="ortxt"> or </span> 
+                      
+                  </div>
+                  <div class="col-4">
+                      <input type="text" class="form-control customWordsInput">  
+                  <span class="ortxt"> or </span>
+
+                  </div>
+                  <div class="col-4">
+                      <input type="text" class="form-control customWordsInput"> 
+                  </div>
+              </div>
+               </div>
+      </div>
+      <div class="row row_main">
+          <div class="col-4">
+             <h5 class="body_Mod_Title">Do <b>Not</b> contain any of these words:</h5>
+          </div>
+          <div class="col-5"> <input type="text" class="form-control"> </div>
+          <div class="col-3 notesAdvanceSer">Option to insert multiple words separated by invered commas</div>
+      </div>
+      </div>
+      <div class="modal-footer"><!--This is the modal footer-->
+        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+        <button type="button" class="btn btn-dark">Search</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Coupon Code -->
+
+<div id="couponModal" class="modal fade popupCouponCodeTop" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Enter coupon code to apply</h5>
+        <button type="button" class="close" data-dismiss="modal" id="close">&times;</button>
+      </div>
+      <form [formGroup]="Coupon_Form" (ngSubmit)="submitcounpon()">
+      <div class="modal-body">
+           <div class="row">
+             <div class="col-12">
+             </div>
+             <div class="col-12">
+              <div class="verification-code--inputs text-center">
+                <input type="tel" formControlName="otp1"  maxlength="1" id="OTP1" placeholder="0" (input)="omit_special_char($event)"   (keyup)="setfocus($event,'OTP2',1)" style="text-transform: uppercase;"/><span class="">-</span>
+                <input type="tel" formControlName="otp2"  maxlength="1" id="OTP2" placeholder="0" (input)="omit_special_char($event)" (keyup)="setfocus($event,'OTP3',2)" style="text-transform: uppercase;"/><span class="">-</span>
+                <input type="tel" formControlName="otp3"  maxlength="1" id="OTP3" placeholder="0" (input)="omit_special_char($event)" (keyup)="setfocus($event,'OTP4',3)" style="text-transform: uppercase;"/><span class="">-</span>
+                <input type="tel" formControlName="otp4"  maxlength="1" id="OTP4" placeholder="0" (input)="omit_special_char($event)" (keyup)="setfocus($event,'OTP5',4)" style="text-transform: uppercase;"/><span class="">-</span>
+                <input type="tel" formControlName="otp5"  maxlength="1" id="OTP5" placeholder="0" (input)="omit_special_char($event)" (keyup)="setfocus($event,'OTP6',5)" style="text-transform: uppercase;"/><span class="">-</span>
+                <input type="tel" formControlName="otp6"  maxlength="1" id="OTP6" placeholder="0" (input)="omit_special_char($event)" (keyup)="setfocus($event,'OTP6',6)" style="text-transform: uppercase;"/>
+            </div>
+             </div>
+           </div>
+      </div>
+      <div class="modal-footer OtpFooter">
+        <!-- <button  [ngClass]="otp1.value=='' || otp2.value=='' ||otp3.value=='' ||otp4.value=='' ||otp5.value=='' ||otp6.value=='' ? 'disabledButton btn' : 'finalSubmitButton btn'" (click)="submitcounpon(otp1.value,otp2.value,otp3.value,otp4.value,otp5.value,otp6.value)" [disabled]="otp1.value=='' || otp2.value=='' ||otp3.value=='' ||otp4.value=='' ||otp5.value=='' ||otp6.value==''">
+          <div [hidden]="load">Apply</div>
+          <div [hidden]="!load" class="spinner-border text-light"></div>
+        </button> -->
+        <button type="submit" class="finalSubmitButton btn" [disabled]="f.otp1.value=='' || f.otp2.value=='' ||f.otp3.value=='' ||f.otp4.value=='' ||f.otp5.value=='' ||f.otp6.value==''">
+          <div [hidden]="load">Apply</div>
+          <div [hidden]="!load" class="spinner-border text-light"></div>
+        </button>
+      </div>
+      </form>
+    </div>
+
+  </div>
+</div>

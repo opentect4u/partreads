@@ -1,0 +1,9 @@
+.dialog-title{
+    display: flex!important;
+    justify-content: space-between;
+    align-items: center;
+}
+mat-form-field{width:100%;font-size: 15px!important;}
+.mat-dialog-content{
+    max-height: 81vh;
+}

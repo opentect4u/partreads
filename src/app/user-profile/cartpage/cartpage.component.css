@@ -1,0 +1,18 @@
+table {width: 100%;}
+.mat-form-field {font-size: 14px;width: 100%;}
+td, th {width: 14%;}
+.p{font-size:13px;text-align: center;font-weight:600 ;}
+.close{font-size: 22px!important;font-weight: 600!important;}
+.btn:hover{color:#fff!important;}
+/* th.mat-header-cell{width:14%!important} */
+/* .MatCard{text-align: center;}
+.bookcartUL{list-style-type: none;}
+.bookcartUL li:first-child{word-break: break-all;margin: 0;padding: 4px 0px;display: block;font-size: 16px;white-space: normal;color: #1a1f1f;}
+.bookcartUL .cartlistItem{font-size: 13px;font-weight: 600;color: #605d5d;line-height: 1.5;margin: 0;padding: 4px 0px;}
+.cartlistItem a{ text-decoration: underline!important;color: #0072bb!important;font-weight: 800;cursor: pointer;}
+.cartPrice{float:right;font-size: 18px;font-weight: 600;color: #605d5d;line-height: 1.5;margin: 0;padding: 4px 0px;}
+::ng-deep .mat-list-base{
+  padding: 6px!important;
+}
+hr{border:1px solid gray!important;}
+.customCol12{border-bottom: 1px solid #dedbdb;padding: 0 19px 6px 0;} */

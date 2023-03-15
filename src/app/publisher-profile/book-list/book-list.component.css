@@ -1,0 +1,129 @@
+.alert {
+    padding: 20px;
+    background-color: #febc07; /* Red */
+    color: rgb(5, 5, 5);
+    margin-bottom: 15px;
+  }
+  
+  /* The close button */
+  .closebtn {
+    /* margin-left: 15px; */
+    margin: 0 5px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  /* When moving the mouse over the close button */
+  .closebtn:hover {
+    color: black;
+  }
+  .check {
+    display: inline-block;
+    transform: rotate(45deg);
+    height: var(--height);
+    width: var(--width);
+    border-bottom: var(--borderWidth) solid var(--borderColor);
+    border-right: var(--borderWidth) solid var(--borderColor);
+  }
+  table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: 18%;
+  }
+
+  .nameoverflow{
+    white-space: nowrap; 
+    width: 100px;
+overflow: hidden;
+text-overflow: ellipsis;
+
+}
+::ng-deep .mat-tooltip {
+  color:white;
+  background-color: #282a3c;
+ text-overflow: inherit;
+}
+
+
+  /*For loader*/
+  @keyframes loader-animation {
+    0% {
+        left: -100%;
+    }
+    49% {
+        left: 100%;
+    }
+    50% {
+        left: 100%;
+    }
+    100% {
+        left: -100%;
+    }
+}
+.loader {
+    height: 5px;
+    width: 100%;
+    overflow: hidden;
+}
+.loader .bar {
+    position: relative;
+    height: 5px;
+    width: 100%;
+    background-color: dodgerblue;
+    animation-name: loader-animation;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+#MYModal .modal-dialog {
+  /* height: 15%;
+  width:40%;
+  position:absolute;
+  top:40%;
+  left:30%; */
+}
+#MYModal .modal-content {
+  /* height: 100%;
+  text-align: center; */
+}
+
+#MyModal .modal-dialog {
+  /* height: 15%;
+  width:40%;
+  position:absolute;
+  top:40%;
+  left:30%; */
+}
+#MyModal .modal-content {
+  /* height: 100%;
+  text-align: center; */
+}
+
+.btn1{
+  position:absolute;
+  top:85px;
+  right:30px;
+}
+.btn2{
+  position:absolute;
+  top:85px;
+  right:73px;
+}
+.inputfont{
+  font-size:15px !important;
+}
+.btn:hover {
+  color: #fff!important;
+}

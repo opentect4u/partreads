@@ -1,0 +1,841 @@
+<app-userheaderafterlogin [c]="c"></app-userheaderafterlogin>
+<div class="bodyContainer" appNorightclick>
+
+    <div class="wrapperCustome">
+
+        <app-usersidebar></app-usersidebar>
+        <div class="col-sm-9 rightSideBarnewCus float-left" appNorightclick>
+            <div class="row rightBookListMinheight" appNorightclick>
+                <div id="cover-spin" *ngIf="loader"></div>
+                <!-- <div class="spinner-border book_load" *ngIf="loader"></div> -->
+
+                <div *ngIf="bookdetailspage.length==0 && loader==false" class="text-muted text-center fs-3 mt-3">
+                    <img src="assets/images/no-read-book-icons-set-260nw-299610074.jpg" class="img-fluid"
+                        height="227" />
+                    <h2>Looks like you haven't puchased anything yet!</h2>
+
+                </div>
+                <div class="col-sm-3 col_sm_3BooksView float-left"
+                    *ngFor="let p of bookdetailspage | paginate: { itemsPerPage: 12, currentPage: p } ; let j=index"
+                    appNorightclick>
+                    <button id="share_btn1"  class="pdfPopupBtn1" data-toggle="modal" data-target="#book_share" (click)="share_book(p)">
+                        <!-- <i  class="fa fa-share-alt" aria-hidden="true"></i> -->
+                        <mat-icon>share</mat-icon> 
+                        </button>
+                    <!-- <div class="modal fade bd-example-modal-lg" id="exampleModalLong" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle"><i class="fa fa-user-plus"
+                                            aria-hidden="true"></i>
+                                        Share with people and groups
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <div id="snackbar1" style="color: #ffffff;">{{linkshareinterpolation}}</div>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <input type="email" id="sendmail" class="searchEmailShare"
+                                                placeholder="Add people and groups" #mail required
+                                                (change)="preventemptymail()">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h4>Book Name:</h4><br>
+                                            <h4>Author Name:</h4>
+                                        </div>
+                                        <div class="col-6">
+                                            <h4>ISBN Code:</h4><br>
+                                            <h4>Page No:</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="bookList" @fade>
+                        <div class="bookPro">
+                            <!-- <img [src]="p.book_image_path" alt=""
+                                (click)="go_to_user_bookdetails(p.book_id,p.publisher_id,p.active_book)"
+                                style="cursor:pointer;" /> -->
+                            <img [src]="p.book_image_path" alt="" style="cursor:pointer;" />
+
+                        </div>
+
+                        <div class="bookProDetails">
+                            <div class="dropdown widthFullCustom"
+                                (mouseenter)="onMouseEnter($event,p.book_id,p.book_name)">
+                                <div class="dropdown-content starOnHover">
+                                    <h2 class="ratingTitle">Reader ratings</h2>
+                                    <div class="ratingPopup_Ut">
+                                        <ul>
+                                            <li>{{avgrt}} </li>
+                                            <li>out of 5</li>
+                                            <li>{{reviewData1.length}} rating(s)</li>
+                                        </ul>
+                                    </div>
+                                    <div class="container" style="padding-left: 8%;">
+                                        <ol reversed>
+
+                                            <li style="margin-bottom:5px;font-size:14px;">
+                                                <mat-progress-bar class="example-margin" [color]="color1" [mode]="mode"
+                                                    [value]="t5" [bufferValue]="bufferValue">
+                                                </mat-progress-bar>
+                                            </li>
+                                            <li style="margin-bottom:5px;font-size:14px;">
+                                                <mat-progress-bar class="example-margin" [color]="color1" [mode]="mode"
+                                                    [value]="t4" [bufferValue]="bufferValue">
+                                                </mat-progress-bar>
+                                            </li>
+                                            <li style="margin-bottom:5px;font-size:14px;">
+                                                <mat-progress-bar class="example-margin" [color]="color1" [mode]="mode"
+                                                    [value]="t3" [bufferValue]="bufferValue">
+                                                </mat-progress-bar>
+                                            </li>
+                                            <li style="margin-bottom:5px;font-size:14px;">
+                                                <mat-progress-bar class="example-margin" [color]="color1" [mode]="mode"
+                                                    [value]="t2" [bufferValue]="bufferValue">
+                                                </mat-progress-bar>
+
+                                            </li>
+                                            <li style="margin-bottom:5px;font-size:14px;">
+                                                <mat-progress-bar class="example-margin" [color]="color1" [mode]="mode"
+                                                    [value]="t1" [bufferValue]="bufferValue">
+                                                </mat-progress-bar>
+
+                                            </li>
+                                        </ol>
+                                    </div>
+                                    <hr *ngIf="reviewData.length">
+                                    <a *ngIf="reviewData.length" data-toggle="modal" class="ratingPopup" id="open_modal"
+                                        data-target="#reviewModal" data-backdrop="false">Reader reviews</a>
+                                </div>
+
+                                <div class="starRatingNew">
+                                    <ngb-rating [max]="5" (mouseleave)="onmouseleave($event)" [(rate)]="avgRate[j]"
+                                        [readonly]="false"
+                                        style="font-size:30px;color:rgb(254,188,7)!important;margin-top:5px">
+                                    </ngb-rating>
+                                </div>
+                                <small><button hidden type="button" data-toggle="modal" id="open_modal"
+                                        data-target="#reviewModal" data-backdrop="false">Read reviews</button> </small>
+                                <p class="nameoverflow" title="{{p.book_name}}">{{p.book_name}}<br>
+                                    <span>{{p.author_name}}</span>
+                                </p>
+
+                            </div>
+                            <p class="price"><i class="fa fa-inr" aria-hidden="true"></i> {{p.price}}</p>
+
+
+                            <a class="btnDetails" id="b_{{p.book_id}}" type="button" data-toggle="modal"
+                                data-target="#myModal" style="cursor:pointer;" data-backdrop="false"
+                                (click)="read(p.book_id,p.publisher_id,p.book_name,p.active_book,p.author_name)">Subscribed
+                                Pages</a>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <button hidden id="Open_Modal" data-target="#myModal" data-toggle="modal"
+                    data-backdrop="false"></button>
+            </div>
+
+            <div style="text-align:center;" *ngIf="bookdetailspage.length > 0">
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+
+        </div>
+        <br clear="all">
+    </div>
+
+</div>
+
+
+
+<div id="myModal" class="modal fade purchaselist_Ut" role="dialog" appNorightclick>
+    <button type="button" class="customButtonClose customButtonCloseNew" data-dismiss="modal" id="close_modal"
+        (click)="close_modal()">&times;</button>
+    <div class="modal-dialog modal-lg modal_dialog_WidthFixd">
+
+
+        <div class="modal-content modal_contentCustomPurPop">
+            <div class="modal-body">
+                <button id="share_btn" *ngIf="this.active_book=='A'" class="pdfPopupBtn"><i class="fa fa-share-alt"
+                        aria-hidden="true"></i></button>
+                <div id="pause" class="d-flex align-items-center justify-content-center" *ngIf="loading">
+                    <div id="spinner"></div>
+                </div>
+                <div class="row rowPublisPop">
+
+                    <div class="col-3 col_3Cus col_3CusMobile text-center">
+                        <div class="col_3CusSub">
+                            <div class="bookDetailsPrevie" *ngIf="this.active_book=='A'">
+                                <ul class="nameTxt">
+                                    <li class="bookNamePop"><strong>{{bk_name}}</strong>
+                                        <div id="header-modal"></div>
+                                    </li>
+                                    <li><strong>Total Pages:</strong> {{this.total_page}}, <strong>Per
+                                            Page:</strong>&nbsp;
+                                        <i class="fa fa-inr" aria-hidden="true"></i>{{this.per_page}}
+                                    </li>
+                                </ul>
+                                <div class="buyElePrv">
+                                    <div class="pageCount" [hidden]="this.full_book=='Y'">
+                                        <div class="pageCountHalf">
+                                            <label><strong>Page Number</strong></label>
+                                            <label class="inputField">
+                                                <input id="resfrompg" type="text" placeholder="0" class="form-control"
+                                                    (keypress)="preventNonNumericalInput($event)" #frm>
+                                            </label>
+                                            <label><strong>to</strong></label>
+                                            <label class="inputField">
+                                                <input id="restopg" type="text" placeholder="0" class="form-control"
+                                                    (keypress)="preventNonNumericalInput($event)" #to>
+                                            </label>
+                                            <!-- </div> 
+                                <div class="pageCountHalf"> -->
+                                            <label class="m-2">Or <input type="checkbox" class="m-2"
+                                                    (change)="changeEvent($event)" id="changeInputres"></label>
+                                            <label class="mr-3"><strong class="mr-3">Buy Whole Book</strong></label>
+                                        </div>
+                                    </div>
+                                    <div class="btnPrvCont">
+                                        <!-- <button type="button" class="buyNowBtn" [hidden]="this.full_book=='Y'"
+                                        (click)="show_details(bk_name,bookid,pubid,frm.value,to.value,total_page)">
+                                        <div *ngIf="!show_hide">Subscribe Now</div>
+                                        <div class="loader" *ngIf="show_hide"></div>
+                                    </button> -->
+
+                                        <button type="button" class="buyNowBtn" [hidden]="this.full_book=='Y'">Subscribe
+                                            Now</button>
+
+
+                                        <button type="button" class="adtoCartBtn" *ngIf="!cartbuttonshow"
+                                            [hidden]="this.full_book=='Y'"
+                                            (click)="cart_add(pubid,bookid,frm.value,to.value,total_page)">
+                                            <!-- <i aria-hidden="true" class="fa fa-shopping-cart "></i> Add to Cart -->
+                                            <div *ngIf="!addtocartloader"><i aria-hidden="true"
+                                                    class="fa fa-shopping-cart "></i> Add to Cart</div>
+                                            <div class="loader" *ngIf="addtocartloader"></div>
+
+                                        </button>
+                                        <button type="button" class="adtoCartBtn" *ngIf="cartbuttonshow"
+                                            (click)="gotcart()"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                            View
+                                            Cart</button>
+                                        <button type="button" class="buyNowBtn" data-toggle="modal"
+                                            data-backdrop="false" *ngIf="this.active_book=='A'"
+                                            data-target="#printbooks"><i class="fa fa-rupee"></i> Subscribe Hard
+                                            Copy</button>
+                                        <button type="button" class="adtoCartBtn" (click)="openNav()"
+                                            *ngIf="this.active_book=='A'"><i class="fa fa-file"></i>
+                                            Contents</button>
+
+
+                                    </div>
+
+                                    <div class="alert" [hidden]="this.full_book!='Y'">
+                                        <strong class="fs-5"> You have already purchased the whole book</strong>
+                                    </div>
+
+                                    <b style="font-size: 13px;">(Note: For Any Query Contact Us: 9836467262)</b>
+
+                                </div>
+                                <!-- <span class="text-danger customspan">{{number_msg}}</span> -->
+
+                            </div>
+                            <!-- <div class="btnPrvCont mb-3" *ngIf="this.active_book=='A'">
+                            <button type="button" class="buyNowBtn" data-toggle="modal" data-backdrop="false"
+                                data-target="#printbooks"><i class="fa fa-rupee"></i> Subscribe Hard Copy</button>
+                            <button type="button" class="adtoCartBtn" (click)="openNav()"><i class="fa fa-file"></i>
+                                Contents</button>
+                        </div> -->
+
+                            <div class="menu-wrapper">
+
+                                <div id="responSivemySidenav" class="sidenav">
+
+
+                                    <p (click)="openPages(b.actual_page,b.full_book)" style="cursor: pointer;"
+                                        *ngFor="let b of contents_pg">{{b.title}} <span
+                                            *ngIf="b.actual_page!=''">({{b.actual_page}})</span></p>
+
+                                    <div class="fs-1">
+
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-9 col_9Cus">
+                        <div class="col_9CusSub">
+                            <div id="modal_body_id">
+                                <app-loader *ngIf="spin"></app-loader>
+                                <ngx-extended-pdf-viewer [src]="pdfBytes" [useBrowserLocale]="false" height="68vh"
+                                    [textLayer]="true" [contextMenuAllowed]="false" [enablePrint]="false"
+                                    [ignoreKeyboard]="true" [showOpenFileButton]="false" [showPagingButtons]="false"
+                                    [showBookmarkButton]="false" [showDownloadButton]="false" [showRotateButton]="false"
+                                    [zoom]="'page-width'" [(page)]="open_pg" [showSidebarButton]="true"
+                                    [showFindButton]="true" [sidebarVisible]="false" [showZoomButtons]="false"
+                                    [showSpreadButton]="false" [showPresentationModeButton]="false"
+                                    [showBorders]="false" backgroundColor="#14141478" (pdfLoaded)="onpage()"
+                                    (pageChange)="changePage($event)">
+                                </ngx-extended-pdf-viewer>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-3 col_3Cus col_3CusDeskTop text-center">
+                        <div class="col_3CusSub">
+                            <div class="bookDetailsPrevie" *ngIf="this.active_book=='A'">
+                                <ul class="nameTxt">
+                                    <li class="bookNamePop"><strong>{{bk_name}}</strong>
+                                        <div id="header-modal">
+                                            <button id="share_btn" data-target="#myModal_share" data-toggle="modal"
+                                                class="pdfPopupBtn"><i class="fa fa-share-alt"
+                                                    aria-hidden="true"></i></button>
+                                        </div>
+                                    </li>
+                                    <li><strong>Total Pages:</strong> {{this.total_page}}</li>
+                                    <li><strong>Per Page:</strong>&nbsp;
+                                        <i class="fa fa-inr" aria-hidden="true"></i>{{this.per_page}}
+                                    </li>
+                                </ul>
+                                <div class="buyElePrv">
+                                    <div class="pageCount" [hidden]="this.full_book=='Y'">
+                                        <div class="pageCountHalf">
+                                            <label><strong>Page Number</strong></label>
+                                            <label class="inputField">
+                                                <input id="frompg" type="text" placeholder="0" class="form-control"
+                                                    (keypress)="preventNonNumericalInput($event)" #frm>
+                                            </label>
+                                            <label><strong>to</strong></label>
+                                            <label class="inputField">
+                                                <input id="topg" type="text" placeholder="0" class="form-control"
+                                                    (keypress)="preventNonNumericalInput($event)" #to>
+                                            </label>
+                                        </div>
+                                        <div class="pageCountHalf">
+                                            <label class="m-2">Or <input type="checkbox" class="m-2"
+                                                    (change)="changeEvent($event)" id="changeInput"></label>
+                                            <label class="mr-3"><strong class="mr-3">Buy Whole Book</strong></label>
+                                        </div>
+                                    </div>
+                                    <div class="btnPrvCont" [hidden]="this.full_book=='Y'">
+                                        <!-- <button type="button" class="buyNowBtn" id="subscribenow"
+                                        (click)="show_details(bk_name,bookid,pubid,frm.value,to.value,total_page)">
+                                        <div *ngIf="!show_hide">Subscribe Now</div>
+                                        <div class="loader" *ngIf="show_hide"></div>
+                                    </button> -->
+
+                                        <button type="button" class="buyNowBtn" id="subscribenow">Subscribe Now</button>
+
+                                        <button type="button" id="cartAdd" class="adtoCartBtn" *ngIf="!cartbuttonshow"
+                                            (click)="cart_add(pubid,bookid,frm.value,to.value,total_page)">
+                                            <div *ngIf="!addtocartloader"><i aria-hidden="true"
+                                                    class="fa fa-shopping-cart "></i> Add to Cart</div>
+                                            <div class="loader" *ngIf="addtocartloader"></div>
+                                        </button>
+                                        <button type="button" class="adtoCartBtn" *ngIf="cartbuttonshow"
+                                            (click)="gotcart()"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                            View
+                                            Cart</button>
+                                    </div>
+
+                                    <div class="alert" [hidden]="this.full_book!='Y'">
+                                        <strong class="fs-5"> You have already purchased the whole book</strong>
+                                    </div>
+
+                                </div>
+                                <!-- <span class="text-danger customspan">{{number_msg}}</span> -->
+
+                            </div>
+                            <div class="btnPrvCont mb-3" *ngIf="this.active_book=='A'">
+                                <button type="button" class="buyNowBtn" data-toggle="modal" data-backdrop="false"
+                                    data-target="#printbooks"><i class="fa fa-rupee"></i> Subscribe Hard Copy</button>
+                                <button type="button" class="adtoCartBtn" (click)="openNav()"><i class="fa fa-file"></i>
+                                    Contents</button>
+                            </div>
+                            <b style="font-size: 13px;">(Note: For Any Query Contact Us: 9836467262)</b>
+
+                            <div class="menu-wrapper">
+
+                                <div id="mySidenav" class="sidenav">
+
+
+                                    <p (click)="openPages(b.actual_page,b.full_book)" style="cursor: pointer;"
+                                        *ngFor="let b of contents_pg">{{b.title}} <span
+                                            *ngIf="b.actual_page!=''">({{b.actual_page}})</span></p>
+
+                                    <div class="fs-1">
+
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade shareModalPopup_Ut" data-backdrop="static" id="myModal_share" appNorightclick appKeyoff>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fa fa-user-plus" aria-hidden="true"></i>
+                    Share with people and groups
+                </h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div id="snackbar1" style="color: #ffffff;">{{linkshareinterpolation}}</div>
+
+            </div>
+
+
+            <div class="modal-body" id="second-body">
+
+                <input type="email" id="sendmail" class="searchEmailShare" placeholder="Add people and groups" #mail
+                    required (change)="preventemptymail()">
+                <!-- <div class="text-primary">{{email_sender}}</div> -->
+                <div class="ex1 sharePopSelectTable" style="text-align: center;">
+                    <!-- <table> -->
+                    <!-- <tr>
+                            <td> -->
+                    <div class="row">
+                        <div class="col-12">
+                            <label class="container">
+                                <input type="checkbox" id="selall" (click)="check_all($event)">
+                                <span class="checkmark">Select All</span>
+                            </label>
+                        </div>
+                        <div class="col-4" *ngFor="let d of pageread">
+                            <label class="container">
+                                <input #colorcheck type="checkbox" id="bookcheck{{d.book_page_no}}"
+                                    (click)="checkdata(d.book_page_no,d.book_id,d.publisher_id)">
+                                <span class="checkmark">Page:{{d.book_page_no}}</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- </td> -->
+                    <!-- <td class="page_no"></td> -->
+
+                    <!-- </tr> -->
+                    <!-- <tr *ngFor="let d of pageread"> -->
+
+
+                    <!-- <td> -->
+                    <!-- <label class="container">
+                                    <input #colorcheck type="checkbox" id="bookcheck{{d.book_page_no}}"
+                                        (click)="checkdata(d.book_page_no,d.book_id,d.publisher_id)">
+                                    <span class="checkmark"></span>
+                                </label> -->
+                    <!-- </td> -->
+                    <!-- <td class="page_no">Page:{{d.book_page_no}}</td> -->
+
+                    <!-- </tr> -->
+                    <!-- </table> -->
+                </div>
+
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer" id="gen_link_footer">
+                <button [disabled]="data_checked" class="btn btn-info"
+                    style="float:left;font-size: small; text-decoration: none;" (click)="copylink()">Copy Link</button>
+                <button type="button" id="sharelink" class="btn btn-primary button-no" data-dismiss="modal"
+                    style="font-size: small;" [disabled]="disabledonebutton"
+                    (click)="share_data(mail.value);mail.value=''">Done</button>
+
+                <!-- <input type="hidden" id="gen_link"><br/> -->
+
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal fade reviewModal_Ut" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h5 class="modal-title" id="exampleModalLabel" style="font-size: medium;">Reviews for {{reviewBookName}}
+                    <span style="color: white;font-size: medium;" class="badge badge-pill badge-warning"><i
+                            class="fa fa-star" style="color: white;" aria-hidden="true"></i> {{avgrt}}</span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="reviewList" *ngFor="let i of reviewData">
+
+                    <span style="color: white;" class="badge badge-pill badge-success"><i class="fa fa-star"
+                            style="color: white;" aria-hidden="true"></i> {{i.rating}}</span>
+                    {{i.review}}
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <p class="mt-3 reviewPopupFooterTxt" *ngIf="maxRange<reviewData1.length">{{minRange+1}} - {{maxRange}}
+                    of {{reviewData1.length}} results</p>
+                <p class="mt-3 reviewPopupFooterTxt" *ngIf="maxRange>reviewData1.length&&minRange!=0">{{minRange+1}}th
+                    of {{reviewData1.length}} results</p>
+                <p class="mt-3 reviewPopupFooterTxt" *ngIf="maxRange>reviewData1.length&&minRange==0">{{minRange+1}}st
+                    of {{reviewData1.length}} result</p>
+                <button *ngIf="minRange>0" style="font-size:8px; color: white;" (click)="prev()" class="btn btn-dark">
+                    <i class="fa fa-chevron-left"></i></button>
+                <button *ngIf="maxRange<reviewData1?.length" style="font-size:11px; color: white;"
+                    (click)="next()"></button>
+                <button class="btn btn-dark"> <i class="fa fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="printbooks" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div id="header-h4" class="modal_head modal_headCustom">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                    <h4 class="modal-title">{{bk_name}}</h4>
+                    <h5 class="modal-title">by {{author_name}}</h5>
+                </div>
+                <!-- <h5 class="modal-title" id="exampleModalLongTitle">Buy Hard Copy</h5> -->
+
+            </div>
+            <div class="modal-body fs-4">
+
+                <!-- <strong>Book:</strong> {{bk_name}} &nbsp;
+            <strong>By:</strong> {{author_name}}
+            <hr>
+            <strong>MRP:</strong> <i class="fa fa-inr" aria-hidden="true"></i>{{mrp}}&nbsp;
+            
+            <strong>Offer Price: </strong> <i class="fa fa-inr" aria-hidden="true"></i>{{offer_price}}&nbsp;
+            <strong>Delivery Charges: </strong> <i class="fa fa-inr" aria-hidden="true"></i>{{delivery_charge}} -->
+                <!-- <hr> -->
+                <!-- <div class="row pb-2">
+                <div class="col-6">
+                    <input type="text" #state class="form-control" placeholder="Enter state...">
+                </div>
+                <div class="col-6">
+                    <input type="text" #city class="form-control"  placeholder="Enter city..." >
+                </div>
+            </div>
+            <div class="row pb-2">
+                <div class="col-12">
+                    <input type="text" #pincode class="form-control" placeholder="Enter pincode..." >
+                </div>
+                
+            </div>
+            <div class="row pb-2">
+                <div class="col-12">
+                   <textarea #address class="form-control" cols="30" rows="20" placeholder="Enter delivery address..."></textarea>
+                </div>
+                
+            </div> -->
+
+                <div class="row mb-5">
+                    <div class="col-4 text-center">
+                        <strong class="customDetails">MRP:</strong>&nbsp;<i class="fa fa-inr"
+                            aria-hidden="true"></i>{{mrp}}&nbsp;
+                    </div>
+                    <div class="col-4 text-center">
+                        <strong class="customDetails">Offer Price: </strong>&nbsp;<i class="fa fa-inr"
+                            aria-hidden="true"></i>{{offer_price}}&nbsp;
+                    </div>
+                    <div class="col-4 text-center">
+                        <strong class="customDetails">Delivery Charges: </strong>&nbsp;<i class="fa fa-inr"
+                            aria-hidden="true"></i>{{delivery_charge}}
+                    </div>
+                </div>
+
+                <!-- <hr> -->
+                <div class="row pb-2 mb-2">
+                    <div class="col-6">
+                        <input type="text" #state class="form-control" placeholder="Enter state...">
+                    </div>
+                    <div class="col-6">
+                        <input type="text" #city class="form-control" placeholder="Enter city...">
+                    </div>
+                </div>
+                <div class="row pb-2  mb-2">
+                    <div class="col-12">
+                        <input type="text" #pincode class="form-control" placeholder="Enter pincode...">
+                    </div>
+
+                </div>
+                <div class="row pb-2 ">
+                    <div class="col-12">
+                        <textarea #address class="form-control" cols="20" rows="10"
+                            placeholder="Enter delivery address..."></textarea>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-dark" data-dismiss="modal"
+                    (click)="buyHardCopy(state.value,city.value,pincode.value,address.value)">Proceed to buy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="book_share" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <div id="header-h4" class="modal_head modal_headCustom">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        aria-hidden="true"
+                        (click)="closeShareModal()"
+                        >&times;
+                        <!-- <span aria-hidden="true">&times;</span> -->
+                    </button>
+                    <h3 class="modal-title" id="exampleModalLongTitle"><i class="fa fa-user-plus"
+                            aria-hidden="true"></i>
+                        Share with people and groups
+                    </h3>
+                    <!--                  
+                    <h4 class="modal-title">Income Tax</h4>
+                    <h5 class="modal-title">by Lila Banerjee</h5> -->
+                </div>
+
+            </div>
+            <div class="modal-body fs-5">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class='componentWraper'>
+                                    <p class='componentTitle'>Book Details</p>
+                                    <div class="row">
+                                        <div class="col-12 text-left">
+                                            <strong class="customDetails">Book Name:</strong>&nbsp;{{book_dtls?.book_name}} &nbsp;
+                                            <button mat-icon-button class="float-right" 
+                                            
+                                            title="Copy Link">
+                                                <mat-icon title="Copy Link">content_copy</mat-icon>
+                                            </button>
+                                        </div>
+                                        <div class="col-12 my-4 text-left">
+                                            <strong class="customDetails">Author Name: </strong>&nbsp;{{book_dtls?.author_name}} &nbsp;
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="row">
+                                                <div class="col-12 my-4 text-left">
+                                                    <strong class="customDetails">ISBN: </strong>&nbsp; {{book_dtls?.isbn_no}} &nbsp;
+                                                </div>
+                                                <div class="col-12 my-4 text-left">
+                                                    <strong class="customDetails">Total Pages: </strong>&nbsp;123&nbsp;
+                                                </div>
+                                                <div class="col-12 my-4  text-left">
+                                                    <strong class="customDetails">Per Page Price: </strong>&nbsp;<i class="fa fa-inr"
+                                                        aria-hidden="true"></i>{{book_dtls?.price}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <form class="example-form">
+                                                <div class="row">
+                                                    <div class="col-sm-12 mt-5">
+                                                  
+                                                <div class='componentWraper'>
+                                                    <p class='componentTitle'>Send Email</p>
+                                                  
+                                                    <div class="row ">
+                                                        <div class="col-sm-12">
+                                                            <mat-form-field appearance="outline" class="example-full-width">
+                                                                <mat-label>Email</mat-label>
+                                                                <input type="email" matInput   [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+                                                                       placeholder="Ex. pat@example.com">
+                                                                <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                                                                  Please enter a valid email address
+                                                                </mat-error>
+                                                                <mat-error *ngIf="emailFormControl.hasError('required')">
+                                                                  Email is <strong>required</strong>
+                                                                </mat-error>
+                                                              </mat-form-field>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <button color="primary" mat-button class="float-right">
+                                                                Send
+                                                             </button>
+                                                        </div>
+                                                    </div>
+                                                </div>  
+                                            </div>
+                                        </div>
+                                               </form>
+                                        </div>
+                                       
+                                    </div>
+                                
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="row pb-2 my-3">
+                            <div class="col-sm-6">
+                                <!-- <div class="col-12 mb-5">
+                                    <input class="checkmark" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="select" for="flexCheckDefault">Select All Pages</label>
+        
+                                </div> -->
+                                <form [formGroup]="__sharepdf" (ngSubmit)="pdfShare()">
+                                    <div class="row mt-5">
+                                        <div class="col-sm-12">
+                                            <div class='componentWraper'>
+                                                <p class='componentTitle'>Enter Page Numbers to preview</p>
+                                                 <div class="row">
+                                                    <div class="col-sm-5">
+                                                        <mat-form-field  appearance="outline" class="example-full-width">
+                                                        <mat-label>Page No.</mat-label>
+                                                        <input matInput  formControlName="from_page">
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div class="col-sm-2 my-auto">
+                                                        <p class="m-0  text-center">To</p>
+                                                    </div>
+                                                <div class="col-sm-5">
+                                                    <mat-form-field  appearance="outline" class="example-full-width">
+                                                    <mat-label>Page No.</mat-label>
+                                                    <input matInput  formControlName="to_page">
+                                                    </mat-form-field>
+                                                    
+                                                </div>
+                                                 </div>
+                                                 <div class="row">
+                                                    <div class="col-12">
+                                                    <mat-checkbox class="float-left" color="primary" formControlName="is_selectAll">Select All Pages</mat-checkbox>
+
+                                                        <button 
+                                                        class="float-right"
+                                                        mat-button 
+                                                        matTooltip="Preview" 
+                                                        color="primary">
+                                                            Preview
+                                                        </button>
+                                                    </div>
+                                                 </div>
+                                            
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                               </form>
+                              
+                            </div>
+                            <div class="col-sm-6">
+                                <form [formGroup]="__sharepdf" (ngSubmit)="preview()">
+                                    <div class="row mt-5">
+                                        <div class="col-sm-12">
+                                            <div class='componentWraper'>
+                                                <p class='componentTitle'>Enter Single Pages to preview (<mat-hint>Ex:- 1,2,3...</mat-hint>)</p>
+                                                 <div class="row">
+                                                      <div class="col-sm-12">
+                                                        <mat-form-field  appearance="outline" class="example-full-width">
+                                                            <mat-label>Pages</mat-label>
+                                                            <input matInput  formControlName="from_page">
+                                                            
+                                                        </mat-form-field>
+                                                      </div>
+                                                      <div class="col-sm-12 my-auto">
+                                                        <button mat-button class="float-right" color="primary" matTooltip="Preview">
+                                                            Preview
+                                                        </button>
+                                                      </div>
+                                                 </div>
+                                                </div>  
+                                        </div>
+                                    </div>
+                                   </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class='componentWraper'>
+                                    <p class='componentTitle'>Preview PDF</p>
+                                    <div class="sharePdf">
+                                        <app-loader *ngIf="spin"></app-loader>
+                                        <ng-container *ngIf="share_pdfBytes">
+                                            <pdf-viewer 
+                                            [src]="share_pdfBytes"
+                                            [rotation]="0"
+                                            [original-size]="false"
+                                            [show-all]="true"
+                                            [fit-to-page]="false"
+                                            [zoom]="1"
+                                            [zoom-scale]="'page-width'"
+                                            [stick-to-page]="false"
+                                            [render-text]="true"
+                                            [external-link-target]="'blank'"
+                                            [autoresize]="true"
+                                            [show-borders]="true"
+                                            style="width: 100%; height: 50px;"
+                                            ></pdf-viewer>
+                                        </ng-container>
+                                        <ng-container *ngIf="!share_pdfBytes">
+                                     
+                                        </ng-container>
+                                     
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>   
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <app-site-footer></app-site-footer

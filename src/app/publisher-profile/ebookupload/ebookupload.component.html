@@ -1,0 +1,939 @@
+<app-site-header (outputFromChild) = "receiveChildData($event)"></app-site-header>
+<!-- <div class="breadcrumb">
+	<ul>
+		<li><a routerLinkActive="true" routerLink="/publisher/publisher-dashboard">Home</a></li>
+		<li>&gt;</li>
+		<li>Upload eBook</li>
+	</ul>
+</div> -->
+
+<div class="bodyContainer">
+	<div class="wrapperCustome">
+
+		<app-site-side-bar></app-site-side-bar>
+		<div class="col-sm-9 float-left">
+			<div class="rightSection">
+				<!-- <div class="customSection"> -->
+				<div class="myProjectPhotoEdit">
+					<div class="area1">
+						<h5  [hidden]="!buttonshow">Click to preview</h5><br/>
+
+						<div class="pdfUpload"  [hidden]="!buttonshow" >
+						
+							<span class="crossIcon" (click)="clear_input()"><i class="fa fa-times fa-2x" style="color:rgb(100, 100, 100)" aria-hidden="true"></i>
+						
+							</span>
+							<i class="fa fa-file-pdf-o showpdfIcon"  data-toggle="modal" data-target="#openPdf" aria-hidden="true"></i>
+						</div>
+					
+
+
+						<div class="upload-btn-wrapper">
+						
+							<p><span>{{t}}</span></p>
+							<!-- <button class="btn ">
+								<i style="font-size:20px" class="fa">&#xf093;</i>
+							
+							</button><br/><br/> -->
+							<h5 class="innerText">Drag and Drop file or <a href="">Browse</a></h5>
+
+							<input type="file" id="resume" name="myfile" class="form-control"
+								title="Upload Book  (required)" accept=".pdf" (change)="onChange_book($event)" />
+							<span @fadeSlideInOut class="text-danger fieldAleart"
+								*ngIf="upload&&!ebook_change">{{upload_msg}}</span>
+						</div>
+						<!-- {{file_book}} -->
+						
+					</div>
+
+
+				</div>
+	<!-- Stepper -->
+				<div class="row rowCustome">
+					<div id="cover-spin" [hidden]="loader"></div>
+
+				<mat-horizontal-stepper linear class="classYellow" #stepper>
+					<!-- <mat-step>
+						<ng-template matStepLabel>Upload image</ng-template>
+						<div class="container">
+							<div class="row">
+							<div class="col-sm-12 imgUp">
+							  <div class="imagePreview"></div>
+						  <label class="customUploadbutton">
+							Upload
+							<input type="file" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;">
+							</label>
+							</div>
+					
+						   </div>
+						  </div>
+						  
+					</mat-step> -->
+					<!-- <div class="loading" [hidden]="loader">Loading&#8230;</div> -->
+
+				
+                	<mat-step  [stepControl]="category_subcategory">
+						<form [formGroup]="category_subcategory">
+						<ng-template matStepLabel>General Information<br/>
+							<small class="text-danger" [hidden]="!isbn_check">Pattern of Isbn No is not valid</small>
+						</ng-template>
+				         <!-- Category & subcategory -->
+						<div class="form-group form_group_custome mb-5 mt-5">
+							<div class="col-sm-6 float-left">
+									
+								<!-- <select #cats data-placeholder="Categories (required)" class="form-select p-4 inputfont"
+									style="width: 100%;height:100%;" (change)="show(cats.value)" formControlName="cat_name" required>
+									<option value="default">Categories (required)</option>
+									<option *ngFor="let cat of category">{{cat.name}}</option>
+								</select> -->
+								<angular2-multiselect [data]="dropdownList" 
+								[(ngModel)]="selectedItems" 
+								[settings]="dropdownSettings" 
+								(onSelect)="onItemSelect($event)" 
+								(onDeSelect)="OnItemDeSelect($event)"
+								(onSelectAll)="onSelectAll($event)"
+								(onDeSelectAll)="onDeSelectAll($event)"
+							
+								(onClose)="onClose($event)"
+								formControlName="cat_name"
+						        #cat
+								required
+								> 
+							</angular2-multiselect>
+
+								<mat-hint align="start" class="instructionLabel">(Maximum 3 allowed)</mat-hint>
+								<input #cats id="cat" [hidden]="true"/>
+			
+							</div>
+							<div class="col-sm-6 float-left">
+	
+								<!-- <select data-placeholder="Categories (required)" class="form-select p-4 inputfont"
+									style="width: 100%;height:100%;" #subcat (change)="show_sub(subcat.value)" formControlName="subcat_name" required>
+									<option value="">Sub-Categories (required)</option>
+									<option [hidden]="!opshow" *ngFor="let cat1 of category1">{{cat1}}</option>
+								 </select>-->
+									<angular2-multiselect [data]="dropdownList_subcategory" 
+									[(ngModel)]="subcategory_selectedItems" 
+									[settings]="subcategory_dropdownSettings" 
+									(onSelect)="onsubcateSelect($event)" 
+									(onDeSelect)="OnsubcateDeSelect($event)"
+									(onSelectAll)="onSelectAllsubcate($event)"
+									(onDeSelectAll)="onDeSelectAllsubcate($event)"
+									(onOpen)="onOpen($event)"
+									(onClose)="onClosesubcate($event)"
+									formControlName="subcat_name"
+									required
+									></angular2-multiselect>
+									
+									<mat-hint align="start" class="instructionLabel" *ngIf="subcategory_selectedItems.length <= 3 && subcategory_selectedItems.length>=0">(Maximum 3 allowed)</mat-hint>
+								 <input  #subcat id="sub" [hidden]="true"/>
+								 <!-- <strong  *ngIf="category_subcategory.get('subcat_name'.hasError('maxlength')">Maximum 3 Allowed</strong> -->
+								 <h5 class="text-danger" *ngIf="subcategory_selectedItems.length > 3 && subcategory_selectedItems.length!=0">You can choose only 3 sub-categories</h5>
+							</div>
+						</div>
+
+						<!--Publisher Name & ISBN  -->
+                         <div class="form-group form_group_custome ">
+							 <div class="col-sm-6  float-left">
+								<mat-form-field appearance="outline">
+									<mat-label>Publisher Name</mat-label>
+									<!-- <input matInput type="text" value="{{pub_name}}" #nm formControlName="firstCtrl" required> -->
+									<input matInput type="text" #nm formControlName="pub_name" readonly required>
+								 
+								</mat-form-field>
+							 </div>
+							 <div class="col-sm-6  float-left">
+								<mat-form-field appearance="outline">
+									<mat-label>ISBN</mat-label>
+									<input maxlength="17" minlength="17" matInput type="text" id="isbnNo"  #isbn formControlName="isbn_no" (keyup)="addHyp($event)" (keypress)="check_pattern($event)" required >
+								
+									<mat-hint align="start" [hidden]="isbn_check" class="instructionLabel">(Ex. 978-3-16-148410-0)</mat-hint>
+
+								  </mat-form-field>
+								  <h5 class="text-danger" [hidden]="!isbn_check">ISBN No. must be  valid  in the format  000-0-00-000000-0 (13 digits & 17 characters)</h5>
+
+								  <!-- <div  class="instructionLabel" *ngIf="f.isbn_no.errors.pattern">
+									<div >ISBN No. must be  valid  in the format  978-3-16-148410-0</div>
+
+								  </div> -->
+								
+							 </div>
+						 </div>
+                         
+						 <!-- BookName & AuthorName -->
+						 <div class="form-group form_group_custome ">
+								<div class="col-sm-6 float-left fs-5">
+									<!-- <input type="text" placeholder="Book Name (required) "
+										class="form-control inputfont" #bkname>
+										<span @fadeSlideInOut *ngIf="upload&&bkname.value==''"
+										class="text-danger fieldAleart">*Book Name is required</span> -->
+									
+		
+										<mat-form-field appearance="outline">
+											<mat-label>Book Name</mat-label>
+											<input matInput type="text"  #bkname formControlName="bk_name" required>
+										  </mat-form-field>
+									</div>
+									<div class="col-sm-6 float-left">
+										<mat-form-field appearance="outline">
+											<mat-label>Author Name</mat-label>
+											<input matInput type="text"  #authname formControlName="auth_name" required>
+										  </mat-form-field>
+											
+										</div>
+							 </div>
+
+							 	 <!-- Publication Year & Edition -->
+						 <div class="form-group form_group_custome ">
+							<div class="col-sm-6 float-left fs-5">
+									<!-- <mat-form-field appearance="outline">
+										<mat-label>Pulication Year</mat-label>
+										<input matInput type="text" #pub_year  formControlName="pub_year" required>
+									  </mat-form-field> -->
+									  <mat-form-field appearance="outline">
+										<mat-label>Publication Date</mat-label>
+										<input  type="date" matInput formControlName="pub_year"  #pub_year required>
+										<!-- <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle> -->
+										<!-- <mat-datepicker #picker></mat-datepicker> -->
+									  </mat-form-field>
+								</div>
+								<div class="col-sm-6 float-left">
+									<mat-form-field appearance="outline">
+										<mat-label>Edition</mat-label>
+										<input matInput type="text" #edition  formControlName="edition" required>
+									  </mat-form-field>
+										
+									</div>
+						 </div>
+
+						<div class="form-group form_group_custome ">
+							<div class="col-sm-6"></div>
+							<div class="col-sm-6">
+							  <!-- <button class="btn btn-warning-outline" matStepperPrevious>Back</button> -->
+						   	<button  class="finalSubmitButton  my-auto float-right"  [disabled]="isbn_check || (subcategory_selectedItems.length > 3 && subcategory_selectedItems.length!=0) || (f.isbn_no.value.length != 17)"  matStepperNext>Next</button>
+							</div>
+				  
+						  <div class="col-sm-6">
+						  </div>
+						  
+						</div>
+				    	</form>
+					</mat-step>
+
+					<mat-step [stepControl]="firstFormGroup">
+						<form [formGroup]="firstFormGroup">
+
+						<ng-template matStepLabel>Mapping Content<br/>
+							<small @fadeSlideInOut class="text-danger" *ngIf="upload&&!cover_change">{{cover}}</small>
+						</ng-template>
+
+						<!-- <div class="form-group form_group_custome text-center"  [hidden]="!cover_change"> -->
+						
+								<!-- <div class="img-wrap rounded"> -->
+
+									<!-- <img src="{{preview_book_image}}" class="Imageshow" > -->
+								
+				
+						<!-- </div> -->
+						<!-- Content From & Content To -->
+						<div class="form-group form_group_custome mt-5">
+							<div class="col-sm-6 float-left ">
+								<!-- <input type="text" class="form-control inputfont"
+									placeholder="Contents From(required)" #cf pattern="[0-9]*"
+									(keypress)="preventNonNumericalInput($event)"><span @fadeSlideInOut
+									*ngIf="upload&&cf.value==''" class="text-danger fieldAleart">*Page No. is required</span>
+								
+									<span @fadeSlideInOut
+									*ngIf="cf.value>ct.value" class="text-danger fieldAleart">*{{page_no_error}}</span>
+									<span @fadeSlideInOut
+									*ngIf="cf.value==ct.value &&ct.value!='' " class="text-danger fieldAleart">*{{page_no_error}}</span> -->
+									<!-- (keypress)="preventNonNumericalInput($event)"  -->
+									<mat-form-field appearance="outline">
+									<mat-label>Contents Page No. From</mat-label>
+									<input matInput type="text"  #cf  pattern="[0-9]*"
+									(keypress)="preventNonNumericalInput($event)"
+									formControlName="c_from" required>
+								  </mat-form-field>
+								  <span @fadeSlideInOut
+									*ngIf="upload&&cf.value==''" class="text-danger fs-5">*Page No. is required</span>
+								
+									
+									<span @fadeSlideInOut
+									*ngIf="cf.value==ct.value &&ct.value!='' " class="text-danger fs-5">*{{page_no_error}}</span>
+								</div>
+							<div class="col-sm-6 float-left fs-5">
+									<mat-form-field appearance="outline">
+										<mat-label>Contents Page No. To</mat-label>
+										<input matInput type="text"  #ct pattern="[0-9]*"
+										(keypress)="preventNonNumericalInput($event)"
+										formControlName="c_to" required
+										>
+									  </mat-form-field>
+									  <!-- <div class="invalid-feedback" *ngIf="g.errors?.C_TO">
+										<sup>*</sup>
+									  </div> -->
+									  
+									  <span @fadeSlideInOut
+									*ngIf="page_no_error!=''" class="text-danger fs-5">*{{page_no_error}}</span>
+									
+								</div>
+							   </div>
+						<!-- Preview Pages& PageCountStart -->
+
+							<div class="form-group form_group_custome ">
+								<div class="col-sm-6 float-left">
+									
+									<!-- <input type="text" class="form-control inputfont"
+										placeholder="Preview Pages From(required)" #rdf pattern="[0-9]*"
+										(keypress)="preventNonNumericalInput($event)"><span @fadeSlideInOut
+										*ngIf="upload&&rdf.value==''" class="text-danger fieldAleart">*Page No. is required</span>
+										<span @fadeSlideInOut
+										*ngIf="rdf.value>rdt.value" class="text-danger fieldAleart">*{{page_no_error}}</span>
+										<span @fadeSlideInOut
+										*ngIf="rdf.value==rdt.value &&rdt.value!=''" class="text-danger fieldAleart">*{{page_no_error}}</span> -->
+
+										<mat-form-field appearance="outline">
+											<mat-label>Preview Page (e.g. 1-5,8,11-13)</mat-label>
+											<input matInput type="text" 
+											(keypress)="isNumberKey($event)"
+											formControlName="r_from" required
+											
+											#rdf >
+										</mat-form-field>
+										<!-- <small @fadeSlideInOut
+										*ngIf="upload&&rdf.value==''" class="text-danger fieldAleart">*Page No. is required</small>
+										<small @fadeSlideInOut
+										*ngIf="rdf.value>rdt.value" class="text-danger fieldAleart">*{{page_no_error}}</small>
+										<small @fadeSlideInOut
+										*ngIf="rdf.value==rdt.value &&rdt.value!=''" class="text-danger fieldAleart">*{{page_no_error}}</small> -->
+									
+									</div>
+								<div class="col-sm-6 float-left">
+									
+									<!-- <input type="text" class="form-control inputfont"
+										placeholder="Preview Pages To(required)" #rdt pattern="[0-9]*"
+										(keypress)="preventNonNumericalInput($event)" /><span @fadeSlideInOut
+										*ngIf="upload&&rdt.value==''" class="text-danger fieldAleart">*Page No. is required</span> -->
+										
+										<mat-form-field appearance="outline">
+											<mat-label>Page Count Start From</mat-label>
+											<input matInput type="text"
+											formControlName="r_to" required
+											
+											#rdt pattern="[0-9]*" (keypress)="preventNonNumericalInput($event)">
+										</mat-form-field>
+										
+										<!-- <small @fadeSlideInOut
+										*ngIf="upload&&rdt.value<rdf.value" class="text-danger fieldAleart">*{{page_no_error}}</small> -->
+									
+									
+									
+									</div>
+							</div>
+                             <!-- Image Upload -->
+						  <div class="form-group form_group_custome">
+								<div class="col-sm-6 float-left ">
+									<input type="file" id="myfile" name="myfile" 
+									class="inputFile" title="Upload Book Cover Photo (required)"
+									accept=".jpeg, .jpg, .png" (change)=" fileChangeEvent($event)"  onclick="this.value = null"
+									formControlName="image" required
+									>
+										<button hidden id="openModal" data-toggle="modal"
+										data-target="#mymodal1"></button>
+									
+								<span @fadeSlideInOut class="text-danger fieldAleart" *ngIf="upload&&!cover_change">*{{cover}}</span>
+								
+								
+								<div id="mymodal1" class="modal fade" role="dialog"  [hidden]="valu" >
+									<div class="modal-dialog modal-dialog-centered" >
+
+				
+										<div class="modal-content">
+											<div class="modal-header">
+										
+												<h5 class="modal-title" >Adjust
+													Image&nbsp;</h5><div class="ml-4 pl-5">
+												<button [hidden]="ZoomIn" class="btn button-no" (click)="zoomOut()"
+													style="width:90px">Zoom <strong>-</strong></button>&nbsp; <button [hidden]="Zoomout"
+													style="width:90px" class="btn button-no" (click)="zoomIn()">Zoom
+													<strong>+</strong></button>
+												</div>
+													<button type="button" class="close" id="Close" data-dismiss="modal"(click)="close_it()" >&times;</button>
+										
+											</div>
+											
+
+											<div class="modal-body" style="height:300px">
+												<image-cropper [hidden]="hide" [imageChangedEvent]="imageChangedEvent"
+													[maintainAspectRatio]="true" 
+													[aspectRatio]="4 / 3"
+													[onlyScaleDown]="false" 
+													[cropperStaticWidth]="200" [cropperStaticHeight]="300"
+													(imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+													(cropperReady)="cropperReady($event)"
+													(loadImageFailed)="loadImageFailed()"
+													[style.display]="showCropper ? null: 'none'" [transform]="transform">
+												</image-cropper>
+
+							
+
+
+											</div>
+											<div class="modal-footer">
+												<div class="modal-footer">
+													<button class="btn button-no" data-dismiss="modal"  
+														(click)="click_it()">Save</button>
+												
+												</div>
+											</div>
+
+										</div>
+									</div>
+
+								</div>
+								</div>
+                                 <div class="col-sm-6" [hidden]="!cover_change">
+									<i class="fa fa-trash crossimageIcon"  (click)="make_image_empty()" aria-hidden="true"> Remove</i>
+								
+									<img src="{{preview_book_image}}" class="img-thumbnail float-left" alt="..." style="height: 59px;width: 69px;">
+									<!-- </div> -->
+									
+									
+								 </div>
+							
+                          </div>
+						  <div class="form-group form_group_custome mt-4">
+							  <div class="col-sm-6"></div>
+							  <div class="col-sm-6">
+								<!-- <button class="btn btn-warning-outline" matStepperPrevious>Back</button> -->
+								<button  class="finalSubmitButton my-auto float-right"  matStepperNext>Next</button>
+								<button class="CustomBackButton float-right" type="button"   matStepperPrevious>Back</button>
+							  </div>
+					
+							<div class="col-sm-6">
+							</div>
+							
+						  </div>
+			    		</form>
+					<!-- <div class="form-group form_group_custome">
+						
+					
+					</div> -->
+					</mat-step>
+					<mat-step [stepControl]="secondFormGroup">
+						<form [formGroup]="secondFormGroup">
+					  <ng-template matStepLabel>Pricing</ng-template>
+					  <div class="form-group form_group_custome mt-5">
+						<div class="col-sm-6 float-left ">
+							<!-- Per Page Credits-->
+							<mat-form-field appearance="outline">
+								<mat-label>₹ Per Page Price</mat-label>
+								<input matInput type="text"  #price (keypress)="preventNonCurrencyInput($event)"
+								formControlName="p_price" required>
+							  </mat-form-field>
+							
+							</div>
+						<div class="col-sm-6 float-left">
+							<!-- Full E-book price -->
+							<mat-form-field appearance="outline">
+								<mat-label>₹ Full E-book price</mat-label>
+								<input matInput type="text"  (keypress)="preventNonCurrencyInput($event)"
+								formControlName="f_price" #full_book_price required>
+							  </mat-form-field>
+							
+							
+							</div>
+				    	</div>
+
+						<div class="form-group form_group_custome mt-5">
+							<div class="col-sm-6 float-left ">
+								<!-- Per Page Credits-->
+								<mat-form-field appearance="outline">
+									<mat-label>₹ Mrp</mat-label>
+									<input matInput type="text"  #mrp (keypress)="preventNonCurrencyInput($event)"
+									formControlName="Mrp" required>
+								  </mat-form-field>
+								
+								</div>
+							<div class="col-sm-6 float-left">
+								<!-- Full E-book price -->
+								<mat-form-field appearance="outline">
+									<mat-label>₹ Offer Price</mat-label>
+									<input matInput type="text"  (keypress)="preventNonCurrencyInput($event)"
+									formControlName="offerPrice" #offerprice required>
+								  </mat-form-field>
+								
+								
+								</div>
+							</div>
+
+							<div class="form-group form_group_custome mt-5">
+								<div class="col-sm-6 float-left ">
+									<!-- Per Page Credits-->
+									<mat-form-field appearance="outline">
+										<mat-label>₹ Delivery Charge</mat-label>
+										<input matInput type="text"  #d_charge (keypress)="preventNonCurrencyInput($event)"
+										formControlName="delivery_charge" required>
+									  </mat-form-field>
+									
+									</div>
+								
+								</div>
+					<div class="form-group form_group_custome ">
+						<div class="col-sm-6"></div>
+						<div class="col-sm-6">
+							<button  class="matButton finalSubmitButton my-auto float-right"  matStepperNext>Next</button>
+						  <button class="CustomBackButton float-right"  type="button"  matStepperPrevious>Back</button>
+						</div>
+			  
+					  <div class="col-sm-6">
+					  </div>
+					  
+					</div>
+					</form>
+					</mat-step>
+					<mat-step  [stepControl]="lastFormGroup">
+						<form [formGroup]="lastFormGroup">
+
+						<ng-template matStepLabel>About</ng-template>
+					  <div >
+						<div class="form-group form_group_custome mt-2">
+						
+							<div class="col-sm-12 float-left fs-5">
+							
+								<mat-form-field appearance="outline" style="width:100%">
+									<mat-label>About Book</mat-label>
+									<textarea matInput #bookabout rows="4" 
+									formControlName="about_book" required  maxlength="1000"
+									></textarea>
+									<mat-hint align="end">{{bookabout.value?.length || 0}}/1000</mat-hint>
+								  </mat-form-field>
+							
+							</div>
+							 </div>
+							<div class="form-group form_group_custome">
+									<div class="col-sm-12 float-left fs-5">
+										
+										<!-- <textarea class="form-control inputfont" placeholder="About Author(required)"
+											#authabout></textarea><span @fadeSlideInOut *ngIf="upload&&authabout.value==''"
+											class="text-danger fieldAleart">*Write something about the author</span> -->
+											<mat-form-field appearance="outline" style="width:100%">
+												<mat-label>About Author</mat-label>
+												<textarea matInput #authabout rows="4" maxlength="1000"
+												formControlName="about_author" required
+												></textarea>
+									           <mat-hint align="end">{{authabout.value?.length || 0}}/1000</mat-hint>
+
+											</mat-form-field>
+										
+										</div>
+									<!-- <div class="col-sm-6 float-left fs-5">
+								
+											<mat-form-field appearance="outline">
+												<mat-label>About Book</mat-label>
+												<textarea matInput #bookabout rows="8"
+												formControlName="about_book" required
+												></textarea>
+											</mat-form-field>
+										
+										</div> -->
+								</div>
+						<div class="form-group form_group_custome ">
+							<div class="col-sm-6"></div>
+							<div class="col-sm-6">
+								<button  class="finalSubmitButton my-auto float-right"  matStepperNext>Next</button>
+							  <button class="CustomBackButton float-right"  type="button"  matStepperPrevious>Back</button>
+							</div>
+				  
+						  <div class="col-sm-6">
+						  </div>
+						  
+						</div>
+
+					  </div>
+					   </form>
+
+					</mat-step>
+				
+					<mat-step>
+						<ng-template matStepLabel>More(Optional)</ng-template>
+                         <div>
+							<table class="table table-bordered" id="myTable" style="margin-top: 37px;">
+								<thead>
+									<tr>
+										<th>Title & Description</th>
+										<!-- <th>Description</th> -->
+										<th>Pages</th>
+										<!-- <th>Pdf Page</th> -->
+										<th class="text-center" (click)="addRow()">
+											<i class="fa fa-plus fa-2x"></i>
+											<!-- <button type="button" class="matButton">Add</button> -->
+										  </th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let OtherContent of other_contents; let i = index;">
+									
+										<td>
+											<mat-form-field appearance="outline">
+												<mat-label>Title</mat-label>
+											      <textarea matInput [(ngModel)]="other_contents[i].title" rows="5" cols="20" type="text" [ngModelOptions]="{standalone: true}"></textarea>
+												</mat-form-field>
+												<br/>
+										  <!-- </td>
+										  
+										  <td> -->
+											<mat-form-field appearance="outline">
+												<mat-label>Description</mat-label>
+											      <textarea matInput rows="5" cols="20" [(ngModel)]="other_contents[i].description"  type="text" [ngModelOptions]="{standalone: true}"></textarea>
+											 </mat-form-field>
+										  </td>
+										  <td  style="width:5px">
+											<mat-form-field appearance="outline" class="mb-5">
+												<mat-label>Actual Page</mat-label>
+											<input matInput [(ngModel)]="other_contents[i].actual_page"  type="text" [ngModelOptions]="{standalone: true}" /> 
+											</mat-form-field>
+										  <!-- </td>
+										  <td> -->
+											<mat-form-field appearance="outline" class="mt-5">
+												<mat-label>Pdf Page</mat-label>
+											<input matInput [(ngModel)]="other_contents[i].pdf_page"  type="text" [ngModelOptions]="{standalone: true}" />
+
+											 
+											</mat-form-field>
+										  </td>
+										   <td  class="text-center">
+
+											<!-- <button type="button" class="matButton">Delete</button> -->
+											<a class="customIcon" type="button" 
+											#tooltip="matTooltip"
+											matTooltip="Delete"
+											(click)="deleteRow(i)" 
+											><i class="fa fa-trash fa-2x"></i></a> 
+											<!-- (click)="deleteRow(i)"  -->
+										  </td>
+									</tr>
+								
+								</tbody>
+							</table>	
+							<div class="col-sm-12 termsCheck mt-5">
+								<input #terms type="checkbox" id="check" checked value="Terms and conditions" (click)="show_check()" (change)='check_checkbox($event)'>
+								<label for="check"><a type='button' data-toggle="modal" data-target="#terms_condition">Terms & Conditions Apply</a></label>
+	
+								<!-- <input type="button" class="finalSubmitButton float-right" value="Preview" [disabled]="progress_show"
+	
+									(click)="showvalues(nm.value,cats.value,subcat.value,bkname.value,authname.value,price.value,isbn.value,authabout.value,bookabout.value,cf.value,ct.value,rdf.value,rdt.value,full_book_price.value,pub_year.value,edition.value)"> -->
+									<!-- (click)="previewValues(nm.value,cats.value,subcat.value,bkname.value,authname.value,price.value,isbn.value,authabout.value,bookabout.value,cf.value,ct.value,rdf.value,rdt.value,full_book_price.value,pub_year.value,edition.value)" -->
+									<button type="button" class="finalSubmitButton float-right" [disabled]="progress_show"
+									(click)="previewValues(nm.value,cats.value,subcat.value,bkname.value,authname.value,price.value,isbn.value,authabout.value,bookabout.value,cf.value,ct.value,rdf.value,rdt.value,full_book_price.value,pub_year.value,edition.value,d_charge.value,mrp.value,offerprice.value)"
+									>Preview</button>
+									<button type="button" class="CustomBackButton float-right" matStepperPrevious>Back</button>
+								
+									&nbsp;
+		
+		
+								<div id="overlay">
+									<div id="text">
+										<p class="text-center">Uploading...</p>
+										<div class="sk-circle" [hidden]="!progress_show">
+											<div class="sk-circle1 sk-child"></div>
+											<div class="sk-circle2 sk-child"></div>
+											<div class="sk-circle3 sk-child"></div>
+											<div class="sk-circle4 sk-child"></div>
+											<div class="sk-circle5 sk-child"></div>
+											<div class="sk-circle6 sk-child"></div>
+											<div class="sk-circle7 sk-child"></div>
+											<div class="sk-circle8 sk-child"></div>
+											<div class="sk-circle9 sk-child"></div>
+											<div class="sk-circle10 sk-child"></div>
+											<div class="sk-circle11 sk-child"></div>
+											<div class="sk-circle12 sk-child"></div>
+										</div>
+										<p style="display: inline-block;" *ngIf="pgbstring==''">{{processing_message}}</p>
+										<div style="display: inline-block;" *ngIf="pgbstring==''" class="spinner1">
+											<div class="bounce1"></div>
+											<div class="bounce2"></div>
+											<div class="bounce3"></div>
+										</div>
+										<p>{{pgbstring}}</p>
+									</div>
+								</div><br>
+								<!-- <span @fadeSlideInOut class="text-danger fieldAleart" [hidden]="progress_show">{{upload_message}}</span> -->
+							</div>
+						 </div>
+					</mat-step>
+			
+				  </mat-horizontal-stepper>
+				  <span @fadeSlideInOut class="text-danger text-center fieldAleart" [hidden]="progress_show">{{upload_message}}</span>
+				</div>
+				<!-- <br clear="all"> -->
+			</div>
+			<!-- <div class="col-sm-12"> -->
+				
+			<!-- </div> -->
+		</div>
+		<br clear="all">
+
+	</div>
+	<!-- For Preview Modal After set the value of all field -->
+	<button hidden id="preview" data-toggle="modal" data-target="#previewModal"></button>
+</div>
+
+
+
+<div id="myModal" class="modal" role="dialog">
+
+	<div class="modal-dialog modal-sm" [ngClass]="modal_msg!='Wrong Format!'? 'modal-lg':'modal-sm'">
+		<div class="modal-content" id="cont">
+
+			<p class="inputfont ml-3">{{modal_msg}}</p>
+
+			<div class="modal-footer">
+				<button type="button" class="btn button-no" data-dismiss="modal" (click)="modal_close()">OK</button>
+
+
+			</div>
+		</div>
+	</div>
+</div>
+<br clear="all">
+<app-site-footer></app-site-footer>
+
+
+<div class="modal fade" id="openPdf"  role="dialog">
+	<div class="modal-dialog modal-xl">
+	  <div class="modal-content">
+  
+		<!-- Modal Header -->
+		<div class="modal-header">
+		  <!-- <h4 class="modal-title">Terms & Conditions</h4> -->
+		  <h2 style="color:grey">Preview Pane</h2>
+		  <button type="button" class="close" data-dismiss="modal">&times;</button>
+		</div>
+  
+		<!-- Modal body -->
+		<div class="modal-body">
+		<div class="text-center" [hidden]="!buttonshow">
+							<div style="clear:both" class="next">
+								<iframe id="viewer" frameborder="0" scrolling="no" width="100%" height="500"
+									></iframe>
+							</div>
+						</div>
+		</div>
+  
+		<!-- Modal footer -->
+		<div class="modal-footer">
+		  <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> -->
+		</div>
+  
+	  </div>
+	</div>
+  </div>
+
+<div class="modal fade" id="terms_condition"  role="dialog">
+	<div class="modal-dialog modal-lg">
+	  <div class="modal-content">
+  
+		<!-- Modal Header -->
+		<div class="modal-header">
+		  <h4 class="modal-title">Terms & Conditions</h4>
+		  <button type="button" class="close" data-dismiss="modal">&times;</button>
+		</div>
+  
+		<!-- Modal body -->
+		<div class="modal-body">
+			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+		</div>
+  
+		<!-- Modal footer -->
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		</div>
+  
+	  </div>
+	</div>
+  </div>
+
+
+    <!-- The preview Modal -->
+	<div class="modal fade" id="previewModal">
+		<div class="modal-dialog  modal-xl modal-dialog-scrollable">
+		  <div class="modal-content">
+		  
+			<!-- Modal Header -->
+			<div class="modal-header">
+			  <h4 class="modal-title">Preview</h4>
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			
+			<!-- Modal body -->
+			<div class="modal-body">
+
+
+				<mat-grid-list  [cols]="2" gutterSize="10px" rowHeight="150px">
+					<mat-grid-tile colspan="1" rowspan="2">
+						<div class="previewDetails">
+							<div class="previewDetailsheader">
+								General Information
+							</div>
+                             <div class="previewDetailsbody">
+								<div class="row ">
+									<div class="col-6">
+									   Category:    <ul  class="fruits"><li class="fruit on" *ngFor="let cat of cate_gories"> {{cat.itemName}}</li></ul>
+									</div>
+									<div class="col-6">
+									   Sub-Category:  <ul  class="fruits"><li class="fruit on" *ngFor="let subcat of subcate_gories"> {{subcat.itemName}}</li></ul>
+									</div>
+								</div>
+								 <div class="row mt-5">
+									 <div class="col-6">
+										 Book Name : {{bkname.value}}
+									 </div>
+									 <div class="col-6">
+										Author Name : {{authname.value}}
+									</div>
+								 </div>
+								 <div class="row mt-5">
+									<div class="col-6">
+										Publisher Name : {{nm.value}}
+									  </div>
+									<div class="col-6">
+										Isbn No : {{isbn.value}}
+									</div>
+									
+								</div>
+								<div class="row mt-5">
+									<div class="col-6">
+										Edition : {{edition.value}}
+									</div>
+									<div class="col-6">
+										Publication Date : {{pub_year.value}}
+										
+									</div>
+								</div>
+							 </div>
+							
+						</div>
+
+					</mat-grid-tile>
+					<mat-grid-tile colspan="1" rowspan="1">
+						<div class="previewDetails">
+							<div class="previewDetailsheader">
+							  Mapping Content
+							</div>
+                             <div class="previewDetailsbody">
+							   <div class="row">
+								   <div class="col-6">
+									   Content Page No From : {{cf.value}}
+								   </div>
+								   <div class="col-6">
+									Content Page No To : {{ct.value}}
+								</div>
+							   </div>
+							   <div class="row mt-3">
+                                    <div class="col-6">
+                                     Preview Pages : {{rdf.value}}
+									</div>
+									<div class="col-6">
+									 Page Count Start From : {{rdt.value}}
+									</div>
+							   </div>
+							 </div>
+						</div>
+					</mat-grid-tile >
+					<mat-grid-tile >
+						<div class="previewDetails">
+							<div class="previewDetailsheader">
+								Pricing
+							</div>
+                             <div class="previewDetailsbody">
+                               <div class="row">
+								   <div class="col-6">
+									   Per Page Credits: {{price.value}}
+								   </div>
+								   <div class="col-6">
+									Full E-book price : {{full_book_price.value}}
+								</div>
+							   </div>
+							   <div class="row">
+								   <div class="col-6">
+									   MRP:{{mrp.value}}
+								   </div>
+								   <div class="col-6">
+									Offer Price:{{offerprice.value}}
+									</div>
+							   </div>
+							   <div class="row">
+								   <div class="col-6">
+									   Delivery Charges:{{d_charge.value}}
+								   </div>
+							   </div>
+							   <!-- <div class="row mt-3">
+								<div class="col-6">
+									Preview Pages : {{rdf.value}}
+								</div>
+								<div class="col-6">
+								 Page Count Start From : {{rdt.value}}
+							  </div>
+							</div> -->
+							 </div>
+						</div>
+					</mat-grid-tile>
+					<mat-grid-tile colspan="1" rowspan="3">
+						<div class="previewDetails">
+							<div class="previewDetailsheader">
+							About
+							</div>
+                             <div class="previewDetailsbody">
+                              <div class="row">
+								  <div class="col-12 mb-3">
+									  About Author : {{authabout.value}}
+								  </div>
+								  <hr class="m-0"/>
+                                    <div class="col-12 mt-3">
+										About Book : {{bookabout.value}}
+									</div>
+							  </div>
+							 </div>
+						</div>
+					</mat-grid-tile>
+					<mat-grid-tile colspan="1" rowspan="3">
+						<div class="previewDetails">
+							<div class="previewDetailsheader">
+						    More
+							</div>
+                             <div class="previewDetailsbody" id="showMoreDetails">
+                           
+								  <ul class="previewMore" >
+									  <li *ngFor="let more of other_contents">
+										  Title : {{more.title}}<br/>
+										Actual Page : {{more.actual_page}} <br/>
+										 Pdf Page : {{more.pdf_page}}<br/>
+									     Description : {{more.description}}
+										<hr class="m-0"/>
+									</li>
+								  </ul>
+					              <!-- <h4 class="text-center" *ngIf="other_contents.length == 0">It seems, you have not filled this part yet.</h4> -->
+							 </div>
+						</div>
+					</mat-grid-tile>
+				  
+				</mat-grid-list>
+
+
+			</div>
+			
+			<!-- Modal footer -->
+			<div class="modal-footer">
+				<button type="button" class="CustomBackButton" data-dismiss="modal" id="closepreviewModal">Cancel</button>
+
+			  <button type="button" class="finalSubmitButton"
+			  (click)="showvalues(nm.value,cats.value,subcat.value,bkname.value,authname.value,price.value,isbn.value,authabout.value,bookabout.value,cf.value,ct.value,rdf.value,rdt.value,full_book_price.value,pub_year.value,edition.value,d_charge.value,mrp.value,offerprice.value)"
+			   >Submit</button>
+			</div>
+			
+		  </div>
+		</div>
+	  </div>

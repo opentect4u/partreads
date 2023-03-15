@@ -1,0 +1,213 @@
+<!-- <html class="login" style="background-color:#333">
+
+
+
+
+<body class="login" style="background-color:#333;">
+
+    <div class="form-signin" style="background-color:white">
+  <div class="text-center">
+      <img src="assets/img/logo.png" alt="Metis Logo">
+  </div>
+  <hr>
+  <div class="tab-content">
+      <div id="login" [hidden]="log" class="tab-pane active">
+        <p class="text-muted text-center">Enter your ID and password</p>
+        <p class="text-center text-danger">{{k}}</p>
+        <form [formGroup]="loginForm" #loginform="ngForm" (ngSubmit)="login()">
+           
+             <br> <div class="form-group clearfix" [ngClass]="{ 'has-error': f.userid.errors }">
+                  
+                  <div>
+                      <input type="text" class="form-control" placeholder="User Id" formControlName="userid" />
+                      <div *ngIf=" f.userid.errors" class="help-block">
+                            <div *ngIf="f.userid.errors.required">User ID is required</div>
+                      </div>
+                  </div>
+              </div>
+              <div class="form-group clearfix" [ngClass]="{ 'has-error':f.password.errors }">
+               
+                <div>
+                    <input type="password" class="form-control" placeholder="Password" formControlName="password"/>
+                    <div *ngIf="f.password.errors" class="help-block">
+                            <div *ngIf="f.password.errors.required">Password is required</div>
+                    </div>
+                </div>
+              </div>
+              <div class="col-xs-12 form-group text-right"><br>
+                <button [disabled]="loginform.form.invalid" class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
+             <br> </div>
+            
+          </form>
+      </div>
+      <div id="forgot" [hidden]="forget">
+          <form action="index.html">
+              <p class="text-muted text-center">Enter your valid e-mail</p>
+              <input type="email" placeholder="mail@domain.com" class="form-control">
+              <br>
+              <button class="btn btn-lg btn-danger btn-block" type="submit">Recover Password</button>
+          </form>
+      </div>
+      <div id="signup" [hidden]="sign"  >
+          <form action="index.html">
+              <input type="text" placeholder="username" class="form-control top">
+              <input type="email" placeholder="mail@domain.com" class="form-control middle">
+              <input type="password" placeholder="password" class="form-control middle">
+              <input type="password" placeholder="re-password" class="form-control bottom">
+              <button class="btn btn-lg btn-success btn-block" type="submit">Register</button>
+          </form>
+      </div>
+  </div>
+  <hr>
+  <div class="text-center">
+      <ul class="list-inline">
+          <li><a class="text-muted" (click)="login_show()">Login</a></li>
+          <li><a class="text-muted" (click)="forgot_show()">Forgot Password</a></li>
+          <li><a class="text-muted" (click)="sign_show()">Signup</a></li>
+      </ul>
+  </div>
+</div>
+
+
+
+  <script src="assets/lib/jquery/jquery.js"></script>
+
+
+  <script src="assets/lib/bootstrap/js/bootstrap.js"></script>
+
+
+
+</body>
+</html> -->
+<!-- <html class="login">
+<body class="login"> -->
+<div class="loginmainDiv">
+  <p class="showMsg" @fade> Welcome, Admin...</p>
+    <div class="loginBox">
+      <div class="adminLogo"><img src="../../assets/adminassets/images/logoAdmin.png" alt=""/></div>
+       <div class="fieldSec">
+        <div class="tab-content">
+        <div id="login" [hidden]="log" class="tab-pane active">
+            <p class="text-muted text-center">Enter your ID and password</p>
+            <p class="customErrorAlert" *ngIf="show_alert">{{k}}
+              <i class="fa fa-times" aria-hidden="true" (click)="hide_alert()"></i>
+            </p>
+
+
+      <!-- <form [formGroup]="loginForm" #loginform="ngForm" (ngSubmit)="login()">
+        <br> 
+               <div class="row">
+                 <div class="col-12">
+                  <div class="form-group clearfix" [ngClass]="{ 'has-error': f.userid.errors }">
+                   
+                          <input type="text" class="form-control " id="exampleInputEmail1" placeholder="User Id" name="user_id" formControlName="userid">
+                      
+                          <div *ngIf=" f.userid.errors" class="help-block">
+                              <div *ngIf="f.userid.errors.required">User ID is required</div>
+                          </div> 
+
+                      </div>  
+                 </div>
+                 <div class="col-12 mt-3 mb-2">
+                  <div class="form-group clearfix" [ngClass]="{ 'has-error':f.password.errors }">
+
+                      <input type="password" name="user_pass" class="form-control" id="exampleInputPassword1" placeholder="Password" formControlName="password">
+                      <label  class="mt-2 float-right"><input type="checkbox" (change)="change_type()"> Show Password</label> 
+                      <div *ngIf="f.password.errors" class="help-block">
+                          <div *ngIf="f.password.errors.required">Password is required</div>
+                       </div>
+                    </div>
+
+                 </div>
+               </div>
+                  <div class="form-group">
+                    <input type="submit" [disabled]="loginform.form.invalid"  class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
+                  </div>
+               
+  
+        </form> -->
+        <div id="cover-spin" *ngIf="!show_loader"></div>
+
+            <form [formGroup]="loginForm" #loginform="ngForm" (ngSubmit)="login()">
+              <div class="row">
+                <div class="col-12 mb-5">
+                  <mat-form-field appearance="outline">
+                    <mat-label>User Id</mat-label>
+                    <input matInput placeholder="Enter User Id" id="exampleInputEmail1" name="user_id" formControlName="userid"/>
+                    
+                    <mat-error *ngIf=" f.userid.errors" class="help-block">
+                      <div *ngIf="f.userid.errors.required">*User ID is required</div>
+                    </mat-error> 
+                  </mat-form-field>
+                
+                </div>
+                <div class="col-12 mb-5">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput [type]="Hide ? 'password' : 'text'" placeholder="Enter Password" id="exampleInputPassword1" name="user_pass" formControlName="password"/>
+                    <a mat-icon-button matSuffix (click)="Hide = !Hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                      <mat-icon>{{Hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </a>
+                    <mat-error *ngIf="f.password.errors" class="help-block">
+                      <div *ngIf="f.password.errors.required">*Password is required</div>
+                    </mat-error>
+                  </mat-form-field>
+                
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="titleSec" >
+                  <!-- <button type="submit" class="btn btn-primary btn-block"><div [hidden]="!show_loader"> LOGIN</div><div [hidden]="show_loader" class="spinner-border text-light"></div></button> -->
+                <input type="submit" class="btn btn-primary btn-block"  [disabled]="loginform.form.invalid"/>
+              </div>
+              </div>
+            </form>  
+      
+      </div>
+          </div>
+          </div>
+    </div>
+  </div> 
+  <div id="myModal11" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <h2>Oops...You are offline!!</h2>
+      </div>
+      <div class="modal-body">
+        <p>Seems like your connection has been interrupted!!</p>
+        <p>You will be notified once the connection is resurrected.</p>
+      </div>
+      <div class="modal-footer">
+        <h3> Waiting for network...
+          <!-- <button class="btn btn-secondary" (click)="hide()">Close</button> -->
+          <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </h3>
+      </div>
+    </div>
+    
+  </div>
+  <div id="myModal1" class="modal">
+  
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <h2>You are back online!!</h2>
+      </div>
+      <div class="modal-body">
+        <p>Your connection has been resurrected!</p>
+       
+      </div>
+      <div class="modal-footer">
+        <h3><button class="btn btn-secondary" (click)="hide1()">Close</button></h3>
+      </div>
+    </div>
+    
+  </div>
+<!-- </body>
+</html> -->

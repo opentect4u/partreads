@@ -1,0 +1,78 @@
+
+<!-- This is the html part of footer component of the website. -->
+<!-- This footer is used in users and publshers all pages  --> 
+
+<div class="footer" appNorightclick><!-- div1 : Main div contain  two list items i.e one for social icons and another one is for Sitemap,About us,Contact With Admin,How it works,terms & conditions etc-->
+  <ul class="social"> <!--div2 : Contain Social icons-->
+    <li><a href="https://www.facebook.com/profile.php?id=100090501130551" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+    <li><a href="https://twitter.com/PartReads" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+    <li><a href="https://instagram.com/partreads?igshid=ZDdkNTZiNTM=" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+    <!-- <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li> -->
+  </ul>
+
+  <div class="f-menu mt-2"><!--div3 : It contains Sitemap,About us,Contact With Admin,How it works,terms & conditions ,privacy policy,Contact-->
+    <ul>
+      <li><a href="#">Sitemap</a></li>
+      <li><a href="#">About us</a></li>
+      <li><a href="#">Contact With Admin</a></li>
+      <li><a href="#">How It Works</a></li>
+      <li><a  target="_blank" routerLink='/terms'>Terms &amp; Conditions</a></li>
+      <li><a target="_blank" routerLink='/Privacypolicy'>Privacy Policy</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+  <p class="text-center mt-2 text-white">Copyright 2022 PartReads India. All rights reserved</p>
+
+</div>
+<div id="myModal11" class="modal" appNorightclick>
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      
+      <h2>Oops...You are offline!!</h2>
+    </div>
+    <div class="modal-body">
+      <p>Seems like your connection has been interrupted!!</p>
+      <p>You will be notified once the connection is resurrected.</p>
+    </div>
+    <div class="modal-footer">
+      <h3> Waiting for network...
+        <!-- <button class="btn btn-secondary" (click)="hide()">Close</button> -->
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </h3>
+    </div>
+  </div>
+  
+</div>
+<div id="myModal1" class="modal" appNorightclick>
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      
+      <h2>You are back online!!</h2>
+    </div>
+    <div class="modal-body">
+      <p>Your connection has been resurrected!</p>
+     
+    </div>
+    <div class="modal-footer">
+      <h3><button class="btn btn-secondary" (click)="hide1()">Close</button></h3>
+    </div>
+  </div>
+  
+</div>
+<script>
+$('document').ready(function(){
+            $('.media').click(function(){
+                $("body").removeAttr("style");
+            })
+})
+
+</script>
+
+
+<!-- <script src="../../assets/chosen/chosen/chosen.jquery.js" type="text/javascript"></script> -->

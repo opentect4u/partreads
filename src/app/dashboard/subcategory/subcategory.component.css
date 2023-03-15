@@ -1,0 +1,24 @@
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: 25%;
+  }
+
+ /*For Admin subcategory spinner*/
+  .spinner-border{
+    width: 40px; 
+    height: 40px;
+    font-size:20px;
+  }
+
+  /*For admin subcategroy update cusror point*/
+  .updateCustom{
+    cursor: pointer;
+  }

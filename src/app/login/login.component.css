@@ -1,0 +1,134 @@
+
+.login{
+    height: 832px;
+}
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+
+  /* input[type="text"]{
+    border-radius: 2px !important;
+    font-size: 13px !important;
+    border: 1px solid #dbd8d8 !important;
+    height: 42px !important;
+  }
+  input[type="password"]{
+    border-radius: 2px !important;
+    font-size: 13px !important;
+    border: 1px solid #dbd8d8 !important;
+    height: 42px !important;
+  } */
+
+
+
+  /* Modal Content */
+  .modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+  }
+  
+  /* Add Animation */
+  @-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+  }
+  
+  @keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+  }
+  
+  /* The Close Button */
+  .close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .modal-header {
+    padding: 2px 16px;
+    background-color: #fdfbfb;
+    color: rgb(8, 8, 8);
+  }
+  
+  .modal-body {padding: 2px 16px;font-size: large;}
+  
+  .modal-footer {
+    padding: 2px 16px;
+    background-color: #fdfcfc;
+    color: rgb(5, 5, 5);
+  }
+  .showMsg{
+    /* font-size:35px;
+    color: #ffffff;
+    font-weight: 100;
+    margin-left: 39%;
+    margin-right: -61%;
+    margin-bottom: 32%; */
+    
+    /*Suman mitra Css */
+    font-size: 24px;color: #121212;font-weight: 100;font-weight: 400;margin:25px
+}
+
+mat-form-field{width: 100%;font-size: 14px;font-weight: 400;}
+mat-error{font-size:11px;font-weight: 500;}
+.customErrorAlert{color: #a94442;background-color: #f2dede;border-color: #ebccd1;padding: 10px;font-size: 14px;border: 1px solid #ebccd1;border-radius: 5px;
+  animation: fadeIn linear 1s;
+  -webkit-animation: fadeIn linear 1s;
+  -moz-animation: fadeIn linear 1s;
+  -o-animation: fadeIn linear 1s;
+  -ms-animation: fadeIn linear 1s;}
+
+  @keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  
+  @-moz-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  
+  @-webkit-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  
+  @-o-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  
+  @-ms-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  .customErrorAlert .fa-times{margin: 5px;float:right;}

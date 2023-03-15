@@ -1,0 +1,137 @@
+
+
+.loginmainDiv {
+    /* background: #fcc429; */
+    padding: 45px 0 70px 0;
+    position: relative;
+    width: 100%;
+    flex: 1 0 auto;
+	align-items: center;
+	display: flex;
+
+    /* Suman Mitra Css */
+    flex-direction: column;
+}
+/* utsav Da Css */
+/*.loginBox{max-width: 600px; background: #fff; margin: 0 auto; width: 100%; padding: 15px; border-radius: 10px; box-shadow: 0 0 8px 0px #a28429;} */
+
+/* Suman Mitra Css */
+.loginBox{max-width: 457px;background: #fff;margin: 0 auto;width: 100%;padding: 15px;border-radius: 10px;box-shadow: 1px 3px 8px 5px #d5d5d5;background: #f4f4f4;border: #fff solid 3px;}
+
+
+
+.adminLogo {margin-bottom: 45px; text-align: center;}
+.loginBox h3.adTitle {
+    font-weight: 500 !important;
+    text-align: left;
+    font-size: 16px;
+	margin: 0;}
+
+.loginBox .fieldSec{}
+/* .fieldSec input[type="text"]{border: 1px solid #f3f3f3;
+background: #fff;
+border-radius: 2px;
+font-size: 17px;
+padding: 12px 15px;
+height: 52px;}
+
+.fieldSec input[type="password"]{border: 1px solid #f3f3f3;
+background: #fff;
+border-radius: 2px;
+font-size: 17px;
+padding: 12px 15px;
+height: 52px;} */
+
+.fieldSec input[type="submit"]{background: #333; border: none;
+border-radius: 2px; font-size: 17px; padding: 12px 15px;}
+
+
+.btn-primary:not(:disabled):not(.disabled):active{background: #000;}
+.fieldSec input.btn-primary:focus[type="submit"]{box-shadow: none;}
+.btn-primary:not(:disabled):not(.disabled):active:focus{box-shadow: none;}
+
+.navSectionAfterLogAdmin{margin: 0 0 0 auto;}
+.navRightSecAdmin{
+    /* background: #fcc429; */background: #d9d9d9;}
+
+.finalSubmitButton{border: none;font-weight: 400;font-size: 16px;line-height: 15px;color: #fff;padding: 9px 12px;background: #164d8d; border-radius: 5px;}
+.spinner-border{border: 2px solid currentColor!important;
+    border-right-color: transparent!important;
+}
+
+td.mat-cell{
+    text-align: center;
+  }
+  th.mat-header-cell.cdk-header-cell {
+    text-align: center;
+  }
+
+
+  .exampleMargin{margin: auto;}
+.notificationCheckbox{margin-top: 6px!important;}
+.mat-card-header .mat-card-title {font-size: 14px;margin-bottom: 3px!important;}
+.mat-card-actions, .mat-card-subtitle, .mat-card-content {margin-bottom: 0px!important;}
+.mat-card-subtitle {color: rgba(118, 116, 116, 0.925);font-size: 12px!important;}
+.mat-card-header {display: block;}
+.matcardtitleh2{font-size: 14px;font-weight: 700;color: #393737;}
+.matIcon{color: #7e7c7b;font-size: 23px;cursor: pointer;}
+.customcardtext{color: #7e7c7b;font-size: 11px;font-weight: 700;margin-bottom: 0px;}
+.matcardcontenth4{padding:4px 17px;cursor: pointer;}
+.example-card {max-width: 400px;}
+
+.customnotificationspan{float: right;font-size: 11px;margin-top: 4px;color: gray;}
+.mainnotificationdiv{height: 400px;overflow-y: auto;}
+
+
+
+
+
+/* For Delete Modal */
+
+
+
+/* Float cancel and delete buttons and add an equal width */
+.cancelbtn, .deletebtn {
+    float: left;
+    width: 50%;
+    color: white;
+    padding: 9px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+  }
+  
+  /* Add a color to the cancel button */
+  .cancelbtn {background-color: #ccc;color: black;
+  
+  }
+  
+  /* Add a color to the delete button */
+  .deletebtn {/* background-color: #f44336; */background-color: #394072;}
+  
+  /* Add padding and center-align text to the container */
+  .container {
+    padding: 16px;
+    text-align: center;
+  }
+  
+  /* The Modal (background) */
+  .Modal {display: none; /* Hidden by default */position: fixed; /* Stay in place */z-index: 9999;left: 0;top: 0;width: 100%; /* Full width */height: 100%; /* Full height */overflow: auto; /* Enable scroll if needed */background-color: #101010e3;padding-top: 50px;}
+  
+  /* Modal Content/Box */
+  .Modal-content {background-color: #fefefe;/* margin: 5% auto 15% auto;  *//* 5% from the top, 15% from the bottom and centered */margin: 13% auto;border: 1px solid #888;/*width: 80%;*/ /* Could be more or less, depending on screen size */ width:33%}
+  
+  /* Style the horizontal ruler */
+  hr {border: 1px solid #f1f1f1;margin-bottom: 25px;}
+   
+  /* The Modal Close Button (x) */
+  .Close {position: absolute;right: 35px;top: 15px;font-size: 40px;font-weight: 300;color: #f1f1f1;text-shadow: none!important;opacity:1!important;}
+  
+  .Close:hover,.Close:focus {cursor: pointer;}
+  
+  /* Clear floats */
+  .clearfix::after {content: "";clear: both;display: table;}
+  
+  /* Change styles for cancel button and delete button on extra small screens */
+  @media screen and (max-width: 300px) {.cancelbtn, .deletebtn { width: 100%;}}
+  .modalContenttext{font-size: 15px;font-weight: 400;color: gray;}

@@ -1,0 +1,220 @@
+<app-adminheader></app-adminheader>
+<div class="page-body-wrapper">
+
+    <app-adminsidebar></app-adminsidebar>
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="card">
+                <div class="card-body">
+
+
+                    <div class="titleSec">
+
+                        <h2>User Management</h2>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                  
+
+
+
+
+    <!--For Admin user Management spinner-->
+    <div class="text-center">
+        <!-- <div class="spinner-border text-primary" *ngIf="loading"></div> -->
+        <div id="cover-spin" *ngIf="loading"></div>
+        
+     </div>
+     
+<!-- 
+                               <div class="row">
+                                <div class="col-7"></div>
+                                   <div class="col-5">     -->
+                                       <mat-form-field >
+                                    <mat-label>Search</mat-label>
+                                    <input matInput (keyup)="applyFilter($event)"
+                                        placeholder="Search by Name,Email,Phone and User Type" #input>
+                                     </mat-form-field>
+                                    <!-- </div> -->
+                               <!-- </div> -->
+                            
+
+
+
+                                <div class="mat-elevation-z8">
+                                    <table mat-table [dataSource]="dataSource" matSort>
+
+
+
+                                        <ng-container matColumnDef="#">
+                                            <th mat-header-cell *matHeaderCellDef >#</th>
+                                            <td mat-cell *matCellDef="let row;index as i ">
+                                                {{i+1}} </td>
+                                        </ng-container>
+
+
+                                        <ng-container matColumnDef="Name">
+                                            <th mat-header-cell *matHeaderCellDef >Name</th>
+                                            <td mat-cell *matCellDef="let row" class="text-left">{{row.user_name}}
+                                            </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="Email">
+                                            <th mat-header-cell *matHeaderCellDef >Email</th>
+                                            <td mat-cell *matCellDef="let row" class="text-left">{{row.user_id}}</td>
+                                        </ng-container>
+                                        <ng-container matColumnDef="createdDate">
+                                            <th mat-header-cell *matHeaderCellDef >Contact</th>
+                                            <td mat-cell *matCellDef="let row" >
+                                                <!-- {{row.created_at | date: 'dd/MM/yyyy HH:mm'}}  -->
+                                                <span>{{row.phone}}&nbsp;</span><mat-icon class="noteIcon" style="cursor:pointer" (click)="OpenModal(row.admin_remarks,row._id)">note_add</mat-icon>  
+                                            </td>
+                                        </ng-container>
+
+
+                                        <ng-container matColumnDef="updatedDate">
+                                            <th mat-header-cell *matHeaderCellDef >User Type</th>
+                                            <td mat-cell *matCellDef="let row" >
+                                                <!-- {{row.updated_at | date: 'dd/MM/yyyy HH:mm'}} -->
+                                                {{row.type}}
+
+                                            </td>
+                                        </ng-container>
+
+ 
+
+
+                                        <ng-container matColumnDef="Status">
+                                            <th mat-header-cell *matHeaderCellDef >Status</th>
+                                            <td mat-cell *matCellDef="let row"> 
+                                                <div *ngIf="row.user_status=='A'; then ifblock"></div>
+                                                <div *ngIf="row.user_status=='I'; then yblock"></div>
+                                               
+                                                <ng-template #ifblock>
+                                                    <td >
+                                                        <div  style="display:inline-block;">
+                                                       
+                                                            <a   title="Edit" class="Activebtn approvBtn" (click)="Inactive_me(row._id,row.user_status,row.user_id,0)">Active</a>
+                    
+                                                        <!-- <a  data-toggle="modal" data-target="#myModal_status" data-placement="bottom" title="Edit" class="Activebtn approvBtn" (click)="Inactive_me(row._id,row.user_status,row.user_id,0)">Active</a> -->
+                                                       
+                                                    </div>
+                                                      </td>
+                                                  </ng-template>
+                                                  <ng-template #yblock>
+                                                    <td>
+                                                        <a    title="Edit" class="Activebtn rejectBtn" (click)="Inactive_me(row._id,row.user_status,row.user_id,1)">Inactive</a></td>
+
+                                                        <!-- <a   data-toggle="modal" data-target="#myModal_status" data-placement="bottom" title="Edit" class="Activebtn rejectBtn" (click)="Inactive_me(row._id,row.user_status,row.user_id,1)">Inactive</a></td> -->
+                                                  </ng-template>
+                                                  </td>
+                                          </ng-container>
+                                      
+                                          <ng-container matColumnDef="View">
+                                            <th mat-header-cell *matHeaderCellDef >View</th>
+                                            <td mat-cell *matCellDef="let row" ><mat-icon style="cursor:pointer" (click)="viewDetails(row._id)">remove_red_eye</mat-icon>
+                                                <!-- <i class="fa fa-eye" (click)="viewDetails(row._id)" aria-hidden="true"></i> -->
+                                            </td>
+                                        </ng-container>
+
+                                      
+
+
+                                        <!-- <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+            <td mat-cell *matCellDef="let row" style="text-align:left"> {{row.status}} </td>
+        </ng-container> -->
+
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                                        <!-- Row shown when there is no matching data. -->
+                                        <tr class="mat-row" *matNoDataRow>
+                                            <td class="mat-cell" colspan="4">No data matching the filter
+                                                "{{input.value}}"</td>
+                                        </tr>
+                                    </table>
+
+                                    <mat-paginator [pageSizeOptions]="[50, 100, 200]" showFirstLastButtons
+                                        ></mat-paginator>
+
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal_status" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <!-- <h4 class="modal-title">Modal Header</h4> -->
+        </div>
+        <div class="modal-body">
+          <p class="p">Are you sure you want to change status?</p>
+          <textarea [hidden]="pubStatus==1" placeholder="Please cite your reason for doing so..." name="" id="" cols="75" rows="10" [(ngModel)]="reason"></textarea>
+
+        </div>
+        <div class="modal-footer">
+        
+       
+          <button type="button" class="btn admin-button" data-dismiss="modal">Cancel</button>
+       
+        
+          <button type="button" class="btn admin-button" data-dismiss="modal" (click)="change_status()">OK</button>
+          
+          
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+  <div id="id02" class="Modal">
+    <span (click)="closeModal()" class="Close" title="Close Modal">×</span>
+    <form class="Modal-content" *ngIf="modal_type=='N'">
+      <div class="container">
+      <h1 class="m-2">Add Annotation </h1>
+        <mat-form-field appearance="outline">
+            <mat-label>Add Note</mat-label>
+            <textarea matInput [(ngModel)]="admin_remarks" name="adminRemarks" maxlength="200" rows="5"></textarea>
+            <mat-hint>{{admin_remarks.length || 0}}/200</mat-hint>
+          </mat-form-field>
+      
+        <div class="clearfix">
+          <button type="button" (click)="closeModal()"  class="cancelbtn">Cancel</button>
+          <button type="button" (click)="saveItem()" class="deletebtn" [disabled]="admin_remarks=='' ">
+
+              <div [hidden]="show_checkmark" class="spinner-border text-light"></div>
+               <div [hidden]="!show_checkmark">Save </div>
+            </button>
+        </div>
+      </div>
+    </form>
+    <form class="Modal-content" *ngIf="modal_type=='S'">
+        <div class="container">
+        <h1 class="m-2">Are you sure you want to change status? </h1>
+          <mat-form-field appearance="outline" [hidden]="pubStatus==1">
+              <mat-label>Reason</mat-label>
+              <textarea matInput placeholder="Please cite your reason for doing so..." name="Reason"  rows="5" [(ngModel)]="reason"></textarea>
+
+              <!-- <mat-hint>{{admin_remarks.length || 0}}/200</mat-hint> -->
+            </mat-form-field>
+        
+          <div class="clearfix">
+            <button type="button" (click)="closeModal()"  class="cancelbtn">Cancel</button>
+          <button type="button" class="deletebtn" data-dismiss="modal" (click)="change_status()" [disabled]="pubStatus==1 ? false : reason=='' ">
+            <div [hidden]="show_checkmark" class="spinner-border text-light"></div>
+            <div [hidden]="!show_checkmark">OK </div>
+            </button>
+          </div>
+        </div>
+      </form>
+  </div>

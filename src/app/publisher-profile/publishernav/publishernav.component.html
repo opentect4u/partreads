@@ -1,0 +1,208 @@
+
+<!-- 
+  * This is publishernavcomponent
+  * This is the login page for publisher 
+-->
+
+<app-index-nav-header appNorightclick></app-index-nav-header><!--Usage: This is the header of the publisher login page-->
+
+<div class="header_banner_inner" appNorightclick><!--Usage: This div contain background-images and two inner div-->
+  <div class="wrapper_top headerWrapper_inner">
+
+    <div class="col-sm-8 float-left"><!--This div contain some dummy content-->
+
+      <h2>
+        <span>Books </span>Are <span>Knowledge</span><br> <span>Knowledge</span> is <span>Power</span>
+      </h2>
+
+
+      <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt <br>ut labore
+        et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo <br> viverra maecenas accumsan
+        lacus vel facilisis. </p> -->
+
+    </div>
+
+    <div class="col-sm-4 float-left"><!--Usage: This div contain Publisher Login form-->
+      <div class="loginWraper">
+
+        <div class="col-sm-12">
+          <h1>Publisher Login</h1>
+          <div class="alert alertLogin" id="uploaded" [hidden]="alert_show"><!--Usage: This div contain alert message-->
+            <span class="closebtn" (click)="close_alert()">&times;</span>
+            {{invalid}}
+          </div>
+          <div class="form-group">
+            <label class="inputWraper"><i class="fa fa-envelope-o" aria-hidden="true"></i>
+              <input type="email" class="form-control" placeholder="Email" #pubemail required
+                (change)="check_email_validity($event)"><!--Usage: This Input field is for publisher email id-->
+              </label>
+            <span class="text-danger fieldAleart">{{confirm_email}}</span> <br/><!--Usage: This Span is for  email required validation-->
+            <span class="text-danger fieldAleart">{{check_email}}</span><!--Usage: This Span is for checking whether is it matched email regex  or not-->
+          </div>
+          <div class="form-group"><!--Usage: This div is for publisher password-->
+            <label class="inputWraper"><i class="fa fa-lock" aria-hidden="true"></i>
+              <input id="passwd" type="password" class="form-control" placeholder="Password" #pubpwd required><span
+                id="iconshow" style="z-index: 1;
+          position: absolute;
+          top: 5%;
+          right: 40px;" class="p-viewer">
+                <i id="eye" class="fa fa-eye-slash viewPas" aria-hidden="true" (click)="show_hide()"></i>
+              </span></label>
+            <span class="text-danger fieldAleart">{{check_pass}}</span><!--Usage: this span is for password validation message-->
+          </div>
+          <div class="checkBoxCustomeMain">
+            <label class="checkBoxCustom">
+              <input type="checkbox" #p_rem (click)="remember_me(p_rem.checked)" id="prem" checked="checked">
+              <span class="checkmarkText"></span>
+            </label>Remember
+
+            <a class='float-right' routerLink='/publisher/forgetpassword' routerLinkActive="true">Forgot password</a>
+          </div>
+
+          <div class="form-group">
+
+            <!-- <input type="submit" class="btn btnRed widthFull" (click)="show(pubemail.value,pubpwd.value)" value="LOGIN"> -->
+            <button (click)="show(pubemail.value,pubpwd.value)" class="btn btnRed widthFull">
+              <div [hidden]="!show_loader"> LOGIN</div>
+              <div [hidden]="show_loader" class="spinner-border text-light"></div>
+            </button>
+          </div>
+          <!-- </div> -->
+
+          <!-- <p style="color: black;">Not a member? <a routerLinkActive="true" routerLink="/publisher/regpub">Sign up
+              now</a>
+            </p> -->
+
+        </div>
+
+        <br clear="all">
+      </div>
+
+    </div>
+
+    <br clear="all">
+
+  </div>
+
+</div>
+
+
+<div class="bodyContainerInner">
+  <div class="wrapperCustome">
+    <div class="offerInner">
+      <div class="offerInnerSub">
+        <h2>Become an PartReads <br>
+
+          with 2% Selling Fees only*</h2>
+        <p>Avail this mega offer by registering today!</p>
+        <a href="#">Start Purchase >></a>
+      </div>
+    </div>
+
+  </div>
+  <div class="sellSection">
+    <div class="wrapperCustome">
+      <h2>Why sell on Partreads?</h2>
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+        standard dummy text ever since the 1500s</p>
+
+      <div class="sellSectionBox">
+        <div class="sellSectionBoxSub">
+          <h3>Unbeatable Reach</h3>
+          <h2>Crores</h2>
+          <p>Reach crores of customers on Amazon.in, India's most visited shopping destination. You can expand further
+            by selling globally</p>
+          <img src="/assets/images/icon_aa.png" class="secIcon" alt="">
+        </div>
+      </div>
+
+      <div class="sellSectionBox">
+        <div class="sellSectionBoxSub">
+          <h3>Stress-free delivery</h3>
+          <h2>100%</h2>
+          <p>Reach crores of customers on Amazon.in, India's most visited shopping destination. You can expand further
+            by selling globally</p>
+          <img src="/assets/images/icon_bb.png" class="secIcon" alt="">
+        </div>
+      </div>
+
+      <div class="sellSectionBox">
+        <div class="sellSectionBoxSub">
+          <h3>Make money</h3>
+          <h2>4100+</h2>
+          <p>Reach crores of customers on Amazon.in, India's most visited shopping destination. You can expand further
+            by selling globally</p>
+          <img src="/assets/images/icon_cc.png" class="secIcon" alt="">
+        </div>
+      </div>
+
+      <br clear="all">
+
+    </div>
+  </div>
+  <div class="stepSection">
+    <div class="wrapperCustome">
+      <h2>How to sell your products on Partread?</h2>
+
+      <div class="stepSectionBox">
+
+        <div class="stepSectionBoxSub">
+          <div class="number"><span>1</span></div>
+          <div class="col-sm-5 float-left stepSectionBoxSubImg"><img src="/assets/images/img_a.png" alt=""></div>
+          <div class="col-sm-7 float-left stepSectionBoxSubTxt">
+            <h2>Become an PartReads</h2>
+            <p>Create an account and list your products on Amazon.in. All you need to set up your account is your
+              GST/PAN information and an active bank account</p>
+            <a href="#">Learn more about how to start selling <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+          </div>
+        </div>
+
+
+        <div class="stepSectionBoxSub_right">
+          <div class="number"><span>2</span></div>
+          <div class="col-sm-7 float-left stepSectionBoxSubTxt_right">
+            <h2>How to list your product?</h2>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+              Lorem Ipsum has been the industry's.</p>
+            <a href="#">Learn more about product <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+          </div>
+          <div class="col-sm-5 float-left stepSectionBoxSubImg_right"><img src="/assets/images/img_b.png" alt=""></div>
+
+        </div>
+
+
+        <div class="stepSectionBoxSub">
+          <div class="number"><span>3</span></div>
+          <div class="col-sm-5 float-left stepSectionBoxSubImg"><img src="/assets/images/img_c.png" alt=""></div>
+          <div class="col-sm-7 float-left stepSectionBoxSubTxt">
+            <h2>Become an PartReads</h2>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+              Lorem Ipsum has been the industry's.</p>
+            <a href="#">Learn more about <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+          </div>
+        </div>
+
+
+        <div class="stepSectionBoxSub_right">
+          <div class="number"><span>4</span></div>
+          <div class="col-sm-7 float-left stepSectionBoxSubTxt_right">
+            <h2>Become an PartReads</h2>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+              Lorem Ipsum has been the industry's.</p>
+            <a href="#">Learn more about fees <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+          </div>
+          <div class="col-sm-5 float-left stepSectionBoxSubImg_right"><img src="/assets/images/img_d.png" alt=""></div>
+
+        </div>
+
+        <div class="barLeft">&nbsp;</div>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<app-site-footer appNorightclick></app-site-footer>

@@ -1,0 +1,165 @@
+
+@media only screen and (max-width: 1040px) {
+.searchSection{max-width: 385px; margin-right: 0;}
+.navSection ul.navUl li:last-child a {padding: 10px 8px;}
+
+.bookList .bookProDetails p{font-size: 16px !important;}
+.bookList .bookProDetails p span{font-size: 13px !important;}
+.bookList .bookProDetails p.price{font-size: 20px !important;}
+.bookList .bookProDetails .btnDetails {font-size: 15px;}
+
+.CustomHeader {font-size: 20px; margin-bottom: 8px;}
+.bookDetails .bookRightDetail p.productInfo{line-height: 28px !important;}
+.bookDetails .bookRightDetail p.productInfo span.price {font-size: 15px !important; margin-top: 5px !important; line-height: 20px;}
+
+.bookDetails .bookLeftImg {width: 40% !important; padding-right: 15px;}
+.bookDetails .bookRightDetail {width: 60% !important;}
+.inner_side {width: 100% !important; margin:15px 0 0 0;}
+.bookImgFull {min-height: inherit !important;}
+
+.leftSideBarnewCus{max-width: 35%;}
+.rightSideBarnewCus{max-width: 65% !important;}
+
+.bookDetails .bookRightDetail .pageCount label input[type="text"] {width: 45px; padding: 3px; font-size: 14px; height: 38px !important;}
+
+.bookDetails .bookRightDetail .buyNowBtn{height: inherit !important; font-size: 14px !important; padding: 7px 10px !important;}
+.bookDetails .bookRightDetail .adtoCartBtn {height: inherit !important; font-size: 14px !important; padding: 7px 10px !important;}
+
+
+.col_sm_3BooksView{flex: 0 0 50% !important; max-width: 50% !important;}
+
+.loginDetaiTop ul li .loginThumb {width: 34px !important; height: 34px !important;}
+.loginDetaiTop ul li a {font-size: 14px !important;}
+.loginDetaiTop ul li {font-size: 14px !important; padding: 13px 6px !important;}
+.loginDetaiTop ul li.thumbnailLi {margin-left: 0 !important; padding-top: 3px !important;}
+
+.loginDetaiTop .cart .count {right: -6px; height: 17px; width: 17px; font-size: 12px; line-height: 15px;}
+
+li.cartLiCus{margin-left: 5px !important; margin-right: 10px !important;}
+
+.dropdown_container_Ut hr{margin: 6px 0 0 0;}
+ul.cataMegamenu li a{padding: 6px 0 !important; font-size: 12px !important; line-height: 16px !important;}
+
+.rightSideBarnewCus hr.mb-5{margin:3px 0 4px 0 !important; padding:0;}
+
+.col_3_similarPro{flex: 0 0 33%; max-width: 33%;}
+
+
+.textbox .book_details01 h4 {font-size: 14px; margin-bottom: 12px;}
+.textbox .book_details01 h5{font-size: 14px; margin-top: 4px;}
+.textbox .book_details01 h4.slider_price {font-size: 16px; margin-top: 10px;}
+
+}
+
+@media only screen and (max-width: 990px) {
+.rowPublisPop{display: block;}
+.modal_contentCustomPurPop .col_3CusMobile{display: block !important; max-width: 100% !important; margin-bottom: 10px;}
+.modal_contentCustomPurPop .col_3CusDeskTop{display: none;}
+.modal_contentCustomPurPop .col_9Cus{max-width: 100%;}
+.modal_contentCustomPurPop .col_3CusMobile{display: block !important;}
+
+.customButtonCloseNew{right: 5px; top: 0; left: initial; position: absolute; width: 25px; border: none; top: 4px; font-size: 15px !important; padding: 3px !important;}
+
+.form_selectUt { width: 155px !important; top: 6px !important; font-size: 13px !important; padding: 6px !important;}
+.mgmenu > li > a{font-size: 12px !important; padding: 8px 12px !important;}
+
+.col_sm_3BooksView{flex: 0 0 50% !important; max-width: 50% !important;}
+
+.mat-standard-chip {padding: 7px 12px; min-height: 26px; font-size: 11px; margin: 4px; padding: 0px 10px; line-height: 12px;}
+
+.btnPrvCont button.adtoCartBtn[type="button"]{margin-right: 10px;}
+
+.buyElePrv .pageCount .pageCountHalf{margin-bottom: 5px;}
+.buyElePrv .pageCount .pageCountHalf label.inputField input[type="text"]{width: 48px; height: 27px !important; padding: 3px !important;}
+
+
+}
+
+@media only screen and (max-width: 905px) {
+.navSection ul.navUl li a{font-size: 15px;}
+.searchSection {max-width: 340px;}
+.autocomplete-container .input-container input {font-size: 13px;}
+
+.searchFieldCont{width: 76%;}
+.searchSection input[type="submit"]{padding: 11px 10px; font-size: 15px; width: 24%;}
+
+.bookList-col {width: 33% !important;}
+
+.leftNavSec ul li a {padding:9px 15px !important; font-size: 15px !important;}
+
+
+th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {padding-left: 0;}
+th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type {padding-right: 0;}
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {font-size:11px !important; padding:0 4px;}
+
+.col_5DateRange{flex: 0 0 38%; max-width: 38%;}
+.col_2DateRangeBtn{flex: 0 0 24%; max-width: 24%;}
+    
+}
+
+@media only screen and (max-width: 840px) {
+
+.navSection ul.navUl li {padding: 10px 8px;}
+.searchSection {max-width: 275px;}
+
+.loginDetaiTop ul li .loginThumb {width: 34px !important; height: 34px !important;}
+.loginDetaiTop ul li a {font-size: 14px !important;}
+.loginDetaiTop ul li {font-size: 14px !important; padding: 13px 6px !important;}
+.loginDetaiTop ul li.thumbnailLi {margin-left: 0 !important; padding-top: 3px !important;}
+
+.loginDetaiTop .cart .count {right: -6px; height: 17px; width: 17px; font-size: 12px; line-height: 15px;}
+
+/* table responsive Cart start */
+
+table.matTableCustom tbody tr td.mat-cell{width: 100%; float: left; padding: 7px 0;}
+table.matTableCustom thead{display: none;}
+table.matTableCustom tbody tr td.mat-cell:nth-child(1)::before{content: "Thumbnail"; padding-right: 0; width: 100%; display: block; font-size: 13px; font-weight: 500; background: #f0eeee;
+    padding: 3px; margin-bottom: 8px;}
+table.matTableCustom tbody tr td.mat-cell:nth-child(2)::before{content: "Book"; padding-right: 0; width: 100%; display: block; font-size: 13px; font-weight: 500; background: #f0eeee;
+    padding: 3px; margin-bottom: 8px;} 
+table.matTableCustom tbody tr td.mat-cell:nth-child(3)::before{content: "ISBN"; padding-right: 0; width: 100%; display: block; font-size: 13px; font-weight: 500; background: #f0eeee;
+    padding: 3px; margin-bottom: 8px;} 
+table.matTableCustom tbody tr td.mat-cell:nth-child(4)::before{content: "Pages"; padding-right: 0; width: 100%; display: block; font-size: 13px; font-weight: 500; background: #f0eeee;
+    padding: 3px; margin-bottom: 8px;} 
+table.matTableCustom tbody tr td.mat-cell:nth-child(5)::before{content: "Whole Book"; padding-right: 0; width: 100%; display: block; font-size: 13px; font-weight: 500; background: #f0eeee;
+    padding: 3px; margin-bottom: 8px;}  
+table.matTableCustom tbody tr td.mat-cell:nth-child(6)::before{content: "Per Page Price"; padding-right: 0; width: 100%; display: block; font-size: 13px; font-weight: 500; background: #f0eeee;
+    padding: 3px; margin-bottom: 8px;}  
+table.matTableCustom tbody tr td.mat-cell:nth-child(7)::before{content: "Action"; padding-right: 0; width: 100%; display: block; font-size: 13px; font-weight: 500; background: #f0eeee;
+    padding: 3px; margin-bottom: 8px;}  
+
+/* table responsive Cart end */
+
+
+/* table responsive History start */
+
+table.matTableCustomHistory tbody tr td.mat-cell{width: 100%; float: left; padding: 7px 0;}
+table.matTableCustomHistory thead{display: none;}
+table.matTableCustomHistory tbody tr td.mat-cell:nth-child(1)::before{content: "#"; padding-right: 0; width: 100%; display: block; font-size: 13px; font-weight: 500; background: #f0eeee;
+    padding: 3px; margin-bottom: 8px;}
+table.matTableCustomHistory tbody tr td.mat-cell:nth-child(2)::before{content: "Order ID"; padding-right: 0; width: 100%; display: block; font-size: 13px; font-weight: 500; background: #f0eeee;
+    padding: 3px; margin-bottom: 8px;} 
+table.matTableCustomHistory tbody tr td.mat-cell:nth-child(3)::before{content: "Book"; padding-right: 0; width: 100%; display: block; font-size: 13px; font-weight: 500; background: #f0eeee;
+    padding: 3px; margin-bottom: 8px;} 
+table.matTableCustomHistory tbody tr td.mat-cell:nth-child(4)::before{content: "Author"; padding-right: 0; width: 100%; display: block; font-size: 13px; font-weight: 500; background: #f0eeee;
+    padding: 3px; margin-bottom: 8px;} 
+table.matTableCustomHistory tbody tr td.mat-cell:nth-child(5)::before{content: "Pages"; padding-right: 0; width: 100%; display: block; font-size: 13px; font-weight: 500; background: #f0eeee;
+    padding: 3px; margin-bottom: 8px;}  
+table.matTableCustomHistory tbody tr td.mat-cell:nth-child(6)::before{content: "Amount"; padding-right: 0; width: 100%; display: block; font-size: 13px; font-weight: 500; background: #f0eeee;
+    padding: 3px; margin-bottom: 8px;}  
+table.matTableCustomHistory tbody tr td.mat-cell:nth-child(7)::before{content: "Date"; padding-right: 0; width: 100%; display: block; font-size: 13px; font-weight: 500; background: #f0eeee;
+    padding: 3px; margin-bottom: 8px;}  
+
+/* table responsive History end */
+
+.col_3_similarPro{flex: 0 0 50%; max-width: 50%;}
+
+
+
+}
+
+
+
+
+
+

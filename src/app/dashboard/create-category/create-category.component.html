@@ -1,0 +1,58 @@
+<app-adminheader></app-adminheader>
+	
+<div class="page-body-wrapper">
+    <app-adminsidebar></app-adminsidebar>
+	
+	
+	<div class="main-panel">
+		<div class="content-wrapper">
+			<div class="card">
+			 <div class="card-body">
+				 
+				 
+				 <div class="titleSec">
+				 <h2>Create Category</h2> 
+				 </div>
+				 
+				<div class="row">
+					 <div class="col-sm-6"> 
+				<form>
+  
+					
+  <div class="form-group row">
+    
+    <div class="col-sm-10">
+
+
+        
+	  <!-- <input type="text" class="form-control" placeholder="Enter Category"  id="category_name" #nm> -->
+
+	  <mat-form-field appearance="outline">
+		<mat-label>Category</mat-label>
+		<input matInput type="text" placeholder="Enter Category"  id="category_name" #nm/>
+	  </mat-form-field>
+	  <mat-error class="text-danger fieldAleart" [hidden]="!messageshow">
+		{{messagealert}}
+	</mat-error>
+
+	  <!-- <span class="text-danger fieldAleart" [hidden]="!messageshow">{{messagealert}}</span> -->
+    </div>
+  </div>
+					
+<div class="form-group row">
+    <div class="col-sm-12 btnSubmitSec">
+      <input type="submit" class="btn btn-info" id="submit" name="submit" value="Create"   (click)="create_cat(nm.value)">
+<!--		<input type="reset" onclick="" class="btn btn-info" value="Cancel">-->
+    </div>
+  </div>				
+					
+</form> 
+						 
+						 
+				</div>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>

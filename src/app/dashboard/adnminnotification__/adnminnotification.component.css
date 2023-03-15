@@ -1,0 +1,53 @@
+.P_Tag{
+    display: inline-block;
+   
+}
+.P_Tag  p{
+    padding-top:10px;
+    padding-left:12px;
+    word-spacing:2px;
+  
+}
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: -17%;
+  }
+  /*FOR ADMIN SPINNER */
+  .spinner-border{
+    width: 40px; 
+    height: 40px;
+    font-size:20px;
+  }
+
+
+
+.Table_profilePic{
+  text-align: center;
+  /* border: #fff solid 1px; */
+  overflow: hidden;
+  box-shadow: 0px 0 7px 4px #dfdfdf;
+  margin: 0 auto 20px auto;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  height: 50px !important;
+  width: 50px !important;
+}
+
+/* ::ng-deep.mat-checkbox-inner-container {margin-right: 3px!important;}
+::ng-deep .mat-checkbox-layout .mat-checkbox-label{font-size: 13px;}
+::ng-deep .mat-checkbox-checked .mat-checkbox-background, 
+.mat-checkbox-indeterminate .mat-checkbox-background {background-color: #164d8d !important;} */
+
+/* ::ng-deep .mat-checkbox:not(.mat-checkbox-disabled) .mat-checkbox-ripple .mat-ripple-element {
+  background-color: #164e8d62 !important;
+} */
+.mat-card-content h4{padding: 10px 15px;}

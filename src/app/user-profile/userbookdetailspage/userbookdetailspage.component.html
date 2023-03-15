@@ -1,0 +1,642 @@
+
+<app-userheaderafterlogin [c]="c"></app-userheaderafterlogin>
+<div class="bodyContainer" appRightclickoff>
+  <div class="wrapperCustome" appRightclickoff>
+
+    <app-usersidebar></app-usersidebar>
+    <div id="cover-spin" *ngIf="load"></div>
+    <div [hidden]="fullpageload">
+      <div class="col-sm-9 rightSideBarnewCus float-left mt-2" appRightclickoff>
+        <div class="bookDetails" *ngFor="let x of books" @fade appRightclickoff>
+
+          <div class="bookLeftImg">
+            <!-- <img src="../../../assets/images/prv.png" alt=""> -->
+            <div class="bookImgFull">
+              <div class="Container">
+                <img src="{{x.book_image_path}}" alt="" class="imgCss imgThumbnail" />
+                <div class="middle">
+                  <div class="text" (click)="show_prev(x.book_id,x.publisher_id,x.full_book)" data-toggle="modal"
+                    data-target="#previewModal">View Sample Pages</div>
+                  <!-- <div class="text" (click)="show_prev(x.book_id,x.publisher_id,x.full_book)" >Preview</div> -->
+                </div>
+              </div>
+
+
+              <div class="dropdown" (mouseenter)="onMouseEnter($event,x.book_id,x.book_name)">
+                <p class="nameoverflow dropbtn">
+                  <ngb-rating [max]="5" [(rate)]="avgRate" [readonly]="true"
+                    style="font-size:30px;color:rgb(254,188,7);margin-top:5px"></ngb-rating>
+                </p>
+
+
+                <div class="dropdown-content">
+                  <h3 class="fs-5 mt-2">Reader ratings</h3>
+                  <h2> {{avgRate}} </h2>
+                  <p class="text-muted fs-5">out of 5 </p>
+                  <div class="text-muted fs-5 mt-2">{{reviewdata1.length}} rating(s)</div>
+
+                  <br>
+                  <div class="container" style="padding-left: 8%;">
+                    <ol reversed>
+
+                      <li style="font-size:14px;    margin-bottom: 6px;">
+                        <mat-progress-bar class="example-margin" [color]="color1" [mode]="mode" [value]="t5"
+                          [bufferValue]="bufferValue">
+                        </mat-progress-bar>
+                      </li>
+                      <li style="font-size:14px;    margin-bottom: 6px;">
+                        <mat-progress-bar class="example-margin" [color]="color1" [mode]="mode" [value]="t4"
+                          [bufferValue]="bufferValue">
+                        </mat-progress-bar>
+                      </li>
+                      <li style="font-size:14px;    margin-bottom: 6px;">
+                        <mat-progress-bar class="example-margin" [color]="color1" [mode]="mode" [value]="t3"
+                          [bufferValue]="bufferValue">
+                        </mat-progress-bar>
+                      </li>
+                      <li style="font-size:14px;    margin-bottom: 6px;">
+                        <mat-progress-bar class="example-margin" [color]="color1" [mode]="mode" [value]="t2"
+                          [bufferValue]="bufferValue">
+                        </mat-progress-bar>
+
+                      </li>
+                      <li style="font-size:14px;    margin-bottom: 6px;">
+                        <mat-progress-bar class="example-margin" [color]="color1" [mode]="mode" [value]="t1"
+                          [bufferValue]="bufferValue">
+                        </mat-progress-bar>
+
+                      </li>
+                    </ol>
+                  </div>
+                  <br>
+                  <hr *ngIf="reviewdata.length">
+                  <!-- <small><button hidden type="button" data-toggle="modal" id="open_modal" data-target="#reviewModal" >Reviews</button> </small>	 -->
+                  <h4 *ngIf="reviewdata.length">Reader reviews</h4>
+                </div>
+              </div>
+            </div>
+            <!-- <br/> -->
+            <!-- {{avgRate}} -->
+
+            <!-- <a class="prev_index" (click)="show_prev(x.book_id,x.publisher_id)" data-toggle="modal"
+                  data-target="#myModal">Preview</a>  -->
+          </div>
+          <!-- <div class="bookLeftImg">
+                   
+                   <div class="row mb-2">
+                       <div class="col-7"></div>
+                       <div class="col-5"><h2>Preview <span class="text-warning"> Index</span>&nbsp;<i class="fa fa-arrow-down" style="color:#aa2f09;" aria-hidden="true"></i></h2> </div>
+
+                   </div>
+                    <div class="bookImgFull"><img src="{{x.book_image_path}}" alt="" /></div>
+
+                </div> -->
+
+          <div class="bookRightDetail" appRightclickoff>
+            <h4 class="CustomHeader" title="{{x.book_name}}">{{x.book_name}}</h4>
+            <p class="productInfo"><strong>ISBN:</strong> {{x.isbn_no}}<br>
+
+              <strong>Author:</strong> {{x.author_name}}<br>
+
+              <strong>Publisher:</strong> {{x.publisher_name}}<br>
+              <strong>Total pages:</strong> {{x.page_count}}<br>
+              <span class="price">
+                <!-- Book Price:  -->
+                Full E-book price:
+                <i class="fa fa-inr" aria-hidden="true"></i> {{x.price_fullbook}}
+              </span>
+              <!-- {{x.price_fullbook}}  -->
+              <span class="price">
+                <!-- Per Page:  -->
+                Per Page Credits:
+                <i class="fa fa-inr" aria-hidden="true"></i>
+                {{x.price}}
+              </span>
+            </p>
+
+
+
+            <div class="pageCount">
+              <label class="title">Page Number</label> <label class="inputField"><input id="frompg" type="text"
+                  placeholder="" class="form-control" (keypress)="preventNonNumericalInput($event)" #frm></label>
+              <label class="title">to</label> <label class="inputField"><input type="text" placeholder=""
+                  (keypress)="preventNonNumericalInput($event)" id="topg" class="form-control" #to></label>
+              <!-- <span class="text-danger fieldAleart" @fade>{{number_msg}}</span> -->
+              <!-- <br/> -->
+              <h4 class="customCheck">or</h4>
+              <label><input type="checkbox" id="checkBox" (change)="FullBook($event)" /></label><label
+                class="title m-1">Buy the whole book</label>
+
+              <!--  -->
+
+            </div>
+
+            <!-- <button type="button" [disabled]="x.full_book=='Y'" class="buyNowBtn"
+              (click)="show_details(x.book_name,x.book_id,x.publisher_id,frm.value,to.value)">Subscribe Now</button> -->
+              <button type="button" [disabled]="x.full_book=='Y'" class="buyNowBtn">Subscribe Now</button>
+            <button type="button" [disabled]="x.full_book=='Y'" class="adtoCartBtn" *ngIf="!cartbuttonshow"
+              (click)="cart_add(x.publisher_id,x.book_id,frm.value,to.value)"><i class="fa fa-shopping-cart"
+                aria-hidden="true"></i> Add to Cart</button>
+            <button type="button" [disabled]="x.full_book=='Y'" class="adtoCartBtn" *ngIf="cartbuttonshow"
+              (click)="gotcart()"><i class="fa fa-shopping-cart" aria-hidden="true"></i> View Cart</button>
+
+            <!-- <div >
+                             <mat-hint>You have already purchased the whole book</mat-hint>
+                        </div> -->
+            <div class="alert  mt-3" *ngIf="x.full_book=='Y'">
+              <strong >You have already purchased the whole book.</strong>
+            </div>
+          </div>
+          <div class="inner_side" *ngIf="relatedbooks!=''">
+            <div id="newsticker-demo">
+              <div class="title">Related Books</div>
+              <div class="newsticker-jcarousellite">
+                <ul class="relatedBooks">
+                  <li *ngFor="let r of relatedbooks">
+
+
+                    <div class="info">
+                      <a (click)="showbook(r.book_id,r.publisher_id)" style="cursor: pointer;color:black;">
+                        <p><strong>{{r.book_name}}</strong></p>
+                      </a>
+                      <p>{{r.author_name}}</p>
+                    </div>
+                    <div class="clear"></div>
+                  </li>
+
+                </ul>
+              </div>
+
+            </div>
+          </div>
+
+          <br />
+        </div>
+      </div>
+      <!-- For Tab  -->
+      <div class="containerTab" *ngFor="let x of books">
+        <div class="row mb-4">
+          <div class="col-12 ">
+            <nav>
+              <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                  aria-controls="nav-home" aria-selected="true" (click)="activeTab('nav-home')">About Book</a>
+                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+                  aria-controls="nav-profile" aria-selected="false" (click)="activeTab('nav-profile')">About Author</a>
+                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
+                  aria-controls="nav-contact" aria-selected="false" (click)="activeTab('nav-contact')">Content</a>
+                <!-- <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">About</a> -->
+              </div>
+            </nav>
+            <div class="tab-content p-5" id="nav-tabContent">
+              <div class="tab-pane fade show in active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"
+                *ngIf="tabName=='nav-home'">
+                <!-- Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex. -->
+                <p>{{x.about_book}} <a type="button" class="customshowMore" [hidden]="hide" (click)="showText()"> {{ isReadMore ? 'Show
+                    more>>': '<< Show less' }} </a>
+                </p>
+
+              </div>
+              <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"
+                *ngIf="tabName=='nav-profile'">
+                {{x.about_author}}
+              </div>
+              <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab"
+                *ngIf="tabName=='nav-contact'">
+                <ul>
+                  <li *ngFor="let content of x.contents" style="list-style-type:none"><span
+                      *ngIf="content.title==''">{{content.title}}</span></li>
+                </ul>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- For Writing a Review -->
+        <div class="row" *ngIf="hide_review">
+          <div class="col-3">
+            <img src="assets/images/no_dp.png" alt="Avatar" class="avatar">
+            <div class="customReview" data-toggle="modal" data-target="#reviewRatingModal">Write a review >></div>
+
+          </div>
+        </div>
+      </div>
+      <!-- <div id="pause" class="d-flex align-items-center justify-content-center" *ngIf="loading">
+        <div id="spinner"></div>
+      </div> -->
+      <div class="mainReview" *ngIf="allreview!=''">
+        <h2 class="customReviewItemName">{{bk_name}} Reviews</h2>
+        <div class="reviewBody" *ngFor="let i of allreview">
+          <span *ngIf="i.rating_no > 1" style="color: white;" class="badge badge-pill badge-success"><i
+              class="fa fa-star" style="color: white;" aria-hidden="true"></i> {{i.rating_no}}</span>
+          <span *ngIf="i.rating_no <= 1" style="color: white;" class="badge badge-pill badge-danger"><i
+              class="fa fa-star" style="color: white;" aria-hidden="true"></i> {{i.rating_no}}</span>
+          {{i.review}}
+        </div>
+      </div>
+      <div class="w-100 text-center">
+        <!-- <button class="customButtonReadMore" *ngIf="rangeToShow<allreview1.length"  (click)="read_more()"><i [hidden]="load_more_spinner" class="fa  fa-spinner fa-spin fa-4x text-center"></i>Load more</button> -->
+        <!-- <i  class="fa  fa-spinner fa-spin text-center"  style="font-size: 20px;"></i> -->
+        <div class="loader" [hidden]="load_more_spinner"></div>
+
+
+
+      </div>
+    </div>
+    <br clear="all">
+  </div>
+</div>
+
+<div id="previewModal" class="modal fade purchaselist_Ut" role="dialog" appRightclickoff appCtrlshiftoff>
+  <button type="button" class="customButtonClose customButtonCloseNew" data-dismiss="modal" id="close_modal"
+  (click)="makeItFalse()">&times;</button>
+  <div class="modal-dialog modal-lg modal_dialog_WidthFixd">
+      <div class="modal-content modal_contentCustomPurPop">
+          <div class="modal-body">
+              <div class="row rowPublisPop">
+                  <div class="col-3 col_3Cus col_3CusMobile text-center">
+                      <div class="col_3CusSub">
+                        
+                          <h3 class="fs-5 show_sample" > Showing sample pages</h3>
+                  
+                      <div class="bookDetailsPrevie" *ngFor="let x of books">
+                          <ul class="nameTxt" >
+                              <li class="bookNamePop" ><strong>{{bk_name}}</strong>
+                              <div id="header-modal"></div>
+                              </li>
+                              <li><strong>Total Pages:</strong> {{x.page_count}}, <strong>Per Page:</strong>&nbsp;
+                                  <i class="fa fa-inr" aria-hidden="true"></i>{{x.price}}
+                              </li>
+                          </ul>
+                          <div class="buyElePrv">
+                              <div class="pageCount" [hidden]="this.full_book=='Y'">
+                                  <div class="pageCountHalf">
+                                      <label><strong>Page Number</strong></label>
+                                  <label class="inputField">
+                                      <input id="resfrompg" type="text" placeholder="0" class="form-control"
+                                          (keypress)="preventNonNumericalInput($event)" #frm>
+                                  </label>
+                                  <label><strong>to</strong></label>
+                                  <label class="inputField">
+                                      <input id="restopg" type="text" placeholder="0" class="form-control"
+                                          (keypress)="preventNonNumericalInput($event)" #to>
+                                  </label>
+                     
+                                  <label class="m-2">Or <input type="checkbox" class="m-2"
+                                          (change)="changeEvent($event)" id="changeInputres"></label>
+                                  <label class="mr-3"><strong class="mr-3">Buy Whole Book</strong></label>
+                              </div>
+                              </div>
+                              <div class="btnPrvCont" [hidden]="this.full_book=='Y'">
+                                  <!-- <button type="button" class="buyNowBtn"
+                                      (click)="show_details(x.book_name,x.book_id,x.publisher_id,frm.value,to.value)">Subscribe
+                                      Now</button> -->
+                                      <button type="button" class="buyNowBtn">Subscribe Now</button>
+                                  <button type="button" class="adtoCartBtn" *ngIf="!cartbuttonshow"
+                                      (click)="cart_add(x.publisher_id,x.book_id,frm.value,to.value)"><i
+                                          aria-hidden="true" class="fa fa-shopping-cart "></i> Add to Cart</button>
+                                  <button type="button" class="adtoCartBtn" *ngIf="cartbuttonshow"
+                                      (click)="gotcart()"><i class="fa fa-shopping-cart" aria-hidden="true"></i> View
+                                      Cart</button>
+
+                                      <button type="button" class="buyNowBtn" data-toggle="modal" data-backdrop="false"
+                                      data-target="#printbooks"><i class="fa fa-rupee"></i> Subscribe Hard Copy</button>
+                                  <button type="button" class="adtoCartBtn" (click)="openNav()"><i class="fa fa-file"></i>
+                                      Contents</button>
+
+                              </div>
+
+                              <div class="alert" [hidden]="this.full_book!='Y'">
+                                  <strong class="fs-5"> You have already purchased the whole book</strong>
+                              </div>
+                              <b  style="font-size: 13px;">(Note: For Any Query Contact Us: 9836467262)</b>    
+
+                          </div>
+                          <span class="text-danger customspan">{{number_msg}}</span>
+
+                      </div>
+              
+
+                      <div class="menu-wrapper">
+
+                          <div id="responSivemySidenav" class="sidenav">
+
+                            <p (click)="openPages(b.actual_page)" style="cursor: pointer;"
+                            *ngFor="let b of book_of_contents">{{b.title}} <span
+                                *ngIf="b.actual_page!=''">({{b.actual_page}})</span></p>
+                              <div class="fs-1">
+                              </div>
+                          </div>
+
+
+                      </div>
+
+                      </div>
+                  </div>
+
+                  
+                  <div class="col-9 col_9Cus">
+                      <div class="col_9CusSub">
+                      <div id="modal_body_id">
+                        <!-- <div class="spinner" *ngIf="spin">
+                          <div class="bar1"></div>
+                          <div class="bar2"></div>
+                          <div class="bar3"></div>
+                          <div class="bar4"></div>
+                          <div class="bar5"></div>
+                          <div class="bar6"></div>
+                          <div class="bar7"></div>
+                          <div class="bar8"></div>
+                          <div class="bar9"></div>
+                          <div class="bar10"></div>
+                          <div class="bar11"></div>
+                          <div class="bar12"></div>
+                        </div> -->
+                        <app-loader *ngIf="spin"></app-loader>
+                        <ngx-extended-pdf-viewer [src]="pdfBytes" [(page)]="open_pg" (pageChange)="changePage($event)"
+                        [useBrowserLocale]="false" backgroundColor="#14141478"  height="72vh" [textLayer]="true" [contextMenuAllowed]="false"
+                        [enablePrint]="false" [ignoreKeyboard]="true" [zoom]="'page-width'" [showOpenFileButton]="false"
+                        [showPagingButtons]="false" [showSidebarButton]="true" [showPresentationModeButton]="false"
+                        [showFindButton]="true" [showBookmarkButton]="false" [showDownloadButton]="false"
+                        (pdfLoaded)="pdf_load()">
+                      </ngx-extended-pdf-viewer>
+                      </div>
+                      </div>
+                  </div>
+                  
+                  <div class="col-3 col_3Cus col_3CusDeskTop text-center">
+                      <div class="col_3CusSub">
+                        
+                        <h3 class="fs-5 show_sample" > Showing sample pages</h3>
+                      
+                      <div class="bookDetailsPrevie" *ngFor="let x of books">
+                          <ul class="nameTxt"  >
+                              <li class="bookNamePop" ><strong>{{bk_name}}</strong>
+                              <div id="header-modal"></div>
+                              </li>
+                              <li><strong>Total Pages:</strong> {{x.page_count}}</li>
+                              <li><strong>Per Page:</strong>&nbsp;
+                                  <i class="fa fa-inr" aria-hidden="true"></i>{{x.price}}
+                              </li>
+                          </ul>
+                          <div class="buyElePrv">
+                              <div class="pageCount" [hidden]="this.full_book=='Y'">
+                                  <div class="pageCountHalf">
+                                      <label><strong>Page Number</strong></label>
+                                  <label class="inputField">
+                                     <input id="Frompg" type="text" placeholder="0" class="form-control"
+                                          (keypress)="preventNonNumericalInput($event)" #frm>
+                                  </label>
+                                  <label><strong>to</strong></label>
+                                  <label class="inputField">
+                                     <input id="Topg" type="text" placeholder="0" class="form-control"
+                                          (keypress)="preventNonNumericalInput($event)" #to>
+                                  </label>
+                              </div> 
+                              <div class="pageCountHalf">
+                                  <label class="m-2">Or <input type="checkbox" class="m-2" (change)="changeEvent($event)"
+                                        id="changeInput"></label>
+                                    <label class="mr-3"><strong class="mr-3">Buy Whole Book</strong></label>
+                                    <!-- Or <input type="checkbox" class="m-2"
+                                          (change)="changeEvent($event)" id="changeInput"></label>
+                                  <label class="mr-3"><strong class="mr-3">Buy Whole Book</strong></label> -->
+                              </div>
+                              </div>
+                              <div class="btnPrvCont" [hidden]="this.full_book=='Y'">
+                                 
+                                      <!-- <button type="button" class="buyNowBtn" id="subscribenow"
+                                      (click)="show_details(x.book_name,x.book_id,x.publisher_id,frm.value,to.value)">
+                                      
+                                      <div *ngIf="!loading">Subscribe Now</div>
+                                        <div  class="loader" *ngIf="loading"></div>
+                                    
+                                    </button> -->
+                                    <button type="button" class="buyNowBtn" id="subscribenow">Subscribe Now</button>
+                                      <button type="button" class="adtoCartBtn" id="cartAdd" *ngIf="!cartbuttonshow"
+                                      (click)="cart_add(x.publisher_id,x.book_id,frm.value,to.value)">
+                                      <div *ngIf="!addtocartloader"><i aria-hidden="true" class="fa fa-shopping-cart "></i> Add to Cart</div>
+                                        <div  class="loader" *ngIf="addtocartloader"></div>
+                                      </button>
+                                    <button type="button" class="adtoCartBtn" *ngIf="cartbuttonshow" (click)="gotcart()"><i
+                                        class="fa fa-shopping-cart" aria-hidden="true"></i> View Cart</button>
+                                 
+                              </div>
+    
+
+                              <!-- <div class="alert alert-info" [hidden]="this.full_book!='Y'">
+                                  <strong class="text-info"> You have already purchased the whole book</strong>
+                              </div> -->
+                              <div class="alert" [hidden]="this.full_book!='Y'">
+                                <strong class="fs-5"> You have already purchased the whole book</strong>
+                            </div>
+
+                          </div>
+                          <!-- <span class="text-danger customspan">{{number_msg}}</span> -->
+
+                      </div>
+                      <div class="btnPrvCont mb-3">
+                        <button type="button" class="buyNowBtn" data-toggle="modal" data-backdrop="false" data-target="#printbooks"><i
+                          class="fa fa-rupee"></i> Subscribe Hard Copy</button>
+                      <button type="button" class="adtoCartBtn" (click)="openNav()"><i class="fa fa-file"></i> Contents</button>
+                          <!-- <button type="button" class="buyNowBtn" data-toggle="modal" data-backdrop="false"
+                              data-target="#printbooks"><i class="fa fa-rupee"></i> Subscribe Hard Copy</button>
+                          <button type="button" class="adtoCartBtn" (click)="openNav()"><i class="fa fa-file"></i>
+                              Contents</button> -->
+                      </div>
+                      <b  style="font-size: 13px;">(Note: For Any Query Contact Us: 9836467262)</b>    
+
+                      <div class="menu-wrapper">
+
+                          <!-- <div id="mySidenav" class="sidenav">
+
+
+                              <p (click)="openPages(b.actual_page,b.full_book)" style="cursor: pointer;"
+                                  *ngFor="let b of contents_pg">{{b.title}} <span
+                                      *ngIf="b.actual_page!=''">({{b.actual_page}})</span></p>
+
+                              <div class="fs-1">
+
+
+                              </div>
+                          </div> -->
+                          <div id="mySidenav" class="sidenav">
+
+
+                            <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top"
+                              title="Click here to buy this section" (click)="openPages(b.actual_page)" style="cursor: pointer;"
+                              *ngFor="let b of book_of_contents">
+            
+                              <p *ngIf="b.title!='' && b.actual_page!=''">{{b.title}} ({{b.actual_page}}) </p>
+                            </a>
+            
+            
+                            <div class="fs-1">
+            
+            
+            
+            
+                            </div>
+                          </div>
+
+
+                      </div>
+
+                      </div>
+                  </div>
+                  
+              </div>
+
+
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+<!-- <app-userheaderafterlogin [c]="c"></app-userheaderafterlogin> -->
+<app-site-footer></app-site-footer>
+
+<div id="reviewRatingModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal_head modal_headCustom">
+          <h4>Write a Review for {{bk_name}}</h4>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" id="Close">&times;</button>
+
+      </div>
+
+      <div class="modal-body">
+        <!-- <strong>Your review will help millions of consumers find trustworthy online businesses and avoid scams.</strong> -->
+        <div class="row">
+
+          <div class="col-12 mb-2">
+            <h5>Rating</h5>
+            <ngb-rating [max]="5" [(rate)]="currentRate" [readonly]="false"
+              style="font-size:30px;color:rgb(254,188,7);margin-top:1px"></ngb-rating>
+          </div>
+          <div class="col-12">
+            <!-- <h5>Review</h5> -->
+            <!-- <textarea [(ngModel)]="review" class="form-control mt-2" rows="10" cols="12"></textarea> -->
+            <mat-form-field appearance="outline">
+              <mat-label>Enter Review</mat-label>
+              <textarea matInput
+                        cdkTextareaAutosize
+                        #autosize="cdkTextareaAutosize"
+                        cdkAutosizeMinRows="5" 
+                        [(ngModel)]="review"
+                        cdkAutosizeMaxRows="10"></textarea>
+            </mat-form-field>
+   
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+        <button class="customButtonReadMore" (click)="submit_review()">Submit</button>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal fade" id="printbooks" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-center" id="exampleModalLongTitle">{{bk_name}} by {{auth_name}}</h4>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body fs-4">
+
+        <!-- <strong>Book:</strong> {{name_book}} &nbsp;
+            <strong>By:</strong> {{auth_name}}
+            <hr>
+            <strong>MRP:</strong> <i class="fa fa-inr" aria-hidden="true"></i>{{mrp}}&nbsp;
+            
+            <strong>Offer Price: </strong> <i class="fa fa-inr" aria-hidden="true"></i>{{offer_price}}&nbsp;
+            <strong>Delivery Charges: </strong> <i class="fa fa-inr" aria-hidden="true"></i>{{delivery_charge}}
+            <hr>
+            <div class="row pb-2">
+                <div class="col-6">
+                    <input type="text" #state class="form-control" placeholder="Enter state...">
+                </div>
+                <div class="col-6">
+                    <input type="text" #city class="form-control"  placeholder="Enter city..." >
+                </div>
+            </div>
+            <div class="row pb-2">
+                <div class="col-12">
+                    <input type="text" #pincode class="form-control" placeholder="Enter pincode..." >
+                </div>
+                
+            </div>
+            <div class="row pb-2">
+                <div class="col-12">
+                   <textarea #address class="form-control" cols="30" rows="20" placeholder="Enter delivery address..."></textarea>
+                </div>
+                
+            </div> -->
+
+        <div class="row mb-5">
+          <div class="col-4 text-center">
+            <strong class="customDetails">MRP:</strong>&nbsp;<i class="fa fa-inr" aria-hidden="true"></i>{{mrp}}&nbsp;
+          </div>
+          <div class="col-4 text-center">
+            <strong class="customDetails">Offer Price: </strong>&nbsp;<i class="fa fa-inr"
+              aria-hidden="true"></i>{{offer_price}}&nbsp;
+          </div>
+          <div class="col-4 text-center">
+            <strong class="customDetails">Delivery Charges: </strong>&nbsp;<i class="fa fa-inr"
+              aria-hidden="true"></i>{{delivery_charge}}
+          </div>
+        </div>
+
+        <!-- <hr> -->
+        <div class="row pb-2 mb-2">
+          <div class="col-6">
+            <input type="text" #state class="form-control" placeholder="Enter state...">
+          </div>
+          <div class="col-6">
+            <input type="text" #city class="form-control" placeholder="Enter city...">
+          </div>
+        </div>
+        <div class="row pb-2  mb-2">
+          <div class="col-12">
+            <input type="text" #pincode class="form-control" placeholder="Enter pincode...">
+          </div>
+
+        </div>
+        <div class="row pb-2">
+          <div class="col-12">
+            <textarea #address class="form-control" cols="20" rows="20"
+              placeholder="Enter delivery address..."></textarea>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-dark" data-dismiss="modal"
+          (click)="buyHardCopy(state.value,city.value,pincode.value,address.value)">Proceed to buy</button>
+      </div>
+    </div>
+  </div>
+</div>

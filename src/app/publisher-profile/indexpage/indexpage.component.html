@@ -1,0 +1,848 @@
+
+<!-- 
+    * This is the home page of this project
+    * this part contain header,body and footer of the project
+ -->
+<app-index-nav-header appNorightclick></app-index-nav-header><!--Usage: This is header of the project contain Logo,Auto complete search and some link-->
+
+<div class="header-banner" appNorightclick><!--Usage: This div contain background images  which contain two column-->
+    <div class="wrapper_top headerWrapper"><!--Usage: This div contain two column one is for login form and another is for "BOOKS ARE KNOWLEDGE KNOWLEDGE IS POWER"-->
+        <div class="col-sm-8 float-left"><!--Usage: This div contain "BOOKS ARE KNOWLEDGE KNOWLEDGE IS POWER"-->
+            <h2>
+                <span>Books </span>Are <span>Knowledge</span><br> <span>Knowledge</span> is <span>Power</span>
+            </h2>
+        </div>
+
+        <div class="col-sm-4 float-left"><!--Usage: This div contain the login form for user-->
+            <div class="loginWraper">
+                <div class="col-sm-12">
+
+                    <h1>
+                        <!-- <i (click)="back()" class="fa fa-arrow-left float-left " *ngIf="step ==2" aria-hidden="true"></i>   -->
+                       
+                        <img src="assets/images/leftArrow.svg" [hidden]="step==1 || step==3" (click)="backtoStep1()" class="otpBack"/><!--Usage: This is an back arrow image, this image appear when a user submit the form with their email or phone no.-->
+                        
+                        <span [hidden]="step!=1">Welcome! Sign up or Login to your account</span></h1>
+                         
+                     <form [formGroup]="logForm" (ngSubmit)="continue()">
+
+                      <!-- For Step 1 -->
+                       <div class="form-group" [hidden]="step == 2 || step==3"><!--Usage: This div contain input form of type email or text(conditionally);this div occur at the time of reload and when a user click that back arrow-->
+                           <label class="inputWraper">
+                               <i class="fa fa-envelope-o" aria-hidden="true" *ngIf="!proceedToemail"> </i>
+                               <span class="prefix" *ngIf="proceedToemail">+91</span>
+                               <input id="email_phone" formControlName="Email_phone" #email_phone  title="{{proceedToemail ? 'Please provide valid mobile number' : 'Please enter valid email'}}" type="{{proceedToemail ? 'text' : 'email'}}" class="form-control" placeholder="{{proceedToemail ? '9999999999' : 'Enter Email'}}"
+                             [attr.maxlength]="proceedToemail ? maxLength : null"  (keypress)="proceedToemail ? preventNonNumericalInput($event) : ''"
+                            (keyup)="proceedToemail ? '': check_valid_email($event)"><!--Usage: This input contain one keypress event for checking nonnumeric input,one keyup event is for check length and check valid email (conditionally)-->
+                        
+                        </label>
+                        <p class="text-danger showAlert" *ngIf="confirm_email!=''">{{confirm_email}}</p><!--Usage: In this span error message validation will display-->
+                       </div>
+                       <!-- End -->
+
+                    <div class="checkBoxCustomeMain" style="display:none">
+                        <label class="checkBoxCustom">
+                            <input #rem type="checkbox" name="remember" id="remember" checked hide (change)="remember_me(rem.checked)">
+                            <span class="checkmarkText"></span>
+                        </label><strong>Remember Me</strong>
+                         <!-- <a class='float-right' routerLink='/user/forgetpassword' routerLinkActive="true"><strong>Forgot
+                            password</strong></a>  -->
+                         </div>
+
+
+                    <!-- <button (click)="socialSignIn('facebook')">Sign in with Facebook</button>
+          <button (click)="socialSignIn('google')">Sign in with Google</button>    -->
+
+                    <!--For step 2  -->
+                    <div class="form-group" [hidden]="step ==3 || step==1"><!--Usage: This div contain two row one is for heading, another is for Otp Input field-->
+                        <div class="row"><!--Usage: This div contain  heading-->
+                            <div class="col-12">
+                                <h3 class="enterCode">Enter the code sent to your <span *ngIf="proceedToemail">phone</span><span *ngIf="!proceedToemail">email</span></h3>
+                                <h4 class="sentTo">We sent it to {{this.f.Email_phone.value}} 
+                                    <span class="otpEdit">
+                                    <!-- <img src="assets/images/edit.svg" class="editImage" (click)="backtoStep1()"/> -->
+                                    <!-- <i class="fa fa-pencil-square-o" aria-hidden="true"></i>  -->
+                                    <strong (click)="backtoStep1()">Edit</strong></span>
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="row mt-3"><!--Usage: This div contain OTP input fields -->
+                            <div class="col-12">
+                                <div class="verification-code--inputs">
+                                    <input type="tel" formControlName="otp1" #Otp1 maxlength="1" id="otp1" placeholder="0" (keyup)="setfocus($event,'otp2',1)" (keypress)="preventNonNumericalInput($event)"/><span class="">-</span>
+                                    <input type="tel" formControlName="otp2" #Otp2 maxlength="1" id="otp2" placeholder="0" (keyup)="setfocus($event,'otp3',2)" (keypress)="preventNonNumericalInput($event)"/><span class="">-</span>
+                                    <input type="tel" formControlName="otp3" #Otp3 maxlength="1" id="otp3" placeholder="0" (keyup)="setfocus($event,'otp4',3)" (keypress)="preventNonNumericalInput($event)"/><span class="">-</span>
+                                    <input type="tel" formControlName="otp4" #Otp4 maxlength="1" id="otp4" placeholder="0" (keyup)="setfocus($event,'otp5',4)" (keypress)="preventNonNumericalInput($event)"/><span class="">-</span>
+                                    <input type="tel" formControlName="otp5" #Otp5 maxlength="1" id="otp5" placeholder="0" (keyup)="setfocus($event,'otp6',5)" (keypress)="preventNonNumericalInput($event)"/><span class="">-</span>
+                                    <input type="tel" formControlName="otp6" #Otp6 maxlength="1" id="otp6" placeholder="0" (keyup)="setfocus($event,'otp6',6)" (keypress)="preventNonNumericalInput($event)"/>
+                                </div>
+                        <p class="showAlert " *ngIf="confirm_email!=''">{{confirm_email}}</p><!--Usage: In this part,Error validation message will be shown for OTP -->
+
+                            </div>
+                            <div class="col-12 mt-1 otpTimer">
+                                <span class="didnotRecieve">Didn't recieve OTP?</span> <span  class="customTimer" #counter_left id="counter_left">01:59</span><span id="resendOtp" #resendOtp class="customTimer" (click)="Update()">RESEND OTP</span><!--Usage: In this part,two span will show conditionally,one is for timer count down and another is for "RESEND OTP" -->
+                            </div>
+                        </div>
+                    </div>
+                     <!-- End -->
+                     <p class="text-danger showAlert " #error>Some of fields are empty or invalid</p>
+
+                    <!-- For Step 3 -->
+                    <div class="form-group" [hidden]="step ==2 || step==1"><!--Usage: This div contain registration forms of user-->
+                        
+                          <div class="row">
+                              <div class="col-12"><!--Usage: This div contain Name of the user-->
+                                <label class="inputWraper"><i class="fa fa-user" aria-hidden="true"></i>
+                                    <input id="u_name" type="text" class="form-control" placeholder="Name" formControlName="u_name"
+                                        #user_name>
+                                  </label>
+                              </div>
+                              <!-- <span class="text-danger fieldAleart" id="Name" #error></span> -->
+                          </div>
+                          <div class="row mt-3">
+                              <div class="col-12"><!--Usage: This div contain Email or phone(conditionally) of the user-->
+                                <label class="inputWraper">
+                                    <i class="fa fa-envelope-o" aria-hidden="true" *ngIf="proceedToemail"></i>
+                                    <!-- <input id="Email_Phone" type="{{proceedToemail ?  'email':'number'}}" class="form-control" placeholder="{{proceedToemail ? 'Email' : 'Phone'}}"
+                                        #u_email_phone> -->
+                                          <span class="prefix" *ngIf="!proceedToemail">+91</span>
+                                        <input id="Email_Phone" title="{{proceedToemail ? 'please include @ in the email address  and email is mandatory to proceed furthur' :'Maximum 10 digit available and phone no is mandatory to proceed' }}" 
+                                        type="{{proceedToemail ? 'email' :'text'}}" 
+                                        class="form-control" formControlName="u_email_phone_step3" placeholder="{{proceedToemail ? 'Enter Email' : '9999999999'}}"
+                                        #u_email_phone  [attr.maxlength]="proceedToemail ? null : maxLength"  (keypress)="proceedToemail ? ''  : preventNonNumericalInput($event) "
+                                        (keyup)="proceedToemail ?  check_valid_email($event) : ''">
+                                  </label>
+                              </div>
+                              <!-- <span class="text-danger fieldAleart" id="emailphone" #error></span> -->
+
+                          </div>
+                          <div class="row mt-3">
+                              <div class="col-12"><!--Usage: This div contain Whether a user are -->
+                                <label class="inputWraper">
+                                    <select class="form-control form-select" id="whetheryouare" #whetherareyou formControlName="whetherareyou">
+                                        <option value=""> Whether You are </option>
+                                        <option value="student">Student</option>
+                                        <option value="advocate">Advocate</option>
+                                        <option value="CA / CS">CA / CS </option>
+                                        <option value="corporate counsel">Corporate Counsel</option>
+                                        <option value="other">Other</option>
+                                      </select>
+                                  </label>
+                              </div>
+                              <!-- <span class="text-danger fieldAleart" id="wyouare" #error></span> -->
+                          </div>
+                          <div class="row mt-3">
+                              <div class="col-12"><!--Usage: This div contain Have any coupon code -->
+                                  <!-- <a href="javascript:void(0)" (click)="openDiv()" class="customcouponCode">Have any coupon code?</a> -->
+                                  <p class="customcouponCode" >Have any coupon code? <mat-slide-toggle (change)="openDiv($event)" ></mat-slide-toggle></p>
+                              </div>
+                          </div>
+                         
+                    </div>
+                    <div class="form-group" >
+                        <div class="row mt-2" style="display:none" id="coupon">
+                            <!--Usage:Initial condition this div is hide,whenever a user click on have acoupon this div will appear -->
+                            <div class="col-12 coupFieldMainUt">
+                              <!-- <label class="inputWraper" > -->
+                                  <input id="c_code" (input)="omit_special_char($event)" type="text" [ngModelOptions]="{standalone: true}" class="form-control coupFieldUt" placeholder="coupon code" [(ngModel)]="coupon_code"
+                                      #C_Code style="text-transform: uppercase;" maxlength="6">
+                                      <mat-icon class="showResponseTypeSuccess" id="success" title="valid coupon code">check</mat-icon>
+                                    
+                                      <mat-icon class="showResponseTypeError" id="error" title="invalid coupon code">error</mat-icon>
+                                 <button type = "button" class="btn btnRed coupFieldBtnUt" [disabled]="coupon_code==''" (click)="applyCoupon()">
+                                            <div [hidden]="show_checkmark" class="spinner-border text-light"></div>
+                                            <div [hidden]="!show_checkmark">Apply </div>
+                                     
+                                    
+                                
+                                </button>
+                                <!--Usage:Whenever an user want to apply coupon he have to give coupon code in the input field and click on this button-->
+
+                                    <!-- </label> -->
+                            </div>
+                            <!-- <div class="col-4">
+                              <button class="btn btnRed widthFull" [disabled]="coupon_code==''">Apply</button>
+                            </div> -->
+                        </div>
+                    </div>
+                     <!-- End -->
+
+                    <div class="form-group"><!--Usage: This div contain "CONTINUE" button on which a user click to submit form details-->
+                
+                        <!-- <button class="btn btnRed widthFull" id="continue" (click)="continue()" [disabled]="step==1 ? (proceedToemail ? (email_phone.value== '' || email_phone.value.length < 10) : (email_phone.value== '' || email_flag==0)) : (step==2 ? (Otp1.value=='' || Otp2.value=='' ||  Otp3.value=='' || Otp4.value=='' || Otp5.value=='' || Otp6.value=='') : (proceedToemail? (user_name.value=='' || u_email_phone.value=='' || whetherareyou.value=='' || email_flag==0):(user_name.value=='' || u_email_phone.value=='' || whetherareyou.value=='' || u_email_phone.value.length < 10)))">
+                            <div [hidden]="!show_loader">Continue </div>
+                            <div [hidden]="show_loader" class="spinner-border text-light"></div>
+                        </button> -->
+                        <button type="submit" #Continue class="btn btnRed widthFull" id="continue"  [disabled]="step==1 ? (proceedToemail ? (this.f.Email_phone.value == '' || this.f.Email_phone.value.length < 10): (this.f.Email_phone.value == '' || email_flag==0)) : step == 2 ?  this.f.otp1.value == '' || this.f.otp2.value == '' || this.f.otp3.value == '' || this.f.otp4.value == '' || this.f.otp5.value == '' || this.f.otp6.value == '' : (proceedToemail ? (email_flag==0 || f.u_name.value == '' || f.u_email_phone_step3.value == '' || f.whetherareyou.value == '' || btn_disabled_flag == 'Y') : (f.u_name.value == '' || f.u_email_phone_step3.value == '' || f.whetherareyou.value == '' || u_email_phone.value.length < 10 || btn_disabled_flag == 'Y')) ">
+                            <div [hidden]="!show_loader">Continue </div>
+                            <div [hidden]="show_loader" class="spinner-border text-light"></div>
+                        </button>
+                    </div>
+                         
+                     </form>
+
+                    <div class="form-group text-center" [hidden]="step==2 || step==3">
+                        <!-- <p class="ProceedtoEmail proWithEmail" (click)="proceedToEmail('E')" [hidden]="!proceedToemail">Proceed with Email</p>
+                        <p class="ProceedtoEmail proWithEmail" (click)="proceedToEmail('M')" [hidden]="proceedToemail">Proceed with Mobile</p> -->
+                        <!-- <span class="customproceed"  (click)="proceedToEmail('E')" [hidden]="!proceedToemail">Proceed with email</span> -->
+                        <span class="customproceed" (click)="proceedToEmail('M')"  [hidden]="proceedToemail">Proceed with Mobile</span>
+
+
+                    </div>
+                    <div class="form-group" [hidden]="step==2 || step==3">
+                     <p class="customTerms">By tapping continue, you agree to the <a class="TermsPolicy"  target="_blank" routerLink='/terms'>Terms of Use </a> &nbsp;and <a  target="_blank" routerLink='/Privacypolicy' class="TermsPolicy">Privacy Policy</a></p>
+
+                        <!-- <p class="customTerms">By tapping continue, you agree to the <span class="TermsPolicy" (click)="openTermsPloicy('T')">Terms of Use </span> &nbsp;and <span class="TermsPolicy" (click)="openTermsPloicy('P')">Privacy Policy</span></p> -->
+                    </div>
+                    <!-- <div class="form-group show_icon" >
+                    <i (click)="google_signin()" class="fa fa-google fa-3px" style="font-size: 30px;"  aria-hidden="true"></i>
+                    &nbsp;&nbsp;&nbsp;&nbsp; 
+                    <i (click)="submitLogin()" class="fa fa-facebook-official fa-3px" style="font-size: 30px;" aria-hidden="true"></i>
+                </div> -->
+                    <!-- <div class="buttonSecPop">
+                        <a (click)="google_signin()" style="cursor: pointer;" class="gmailLogin"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill-rule="evenodd"
+                                viewBox="0 0 24 24">
+                                <path class="icon_svg-fill_as_stroke"
+                                    d="M20.16 12.193c0-.603-.054-1.182-.155-1.739H12v3.288h4.575a3.91 3.91 0 0 1-1.696 2.565v2.133h2.747c1.607-1.48 2.535-3.659 2.535-6.248z"
+                                    fill="#4285f4"></path>
+                                <path class="icon_svg-fill_as_stroke"
+                                    d="M12 20.5c2.295 0 4.219-.761 5.625-2.059l-2.747-2.133c-.761.51-1.735.811-2.878.811-2.214 0-4.088-1.495-4.756-3.504h-2.84v2.202A8.497 8.497 0 0 0 12 20.5z"
+                                    fill="#34a853"></path>
+                                <path class="icon_svg-fill_as_stroke"
+                                    d="M7.244 13.615A5.11 5.11 0 0 1 6.977 12a5.11 5.11 0 0 1 .267-1.615V8.183h-2.84C3.828 9.33 3.5 10.628 3.5 12s.328 2.67.904 3.817l2.84-2.202z"
+                                    fill="#fbbc05"></path>
+                                <path class="icon_svg-fill_as_stroke"
+                                    d="M12 6.881c1.248 0 2.368.429 3.249 1.271l2.438-2.438C16.215 4.342 14.291 3.5 12 3.5a8.497 8.497 0 0 0-7.596 4.683l2.84 2.202C7.912 8.376 9.786 6.881 12 6.881z"
+                                    fill="#ea4335"></path>
+                            </svg> <span>
+
+                                Continue with Google
+
+                            </span></a>
+                        <a (click)="submitLogin()" style="cursor: pointer;" class="facebookLogin"><svg width="26"
+                                height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path class="icon_svg-fill_as_stroke" fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M20.5 12a8.5 8.5 0 1 0-9.83 8.397v-5.94H8.513v-2.458h2.159v-1.872c0-2.13 1.269-3.307 3.21-3.307.93 0 1.903.166 1.903.166v2.091h-1.072c-1.056 0-1.385.656-1.385 1.328V12h2.358l-.377 2.457h-1.98v5.94A8.503 8.503 0 0 0 20.5 12Z"
+                                    fill="#1877F2"></path>
+                            </svg> <span>
+                                Continue with Facebook
+
+                            </span></a>
+
+                    </div> -->
+
+                </div>
+            
+                <br clear="all">
+            </div>
+
+        </div>
+
+
+    </div>
+    <div class="col-sm-5 img"></div>
+    <br clear="all">
+</div>
+
+<!-- Benifits Of Our Services -->
+<div class="benifitSer" appNorightclick>
+    <div class="wrapper_top">
+        <h2>Benefits Of Our Services</h2>
+
+        <div class="col-sm-4 float-left">
+            <div class="benifitBox">
+                <img src="/assets/images/n_img.png" alt="">
+                <h3>Authentic</h3>
+                <p>Read content by authoritative sources and top publishers.</p>
+
+            </div>
+        </div>
+        <div class="col-sm-4 float-left">
+            <div class="benifitBox">
+                <img src="/assets/images/m_img.png" alt="">
+                <h3>Affordable</h3>
+                <p>Start reading popular texts and commentaries at basic prices and pay as you read further.</p>
+
+            </div>
+        </div>
+        <div class="col-sm-4 float-left">
+            <div class="benifitBox">
+                <img src="/assets/images/o_img.png" alt="">
+                <h3>Accessible</h3>
+                <p>Carry your online library with you anywhere and research your cases wherever you are.</p>
+
+            </div>
+        </div>
+
+
+
+        <br clear="all">
+
+    </div>
+</div>
+<!-- End -->
+
+
+<!-- Benefits Of Our Services -->
+<div class="whatInside">
+    <div class="wrapper_top">
+        <h2>Benefits Of Our Services</h2>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s</p>
+
+        <div class="col-sm-6 float-left scrollBoard">
+
+            <div class="bp-container">
+                <img src="/assets/images/n_ipad-mockup.webp" alt="">
+                <div class="bp-content">
+                    <h4>Chapter I</h4>
+                    <p>Duis sed odio sit amet nibh vulputate cursus a sit roin gravida nibh vel velit auctor aliquet.
+                        Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem
+                        nibh id eliton neque elit ed ut imperdiet nisi massa sodales verbuctum etos. amet mauris morbi
+                        accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae
+                        erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia
+                        nostra, per inceptos himenaeos.</p>
+                    <p>Mauris in erat justo dullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque
+                        elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc setu retiam pharetra, erat sed
+                        fermentum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque. Suspendisse in
+                        orci enim. Tur adipiscing elit nam dui lacuam nec tellus a odio tincidunt auctor a ornare odio.
+                        Sed non mauris vitae erat consequat auctor eu in elit.</p>
+                    <h4>Chapter II</h4>
+                    <p>Duis sed odio sit amet nibh vulputate cursus a sit roin gravida nibh vel velit auctor aliquet.
+                        Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem
+                        nibh id eliton neque elit ed ut imperdiet nisi massa sodales verbuctum etos. amet mauris morbi
+                        accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae
+                        erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia
+                        nostra, per inceptos himenaeos.</p>
+                    <p>Mauris in erat justo dullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque
+                        elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc setu retiam pharetra, erat sed
+                        fermentum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque. Suspendisse in
+                        orci enim. Tur adipiscing elit nam dui lacuam nec tellus a odio tincidunt auctor a ornare odio.
+                        Sed non mauris vitae erat consequat auctor eu in elit.</p>
+                    <h4>Chapter III</h4>
+                    <p>Duis sed odio sit amet nibh vulputate cursus a sit roin gravida nibh vel velit auctor aliquet.
+                        Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem
+                        nibh id eliton neque elit ed ut imperdiet nisi massa sodales verbuctum etos. amet mauris morbi
+                        accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae
+                        erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia
+                        nostra, per inceptos himenaeos.</p>
+                    <p>Mauris in erat justo dullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque
+                        elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc setu retiam pharetra, erat sed
+                        fermentum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque. Suspendisse in
+                        orci enim. Tur adipiscing elit nam dui lacuam nec tellus a odio tincidunt auctor a ornare odio.
+                        Sed non mauris vitae erat consequat auctor eu in elit.</p>
+                    <h4>Chapter IV</h4>
+                    <p>Duis sed odio sit amet nibh vulputate cursus a sit roin gravida nibh vel velit auctor aliquet.
+                        Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem
+                        nibh id eliton neque elit ed ut imperdiet nisi massa sodales verbuctum etos. amet mauris morbi
+                        accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae
+                        erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia
+                        nostra, per inceptos himenaeos.</p>
+                    <p>Mauris in erat justo dullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque
+                        elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc setu retiam pharetra, erat sed
+                        fermentum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque. Suspendisse in
+                        orci enim. Tur adipiscing elit nam dui lacuam nec tellus a odio tincidunt auctor a ornare odio.
+                        Sed non mauris vitae erat consequat auctor eu in elit.</p>
+                    <h4>Chapter V</h4>
+                    <p>Duis sed odio sit amet nibh vulputate cursus a sit roin gravida nibh vel velit auctor aliquet.
+                        Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem
+                        nibh id eliton neque elit ed ut imperdiet nisi massa sodales verbuctum etos. amet mauris morbi
+                        accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae
+                        erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia
+                        nostra, per inceptos himenaeos.</p>
+                    <p>Mauris in erat justo dullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque
+                        elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc setu retiam pharetra, erat sed
+                        fermentum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque. Suspendisse in
+                        orci enim. Tur adipiscing elit nam dui lacuam nec tellus a odio tincidunt auctor a ornare odio.
+                        Sed non mauris vitae erat consequat auctor eu in elit.</p>
+                    <h4>Chapter VI</h4>
+                    <p>Duis sed odio sit amet nibh vulputate cursus a sit roin gravida nibh vel velit auctor aliquet.
+                        Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem
+                        nibh id eliton neque elit ed ut imperdiet nisi massa sodales verbuctum etos. amet mauris morbi
+                        accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae
+                        erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia
+                        nostra, per inceptos himenaeos.</p>
+                    <p>Mauris in erat justo dullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque
+                        elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc setu retiam pharetra, erat sed
+                        fermentum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque. Suspendisse in
+                        orci enim. Tur adipiscing elit nam dui lacuam nec tellus a odio tincidunt auctor a ornare odio.
+                        Sed non mauris vitae erat consequat auctor eu in elit.</p>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="col-sm-6 float-left acordianCus">
+
+            <div class="acordianCusBox">
+                <h2 class="accordion" id="accordian_1" (click)="showAccordian('1')">Chapter 1. Remove barriers to
+                    getting started <i class="fa fa-plus closeIcon" aria-hidden="true"></i> <i
+                        class="fa fa-minus openIcon" aria-hidden="true"></i>
+                </h2>
+                <div class="panel" id="panel_1">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+            </div>
+
+            <div class="acordianCusBox">
+                <h2 class="accordion" id="accordian_2" (click)="showAccordian('2')">Chapter 2. Remove barriers to
+                    getting started <i class="fa fa-plus closeIcon" aria-hidden="true"></i> <i
+                        class="fa fa-minus openIcon" aria-hidden="true"></i>
+                </h2>
+                <div class="panel" id="panel_2">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+            </div>
+
+            <div class="acordianCusBox">
+                <h2 class="accordion" id="accordian_3" (click)="showAccordian('3')">Chapter 3. Remove barriers to
+                    getting started <i class="fa fa-plus closeIcon" aria-hidden="true"></i> <i
+                        class="fa fa-minus openIcon" aria-hidden="true"></i>
+                </h2>
+                <div class="panel" id="panel_3">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+            </div>
+
+            <div class="acordianCusBox">
+                <h2 class="accordion" id="accordian_4" (click)="showAccordian('4')">Chapter 4. Remove barriers to
+                    getting started <i class="fa fa-plus closeIcon" aria-hidden="true"></i> <i
+                        class="fa fa-minus openIcon" aria-hidden="true"></i>
+                </h2>
+                <div class="panel" id="panel_4">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+            </div>
+
+            <div class="acordianCusBox">
+                <h2 class="accordion" id="accordian_5" (click)="showAccordian('5')">Chapter 5. Remove barriers to
+                    getting started <i class="fa fa-plus closeIcon" aria-hidden="true"></i> <i
+                        class="fa fa-minus openIcon" aria-hidden="true"></i>
+                </h2>
+                <div class="panel" id="panel_5">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+            </div>
+
+            <div class="acordianCusBox">
+                <h2 class="accordion" id="accordian_6" (click)="showAccordian('6')">Chapter 6. Remove barriers to
+                    getting started <i class="fa fa-plus closeIcon" aria-hidden="true"></i> <i
+                        class="fa fa-minus openIcon" aria-hidden="true"></i>
+                </h2>
+                <div class="panel" id="panel_6">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+<!-- ENd -->
+
+<!-- newsLatter -->
+<div class="newsLatter">
+    <div class="wrapper_top">
+        <div class="col-sm-12">
+            <h2>Client Newsletter</h2>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s</p>
+
+            <div class="searchSection_newsLatter">
+                <div class="searchFieldCont_newsLatter">
+                    <div class="autocomplete-container_newsLatter">
+                        <div class="input-container"><input type="text" autocomplete="off"
+                                placeholder="Enter your e-mail address" ng-reflect-model=""
+                                class="ng-untouched ng-pristine ng-valid"></div>
+                    </div>
+                </div>
+                <input type="submit" value="Get Access">
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<!-- End -->
+
+<!-- Subscriber,Monthly purchases,Daily Visitors -->
+<div class="counterSec">
+    <div class="wrapper_top">
+        <div class="col-sm-4 float-left">
+            <h2>3,500
+                <span>Subscribers</span>
+            </h2>
+        </div>
+        <div class="col-sm-4 float-left">
+            <h2>3,500
+                <span>Monthly purchases</span>
+            </h2>
+        </div>
+        <div class="col-sm-4 float-left">
+            <h2>3,500
+                <span>Daily Visitors</span>
+            </h2>
+        </div>
+    </div>
+</div>
+<!-- End -->
+
+<!-- Carousel -->
+<div class="testimonial">
+    <div class="wrapper_top">
+        <h2>What people are saying</h2>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s</p>
+        <div class="testimonialSlide">
+            <div class="row">
+                <div class="col-12 mb-5 policyProduct">
+                     <owl-carousel-o [options]="customOptions" class="carousel_innerCustom">
+                        <ng-template carouselSlide>
+                            <div class="testimonialBox">
+                                <div class="rw-author-details">
+                                    <div class="rw_img_wrapper">
+                                        <div class="rw-authorimg"><img
+                                                src="https://www.ekko-wp.com/static/wp-content/uploads/sites/3/2018/10/testimonial1.jpg">
+                                        </div>
+                                    </div>
+                                    <h5>Sara Grant</h5>
+                                    <p>Los Angeles, California</p>
+                                </div>
+                                <div class="rw_message">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                    sed do eiusmod tempor incididunt ut labore et dolore magna.</div>
+                            </div>
+                        </ng-template>  
+                        <ng-template carouselSlide>
+                            <div class="testimonialBox">
+                                <div class="rw-author-details">
+                                    <div class="rw_img_wrapper">
+                                        <div class="rw-authorimg"><img
+                                                src="https://www.ekko-wp.com/static/wp-content/uploads/sites/3/2018/10/testimonial1.jpg">
+                                        </div>
+                                    </div>
+                                    <h5>Sara Grant</h5>
+                                    <p>Los Angeles, California</p>
+                                </div>
+                                <div class="rw_message">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                    sed do eiusmod tempor incididunt ut labore et dolore magna.</div>
+                            </div>
+                        </ng-template>  
+                        <ng-template carouselSlide>
+                            <div class="testimonialBox">
+                                <div class="rw-author-details">
+                                    <div class="rw_img_wrapper">
+                                        <div class="rw-authorimg"><img
+                                                src="https://www.ekko-wp.com/static/wp-content/uploads/sites/3/2018/10/testimonial1.jpg">
+                                        </div>
+                                    </div>
+                                    <h5>Sara Grant</h5>
+                                    <p>Los Angeles, California</p>
+                                </div>
+                                <div class="rw_message">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                    sed do eiusmod tempor incididunt ut labore et dolore magna.</div>
+                            </div>
+                        </ng-template>   
+                        <ng-template carouselSlide>
+                            <div class="testimonialBox">
+                                <div class="rw-author-details">
+                                    <div class="rw_img_wrapper">
+                                        <div class="rw-authorimg"><img
+                                                src="https://www.ekko-wp.com/static/wp-content/uploads/sites/3/2018/10/testimonial1.jpg">
+                                        </div>
+                                    </div>
+                                    <h5>Sara Grant</h5>
+                                    <p>Los Angeles, California</p>
+                                </div>
+                                <div class="rw_message">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                    sed do eiusmod tempor incididunt ut labore et dolore magna.</div>
+                            </div>
+                        </ng-template>  
+                        <ng-template carouselSlide>
+                            <div class="testimonialBox">
+                                <div class="rw-author-details">
+                                    <div class="rw_img_wrapper">
+                                        <div class="rw-authorimg"><img
+                                                src="https://www.ekko-wp.com/static/wp-content/uploads/sites/3/2018/10/testimonial1.jpg">
+                                        </div>
+                                    </div>
+                                    <h5>Sara Grant</h5>
+                                    <p>Los Angeles, California</p>
+                                </div>
+                                <div class="rw_message">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                    sed do eiusmod tempor incididunt ut labore et dolore magna.</div>
+                            </div>
+                        </ng-template>  
+                        <ng-template carouselSlide>
+                            <div class="testimonialBox">
+                                <div class="rw-author-details">
+                                    <div class="rw_img_wrapper">
+                                        <div class="rw-authorimg"><img
+                                                src="https://www.ekko-wp.com/static/wp-content/uploads/sites/3/2018/10/testimonial1.jpg">
+                                        </div>
+                                    </div>
+                                    <h5>Sara Grant</h5>
+                                    <p>Los Angeles, California</p>
+                                </div>
+                                <div class="rw_message">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                    sed do eiusmod tempor incididunt ut labore et dolore magna.</div>
+                            </div>
+                        </ng-template>  
+                        <ng-template carouselSlide>
+                            <div class="testimonialBox">
+                                <div class="rw-author-details">
+                                    <div class="rw_img_wrapper">
+                                        <div class="rw-authorimg"><img
+                                                src="https://www.ekko-wp.com/static/wp-content/uploads/sites/3/2018/10/testimonial1.jpg">
+                                        </div>
+                                    </div>
+                                    <h5>Sara Grant</h5>
+                                    <p>Los Angeles, California</p>
+                                </div>
+                                <div class="rw_message">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                    sed do eiusmod tempor incididunt ut labore et dolore magna.</div>
+                            </div>
+                        </ng-template>  
+                        <ng-template carouselSlide>
+                            <div class="testimonialBox">
+                                <div class="rw-author-details">
+                                    <div class="rw_img_wrapper">
+                                        <div class="rw-authorimg"><img
+                                                src="https://www.ekko-wp.com/static/wp-content/uploads/sites/3/2018/10/testimonial1.jpg">
+                                        </div>
+                                    </div>
+                                    <h5>Sara Grant</h5>
+                                    <p>Los Angeles, California</p>
+                                </div>
+                                <div class="rw_message">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                    sed do eiusmod tempor incididunt ut labore et dolore magna.</div>
+                            </div>
+                        </ng-template>  
+                        <ng-template carouselSlide>
+                            <div class="testimonialBox">
+                                <div class="rw-author-details">
+                                    <div class="rw_img_wrapper">
+                                        <div class="rw-authorimg"><img
+                                                src="https://www.ekko-wp.com/static/wp-content/uploads/sites/3/2018/10/testimonial1.jpg">
+                                        </div>
+                                    </div>
+                                    <h5>Sara Grant</h5>
+                                    <p>Los Angeles, California</p>
+                                </div>
+                                <div class="rw_message">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                    sed do eiusmod tempor incididunt ut labore et dolore magna.</div>
+                            </div>
+                        </ng-template>  
+                        <ng-template carouselSlide>
+                            <div class="testimonialBox">
+                                <div class="rw-author-details">
+                                    <div class="rw_img_wrapper">
+                                        <div class="rw-authorimg"><img
+                                                src="https://www.ekko-wp.com/static/wp-content/uploads/sites/3/2018/10/testimonial1.jpg">
+                                        </div>
+                                    </div>
+                                    <h5>Sara Grant</h5>
+                                    <p>Los Angeles, California</p>
+                                </div>
+                                <div class="rw_message">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                    sed do eiusmod tempor incididunt ut labore et dolore magna.</div>
+                            </div>
+                        </ng-template>  
+
+                      </owl-carousel-o>
+                </div>
+                
+            </div>
+            
+        </div>
+
+    </div>
+</div>
+<!-- End -->
+
+<!-- Pricing Section -->
+<div class="packageSec">
+    <div class="wrapper_top">
+        <div class="col-sm-4 firstSecBox float-left">
+            <div class="wpb_wrapper">
+                <h2>Simple and<br> flexible pricing<br> options</h2>
+                <p>Simple, flexible, and predictable pricing. Choose which package is best suited for you.</p>
+                <a href="#" target="_self" title="" class="" data-animation-delay="200"><span class="prim_text">Contact us</span></a>
+            </div>
+        </div>
+        <div class="col-sm-4 secoundSecBox float-left">
+            <div class="pricing-table">
+                <div class="pricing-title">
+                    <h5>Silver</h5>
+                </div>
+                <div class="pricing">
+                  
+                    <div class="priceNumber"> <span>₹</span>250 </div>
+
+
+                    <div class="packageDetails">
+                        <ul>
+                            <li><i class="fa fa-check" aria-hidden="true"></i> 500  <span>credits</span></li>
+                            <li><i class="fa fa-check" aria-hidden="true"></i> Selected  <span>Books only</span></li>
+                            <li><i class="fa fa-check" aria-hidden="true"></i> Dumy <span>Text</span></li>
+                        </ul>
+
+                    </div>
+
+                    <a href="#" target="" class="tt_button"><span class="prim_text">Order now</span></a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-sm-4 thirdSecBox float-left">
+
+            <div class="pricing-table">
+              
+                <div class="pricing-title">
+                    <h5>Gold</h5>
+
+                </div>
+
+
+
+                <div class="pricing">
+                    <div class="priceNumber"> <span>₹</span>500</div>
+
+
+                    <div class="packageDetails">
+                        <ul>
+                            <li><i class="fa fa-check" aria-hidden="true"></i> 3000  <span>credits</span></li>
+                            <li><i class="fa fa-check" aria-hidden="true"></i> Renewed   <span>versions</span></li>
+                            <li><i class="fa fa-check" aria-hidden="true"></i> Selected  <span>lectures</span></li>
+                        </ul>
+
+                    </div>
+
+                    <a href="#" target="" class="tt_button"><span class="prim_text">Order now</span></a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!-- End -->
+
+<!-- Upcomming Section -->
+<div class="similarPro" appNorightclick>
+    <div class="wrapper_top">
+        <h2>Upcoming Publications</h2>
+        <div class="similarProBooksMain">
+
+            <div class="col-sm-4 float-left">
+                <div class="similarProBooks">
+                    <div class="similarProBooksImg">
+                        <img src="/assets/images/ITA 2022 Front.jpg" alt="" >
+                    </div>
+                    <div class="detailsBook">
+                        <h2>Bharat’s Income Tax Act
+                        </h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4 float-left">
+                <div class="similarProBooks">
+                    <div class="similarProBooksImg">
+                        <img src="/assets/images/Handbook to DT Front.jpg" alt="" >
+                    </div>
+                    <div class="detailsBook">
+                        <h2>Bharat’s Handbook to Direct Taxes
+                        </h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4 float-left">
+                <div class="similarProBooks">
+                    <div class="similarProBooksImg">
+                        <img src="/assets/images/DTRR 2022 Front.jpg" alt="" style="height:256px">
+                    </div>
+                    <div class="detailsBook">
+                        <h2>Bharat’s Direct Taxes Ready Reckoner
+                        </h2>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <br clear="all" />
+
+    </div>
+</div>
+<!-- End -->
+
+<!-- Contact Us Form -->
+<div class="enqueryForm" appNorightclick id="EnquiryForm">
+    <h2>Enquiry Form</h2>
+    <div class="enqueryFormWraper">
+        <form #enquiry="ngForm" novalidate (ngSubmit)="submit_form(enquiry.value)">
+            <div class="col-sm-6 float-left formField">
+                <input class="form-control" type="text" placeholder="Name" name="nm" #nm='ngModel' ngModel required>
+            </div>
+
+            <div class="col-sm-6 float-left formField">
+                <input class="form-control" type="email" placeholder="Email" name="em" ngModel
+                    pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #em='ngModel' required>
+            </div>
+
+            <div class="col-sm-6 float-left formField">
+                <input class="form-control" type="tel" placeholder="Phone" pattern="[0-9]{10}" name="ph" #ph='ngModel'
+                    ngModel required>
+            </div>
+
+            <div class="col-sm-6 float-left formField">
+                <select class="form-control" name="about" #about='ngModel' ngModel required>
+                    <option selected="selected" value="">Select one option</option>
+                    <option value="How did you hear about us?">How did you hear about us?</option>
+                    <option value="How did you hear about us? 1">How did you hear about us? 1</option>
+                    <option value="How did you hear about us? 2">How did you hear about us? 2</option>
+                </select>
+            </div>
+            <div class="col-sm-12 float-left formField">
+                <textarea class="form-control" placeholder="Write a message" name="remarks" #remarks="ngModel" ngModel
+                    required></textarea>
+            </div>
+
+            <div class="col-sm-12 float-left submitBtn">
+                <input class="form-control" [disabled]="enquiry.invalid" type="submit" value="Submit">
+            </div>
+        </form>
+        <br clear="all">
+
+    </div>
+</div>
+<!-- End -->
+<div id="snackbar">We have received your query. An email will be sent to your account.</div>
+<app-site-footer appNorightclick></app-site-footer>
+
+
+
+
+
+
+
+
+        

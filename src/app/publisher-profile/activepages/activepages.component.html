@@ -1,0 +1,222 @@
+<!--div class="topBanner">
+    <div class="wrapper_top">
+      <div class="col-sm-3 float-left logo"><a href="#"><img src="/assets/images/logo.png" alt=""></a></div>
+      <div class="col-sm-9 float-left">
+        <div class="navSectionAfterLog">
+          <div class="searchSectionAfterLog"><input class="form-control" type="search"
+              placeholder="Search by Name, Author, ISBN" aria-label="Search"><input type="submit" value="Search"></div>
+
+          <div class="loginDetaiTop">
+
+            <ul>
+              <li> <a href="#"><i class="fa fa-bell" aria-hidden="true"></i></a></li>
+              <li class="thumbnailLi"> <a (click)="show()" class="dropbtn loginThumb"
+                  style="background: url('/assets/images/thumnailBig.jpg') no-repeat center center; background-size: cover;">&nbsp;</a>
+
+                <div id="myDropdown" class="dropdown-content">
+                  <a href="#home"><i class="fa fa-user-o" aria-hidden="true"></i> My Profile</a>
+                  <a href="#about"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Change Password</a>
+                  <a (click)="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a>
+                </div>
+
+              </li>
+
+
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div-->
+  <app-site-header></app-site-header>
+  <!-- <div class="breadcrumb" appNoright>
+    <ul>
+      <li><a routerLinkActive="true" routerLink="/publisher/publisher-dashboard">Home</a></li>
+      <li>&gt;</li>
+      <li>Active Pages</li>
+    </ul>
+  </div> -->
+  <!-- <div class="alert" id="uploaded" [hidden]="alert_show" appNoright>
+    <span class="closebtn" (click)="close_alert()">&times;</span>
+    Your book has been uploaded successfully!! &#x2714;
+  
+  </div> -->
+  <div class="bodyContainer">
+    <div class="wrapperCustome">
+    
+      <app-site-side-bar></app-site-side-bar>
+      <div class="col-sm-9 float-left">
+        <div class="rightSection">
+  
+          <h1 >List Of Active Pages Of Inactive Books</h1>
+         <!-- {{url}} -->
+  
+      <mat-form-field >
+        <mat-label>Search</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Search by Book name or ISBN" #input>
+      </mat-form-field>
+      
+      <div class="mat-elevation-z8" >
+        <table mat-table [dataSource]="dataSource" matSort>
+      
+        
+          <ng-container matColumnDef="Thumbnail">
+            <th mat-header-cell *matHeaderCellDef >Image</th>
+            <td mat-cell *matCellDef="let row"> <div class="tableThumbnail"><a 
+              ><img [src]=" url+'/public/book-images/'+row.active_pages.book_image" alt=""  style="height:50px;width:50px"/></a></div> </td>
+          </ng-container>
+      
+       
+          <!-- <ng-container matColumnDef="Admin Review">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="show_book_msg">Admin Review</th>
+            <td mat-cell *matCellDef="let row"> {{row.show_book_msg}} </td>
+          </ng-container>
+       -->
+          
+          <ng-container matColumnDef="Book Name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="active_pages.book_name">Book Name</th>
+            <td mat-cell *matCellDef="let row" > {{row.active_pages.book_name}} </td>
+          </ng-container>
+          <ng-container matColumnDef="ISBN Number">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="active_page.isbn_no">ISBN</th>
+            <td mat-cell *matCellDef="let row" > {{row.active_pages.isbn_no}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Pages">
+            <th mat-header-cell *matHeaderCellDef>Details</th>
+            <td mat-cell *matCellDef="let row" > <a style="cursor:pointer;" class="iconLink" (click)="edit_bk(row.active_pages._id,row.book_id,row.active_pages.active_book)"><i class="fa fa-eye" aria-hidden="true"></i></a> </td>
+          </ng-container>
+         
+           
+          
+      
+      
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+        
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+          </tr>
+        </table>
+      
+        <mat-paginator [pageSizeOptions]="[50, 100, 200]" showFirstLastButtons ></mat-paginator>
+      </div>
+  
+  
+  
+  
+  
+  
+  
+        </div>
+      </div>
+  
+  
+      <br clear="all">
+    </div>
+  </div>
+  
+  <!--div class="footer">
+      <ul class="social">
+        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+        <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+      </ul>
+  
+      <div class="f-menu mt-2">
+        <ul>
+          <li><a href="#">Sitemap</a></li>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Contact With Admin</a></li>
+          <li><a href="#">How It’s Work</a></li>
+          <li><a href="#">Terms &amp; Conditions</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <p class="text-center mt-2 text-white">Copyright 2020 Partread India. All rights reserved</p>
+  
+    </div-->
+  <!-- use modal -->
+ 
+  <!-- <div class="modal fade" id="MYModal" role="dialog">
+    <div class="modal-dialog ">
+    
+      
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+         
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to change status?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn button-yes" (click)="activation1()" data-dismiss="modal">Yes</button>
+          <button type="button" class="btn button-no" data-dismiss="modal">No</button>
+        </div>
+      </div>
+      
+    </div>
+  </div> -->
+  
+  
+  <!-- <div class="modal fade" id="MyModal" role="dialog">
+    <div class="modal-dialog ">
+    
+     
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to change status?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-dark" (click)="activation(userData._id,userData.active_book)" data-dismiss="modal">OK</button>
+          <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div> -->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <app-site-footer></app-site-footer>

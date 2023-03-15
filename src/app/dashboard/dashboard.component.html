@@ -1,0 +1,145 @@
+<app-adminheader></app-adminheader>
+
+
+<div class="page-body-wrapper">
+    <app-adminsidebar></app-adminsidebar>
+
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="card">
+                <div class="card-body">
+
+
+                    <div class="titleSec">
+                        <!-- <button type="button" class="btn btn-primary">Export as CSV</button> -->
+                        <!-- <h2>Dashboard</h2>  -->
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-4 text-center">
+                            <h3 class="dashboardCounterCus">{{pub}} <span>Registered Publishers</span></h3>
+
+                        </div>
+                        <div class="col-4 text-center text-primary">
+                            <h3 class="dashboardCounterCus">{{u}} <span>Registered Users</span></h3>
+
+                        </div>
+                        <div class="col-4 text-center">
+                            <h3 class="dashboardCounterCus">4.8L <span>Total Payment Collected (<i class="fa fa-inr" aria-hidden="true"></i>)</span></h3>
+
+                        </div>
+
+
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+            <div class="card mt-3">
+                <div class="card-body">
+
+
+                    <!-- <div class="titleSec">
+                   <h2 class="ml-5 mt-2 text-danger pl-5">Trending At Top 5</h2>
+                   <hr>
+                  
+                   </div> -->
+                    <!-- <button type="button" class="btn btn-primary">Export as CSV</button> -->
+                    <!-- <h2>Dashboard</h2>  -->
+                    <div class="row">
+                        <div class="dashBoard">
+                            <div class="dashBoardCustomSub">
+                            <!-- For Bar Chart -->
+                            <div class="col-sm-6 float-left">
+                                <div class="dashBoardGraph">
+                                    <div class="titleSec titleSecCus">
+                                        <h2 class="dashboardBoxTitle"><i class="fa fa-book" aria-hidden="true"></i>
+                                            Trending At Top 5</h2>
+
+                                    </div>
+                                    <ul class="showlist list-group listOfBookDash">
+                                        <li *ngFor="let t of top_array"><i class="fa fa-angle-right" aria-hidden="true"></i>
+                                          {{t}}  </li>
+                                        <!-- <li *ngIf="top_1" class="list-group-item"><i class="fa fa-angle-right" aria-hidden="true"></i>
+                                            {{top_1}}</li>
+                                        <li *ngIf="top_2" class="list-group-item"><i class="fa fa-angle-right" aria-hidden="true"></i>
+                                            {{top_2}}</li>
+                                        <li *ngIf="top_3" class="list-group-item"><i class="fa fa-angle-right" aria-hidden="true"></i>
+                                            {{top_3}}</li>
+                                        <li *ngIf="top_4" class="list-group-item"><i class="fa fa-angle-right" aria-hidden="true"></i>
+                                            {{top_4}}</li>
+                                        <li *ngIf="top_5" class="list-group-item"><i class="fa fa-angle-right" aria-hidden="true"></i>
+                                            {{top_5}}</li> -->
+
+                                    </ul>
+                                    <!-- <div id="container" class="mt-5" style="width:100%;height:100%;"> -->
+
+                                    <!-- </div> -->
+                                </div>
+                            </div>
+                            <div class="col-sm-6 float-left">
+
+                                <div class="dashBoardGraph">
+                                    <div class="titleSec titleSecCus">
+                                        <h2 class="dashboardBoxTitle"><i class="fa fa-money" aria-hidden="true"></i>
+                                            Payment History</h2>
+                                        <!-- <hr> -->
+
+                                    </div> <canvas id="pie1" style="width:80%;height:30vh;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+
+                            <!-- <div class="col-sm-12"><img src="/assets/images/add.jpg" alt="" /></div> -->
+                        </div>
+                    </div>
+                    <!-- <div class="row py-1" style="margin-left: 15%;">
+                    <div class="col-sm-6">
+                        
+                         <span><h2>{{this.topbooks.message[0].book_details.book_name}}</h2></span>
+                         <span><h2>{{this.topbooks.message[1].book_details.book_name}}</h2></span>
+                    </div>
+                     <div class="col-sm-6">
+                         <span><h2>{{this.topbooks.message[2].book_details.book_name}}</h2></span>
+                         
+                         <span><h2>{{this.topbooks.message[3].book_details.book_name}}</h2></span>
+                     </div>
+                     <div class=col-sm-6>
+                         <span><h2>{{this.topbooks.message[4].book_details.book_name}}</h2></span>
+                     </div>
+                    </div> -->
+                </div>
+
+
+
+            </div>
+
+        </div>
+        <!-- <div class="card mt-3">
+        <div class="card-body">
+            
+            
+           <div class="titleSec">
+               <h2 class="ml-5 mt-2 pl-5">Payment History</h2>
+               
+                 <button type="button" class="btn btn-primary">Export as CSV</button> 
+             <h2>Dashboard</h2>  
+            
+                <canvas id="pie1" style="width:80%;height:40vh;"></canvas>
+               
+            </div> 
+            
+       
+      
+       </div>
+       
+   </div> -->
+
+
+    </div>
+</div>

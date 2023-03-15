@@ -1,0 +1,24 @@
+
+<ng-container *ngIf="data._flag == 'L'">
+  <h2 mat-dialog-title class="matDialogTitle">Alert</h2>
+  <div mat-dialog-content>
+    <h3 class="mt-3">Are you sure you want to log out?</h3>
+  </div>
+  <div mat-dialog-actions class="matdialogActions">
+    <button class="finalSubmitButton float-right" (click)="onNoClick()">No</button>
+    <button  class="finalSubmitButton ml-2 float-right" mat-button (click)="logOutUser()">Yes</button>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="data._flag == 'D'">
+  <h2 mat-dialog-title class="matDialogTitle">Delete </h2>
+  <div mat-dialog-content>
+    <h3 class="mt-3">Are you sure you want to delete?</h3>
+  </div>
+  <div mat-dialog-actions class="matdialogActions">
+    <button  class="finalSubmitButton mr-2 float-right" mat-button (click)="delete()">Confirm</button>
+
+    <button class="finalSubmitButton float-right" (click)="onNoClick()">Cancel</button>
+  </div>
+</ng-container>
+

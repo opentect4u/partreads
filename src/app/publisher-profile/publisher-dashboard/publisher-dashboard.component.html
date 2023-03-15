@@ -1,0 +1,183 @@
+<!--div class="topBanner">
+    <div class="wrapper_top">
+    <div class="col-sm-3 float-left logo"><a routerLinkActive="true" routerLink="/publisher/publisher-dashboard"><img src="/assets/images/logo.png" alt=""></a></div>
+    <div class="col-sm-9 float-left">
+    <div class="navSectionAfterLog">
+    <div class="searchSectionAfterLog"><input class="form-control" type="search" placeholder="Search by Name, Author, ISBN" aria-label="Search"><input type="submit" value="Search"></div>	
+        
+        <div class="loginDetaiTop">
+        
+        <ul>
+        <li> <a href="#"><i class="fa fa-bell" aria-hidden="true"></i></a></li>	
+        <li class="thumbnailLi"> <a (click)="show()" class="dropbtn loginThumb" style="background: url('/assets/images/thumnailBig.jpg') no-repeat center center; background-size: cover;">&nbsp;</a>
+            
+    <div id="myDropdown" class="dropdown-content">
+        <a href="#home"><i class="fa fa-user-o" aria-hidden="true"></i> My Profile</a>
+      <a href="#about"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Change Password</a>
+      <a (click)="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a> 
+    </div>
+            
+            </li>	
+            
+        
+        </ul>
+        </div>
+    </div>
+            
+    </div>
+    </div>
+    
+    </div-->
+<!-- xxxxxxxxxxxx -->
+<app-site-header></app-site-header>
+<!-- <div class="breadcrumb">
+  <ul>
+    <li><a routerLinkActive="true" routerLink="/publisher/publisher-dashboard">Home</a></li>
+    <li>&gt;</li>
+    <li>Dashboard</li>
+  </ul>
+</div> -->
+
+
+<div class="bodyContainer">
+  <div class="wrapperCustome">
+    <!--div class="col-sm-4 float-left">
+            <div class="leftSideBar">
+              <div class="sideBarInf"><button class="editeBtn"><i class="fa fa-edit"></i>Edit</button>
+                <div class="profilePic"><img src="/assets/images/thumnailBig.jpg" alt=""/></div>
+                <div class="nameInfo">
+              <h4>Alek Jander</h4>
+              <a href="mailto:info@gmail.com"><i class="fa fa-envelope"></i><span>info@gmail.com</span></a><br>
+              <a href="tel:922154666"><i class="fa fa-phone"></i><span>922154666</span></a><br>
+              <a href="#"><p><span> Address:</span> Acropolis, Module 7/18, 1858/1 <br>Rajdanga Main Road Kolkata-107. <br> West Bengal, India</p></a>
+            </div>  
+              </div>
+                
+            <div class="leftSideNav">
+                <div class="leftBottomImg leftNavSec">
+                <ul>
+                <li class="active"><a routerLinkActive="true" routerLink="/publisher/publisher-dashboard"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a></li>
+                <li><a routerLinkActive="true" routerLink="/publisher/ebookupload"><i class="fa fa-upload" aria-hidden="true"></i> Upload E Book</a></li>
+                <li><a routerLinkActive="true" routerLink="/publisher/book-list"><i class="fa fa-list" aria-hidden="true"></i> List of Active Books</a></li>
+                <li><a href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i> Active Pages</a></li>
+                <li><a href="#"><i class="fa fa-history" aria-hidden="true"></i> Report / Payment History</a></li>
+                </ul>
+                </div>
+            </div>
+                
+            </div-->
+
+  <app-site-side-bar></app-site-side-bar>
+  <div class="col-sm-9 float-left">
+    
+      <div class="dashBoard">
+        <div class="customdashBoardGraph" >
+              <div class="row">
+                <div class="col-6" style="cursor: pointer;" routerLink="/publisher/pubCommission">
+               <h5><i class="fa fa-inr"></i> {{this.get_headerVal?.message.earned_amount}}</h5>
+               <h4>Total Commission</h4>
+               </div>
+             <!-- </div> -->
+           
+          <div class="col-6" style="cursor: pointer;" routerLink="/publisher/paymenthistory">
+            <h5><i class="fa fa-inr"></i> {{this.get_headerVal?.message.sold_amount}}</h5>
+            <h4>Total Sale</h4>
+          </div>
+             </div>
+        </div>
+      </div>
+
+      <div class="dashBoard" *ngIf="getAllBooks.length > 0">
+          <div class="customdashBoardGraph">
+                    <ng-container *ngFor="let data of getAllBooks">
+                      <div class="alert " role="alert">
+                        <a routerLink="/publisher/book-list"><mat-icon class="float-right">report_problem</mat-icon>&nbsp;&nbsp;{{data.book_name}} ({{data.isbn_no}}) - (This book has not been uploaded correctly).</a>
+                      </div>
+                    </ng-container>
+        </div>
+
+      </div>
+     <!-- <div class="row">
+       <div class="col-12">
+         <div class="card">
+              <div class="col-6 text-center">
+                <h5><i class="fa fa-inr"></i> 500</h5>
+                <h4>Total Commission</h4>
+              </div>
+              <div class="col-6 text-center">
+                <h5><i class="fa fa-inr"></i> 900</h5>
+                <h4>Sold Per Pages</h4>
+              </div>
+         </div>
+       </div>
+     </div> -->
+    <div class="row mt-5">
+      <div class="dashBoard">
+        <!-- FOr Bar Chart -->
+        <div class="col-sm-6 float-left">
+          <div class="dashBoardGraph dashBoardGraphCus_Ut">
+            <div class="titleSec">
+              <h2 class="mt-2"><i class='fa fa-comment-dollar'></i> Monthly Payment</h2>
+              <hr>
+             
+              </div> 
+            <!-- <div id="container" class="mt-5" style="width:100%;height:100%;"> -->
+              <canvas id="pie2" style="width:100%;height:50vh;"></canvas>
+             <!-- </div> -->
+          </div>
+        </div>
+        <div class="col-sm-6 float-left">
+          <div class="dashBoardGraph dashBoardGraphCus_Ut"><div class="titleSec">
+            <h2 class="mt-2">Sales on Page (book-wise)</h2>
+            <hr>
+           
+            </div>  <canvas id="pie3" style="width:100%;height:50vh;"></canvas></div>
+        </div>
+        <div class="col-sm-6 float-left">
+          <div class="dashBoardGraph dashBoardGraphCus_Ut"><div class="titleSec">
+            <h2 class="mt-2">Top 5 Books</h2>
+            <hr>
+           
+            </div> <canvas id="pie1" style="width:100%;height:50vh;"></canvas></div>
+        </div>
+        <div class="col-sm-6 float-left">
+          <div class="dashBoardGraph dashBoardGraphCus_Ut"><div class="titleSec">
+            <h2 class="mt-2">Subscribers / Book</h2>
+            <hr>
+           
+            </div> <canvas id="pie0" style="width:100%;height:50vh;"></canvas></div>
+        </div>
+        <div class="col-sm-12 publiDashImgSlider"><img src="/assets/images/add.jpg" alt="" /></div>
+      </div>
+    </div>
+
+  </div>
+  <br clear="all">
+</div>
+</div>
+
+<!--/div-->
+
+<!--div class="footer">
+        <ul class="social">
+        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>	
+        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+        <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+        </ul>
+        
+        <div class="f-menu mt-2">
+        <ul>
+          <li><a href="#">Sitemap</a></li>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Contact With Admin</a></li>
+          <li><a href="#">How It’s Work</a></li>
+          <li><a href="#">Terms &amp; Conditions</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+        <p class="text-center mt-2 text-white">Copyright 2020 Partread India. All rights reserved</p>
+        
+    </div-->
+<app-site-footer></app-site-footer>

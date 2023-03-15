@@ -1,0 +1,211 @@
+<app-adminheader></app-adminheader>
+
+
+<div class="page-body-wrapper">
+    <app-adminsidebar></app-adminsidebar>
+	
+	<div class="main-panel">
+		<div class="content-wrapper">
+
+      <!-- <div class="text-center">
+        <div class="spinner-border text-primary" *ngIf="loader"></div>
+     </div> -->
+      <!--<mat-card>
+        <div class="imgDiv">
+              
+                <img src="{{row.from_user_image}}" class="img-fluid"/>
+              </div>
+              <div class="from_user_image">
+                <h2> {{row.publisher_name}} has
+                {{msg}}
+                {{row.book_name}} at {{row.date | date:'dd-MM-yyyy h:mma'}}.
+              </h2>
+              </div>
+              <div class="closeIcon">
+                <a class="float-right" (click)="expandMore(i)"><mat-icon>expand_more</mat-icon></a>
+            <a class="float-right"><mat-icon>close</mat-icon></a>         
+              </div> 
+     </mat-card>-->
+     <div id="cover-spin" *ngIf="loader"></div>
+
+
+			<!-- <div class="card">
+			 <div class="card-body">
+				 
+				 
+				<div class="titleSec">
+				 <h2>Notifications</h2> 
+				 </div> 
+            <div class="text-center">
+                <div class="spinner-border text-primary" *ngIf="loader"></div>
+             </div>
+              
+
+
+             <mat-form-field >
+                <mat-label>Search</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Search Notifications" #input >
+              </mat-form-field> 
+            
+            
+             <div class="mat-elevation-z8" > 
+                <table mat-table [dataSource]="dataSource" matSort>
+              
+                  <ng-container matColumnDef="Image">
+                    <th mat-header-cell *matHeaderCellDef [hidden]="true"></th>
+                    <td mat-cell *matCellDef="let row" style="text-align:center;width: 20px;padding-top: 22px;">
+                       <div *ngIf="row.subject=='BookUpload'; then ifblock"></div>
+                       <ng-template #ifblock>
+                            <td>
+                               <div class="Table_profilePic">
+                                <img src="{{row.from_user_image}}" class="" alt="Cinque Terre" > 
+                               </div>
+                           </td>
+                               
+                   
+                       </ng-template>
+                   </td>
+                  </ng-container>
+
+                  
+                  <ng-container matColumnDef="Notification">
+                    <th mat-header-cell *matHeaderCellDef [hidden]="true"></th>
+                    <td mat-cell *matCellDef="let row" style="text-align:left;word-spacing: 0px;font-size: 17px;">
+                       <div *ngIf="row.subject=='BookUpload'; then ifblock"></div>
+                       <ng-template #ifblock>
+                            <td routerLinkActive='true' style="cursor: pointer;" routerLink='/admin/publisherbooks'>
+                               <div class="P_Tag">
+                                 <p>{{row.publisher_name}} has
+                                 {{msg}}
+                                 {{row.book_name}} at {{row.date | date:'dd-MM-yyyy h:mma'}}.</p>
+                               </div>
+                           </td>
+                               
+                   
+                       </ng-template>
+                   </td>
+                  </ng-container>
+                 
+
+                 
+              
+            
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              
+                  <tr class="mat-row" *matNoDataRow [hidden]="row">
+                    <td class="mat-cell" colspan="4">Data Not Found</td>
+                  </tr>
+                </table>
+              
+                <mat-paginator [pageSizeOptions]="[50, 100, 200]" showFirstLastButtons ></mat-paginator>
+              </div>
+              
+            </div>
+		</div> -->
+
+      <!-- <div class="mainnotificationdiv" *ngIf="userData.message.length > 0"> -->
+      <div  *ngIf="userData.length > 0">
+        <cdk-virtual-scroll-viewport itemSize="10" style="height:400px">
+     <div *cdkVirtualFor="let row of userData;let i=index">
+    
+       <mat-card class="matCard" *ngIf="row.subject=='BookUpload'">
+             
+              <mat-card-header>
+
+                <mat-card-title> 
+                <h2 class="matcardtitleh2">
+                  <a><i class="fa fa-book" aria-hidden="true"></i></a>
+                  New Book Uploaded 
+                  <a class="float-right matIcon" (click)="clear_all_notification('O',row._id,i)"><mat-icon>close</mat-icon></a> 
+                  <a class="float-right matIcon" (click)="expandMore(i)" id="expand_more"><mat-icon>expand_more</mat-icon></a>
+               
+
+                 
+                  <span style="display:none" id="date_{{i}}" class="customnotificationspan">{{row.date | date:'dd-MM-yyyy h:mma'}}</span>
+
+                </h2>
+                <p class="customcardtext" id="Date_{{i}}">{{row.date | date:'dd-MM-yyyy h:mma'}}</p>
+            </mat-card-title>
+             </mat-card-header>
+
+                <mat-card-content style="display:none"  id="matcard{{i}}">     
+                    <h4 class="matcardcontenth4"> {{row.publisher_name}} has
+                      {{msg}}
+                      {{row.book_name}} at {{row.date | date:'dd-MM-yyyy h:mma'}}.
+                      
+                    </h4>
+                </mat-card-content>
+      </mat-card>
+      <mat-card class="matCard" *ngIf="row.subject=='NewUserRegister' || row.subject=='NewPublisherRegister'">
+             
+        <mat-card-header>
+
+          <mat-card-title> 
+          <h2 class="matcardtitleh2">
+            <a><i class="fa fa-user" aria-hidden="true"></i></a>
+            New <span *ngIf="row.subject=='NewUserRegister'">User</span><span *ngIf="row.subject=='NewPublisherRegister'">Publisher</span> Registered.
+            <a class="float-right matIcon" (click)="clear_all_notification('O',row._id,i)"><mat-icon>close</mat-icon></a> 
+            <a class="float-right matIcon" (click)="expandMore(i)"><mat-icon>expand_more</mat-icon></a>
+            <span style="display:none" id="date_{{i}}" class="customnotificationspan">{{row.date | date:'dd-MM-yyyy h:mma'}}</span>
+
+          </h2>
+          <p class="customcardtext" id="Date_{{i}}">{{row.date | date:'dd-MM-yyyy h:mma'}}</p>
+      </mat-card-title>
+       </mat-card-header>
+
+          <mat-card-content style="display:none"  id="matcard{{i}}">     
+              <h4 [routerLink]="['/admin/user_details',row.from_user_id]" class="matcardcontenth4" *ngIf="row.subject=='NewUserRegister'"> {{row.from_user_name}} has been registered as a user.</h4>
+              <h4 [routerLink]="['/admin/pub_details',row.from_user_id]" class="matcardcontenth4" *ngIf="row.subject=='NewPublisherRegister'"> {{row.from_user_name}} has been registered as a publisher.</h4>
+            </mat-card-content>
+      </mat-card>
+
+      <mat-card class="matCard" *ngIf="row.subject=='UserBuyBookPayment'">
+             
+        <mat-card-header>
+
+          <mat-card-title> 
+          <h2 class="matcardtitleh2">
+            <a><i class="fa fa-inr" aria-hidden="true"></i> </a>
+            New Payment Done.
+            <a class="float-right matIcon" (click)="clear_all_notification('O',row._id,i)"><mat-icon>close</mat-icon></a> 
+            <a class="float-right matIcon" (click)="expandMore(i)"><mat-icon>expand_more</mat-icon></a>
+            <span style="display:none" id="date_{{i}}" class="customnotificationspan">{{row.date | date:'dd-MM-yyyy h:mma'}}</span>
+
+          </h2>
+          <p class="customcardtext" id="Date_{{i}}">{{row.date | date:'dd-MM-yyyy h:mma'}}</p>
+      </mat-card-title>
+       </mat-card-header>
+
+          <mat-card-content style="display:none"  id="matcard{{i}}">     
+              <h4 class="matcardcontenth4"> {{row.from_user_name}} has made a payment of {{row.body}}/-.
+              
+              </h4>
+          </mat-card-content>
+      </mat-card>
+
+    </div>
+</cdk-virtual-scroll-viewport>
+  
+  </div>
+  <div class="row mb-2 mt-2" *ngIf="userData.length > 0">
+    <div class="col-2">
+    </div>
+    <div class="col-6"></div>
+    <div class="col-4">
+     <div class="deleteNotification">
+       <span (click)="clear_all_notification('A','',-1)">Clear all notification</span>
+
+     </div>
+    </div>
+  </div>
+   <div class="row" *ngIf="userData.length == 0" class="mt-5">
+     <div class="col-12 text-center">
+       <img src="/assets/images/trnnonotification.png" class="img-fluid" style="height:100px"/>
+            <h2>no new notification</h2>
+     </div>
+   </div>
+ 
+</div>
+</div>
+	

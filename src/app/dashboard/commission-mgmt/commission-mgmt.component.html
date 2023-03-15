@@ -1,0 +1,128 @@
+<app-adminheader></app-adminheader>
+
+
+<div class="page-body-wrapper">
+    <app-adminsidebar></app-adminsidebar>
+
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="card">
+                <div class="card-body">
+                    <div class="titleSec">
+                        <h2>Commission Management</h2> 
+                       
+                    </div>
+                </div>
+
+            </div>
+            <div id="cover-spin" *ngIf="loading"></div>
+            <div class="card mt-3">
+                <div class="card-body">
+                    <div class="titleSec">
+                        <!-- <mat-radio-group aria-label="Select an option"> -->
+                            <mat-radio-button value="D" [checked]="flag=='D'" color="primary" (change)="check_radio($event)"> Unpaid</mat-radio-button>
+                            <mat-radio-button value="A" [checked]="flag=='A'" color="primary" (change)="check_radio($event)">Paid</mat-radio-button>
+                          <!-- </mat-radio-group> -->
+                    </div>
+                    <mat-form-field >
+                        <mat-label>Search</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Search by publisher name,email,amount" #input>
+                      </mat-form-field > 
+                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                       
+                        <ng-container matColumnDef="No">
+                          <th mat-header-cell *matHeaderCellDef> # </th>
+                          <td mat-cell *matCellDef="let row;let i=index">{{i+1}}</td>
+                        </ng-container>
+                       <ng-container matColumnDef="publishername">
+                            <th mat-header-cell *matHeaderCellDef> Publisher</th>
+                            <td mat-cell *matCellDef="let row">{{row.publisher_details.name}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="publisherEmail">
+                            <th mat-header-cell *matHeaderCellDef> Email</th>
+                            <td mat-cell *matCellDef="let row">{{row.publisher_details.email}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="Amount">
+                            <th mat-header-cell *matHeaderCellDef> Amount</th>
+                            <td mat-cell *matCellDef="let row">
+                                <p *ngIf="this.flag=='D'">₹ {{row.total_price}}</p>
+                                <p *ngIf="this.flag=='A'">₹ {{row.amount}}</p>
+
+                            </td>
+                          </ng-container>
+                          <ng-container matColumnDef="Date">
+                            <th mat-header-cell *matHeaderCellDef> Date</th>
+                            <td mat-cell *matCellDef="let row">{{row.date}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="Action">
+                            <th mat-header-cell *matHeaderCellDef> Action</th>
+                            <td mat-cell *matCellDef="let row">
+                                <!-- <div class="titleSec" > -->
+                                    <a type="button" data-toggle="modal" data-target="#ammountModal" class="btn btn-primary finalSubmitButton " (click)="get_publisher(row.publisher_details.name,row.total_price,row.publisher_details.publisher_id)" *ngIf="row.paid_flag=='N' && row.total_price > 0">PAY</a>
+                                    <span  *ngIf="row.total_price==0 || row.total_price > 0 && row.paid_flag=='Y'">Already Paid</span>
+                                <!-- </div> -->
+                            </td>
+                          </ng-container>
+                       
+                         
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        <tr class="mat-row" *matNoDataRow>
+                          <td class="mat-cell text-center" colspan="5">No data matching the filter "{{input.value}}"</td>
+                        </tr>
+                      </table> 
+                      
+                    <mat-paginator [pageSizeOptions]="[50,100,200]" showFirstLastButtons ></mat-paginator>
+                      
+                  
+                </div>
+
+
+
+            </div>
+
+        </div>
+       
+
+
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div id="ammountModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- <button type="button" class="close" data-dismiss="modal" id="close_modal" hidden>&times;</button> -->
+          <h4 class="modal-title" id="pub_details"></h4>
+        </div>
+        <form #logForm="ngForm" (ngSubmit)="submit_details(logForm.value)">
+        <div class="modal-body">
+    
+            <mat-form-field appearance="outline">
+                <mat-label>₹ Amount</mat-label>
+                <input matInput placeholder="Enter Ammount" name="ammount" #ammount="ngModel" ngModel required/>
+                <mat-error *ngIf="ammount.errors?.required && (ammount.touched || ammount.dirty)" class="text-danger">
+                    *Please Enter Amount
+                </mat-error>
+              </mat-form-field>
+              <mat-error *ngIf="error" class="text-danger">
+                *Amount must not be greater than ₹ {{pub_ammount}}
+            </mat-error>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="close_modal">Cancel</button>
+          <button type="submit" class="btn btn-default" [disabled]="logForm.invalid">Submit</button>
+        </div>
+         </form>
+      </div>
+  
+    </div>
+  </div>

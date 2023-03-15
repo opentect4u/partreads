@@ -1,0 +1,19 @@
+.p{
+    font-size:large;
+    text-align: center;
+}
+.modal{
+    /* position: flex; */
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+/*For admin logout cursor point*/
+
+.nav-link{
+   cursor: pointer;
+}
+
+

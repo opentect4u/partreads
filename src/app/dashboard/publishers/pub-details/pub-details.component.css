@@ -1,0 +1,11 @@
+.round_class{
+    border-radius: 50%;
+}
+
+
+hr{height:0px!important}
+h6{font-size: 14px;color: #164d8d;font-weight: 600;}
+.breadcrumb{font-size: 18px;font-weight: 400;}
+.customText{font-size: 14px;font-weight: 400;}
+/* .customImageBackground{height: 100%;display: flex;justify-content: center;align-items: center;} */
+

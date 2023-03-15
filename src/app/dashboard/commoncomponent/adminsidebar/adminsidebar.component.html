@@ -1,0 +1,202 @@
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item" >
+            <a class="nav-link" routerLinkActive="active" routerLink="/admin/dashboard">
+              <!-- <i class="fa fa-tachometer" aria-hidden="true"></i> -->
+              <mat-icon class="dashboard">dashboard</mat-icon>
+              <span class="menu-title">Dashboard</span>
+				<!-- <i class="fa fa-chevron-right arowRight" aria-hidden="true"></i> -->
+               <mat-icon class="cheveron">chevron_right</mat-icon>
+
+            </a>
+          </li>
+          <li class="nav-item"  *ngIf="type=='A'">
+            <a class="nav-link" routerLinkActive="active"  routerLink="/oth_admins">
+              <!-- <i class="fa fa-users" aria-hidden="true"></i> -->
+              <mat-icon  class="dashboard">supervisor_account</mat-icon>
+              <span class="menu-title">Admins</span>
+				<!-- <i class="fa fa-chevron-right arowRight" aria-hidden="true"></i> -->
+        <mat-icon class="cheveron">chevron_right</mat-icon>
+
+            </a>
+          </li>
+          
+			
+          <li class="nav-item" *ngIf="pub_mgmt=='Y'">
+            <a class="nav-link" routerLinkActive="active"  routerLink="/admin/publisher">
+              <!-- <i class="fa fa-newspaper-o" aria-hidden="true"></i> -->
+              <mat-icon class="dashboard"> format_align_justify</mat-icon>
+              <span class="menu-title">Publisher Manage</span>
+				<!-- <i class="fa fa-chevron-right arowRight" aria-hidden="true"></i> -->
+        <mat-icon class="cheveron">chevron_right</mat-icon>
+            </a>
+          </li>
+			<li class="nav-item" *ngIf="u_mgmt=='Y'">
+            <a class="nav-link" routerLinkActive="active"  routerLink="/admin/users">
+              <!-- <i class="fa fa-users" aria-hidden="true"></i> -->
+              <mat-icon  class="dashboard">supervisor_account</mat-icon>
+
+              <span class="menu-title">User Manage</span>
+				<!-- <i class="fa fa-chevron-right arowRight" aria-hidden="true"></i> -->
+        <mat-icon class="cheveron">chevron_right</mat-icon>
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="cat_mgmt=='Y'">
+            <a class="nav-link" routerLinkActive="active"  routerLink="/admin/category">
+              <!-- <i class="fa fa-tag" aria-hidden="true"></i> -->
+              <mat-icon class="dashboard"> category</mat-icon>
+              <span class="menu-title">Category</span>
+              <!-- <i class="fa fa-chevron-right arowRight" aria-hidden="true"></i> -->
+              <mat-icon class="cheveron">chevron_right</mat-icon>
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="subcat_mgmt=='Y'">
+            <a class="nav-link" routerLinkActive="active" routerLink="/admin/subcategory">
+              <!-- <i class="fa fa-tags" aria-hidden="true"></i> -->
+              <mat-icon class="dashboard"> category</mat-icon>
+
+              <span class="menu-title">Sub-Category</span>
+              <!-- <i class="fa fa-chevron-right arowRight" aria-hidden="true"></i> -->
+              <mat-icon class="cheveron">chevron_right</mat-icon>
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="all_bk=='Y'">
+            <a class="nav-link" routerLinkActive="active"  routerLink="/admin/publisherbooks">
+              <!-- <i class="fa fa-book" aria-hidden="true"></i> -->
+              <mat-icon class="dashboard">library_books</mat-icon>
+              <!-- <span class="menu-title">All Books</span> -->
+              <span class="menu-title">All Books</span>
+              <!-- <i class="fa fa-chevron-right arowRight" aria-hidden="true"></i> -->
+              <mat-icon class="cheveron">chevron_right</mat-icon>
+            </a>
+			</li>
+      <li class="nav-item" *ngIf="review_rating=='Y'">
+        <a class="nav-link" routerLinkActive="active" routerLink="/admin/review_rating">
+          <!-- <i class="fa fa-star" aria-hidden="true"></i> -->
+          <mat-icon class="dashboard">star</mat-icon>
+          <span class="menu-title">Reviews/Ratings</span>
+          <!-- <i class="fa fa-chevron-right arowRight" aria-hidden="true"></i> -->
+          <mat-icon class="cheveron">chevron_right</mat-icon>
+        </a>
+      </li>
+      <li class="nav-item"  *ngIf="hard_copy=='Y'">
+        <a class="nav-link" routerLinkActive="active" routerLink="/admin/hardcopy">
+          <!-- <i class="fa fa-book" aria-hidden="true"></i> -->
+          <mat-icon class="dashboard">library_books</mat-icon>
+
+          <span class="menu-title">Hard Copy</span>
+          <!-- <i class="fa fa-chevron-right arowRight" aria-hidden="true"></i> -->
+          <mat-icon class="cheveron">chevron_right</mat-icon>
+        </a>
+    </li>
+
+        <li class="nav-item" *ngIf="user_report=='Y'">
+          <a class="nav-link" routerLinkActive="active" routerLink="/admin/reports">
+            <!-- <i class="fa fa-book" aria-hidden="true"></i> -->
+            <mat-icon class="dashboard">library_books</mat-icon>
+            <span class="menu-title">User Reports</span>
+            <!-- <i class="fa fa-chevron-right arowRight" aria-hidden="true"></i> -->
+            <mat-icon class="cheveron">chevron_right</mat-icon>
+          </a>
+      </li>
+
+          <li class="nav-item" *ngIf="publisher_report=='Y'">
+            <a class="nav-link" routerLinkActive="active" routerLink="/admin/pubReports">
+              <!-- <i class="fa fa-book" aria-hidden="true"></i> -->
+              <mat-icon class="dashboard">library_books</mat-icon>
+
+              <span class="menu-title">Publisher Reports</span>
+              <!-- <i class="fa fa-chevron-right arowRight" aria-hidden="true"></i> -->
+              <mat-icon class="cheveron">chevron_right</mat-icon>
+            </a>
+        </li>
+
+        <li class="nav-item" *ngIf="payment_history=='Y'">
+          <a class="nav-link" routerLinkActive="active" routerLink="/admin/history">
+            <!-- <i class="fa fa-history" aria-hidden="true"></i> -->
+            <mat-icon class="dashboard">history</mat-icon>
+            <span class="menu-title">
+              Subscription History
+            </span>
+            <!-- <i class="fa fa-chevron-right arowRight" aria-hidden="true"></i> -->
+            <mat-icon class="cheveron">chevron_right</mat-icon>
+          </a>
+      </li>
+
+      <li class="nav-item" *ngIf="comm_mgmt=='Y'">
+        <a class="nav-link" routerLinkActive="active"  routerLink="/admin/commision">
+          <!-- <i class="fa fa-inr" aria-hidden="true"></i> -->
+          <mat-icon class="dashboard"> format_align_justify</mat-icon>
+
+          <span class="menu-title">Commission Manage</span>
+          <!-- <i class="fa fa-chevron-right arowRight" aria-hidden="true"></i> -->
+          <mat-icon class="cheveron">chevron_right</mat-icon>
+        </a>
+      </li>
+
+      <li class="nav-item" *ngIf="gen_coupon=='Y'">
+        <a class="nav-link" routerLinkActive="active"  [routerLink]="['/admin/couponCode']">
+          <!-- <i class="fa fa-inr" aria-hidden="true"></i> -->
+          <mat-icon class="dashboard"> format_align_justify</mat-icon>
+
+          <span class="menu-title">Coupon Manage</span>
+          <!-- <i class="fa fa-chevron-right arowRight" aria-hidden="true"></i> -->
+          <mat-icon class="cheveron">chevron_right</mat-icon>
+        </a>
+      </li>
+
+
+      <li class="nav-item" *ngIf="use_coupon=='Y'">
+        <a class="nav-link" routerLinkActive="active"  routerLink="/admin/usedCoupon">
+          <!-- <i class="fa fa-inr" aria-hidden="true"></i> -->
+          <mat-icon class="dashboard"> format_align_justify</mat-icon>
+          <span class="menu-title">Used Coupon</span>
+          <!-- <i class="fa fa-chevron-right arowRight" aria-hidden="true"></i> -->
+          <mat-icon class="cheveron">chevron_right</mat-icon>
+        </a>
+      </li>
+
+      <li class="nav-item" *ngIf="use_coupon=='Y'">
+        <a class="nav-link" routerLinkActive="active"  routerLink="/admin/email">
+          <!-- <i class="fa fa-inr" aria-hidden="true"></i> -->
+          <mat-icon class="dashboard"> email</mat-icon>
+          <span class="menu-title">Marketing Mail</span>
+          <!-- <i class="fa fa-chevron-right arowRight" aria-hidden="true"></i> -->
+          <mat-icon class="cheveron">chevron_right</mat-icon>
+        </a>
+      </li>
+
+
+        </ul>
+      </nav>
+
+
+
+
+<!--Are you sure (Modal)-->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <!-- <h4 class="modal-title">Modal Header</h4> -->
+      </div>
+      <div class="modal-body">
+        <p class="p">Are you sure you want to log out?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn admin-button ok_btn" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn admin-button" data-dismiss="modal" (click)="logout()">OK</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+
+
+
+
+

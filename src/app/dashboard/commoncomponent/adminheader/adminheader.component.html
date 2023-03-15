@@ -1,0 +1,216 @@
+<nav class="navBar fixed-top modal-open">
+	<div class="float-left logo"><img 
+    src="/assets/images/logo.png" style="height:58px"
+    alt=""/></div>
+	<div class="float-left navRightSec navRightSecAdmin">
+    
+    <div class="navSectionAfterLog navSectionAfterLogAdmin">
+      
+
+      <div class="loginDetaiTop">
+
+          <ul>
+              <!-- <li> <a class="cart" routerLink='/admin/notifications' routerLinkActive="true" (click)="count_it()"><i class="fa fa-bell" aria-hidden="true"></i> <div class="count" [hidden]="counter" ><strong *ngIf="let_count<10">{{let_count}}</strong><strong *ngIf="let_count>=10">9+</strong></div></a></li> -->
+              <li> <a class="cart" routerLink='/admin/notifications' routerLinkActive="true"><i class="fa fa-bell" aria-hidden="true"></i> <div class="count" [hidden]="counter" ><strong *ngIf="let_count<10">{{let_count}}</strong><strong *ngIf="let_count>=10">9+</strong></div></a></li>
+             
+              <li class="thumbnailLi" > <a (click)="show()" type="button"   [matMenuTriggerFor]="menu"
+                class="dropbtn loginThumb"
+                 style="background: url({{profile}}) no-repeat center center; background-size: cover; margin-left: 12px;">&nbsp;</a>
+
+                  <!-- <div id="myDropdown" class="dropdown-content">
+                      <a style="cursor: pointer;" data-toggle="modal" data-target="#mymodal_changepass"><i class="fa fa-unlock-alt" aria-hidden="true" ></i> Change Password</a>
+                      <a style="cursor: pointer;" data-toggle="modal" data-target="#myModal"><i class="fa fa-sign-out"
+                              aria-hidden="true"></i> Log Out</a>
+                  </div> -->
+                  <mat-menu #menu="matMenu" class="mt-5">
+                    <button mat-menu-item>
+                      <a style="cursor: pointer;" data-toggle="modal" data-target="#mymodal_changepass"><i class="fa fa-unlock-alt" aria-hidden="true" ></i> Change Password</a>
+                    </button>
+                    <button mat-menu-item>
+                      <!-- <a style="cursor: pointer;" data-toggle="modal" data-target="#myModal"><i class="fa fa-sign-out"
+                        aria-hidden="true"></i> Log Out</a> -->
+
+                        <a style="cursor: pointer;" (click)="opendialog()"><i class="fa fa-sign-out"
+                          aria-hidden="true"></i> Log Out</a>
+                    </button>
+                  </mat-menu>
+
+              </li>
+           
+
+
+          </ul>
+      </div>
+  </div>
+
+   
+    
+	</div>
+ 
+    
+
+</nav>
+<div id="myModal11" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" >
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Oops...You are offline!!</h2>
+    </div>
+    <div class="modal-body">
+      <p>Seems like your connection has been interrupted!!</p>
+      <p>You will be notified once the connection is resurrected.</p>
+    </div>
+    <div class="modal-footer">
+      <h3> Waiting for network...
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </h3>
+    </div>
+  </div>
+</div>
+  
+</div>
+<div id="myModal1" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>You are back online!!</h2>
+    </div>
+    <div class="modal-body">
+      <p>Your connection has been resurrected!</p>
+    </div>
+    <div class="modal-footer">
+      <h3><button class="btn admin-button" (click)="hide1()">Close</button></h3>
+    </div>
+  </div>
+  </div>
+</div>
+<div class="modal fade" id="mymodal_changepass" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Change Password</h4>
+        <a type="button"  class="close" data-dismiss="modal" id='close_mymodal_changepass'><mat-icon>close</mat-icon></a>
+        <!-- <button type="button" class="close" data-dismiss="modal" id='close_mymodal_changepass'>&times;</button> -->
+        
+      </div>
+      <div class="modal-body">
+        <!-- <input type="password" class="form-control inputfont" id="pss" #password placeholder="Enter new password"><br><br>
+        <input type="password" class="form-control inputfont" id="pss" #password placeholder="Enter new password"><br><br>
+        <input type="password" class="form-control inputfont" id="con_pss" #conpassword placeholder="Confirm new password"><br><br> -->
+
+  <div class="row">
+    <div class="col-12 mb-2">
+      <!-- <label>Old Password:</label> -->
+
+      <div class="form-group">
+        <!-- <label class="inputWraper">
+          <input id="old_pss" type="password" class="form-control"  #old_password>
+          <span
+            id="iconshow" class="p-viewer">
+            <i id="eye" class="fa fa-eye-slash viewPas" aria-hidden="true" (click)='show_hide_password()'></i>
+          </span></label> -->
+          <mat-form-field appearance="outline">
+            <mat-label>Old Password</mat-label>
+            <input matInput [type]="hideold ? 'password' : 'text'"  id="old_pss" #old_password >
+            <a mat-icon-button matSuffix (click)="hideold = !hideold" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hideold ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </a>
+          </mat-form-field>
+    
+      </div>
+    </div>
+    <div class="col-12 mb-2">
+      <!-- <label>New Password:</label> -->
+      <!-- <input type="password" class="form-control inputfont" id="pss" #password placeholder="Enter new password"> -->
+
+      <div class="form-group">
+        <!-- <label class="inputWraper">
+          <input  type="password" class="form-control"  id="pss" #password>
+          <span
+            id="iconshow" class="p-viewer">
+            <i id="eye" class="fa fa-eye-slash viewPas" aria-hidden="true" (click)="change_type('new_pass')"></i>
+          </span></label> -->
+
+          <mat-form-field appearance="outline">
+            <mat-label>New Password</mat-label>
+            <input matInput [type]="hidenew ? 'password' : 'text'"  id="pss" #password >
+            <a mat-icon-button matSuffix (click)="hidenew = !hidenew" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hidenew ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </a>
+          </mat-form-field>
+   
+      </div>
+    </div>
+    <div class="col-12 mb-2">
+      <!-- <label>Confirm Password</label> -->
+      <!-- <input type="password" class="form-control inputfont" id="con_pss" #conpassword placeholder="Confirm new password"> -->
+
+      <div class="form-group">
+        <!-- <label class="inputWraper">
+          <input  type="password" class="form-control"  id="con_pss" #conpassword>
+          <span
+            id="iconshow" class="p-viewer">
+            <i id="eye" class="fa fa-eye-slash viewPas" aria-hidden="true" (click)="change_type('con_pass')"></i>
+          </span></label> -->
+
+           
+          <mat-form-field appearance="outline">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput [type]="hidecon ? 'password' : 'text'" id="con_pss" #conpassword >
+            <a mat-icon-button matSuffix (click)="hidecon = !hidecon" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hidecon ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </a>
+          </mat-form-field>
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+        <!-- <div class="form-check">
+     <input type="checkbox" class="form-check-input inputfont" id="show_pass" (click)="change_type('cons_pass')"/>
+     <label class="form-check-label inputfont pl-2" for="show_pass">Show Password</label>
+     </div> -->
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn customModalBtn" data-dismiss="modal">Cancel</button> -->
+        <button type="button" class="btn finalSubmitButton"  (click)="change_pass(old_password.value,password.value,conpassword.value)">
+          <div *ngIf="!show_load">OK</div>
+          <div class="spinner-border text-light" *ngIf="show_load"></div>
+        </button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+
+<!--Are you sure (Modal)-->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Alert!</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Are you sure you want to log out?</h4>
+      </div>
+      <div class="modal-footer">
+
+            <!-- <button type="button" class="btn admin-button" data-dismiss="modal">Cancel</button> -->
+            <button type="button" class="btn btn-dark customModalBtn" data-dismiss="modal" (click)="logout()">OK</button>
+
+      </div>
+    </div>
+    
+  </div>
+</div>

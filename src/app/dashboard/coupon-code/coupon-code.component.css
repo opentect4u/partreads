@@ -1,0 +1,22 @@
+mat-form-field{width:100%;font-size: 15px;}
+mat-error{font-size: 15px;font-weight: 500;}
+table{width: 100%;}
+td, th {width: 14%;text-align:center}
+th.mat-header-cell.cdk-header-cell{text-align:center;
+    font-size: 11px!important;
+}
+#generateCouponCard{display:none;}
+#showTable{display:none}
+#tables{display:none}
+.customBtn{background: #405189;color: #fff;border: none;border-radius: 2px;font-size: 15px;padding: 8px 25px;margin-right: 10px;float: right;}
+.pdfButton{background: #405189;color: #fff;border: none;border-radius: 2px;font-size: 15px;padding: 8px 25px;margin-right: 10px;}
+a{text-decoration: underline;color: blue;cursor:pointer}
+
+th.mat-header-cell.cdk-header-cell.cdk-column-No.mat-column-No{
+    width:3%!important
+}
+.titleSec{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

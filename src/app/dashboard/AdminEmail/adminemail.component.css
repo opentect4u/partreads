@@ -1,0 +1,13 @@
+.mat-radio-button ~ .mat-radio-button {margin-left: 16px;}
+mat-form-field{width:100%;font-size: 15px;font-weight: 500;}
+.mat-selection-list{height: 155px!important;overflow: auto!important;max-height: 155px!important;}
+::-webkit-scrollbar {width: 3px;overflow-y: scroll;box-shadow: inset 0px 0px 4px rgb(243, 243, 243)}
+::-webkit-scrollbar-thumb {background: #57575f;border-radius: 41px;}
+.example-additional-selection {
+    opacity: 0.75;
+    font-size: 0.75em;
+  }
+.mat-checkbox{padding: 10px 13px 0 13px!important;}
+.select-container{
+  margin-top:10px;
+}

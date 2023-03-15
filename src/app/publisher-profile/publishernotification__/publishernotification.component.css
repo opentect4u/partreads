@@ -1,0 +1,50 @@
+.P_Tag{
+    display: inline-block;
+   
+}
+.P_Tag  p{
+    padding-top: 5px;
+    /* padding-left:12px; */
+    word-spacing:2px;
+    margin-left: 2px;
+  
+  
+}
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: -17%;
+  }
+
+
+  .Table_profilePic{
+    text-align: center;
+    /* border: #fff solid 1px; */
+    overflow: hidden;
+    box-shadow: 0px 0 7px 4px #dfdfdf;
+    margin: 0 auto 20px auto;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    height: 30px !important;
+    width: 30px !important;
+  }
+
+
+  .rotate {
+    -moz-transition: all .5s linear;
+    -webkit-transition: all .5s linear;
+    transition: all .5s linear;
+}
+.rotate.down {
+    -moz-transform:rotate(45deg);
+    -webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
+}

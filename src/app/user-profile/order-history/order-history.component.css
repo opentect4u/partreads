@@ -1,0 +1,37 @@
+
+
+/*angular material*/
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: 13%;
+  }
+  /* .nameoverflow{
+    white-space: nowrap; 
+    width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;  
+} */
+
+/* .finalSubmitButton{  */
+  /* background-color: #febc07;color: #464343;border-radius: 3px;padding:9px;text-transform: none;outline: none;border: none;font-size: 14px;letter-spacing: .0107142857em;font-weight: 500; */
+  /* background-color: #164d8d;
+  color: #ffffff;
+  width: 98px;
+  height: 38px;
+  font-family: "Google Sans",Roboto,Arial,sans-serif;
+  text-transform: none;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  letter-spacing: .0107142857em;
+  font-weight: 400; */
+/* } */
+mat-error{font-size: 13px;font-weight: 500;}

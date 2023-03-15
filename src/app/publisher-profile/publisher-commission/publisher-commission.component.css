@@ -1,0 +1,23 @@
+
+
+/*angular material*/
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  th.mat-header-cell{ text-align: center;}
+  td, th {
+    width: 13%;
+    text-align: center;
+  }
+  .nameoverflow{
+    white-space: nowrap; 
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/* .finalSubmitButton{ background-color: #febc07;color: #464343;border-radius: 3px;width: 99px;height: 42px;text-transform: none;outline: none;border: none;font-size: 17px;letter-spacing: .0107142857em;font-weight: 500;} */

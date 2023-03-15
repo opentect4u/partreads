@@ -1,0 +1,129 @@
+<app-adminheader></app-adminheader>
+<div class="page-body-wrapper">
+    <app-adminsidebar></app-adminsidebar>
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="card">
+                <div class="card-body">
+                    <div class="titleSec">
+                        <h2>Edit Books</h2>
+                    </div>
+                   
+
+            <div class="alert alert-danger" role="alert" *ngIf="this.__book.value.show_book == 'R' && this.__uploadPages != this.__totalPages">
+                <p>
+                    <mat-icon class="text-danger">report_problem</mat-icon>&nbsp;
+                    {{this.__book.value.book_name}} has not uploaded correctly</p>
+                
+                </div>
+
+                    <form [formGroup]="__book">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <mat-form-field   appearance="outline">
+                                    <mat-label>Publisher Name</mat-label>
+                                    <input matInput readonly  formControlName="pub_name">
+                                  </mat-form-field>
+                            </div>
+                            <div class="col-sm-4">
+                                <mat-form-field   appearance="outline">
+                                    <mat-label>ISBN</mat-label>
+                                    <input matInput readonly  formControlName="isbn_no">
+                                  </mat-form-field>
+                            </div>
+                            <div class="col-sm-4">
+                                <mat-form-field   appearance="outline">
+                                    <mat-label>Book Name</mat-label>
+                                    <input matInput readonly  formControlName="bk_name">
+                                  </mat-form-field>
+                            </div>
+                           
+                        </div>
+                        <div class="row">
+                            
+                            <div class="col-sm-4">
+                                <mat-form-field   appearance="outline">
+                                    <mat-label>Author Name</mat-label>
+                                    <input matInput readonly  formControlName="author_name">
+                                  </mat-form-field>
+                            </div>
+                            <div class="col-sm-4">
+                                <mat-form-field   appearance="outline">
+                                    <mat-label>Publication Date</mat-label>
+                                    <input matInput readonly  formControlName="publish_dt">
+                                  </mat-form-field>
+                            </div>
+                            <div class="col-sm-4">
+                                <mat-form-field   appearance="outline">
+                                    <mat-label>Edition</mat-label>
+                                    <input matInput readonly  formControlName="edition">
+                                  </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <mat-form-field   appearance="outline">
+                                    <mat-label>Per Page Price</mat-label>
+                                    <input matInput readonly  formControlName="per_page_price">
+                                  </mat-form-field>
+                            </div>
+                            <div class="col-sm-4">
+                                <mat-form-field   appearance="outline">
+                                    <mat-label>Full E-Book Price</mat-label>
+                                    <input matInput readonly  formControlName="full_ebk_price">
+                                  </mat-form-field>
+                            </div>
+                            <div class="col-sm-4">
+                                <mat-form-field   appearance="outline">
+                                    <mat-label>Offer Price</mat-label>
+                                    <input matInput readonly  formControlName="ofr_price">
+                                  </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <mat-form-field   appearance="outline">
+                                    <mat-label>Delivery Charges</mat-label>
+                                    <input matInput readonly  formControlName="delivery_chrgs">
+                                  </mat-form-field>
+                            </div>
+                            <div class="col-sm-6">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Token <span class="text-danger">*</span></mat-label>
+                                    <mat-select formControlName="ass_cpn" >
+                                      <mat-option value="">Select</mat-option>
+                                      <mat-option [value]="cpn.temp_book_id" *ngFor="let cpn of __cpnMst">{{cpn.temp_book_id}} | {{cpn.temp_book_name}}</mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <mat-form-field   appearance="outline">
+                                    <mat-label>About Book</mat-label>
+                                    <textarea  rows="6" readonly matInput formControlName="about_bk"></textarea>
+                                  </mat-form-field>
+                            </div>
+                            <div class="col-sm-6">
+                                <mat-form-field   appearance="outline">
+                                    <mat-label>About Author</mat-label>
+                                    <textarea  matInput readonly rows="6" formControlName="about_author"></textarea>
+                                  </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button mat-raised-button *ngIf="this.__book.value.show_book == 'R' && this.__uploadPages == this.__totalPages"  color="primary" (click)="changeBookStatus('A')">Approved</button>
+                                <button mat-raised-button *ngIf="this.__book.value.show_book == 'R'" color="warn" (click)="changeBookStatus('R')">Reject</button>
+                                <button mat-raised-button color="accent" (click)="changeBookStatus('V')">View PDF</button>
+                            </div>
+                        </div>
+                       
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>

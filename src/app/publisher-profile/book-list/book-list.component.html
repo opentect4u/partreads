@@ -1,0 +1,155 @@
+
+<app-site-header></app-site-header>
+<div class="bodyContainer" appNoright >
+  <div class="wrapperCustome" appNoright>
+  
+    <app-site-side-bar></app-site-side-bar>
+    <div class="col-sm-9 float-left" appNoright>
+      <div class="alert" id="uploaded" [hidden]="alert_show" appNoright>
+        <span class="closebtn inputfont" style="color:black" (click)="close_alert()">&times;</span>
+        <span class="inputfont" style="color:black">Your book has been uploaded successfully!!</span> &#x2714;
+      
+      </div>
+      <div class="rightSection" appNoright>
+
+        <h1 >List Of Books Uploaded</h1>
+        
+    <!-- <div class="book_loadMain" *ngIf="loader">
+
+      <div class="loader loader-1">
+          <div class="loader-outter"></div>
+          <div class="loader-inner"></div>
+        </div>
+      </div> -->
+      <div id="cover-spin" *ngIf="loader"></div>
+      
+      
+
+
+    <mat-form-field >
+      <mat-label>Search</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search by Book name, Price or ISBN" #input>
+    </mat-form-field>
+    
+    <div class="mat-elevation-z4" >
+      <table mat-table [dataSource]="dataSource" matSort>
+    
+        <!-- ID Column -->
+        <!-- <ng-container matColumnDef="#">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>No</th>
+          <td mat-cell *matCellDef="let index as i">{{i+1}}</td>
+        </ng-container> -->
+    
+        <!-- Progress Column -->
+        <ng-container matColumnDef="Thumbnail">
+          <th mat-header-cell *matHeaderCellDef >Image</th>
+          <td mat-cell *matCellDef="let row"> <div class="tableThumbnail"><a (click)="showbookname(row.book_name,row.full_book_path,'P')" data-toggle="modal"
+            data-target="#MYModal"><img [src]="row.book_image_path" alt=""  style="height:50px;width:50px"/></a></div> </td>
+        </ng-container>
+    
+        <!-- Name Column -->
+        <ng-container matColumnDef="Admin Review">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="show_book_msg">Admin Review</th>
+          <td mat-cell *matCellDef="let row"> {{row.show_book_msg}} </td>
+        </ng-container>
+    
+        <!-- Color Column -->
+        <ng-container matColumnDef="Book Name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="book_name">Book</th>
+          <td mat-cell *matCellDef="let row" style="width:16%;"> 
+           <p class="nameoverflow mt-3"
+              #tooltip="matTooltip"
+                matTooltip="{{row.book_name}}"
+                matTooltipClass="custom-tooltip"
+               matTooltipPosition="below">{{row.book_name}}</p> </td>
+        </ng-container>
+        <!-- <ng-container matColumnDef="ISBN Number">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="isbn_no">ISBN</th>
+          <td mat-cell *matCellDef="let row" > {{row.isbn_no}} </td>
+        </ng-container> -->
+        <ng-container matColumnDef="Price">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="price">Price</th>
+          <td mat-cell *matCellDef="let row"> &#8377;{{row.price}} </td>
+        </ng-container>
+           <ng-container matColumnDef="Status">
+          <th mat-header-cell *matHeaderCellDef >Book Status</th>
+          <td mat-cell *matCellDef="let row"> 
+            <div *ngIf="row.active_book=='I'; then ifblock else elseblock">
+          </div>
+          <ng-template #ifblock>
+                  <a class="statusCross" (click)="activation(row._id,row.active_book,'B')" style="cursor:pointer;"  data-toggle="modal" data-target="#MYModal"><i
+                    class="fa fa-times" aria-hidden="true"></i></a>
+            
+          </ng-template>
+          <ng-template #elseblock>
+                  <a class="statusTick" (click)="activation(row._id,row.active_book,'B')" style="cursor:pointer;" data-toggle="modal" data-target="#MYModal"><i
+                    class="fa fa-check" aria-hidden="true"></i></a>
+      
+          </ng-template> 
+          </td>
+         </ng-container> 
+         <ng-container matColumnDef="Action">
+          <th mat-header-cell *matHeaderCellDef >Action</th>
+          <td mat-cell *matCellDef="let row,let i = index">
+            <a style="cursor:pointer;" class="iconLink" (click)="edit_bk(row._id,row.book_id,row.active_book)">	<mat-icon>remove_red_eye</mat-icon></a> 
+            <a *ngIf="row.total_page_count != row.uploadad_page_count" style="cursor: pointer;" class="iconLink" (click)="deleteBook(row.book_id,row.publisher_id,row.uploadad_page_count,i)"><mat-icon class="text-danger">delete</mat-icon></a>
+            <!-- <a  style="cursor: pointer;" class="iconLink" (click)="deleteBook(row.book_id,row.publisher_id,row.uploadad_page_count,i)"><mat-icon class="text-danger">delete</mat-icon></a> -->
+           
+            <!-- <a *ngIf="row.total_page_count != row.uploadad_page_count" style="cursor: pointer;" class="iconLink" (click)="deleteBook(row.book_id,row.publisher_id,i)"><mat-icon class="text-danger">delete</mat-icon></a> -->
+          </td>
+        </ng-container>
+    
+    
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+      </table>
+    
+      <mat-paginator [pageSizeOptions]="[50, 100, 200]" showFirstLastButtons ></mat-paginator>
+    </div>
+
+      </div>
+    </div>
+
+
+    <br clear="all">
+  </div>
+</div>
+
+<!-- use modal -->
+<div [ngClass]="(_modal_body == 'P') ? 'modal fade': 'modal fade changeStatus_Ut'" class="" id="MYModal" role="dialog">
+  <div  [ngClass]="(_modal_body == 'P') ? 'modal-dialog modal-lg modal-dialog-centered': 'modal-dialog modal-sm'">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" *ngIf="_modal_body == 'P'">{{this.bk_name}}</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" *ngIf="_modal_body == 'B'">
+        <p class="allertTxt">Are you sure you want to change status?</p>
+      </div>
+      <div id="modal_body_id" *ngIf="_modal_body == 'P'">   
+          <app-loader *ngIf="pdf_loader"></app-loader>
+         <ngx-extended-pdf-viewer [src]="link" [useBrowserLocale]="false" height="80vh" [textLayer]="true"
+          [contextMenuAllowed]="false" [enablePrint]="false" [ignoreKeyboard]="true" [showOpenFileButton]="false"
+          [showPagingButtons]="true" [showSidebarButton]="false" [showBookmarkButton]="false" zoom="100%"
+          [showDownloadButton]="false" [showSidebarButton]="false" [sidebarVisible]="false" [showFindButton]="false"
+          [showPresentationModeButton]="true" (pdfLoaded)="onpage()"></ngx-extended-pdf-viewer>
+      </div>
+      <div class="modal-footer" >
+        <button type="button" *ngIf="_modal_body == 'B'"  class="btn button-yes btn-block" (click)="activation1()" data-dismiss="modal">Yes</button>
+        <!-- <button type="button" *ngIf="_modal_body == 'P'" class="btn button-no btn2" data-dismiss="modal">Cancel</button> -->
+
+        <br clear="All">
+      </div>
+    </div>
+    
+  </div>
+</div>
+<app-site-footer></app-site-footer>

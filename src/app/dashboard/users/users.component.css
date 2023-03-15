@@ -1,0 +1,42 @@
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width:15%;
+  }
+ /*For Admin user Management spinner*/
+.spinner-border{
+      width: 40px; 
+      height: 40px;
+      font-size:20px;
+}
+.Activebtn{
+  cursor: pointer;
+}
+/* .th.mat-header-cell, td.mat-cell, td.mat-footer-cell{
+   padding-left: 71px;
+} */
+.p{
+  font-size:large;
+  text-align: center;
+}
+.modal{
+  /* position: flex; */
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.mat-cell:nth-child(even){
+   width:10%;
+}
+.noteIcon{color: #006fba;font-size: 20px;vertical-align: middle;}
+mat-form-field{width:100%;font-size: 15px;}
+::ng-deep .cdk-overlay-container {z-index: 9000!important;}
+.spinner-border{width: 20px!important;height: 20px!important;}

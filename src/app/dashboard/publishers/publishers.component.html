@@ -1,0 +1,196 @@
+<app-adminheader></app-adminheader>
+<div class="page-body-wrapper">
+	
+    <app-adminsidebar></app-adminsidebar>
+
+    	
+	<div class="main-panel">
+		<div class="content-wrapper">
+			<div class="card">
+			 <div class="card-body">
+				 
+				 
+				 <div class="titleSec">
+					 
+				 <h2>Publisher Management</h2> 
+				 </div>
+				 
+				<div class="row">
+					 <div class="col-sm-12"> 
+		
+    <div class="text-center">
+        <!-- <div class="spinner-border text-primary" *ngIf="loading"></div> -->
+        <div id="cover-spin" *ngIf="loading"></div>
+
+     </div>
+  
+
+<!-- 
+     <div class="row mt-2">
+      <div class="col-7"></div>
+       <div class="col-5"> -->
+        <mat-form-field >
+          <mat-label>Search</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Search by Name or Email" #input>
+        </mat-form-field>
+       <!-- </div>
+    
+     </div> -->
+          
+
+
+
+
+<div class="mat-elevation-z8">
+
+    <!-- <p>This is paragraph tag</p> -->
+    <table mat-table [dataSource]="dataSource" matSort>
+
+
+    
+            
+      
+
+        <ng-container matColumnDef="#">
+            <th mat-header-cell *matHeaderCellDef>#</th>
+            <td mat-cell *matCellDef="let row;index as i " > {{i+1}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="Name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let row" > {{row.user_name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Email">
+            <th mat-header-cell *matHeaderCellDef >Email</th>
+            <td mat-cell *matCellDef="let row" > {{row.user_id}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="Created Date">
+            <th mat-header-cell *matHeaderCellDef >Created At</th>
+            <td mat-cell *matCellDef="let row"  > {{row.created_at | date: 'dd/MM/yyyy HH:mm'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Updated Date">
+            <th mat-header-cell *matHeaderCellDef >Updated At</th>
+            <td mat-cell *matCellDef="let row" >{{row.updated_at | date: 'dd/MM/yyyy HH:mm'}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="Status">
+            <th mat-header-cell *matHeaderCellDef ><p>Status</p></th>
+            <td mat-cell *matCellDef="let row"> 
+                <div *ngIf="row.user_status=='A'; then ifblock"></div>
+                <div *ngIf="row.user_status=='I'; then yblock"></div>
+               
+                <ng-template #ifblock>
+                    <td >
+                        <div  style="display:inline-block;">
+                        <!-- <button class="btn btn-primary" (click)="approval(row._id,row.show_book)">Approve</button>&nbsp; 
+                        <button class="btn btn-primary" (click)="reject(row._id,row.show_book)">Reject</button> -->
+                        <a  class="Activebtn approvBtn" (click)="Inactive_me(row._id,row.user_id,row.user_status,0)">Active</a>
+
+                        <!-- <a title="Edit"  data-toggle="modal" data-target="#myModal_status" class="Activebtn approvBtn" (click)="Inactive_me(row._id,row.user_id,row.user_status,0)">Active</a> -->
+                       
+                    </div>
+                      </td>
+                  </ng-template>
+                  <ng-template #yblock>
+                    <td>
+                      <a    title="Edit" class=" Activebtn rejectBtn" (click)="Inactive_me(row._id,row.user_id,row.user_status,1)">Inactive</a></td>
+
+                      <!-- <a   data-toggle="modal" data-target="#myModal_status" data-placement="bottom" title="Edit" class=" Activebtn rejectBtn" (click)="Inactive_me(row._id,row.user_id,row.user_status,1)">Inactive</a></td> -->
+                  </ng-template>
+                  </td>
+          </ng-container>
+          <ng-container matColumnDef="View">
+            <th mat-header-cell *matHeaderCellDef >View</th>
+            <td mat-cell *matCellDef="let row" >
+                <!-- <i class="fa fa-eye" (click)="viewDetails(row._id)" aria-hidden="true"></i> -->
+                <mat-icon (click)="viewDetails(row._id)" style="cursor:pointer">remove_red_eye</mat-icon>
+              </td>
+        </ng-container>
+
+
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> 
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell text-center" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[50, 100, 200]" showFirstLastButtons ></mat-paginator>
+</div>
+
+
+
+
+
+
+				</div>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- <div class="modal fade" id="myModal_status" role="dialog">
+    <div class="modal-dialog">
+    
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          
+            <p class="p">Are you sure you want to change status?</p>
+         
+         
+            <mat-form-field class="example-full-width" appearance="outline" [hidden]="pubStatus==1">
+              <mat-label>Reason</mat-label>
+              <textarea matInput  placeholder="Please cite your reason for doing so..." cols="75" rows="10" [(ngModel)]="reason"></textarea>
+            </mat-form-field>
+
+         
+        </div>
+        
+        <div class="modal-footer">
+        
+       
+          <button type="button" class="btn admin-button" data-dismiss="modal">Cancel</button>
+       
+        
+          <button type="button" class="btn admin-button" data-dismiss="modal" (click)="change_status()" >OK</button>
+          
+          
+        </div>
+      </div>
+      
+    </div>
+  </div> -->
+  
+  <div id="id02" class="Modal">
+    <span (click)="closeModal()" class="Close" title="Close Modal">×</span>
+    <form class="Modal-content">
+        <div class="container">
+        <h1 class="m-2">Are you sure you want to change status? </h1>
+          <mat-form-field appearance="outline" [hidden]="pubStatus==1">
+              <mat-label>Reason</mat-label>
+              <textarea matInput placeholder="Please cite your reason for doing so..." name="Reason"  rows="5" [(ngModel)]="reason"></textarea>
+
+ 
+            </mat-form-field>
+        
+          <div class="clearfix">
+            <button type="button" (click)="closeModal()"  class="cancelbtn">Cancel</button>
+          <button type="button" class="deletebtn" data-dismiss="modal" (click)="change_status()" [disabled]="pubStatus==1 ? false : reason=='' ">
+            <div [hidden]="show_checkmark" class="spinner-border text-light"></div>
+            <div [hidden]="!show_checkmark">OK </div>
+            </button>
+          </div>
+        </div>
+      </form>
+  </div>

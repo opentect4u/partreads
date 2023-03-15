@@ -1,0 +1,70 @@
+
+<app-adminheader></app-adminheader>
+
+
+<div class="page-body-wrapper">
+    <app-adminsidebar></app-adminsidebar>
+
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="card">
+              <!-- <div class="text-center">
+                <div class="spinner-border text-primary" *ngIf="loading"></div>
+             </div> -->
+                <div class="card-body">
+                  <div id="cover-spin" *ngIf="loading"></div>
+                    <mat-form-field >
+                        <mat-label>Search</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Search by report Id,name, email and subject" #input>
+                      </mat-form-field > 
+                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                        <ng-container matColumnDef="Report Id">
+                          <th mat-header-cell *matHeaderCellDef> Report Id </th>
+                          <td mat-cell *matCellDef="let row"> {{row.report_id}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="user_name">
+                            <th mat-header-cell *matHeaderCellDef> Name</th>
+                            <td mat-cell *matCellDef="let row" >
+                             {{row.publisher_name.name}}
+                                </td>
+                          </ng-container>
+                          <ng-container matColumnDef="Email">
+                            <th mat-header-cell *matHeaderCellDef> Email</th>
+                            <td mat-cell *matCellDef="let row">
+                          {{row.publisher_name.email}}
+                            </td>
+                          </ng-container>
+                        <ng-container matColumnDef="Subject">
+                          <th mat-header-cell *matHeaderCellDef> Subject</th>
+                          <td mat-cell *matCellDef="let row">{{row.subject}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="View">
+                            <th mat-header-cell *matHeaderCellDef> View</th>
+                            <td mat-cell *matCellDef="let row">
+                               <a (click)="go_toview(row._id,'P')"> <i class="fa fa-eye" aria-hidden="true"></i></a>
+                            </td>
+                          </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        <tr class="mat-row" *matNoDataRow>
+                          <td class="mat-cell text-center" colspan="5">No data matching the filter "{{input.value}}"</td>
+                        </tr>
+                      </table> 
+                      
+                    <mat-paginator [pageSizeOptions]="[50,100,200]" showFirstLastButtons ></mat-paginator>
+                      
+                  
+                </div>
+
+
+
+            </div>
+
+        </div>
+       
+
+
+    </div>
+</div>

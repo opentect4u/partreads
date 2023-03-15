@@ -1,0 +1,47 @@
+
+
+.loginmainDiv {
+    background: #fcc429;
+    padding: 45px 0 70px 0;
+    position: relative;
+    width: 100%;
+    flex: 1 0 auto;
+	align-items: center;
+	display: flex;
+}
+
+.loginBox{max-width: 600px; background: #fff; margin: 0 auto; width: 100%; padding: 15px; border-radius: 10px; box-shadow: 0 0 8px 0px #a28429;}
+.adminLogo {margin-bottom: 45px; text-align: center;}
+.loginBox h3.adTitle {
+    font-weight: 500 !important;
+    text-align: left;
+    font-size: 16px;
+	margin: 0;}
+
+.loginBox .fieldSec{}
+.fieldSec input[type="text"]{border: 1px solid #f3f3f3;
+background: #fff;
+border-radius: 2px;
+font-size: 17px;
+padding: 12px 15px;
+height: 52px;}
+
+.fieldSec input[type="password"]{border: 1px solid #f3f3f3;
+background: #fff;
+border-radius: 2px;
+font-size: 17px;
+padding: 12px 15px;
+height: 52px;}
+
+.fieldSec input[type="submit"]{background: #333; border: none;
+border-radius: 2px; font-size: 17px; padding: 12px 15px;}
+
+
+.btn-primary:not(:disabled):not(.disabled):active{background: #000;}
+.fieldSec input.btn-primary:focus[type="submit"]{box-shadow: none;}
+.btn-primary:not(:disabled):not(.disabled):active:focus{box-shadow: none;}
+
+
+
+
+

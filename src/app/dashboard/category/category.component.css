@@ -1,0 +1,35 @@
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: 25%;
+  }
+  
+   /*For Admin category spinner*/
+  .spinner-border{
+    width: 40px; 
+    height: 40px;
+    font-size:20px;
+  }
+  /*For Admin category update cursor point*/
+  .updateCustom{
+    cursor:pointer;
+  }
+  .customLi{
+    /* padding: 5px;border-bottom: 1px solid #d5d5d5;font-size: 15px; */
+    padding: 13px;
+    border-bottom: 1px solid #d5d5d5;
+    font-size: 14px;
+    background: #fbfbfb;
+    border-radius: 7px;
+    margin: 0 0 4px 0;
+    text-decoration: none;
+    list-style-type: none;
+    font-weight: 700;
+  }

@@ -1,0 +1,374 @@
+
+<!--
+      * This is the Store Page Where all uploaded books are to be shown * 
+	  * This is the User After Login Page
+-->
+
+<app-userheaderafterlogin></app-userheaderafterlogin><!--This is  the header of the page-->
+
+
+<div class="bodyContainer"><!--This is the main body after header which contain sidebar and main content-->
+	<div class="wrapperCustome">
+		<app-usersidebar></app-usersidebar><!--This is the side bar of the page-->
+
+		<div class="col-sm-9 rightSideBarnewCus float-left"><!--Usage: This div contain main content-->
+            <div class="row">
+
+				<div class="col-sm-12 float-right catagorMegaMenuCont">
+                        
+					<!-- <div class="btn" style="font-size:15px;" (click)="showFilterDiv()"><i class="fa fa-filter" aria-hidden="true"></i> Filter</div> -->
+					<div id="mgmenu1" class="navigation">
+						<ul class="mgmenu">
+                               <!--This is the Publisher List-->
+								<li class=""><a><i class="fa fa-filter" aria-hidden="true"></i> Publisher</a><!--Following list will be shown when hover on this h3 tag-->
+									<div class="dropdown_container dropdown_container_Ut dropdown_4columns" ><!--Usage: Contain publishers List-->
+										<h3 class="megaTitle">Publisher</h3>
+										<hr/>
+										<ul class="cataMegamenu">
+											<ng-container *ngFor="let pub of publisher_list">
+												<li class="col-6" *ngIf="pub.pub_details.user_status=='A'" style="cursor:pointer">
+													<a (click)="filterbypublisherCat(pub.publisher_id,pub.name)">{{pub.name}}</a><!--Usage: This anchor tag contain publisher name-->
+													
+												</li>
+											</ng-container>
+											
+										</ul>	
+								   
+									   
+									</div>
+								</li>
+								<!-- END -->
+								<!-- This is the Category list uploaded by the admin -->
+								<li class="active">
+									<a><i class="fa fa-filter" aria-hidden="true"></i> Category</a><!--Usage: Following list will be shown on hover on this anchor tag-->
+									<div class="dropdown_container dropdown_container_Ut dropdown_4columns" ><!--Usage: Contain Category List-->
+								     <h3 class='megaTitle'>Category</h3>
+									 <hr/>
+									 <ul class="cataMegamenu">
+										<li  *ngFor="let cats of getCategory" style="cursor:pointer">
+											 <a (click)="filter(cats._id,cats.name)">{{cats.name}}</a><!--Usage: This anchor tag contain Category name-->
+										</li>
+									</ul>	
+								
+									
+									</div>
+								</li>
+				                <!--END-->
+								<!-- This is the Sub-category List Uploaded by the admin-->
+								<li>
+									<a><i class="fa fa-filter" aria-hidden="true"></i> Subcategory</a><!--Usage: Following list will be shown on hover on this anchor tag-->
+								
+									<div class="dropdown_container dropdown_container_Ut dropdown_4columns" ><!--Usage:Usage: Contain Sub-Category List-->
+										<h3 class="megaTitle">Subcategory</h3>
+										<hr/>
+									   <ul class="cataMegamenu">
+											<li *ngFor="let subcats of getSubCategory" style="cursor:pointer">
+												<a (click)="filterbySubCat(subcats._id,subcats.category_id,subcats.name)">{{subcats.name}}</a><!--Usage: This anchor tag contain Sub-Category name-->
+											</li>
+										</ul>	
+								   
+									   
+									   </div>
+								</li>
+								<!-- END -->
+
+						</ul>
+					</div>
+                    <!-- This is for sorting books with respect to selected item (SORT BY PRICE, LETTER(ASC,DSC))-->
+					<select  class="form-select form_selectUt" id="selectSort" (change)="sortBy($event)" name="selectsort">
+						<option data-value="Last Uploaded Book" value="">Last Uploaded Book</option>
+						<option data-value="Rating--Low To High" value="lowtohigh">Rating--Low To High</option>
+						<option data-value="Rating--High To Low" value="hightolow">Rating--High To Low</option>
+						<option data-value="Book Name--A-Z" value="AtoZ">Book Name--A-Z</option>
+						<option data-value="Book Name--Z-A" value="ZtoA">Book Name--Z-A</option>
+					</select>
+					<!--END  -->
+				
+				</div>
+				<!-- <div class="col-sm-4"></div> -->
+			</div>
+			<hr class="mb-5"/>
+			<div id="cover-spin" [hidden]="loading"></div><!--Usage: Spinner of the page-->
+			<!-- This div is for material chip. what ever the user select from Lists(Publisher,Category,Sub-Category) will be shown here -->
+			<div class="row mt-2" *ngIf="subcatname!='' || catname!='' || pubName!=''">
+				      <div class="col-sm-2 customfiltered my-auto">Filtered by </div>
+					  <!-- There are three chips in this div -->
+						<div class="col-sm-10 my-auto">
+							<mat-chip-list aria-label="Dog selection" lass="mat-chip-list-stacked">
+								<!-- This is the chip for publisher,When a user select a publisher from publisher list ,the publisher name will be shown in this chip  -->
+								<mat-chip *ngIf="pubName!=''" matChipRemove>
+								   {{pubName}}<!--Publisher Name -->
+									<mat-icon (click)="filterend('1')" matChipRemove>cancel</mat-icon><!--Chip removal button-->
+								</mat-chip>
+								<!-- END -->
+								<!-- This is the chip for subcategory,When a user select a sub-category from sub-category list ,the sub-category name will be shown in this chip  -->
+								<mat-chip color="primary" matChipRemove *ngIf="subcatname!=''">
+
+								  {{subcatname}}<!--Sub-category Name-->
+								  <!-- <button matChipRemove> -->
+									<mat-icon matChipRemove (click)="filterend('2')">cancel</mat-icon><!--Chip removal button-->
+								  <!-- </button> -->
+								</mat-chip>
+								<!-- END -->
+								<!-- This is the chip for category,When a user select a category from category list ,the category name will be shown in this chip  -->
+								<mat-chip color="accent" matChipRemove *ngIf="catname!=''">
+								   {{catname}}<!--Category Name-->
+									<mat-icon matChipRemove (click)="filterend('3')">cancel</mat-icon><!--Chip removal button-->
+								</mat-chip>
+								<!-- END -->
+							  </mat-chip-list>
+					
+						</div>
+						<!-- END -->
+			</div>
+			<!-- END -->
+			<!-- This div contain all Book list and filtered book list -->
+			<div class="row mt-3" *ngIf="books.length!=0">	
+				<div class="col-sm-3 col_sm_3BooksView float-left" *ngFor="let x of books | paginate: { itemsPerPage: 8, currentPage: p,totalItems: total }; let j=index">
+					 <div class="bookList" @fade>
+						<div class="bookPro" style="cursor:pointer"><img [src]="x.book_image_path" alt="" />
+						
+							<!-- <div class="anim">
+								<div class="title">The movie even longer title</div>
+								<div class="description">
+								  Text lenghts of Title and Author or even Description do not matter. They will all perfectly accommodate into .thumb on hover
+								</div>
+							  </div> -->
+							  <div class="textbox" (click)="showbook(x.book_id,x.publisher_id)" href="javascript:void(0)">
+								<div class="book_details01">
+									<h4>{{x.book_name}}</h4><!--Shows book name-->
+								<h5>{{x.author_name}} </h5>	<!--Shows author name-->
+								 <h4 class="slider_price"><i class="fa fa-inr" aria-hidden="true"></i> {{x.price}} &nbsp;<small class="text-light">(Per Page)</small></h4></div><!--Shows Book price per page-->
+							   </div>
+						</div>
+						<div class="bookProDetails">
+							<div class="dropdown" (mouseenter)="onMouseEnter($event,x.book_id,x.book_name)" id="dropdown_open">
+								<div class="starRatingNew">  
+									<ngb-rating [max]="5" [(rate)]="avgRate[j]"  [readonly]="true" style="font-size:30px;color:rgb(254,188,7);margin-top:5px"></ngb-rating><!--Shows book rating-->
+								</div>
+						
+					          
+								<div class="dropdown-content starOnHover">
+									<h2 class="ratingTitle">Reader ratings</h2>
+									<div class="ratingPopup_Ut">
+									<ul>
+										<li>{{avgrt}} </li><!--Shows user rating-->
+										<li>out of 5</li>
+										<li>{{reviewData1.length}} rating(s)</li><!--Shows user review-->
+									</ul>
+
+									</div>
+
+								 <!-- This cotainer is showing progress bar depending on user rating -->
+								<div class="container" style="padding-left: 8%;" *ngIf="load_rating">
+									<ol reversed>
+                                        <!-- Showing pecentage of 5 star rating progress bar -->
+										<li> <mat-progress-bar
+											class="example-margin"
+											[color]="color1"
+											[mode]="mode"
+											[value]="t5"
+											[bufferValue]="bufferValue">
+										</mat-progress-bar> 
+										</li>
+										<!-- End -->
+                                        <!-- Showing pecentage of 4 star rating progress bar -->
+										<li>
+											<mat-progress-bar
+											class="example-margin"
+											[color]="color1"
+											[mode]="mode"
+											[value]="t4"
+											[bufferValue]="bufferValue">
+										</mat-progress-bar>
+										</li>
+										<!-- END -->
+                                        <!-- Showing pecentage of 3 star rating progress bar -->
+										<li>
+											<mat-progress-bar
+											class="example-margin"
+											[color]="color1"
+											[mode]="mode"
+											[value]="t3"
+											[bufferValue]="bufferValue">
+										</mat-progress-bar>
+										</li>
+										<!-- END -->
+                                        <!-- Showing pecentage of 2 star rating progress bar -->
+										<li>
+											<mat-progress-bar
+											class="example-margin"
+											[color]="color1"
+											[mode]="mode"
+											[value]="t2"
+											[bufferValue]="bufferValue">
+										</mat-progress-bar>
+										</li>
+										<!-- END -->
+                                        <!-- Showing pecentage of 1 star rating progress bar -->
+										<li>
+											<mat-progress-bar
+											class="example-margin"
+											[color]="color1"
+											[mode]="mode"
+											[value]="t1"
+											[bufferValue]="bufferValue">
+										</mat-progress-bar>
+										
+										</li>
+										<!-- END -->
+									</ol>
+								</div>
+								<!-- END -->
+								<div class="container text-center" *ngIf="!load_rating">
+									<div class="loader"></div>
+								</div>
+								
+								
+							<!-- <small><button hidden type="button" data-toggle="modal" id="open_modal" data-target="#reviewModal" >Reviews</button> </small>	 -->
+								 <a *ngIf="reviewData.length" data-toggle="modal" class="ratingPopup" id="open_modal" data-target="#reviewModal">Reader reviews</a><!--Usage: This is the modal button for user reviews-->
+								</div>
+							  </div>
+
+						</div>
+					</div> 
+				</div>
+
+
+			</div>
+			<!-- END -->
+			<div *ngIf="books.length==0" class="noBookavailable">
+				 <img src="assets/images/no-read-book-icons-set-260nw-299610074.jpg" height="200px" width="200px">
+				 <h5>No Books Available</h5>
+			
+			</div>
+
+		</div>
+		<br clear="all">
+	</div>
+	<div *ngIf="books!=''" style="text-align:center;"><pagination-controls (pageChange)="changePage($event)"></pagination-controls></div><!--This is the pagination-->
+</div>
+<hr class="m-2" *ngIf="r_book.length > 0"/>
+<!-- This is the carousel section -->
+<section *ngIf="r_book.length > 0">
+	<div class="containerPreeview">
+	  <div class="row">
+		  <div class="col-1"></div>
+		  <div class="col-10">
+			  <h3 class="p-4 mb-3">Top Rated Book</h3>
+		  </div>
+		  <div class="col-1"></div>
+		  <!-- This is the Carousel previous button -->
+		  <div class="col-1 prevButton">
+			<span class="customSpan prvCustom" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+			
+				<i class="fa fa-long-arrow-left" aria-hidden="true" style="font-size: 15px;color:gray"></i>
+
+			</span>
+		  </div>
+          <!-- END -->
+		  <!-- This is the carousel body section -->
+		  <div class="col-10">
+			  <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+  
+				  <div class="carousel-inner" >
+					  <div class="carousel-item active"  *ngIf="toprated_book_5.length > 0" >
+						  <div class="row rowSimilarPro">
+							  <div class="col-3 mb-3 col_3_similarPro" *ngFor="let topRated of toprated_book_5 ; let j=index">
+								  <div class="bookList" @fade>
+									<div class="bookPro" style="cursor:pointer">
+										<img class="img-fluid" height="30px" src="{{topRated.img_url}}{{topRated.data[0].book_image}}">
+										<div class="textbox" (click)="showbook(topRated.data[0].book_id,topRated.data[0].publisher_id)" href="javascript:void(0)">
+											<div class="book_details01">
+												<h4 class="slider_price">{{topRated.data[0].book_name}}</h4>
+											<h5 class="authorName">{{topRated.data[0].author_name}} </h5>	
+											 <h4 class="slider_price"><i class="fa fa-inr" aria-hidden="true"></i> {{topRated.data[0].price}} </h4></div>
+										   </div>
+									</div>
+									<div class="bookProDetails">
+										<ngb-rating [max]="5" [(rate)]="rating_first[j]"  [readonly]="true" style="font-size:15px;color:rgb(254,188,7);margin-top:5px"></ngb-rating>
+										
+									</div>
+								</div>
+							  </div>
+  
+						  </div>
+					  </div>
+
+					  <div class="carousel-item" *ngIf="toprated_book_10.length > 0 " >
+						<div class="row">
+
+							<div class="col-3 mb-3" *ngFor="let topRated of toprated_book_10;let j as index ">
+						
+								<div class="bookList">
+									<div class="bookPro" style="cursor:pointer">
+										<img class="img-fluid"  src="{{topRated.img_url}}{{topRated.data[0].book_image}}" height="30px">
+										<div class="textbox" (click)="showbook(topRated.data[0].book_id,topRated.data[0].publisher_id)" href="javascript:void(0)">
+											<div class="book_details01">
+												<h4 class="slider_price">{{topRated.data[0].book_name}}</h4>
+											<h5 class="authorName">{{topRated.data[0].author_name}} </h5>	
+											 <h4 class="slider_price"><i class="fa fa-inr" aria-hidden="true"></i> {{topRated.data[0].price}} </h4></div>
+										   </div>
+									</div>
+								
+									
+								<div class="bookProDetails">
+									<ngb-rating [max]="5" [(rate)]="rating_second[j]"  [readonly]="true" style="font-size:30px;color:rgb(254,188,7);margin-top:5px"></ngb-rating>
+
+								</div>
+
+							</div>
+								
+							</div>
+
+						</div>
+					</div>
+		
+				  </div>
+			  </div>
+		  </div>
+		  <!-- END -->
+		  <!-- This is the Carousel next button -->
+		  <div class="col-1 prevButton">
+			<span class="customSpan nxtCustom" href="#carouselExampleIndicators2" role="button" data-slide="next">
+				<i class="fa fa-long-arrow-right" aria-hidden="true" style="font-size: 15px;color:gray"></i>
+			</span>
+		  </div>
+		  <!-- END -->
+	  </div>
+  </div>
+  </section>
+<!-- END -->
+<!-- For Review Modal -->
+<div class="modal fade reviewModal_Ut" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Reviews for {{reviewBookName}}  <span style="color: white;font-size: medium;" class="badge badge-pill badge-warning"><i class="fa fa-star" style="color: white;" aria-hidden="true"></i> {{avgrt}}</span></h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+		
+		<div class="reviewList" *ngFor="let i of reviewData">
+			
+				<span style="color: white;" class="badge badge-pill badge-success"><i class="fa fa-star" style="color: white;" aria-hidden="true"></i> {{i.rating}}</span>
+              {{i.review}}
+			
+		
+			</div>
+		
+		</div>
+		<div class="modal-footer">
+			<p class="mt-3 reviewPopupFooterTxt" *ngIf="maxRange<reviewData1.length" >{{minRange+1}} - {{maxRange}} of {{reviewData1.length}} results</p>
+			<p class="mt-3 reviewPopupFooterTxt" *ngIf="maxRange>reviewData1.length&&minRange!=0" >{{minRange+1}}th of {{reviewData1.length}} results</p>
+			<p class="mt-3 reviewPopupFooterTxt" *ngIf="maxRange>reviewData1.length&&minRange==0" >{{minRange+1}}st of {{reviewData1.length}} result</p>
+			<button *ngIf="minRange>0" style="font-size:8px; color: white;" (click)="prev()" class="btn btn-dark"> <i class="fa fa-chevron-left"></i></button>
+			<button *ngIf="maxRange<reviewData1.length" style="font-size:11px; color: white;"  (click)="next()" class="btn btn-dark"> <i class="fa fa-chevron-right"></i></button>
+		</div>
+	  </div>
+	</div>
+</div>
+<!-- END -->
+<app-site-footer></app-site-footer><!--This is the footer Section-->

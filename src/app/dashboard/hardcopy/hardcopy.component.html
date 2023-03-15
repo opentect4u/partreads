@@ -1,0 +1,83 @@
+<app-adminheader></app-adminheader>
+
+
+<div class="page-body-wrapper">
+    <app-adminsidebar></app-adminsidebar>
+
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="card">
+                <div class="card-body">
+
+
+                    <div class="titleSec">
+                        <!-- <button type="button" class="btn btn-primary" (click)="addsubadmin()" >Add</button> -->
+                        <h2>Hard Copy Purchases</h2> 
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card mt-3">
+              <div class="text-center">
+                <!-- <div class="spinner-border text-primary" *ngIf="loading"></div> -->
+                <div id="cover-spin" *ngIf="loading"></div>
+             </div>
+                <div class="card-body">
+                    <mat-form-field >
+                        <mat-label>Search</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Search by name, email, book name, phone, publisher name and address" #input>
+                      </mat-form-field > 
+                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                       
+                        <ng-container matColumnDef="Name">
+                          <th mat-header-cell *matHeaderCellDef> Name </th>
+                          <td mat-cell *matCellDef="let row"> {{row.user_name.name}} </td>
+                        </ng-container>
+                      
+                        
+                        <ng-container matColumnDef="Email">
+                          <th mat-header-cell *matHeaderCellDef> Email</th>
+                          <td mat-cell *matCellDef="let row"> {{row.user_name.email}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="Phone">
+                            <th mat-header-cell *matHeaderCellDef> Phone</th>
+                            <td mat-cell *matCellDef="let row"> {{row.user_name.phone}} </td>
+                          </ng-container>
+                        <ng-container matColumnDef="Book">
+                            <th mat-header-cell *matHeaderCellDef> Book</th>
+                            <td mat-cell *matCellDef="let row"> {{row.book_name.book_name}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="Publisher">
+                            <th mat-header-cell *matHeaderCellDef> Publisher</th>
+                            <td mat-cell *matCellDef="let row"> {{row.publisher_name.user_name}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="Address">
+                            <th mat-header-cell *matHeaderCellDef> Address</th>
+                            <td mat-cell *matCellDef="let row"> {{row.address}}, {{row.city}}, {{row.state}} </td>
+                          </ng-container>
+                       
+                         
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        <tr class="mat-row" *matNoDataRow>
+                          <td class="mat-cell text-center" colspan="6">No data matching the filter "{{input.value}}"</td>
+                        </tr>
+                      </table> 
+                      
+                    <mat-paginator [pageSizeOptions]="[50,100,200]" showFirstLastButtons ></mat-paginator>
+                      
+                  
+                </div>
+
+
+
+            </div>
+
+        </div>
+       
+
+
+    </div>
+</div>

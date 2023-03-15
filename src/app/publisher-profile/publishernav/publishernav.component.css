@@ -1,0 +1,25 @@
+.alert{
+    padding: 20px;
+    margin-bottom: 15px;
+    color: #746e6e!important;
+    border-left: 4px solid #8d1616!important;
+  }
+  
+  /* The close button */
+  .closebtn {
+    margin-left: 15px;
+    color: #746e6e;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .loginbox{
+    margin-left: 70% !important;
+    margin-top: -11% !important; 
+    width: 30% !important; 
+    /* background-color: #fbc53c ; */
+  }

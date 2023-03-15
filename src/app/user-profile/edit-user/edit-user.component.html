@@ -1,0 +1,252 @@
+
+<!--
+      * This is the user's edit profile Page    
+-->
+
+<app-userheaderafterlogin></app-userheaderafterlogin><!--This is the header of the project-->
+<div class="bodyContainer"><!--Usage: This is the full body portion which contain sidebar and main content after header-->
+  <div class="wrapperCustome">
+    <app-usersidebar></app-usersidebar><!--Usage: This is the side bar for the user-->
+    
+    <div class="col-sm-9 float-left" ><!--Usage: div right after the side bar-->
+      
+    
+      <div class="rightSection">
+
+
+
+        <div class="row rowCustome">
+          <div class="form-group form_group_custome">
+            <div class="col-sm-4 float-left"></div>
+            <div class="col-sm-4 float-left">
+
+
+            </div>
+
+          </div>
+
+          <div class="form-group form_group_custome">  <!--Usage: Contain All fields and image about the user-->     
+         <div class="sideBarInf"><!--Usage: Contain image of the user, when a user select a image for his/her profile pic-->     
+      <div class="profilePic">
+        <span *ngIf="profile!=null || profile!='' || profile!=undefined" ><!--This span will getting shown when a user has uploaded profile picture-->
+        <img [src]="profile" alt="" /> <!--Preview image for user-->
+      </span>
+     
+        <span *ngIf="profile==''|| profile==null || profile==undefined" class="text-muted"> <!--This span will getting shown when a user has  not uploaded profile picture-->
+          <img src="/assets/images/no_dp.png" alt="" />
+        </span></div>
+         </div>
+               <!--Usage: This div contain user name field-->
+           <div  class="col-sm-3 float-left">
+                   <mat-form-field appearance="outline">
+                  <mat-label>Name</mat-label>
+                  <input matInput placeholder="Enter Name" #name [value]="p_name">
+                </mat-form-field>
+                <span class="text-danger fieldAleart" *ngIf="update&&name.value==''">*Please provide a
+                name.</span>
+            </div>
+                        <!--END-->
+
+                <!--Usage: This div contain user email field-->
+              <div class="col-sm-5 float-left">
+                  <mat-form-field appearance="outline">
+                  <mat-label>Email</mat-label>
+                  <input matInput placeholder="Enter Email" #email [value]="p_email" readonly><!--This email field always remain readonly-->
+                  <mat-icon *ngIf="email_verify=='Y'" class="tickIcon" matSuffix>done</mat-icon><!--If a user login with email then this right tickmark icon will getting shown-->
+                  <mat-icon *ngIf="email_verify=='N'" class="my-icon"  (click)="OpenModal('E',email.value)" data-toggle="modal" data-target="#otpmodal"   matSuffix #tooltip="matTooltip" matTooltip="Please verify email">warning</mat-icon><!--If a user login with email then this right tickmark icon will remain hide-->
+                </mat-form-field>
+               </div>
+                         <!-- END -->
+                 <!--Usage: This div contain user phone number-->
+            <div class="col-sm-4 float-left">
+                <mat-form-field appearance="outline">
+                  <mat-label>Phone No.
+                  </mat-label>
+                  <input matInput placeholder="Enter Phone No." (keypress)="preventNonNumericalInput($event)" #phone [value]="p_phone"  readonly><!--This phone field always remain readonly-->
+                  <mat-icon *ngIf="phone_verify=='Y'" class="tickIcon" matSuffix>done</mat-icon><!--If a user login with phone then this right tickmark icon will getting shown-->
+                  <mat-icon *ngIf="phone_verify=='N'" class="my-icon" (click)="OpenModal('M',phone.value)" data-toggle="modal" data-target="#otpmodal"  matSuffix #tooltip="matTooltip" matTooltip="Please verify phone no.">warning</mat-icon><!--If a user login with phone then this warning for verify  icon will remain hide-->
+                </mat-form-field>
+                <span  class="text-danger fieldAleart" *ngIf="update&&phone.value==''">*Please provide phone no.</span><!--This is the error validation message-->
+            </div>
+                        <!-- END -->
+
+
+                <!--Usage: This divs contain Address about the user-->
+          <div class="form-group form_group_custome pt-4"><!--Contain Street/House Number -->
+           <div class="col-sm-6 float-left">
+                <mat-form-field appearance="outline">
+                  <mat-label>Street/House Number</mat-label>
+                  <input matInput placeholder="Enter Street/House No." #street [value]="p_street">
+                  <!-- <mat-icon matSuffix>location_on</mat-icon> -->
+                </mat-form-field>
+                
+                <span  class="text-danger fieldAleart "
+                *ngIf="update&&street.value==''">*Please provide street</span>
+              </div>
+            <div class="col-sm-6 float-left">
+              <!-- <input type="text" class="form-control inputfont" placeholder="City(required)" #city
+                [value]="p_city" /> -->
+
+
+                <mat-form-field appearance="outline">
+                  <mat-label>City</mat-label>
+                  <input matInput placeholder="Enter City" #city
+                  [value]="p_city">
+                  <!-- <mat-icon matSuffix>location_on </mat-icon> -->
+                  <!-- <mat-hint>Hint</mat-hint> -->
+                </mat-form-field>
+                <span  class="text-danger fieldAleart" *ngIf="update&&city.value==''">*Please provide
+                city</span>
+            </div>
+
+
+
+          </div>
+
+          <div class="form-group form_group_custome"><!--Contain Pin Code-->
+
+            <div class="col-sm-6 float-left">
+              <!-- <input type="text" class="form-control inputfont" placeholder="Pin code(required)"
+                #pin [value]="p_pin" /> -->
+                <mat-form-field appearance="outline">
+                  <mat-label>Pin Code</mat-label>
+                  <input matInput placeholder="Enter Pin Code" #pin [value]="p_pin">
+                </mat-form-field>  
+                <span  class="text-danger fieldAleart" *ngIf="update&&pin.value==''">*Please provide
+                pincode</span>
+              </div>
+            <div class="col-sm-6 float-left">
+              
+              <!-- <input type="text" class="form-control inputfont" placeholder="State(required)"
+                #state [value]="p_state" /> -->
+
+                <mat-form-field appearance="outline">
+                  <mat-label>State</mat-label>
+                  <input matInput placeholder="Enter State" #state [value]="p_state">
+                </mat-form-field> 
+                
+                <span  class="text-danger fieldAleart" *ngIf="update&&state.value==''">*Please provide
+                state</span>
+            </div>
+          </div>
+          <div  class="form-group form_group_custome"><!--Contain Country-->
+            <div class="col-sm-6 float-left">
+              <!-- <input type="text" class="form-control inputfont" placeholder="Country(required)"
+                #country [value]="p_country" /> -->
+                <mat-form-field appearance="outline">
+                  <mat-label>Country</mat-label>
+                  <input matInput placeholder="Enter Country" #country [value]="p_country">
+                </mat-form-field> 
+                
+                <span  class="text-danger fieldAleart" *ngIf="update&&country.value==''">*Please
+                provide country</span>
+            </div>
+
+            <div class="col-sm-6 float-left"><input type="file" id="myfile" name="myfile" class="form-control inputfont"
+                title="Upload Profile Photo (required)" accept=".jpeg,.jpg,.png" (change)="onChange($event)">
+
+            </div>
+
+          </div>
+                 <!-- END -->
+                  <!--This div is for selecting a user is Advocate/CA or CS/Student-->
+          <div class="form-group form_group_custome" id="spanCollapse">
+              <div class="col-sm-6">
+                <span class="customSpan">Whether you are</span><br/>
+                <mat-radio-group>
+                <mat-radio-button class="example-radio-button" [checked]="Clg" id="std" color="primary" value="S" (change)="showValue($event)">Student/Academician</mat-radio-button>
+                <mat-radio-button class="example-radio-butto"  [checked]="Corporate" id="corporate" color="primary" (change)="showValue($event)" value="C">Corporate Counsel</mat-radio-button>
+                <mat-radio-button class="example-radio-button" [checked]="Advocate" id="advocate" (change)="showValue($event)"  color="primary" value="A">Advocate</mat-radio-button>
+              </mat-radio-group>
+               </div>
+                 <!--Note: Initialy this div will remain hidden-->
+               <div class="col-sm-6">
+                  <label>&nbsp;</label>
+                <input type="text" hidden id="colg" class="form-control inputfont" placeholder="College/University"/><!--This div will show when a user choose Student/Academician-->
+                <input type="text" hidden class="form-control inputfont" id="com_name" placeholder="Name Of Company"/><!--This div will show when a user choose Corporate Counsel-->
+                <input type="text" hidden class="form-control inputfont" id="prac_area" placeholder="Practice Area"/><!--This div will show when a user choose Advocate-->
+              </div>
+                     <!--END-->
+          </div>
+                       <!--END-->
+          <div id="cover-spin" [hidden]="!spin_show"></div>
+
+        </div>
+          <div class="col-sm-12 submitButtn mt-2"><!--Usage: This div contain a button ,the data will get submitted -->
+            <!--Usage: This button will submit user details-->
+            <input [disabled]="spin_show" type="submit" class="btn" value="Submit"  (click)="send_data(name.value,email.value,phone.value,street.value,city.value,pin.value,state.value,country.value)">
+        </div>
+        </div>
+      </div>
+    </div>
+    <br clear="all">
+
+  </div>
+</div>
+<!-- This modal will show ,when a user choose a image for his profile but the image is in wrong format-->
+<div id="myModal" class="modal" role="dialog">
+
+  <div class="modal-dialog" [ngClass]="modal_msg=='Wrong format!!'? 'modal-sm': 'modal-md'">
+    <div class="modal-content" id="cont">
+
+      <p class="inputfont ml-3">{{modal_msg}}</p>
+
+      <div class="modal-footer">
+        <button type="button" class="btn button-no" data-dismiss="modal"
+          *ngIf="modal_msg!='One or more fields may be empty.'&& modal_msg!='Wrong format!!'"
+          (click)="modal_close_fun()">Close</button>
+        <button type="button" class="btn button-yes" data-dismiss="modal"
+          *ngIf="modal_msg=='One or more fields may be empty.'||modal_msg=='Wrong format!!'"
+          (click)="modal_close_funtry()">Try Again</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END -->
+<!-- This modal will show ,when a user click on verify email / verify phone-->
+<div id="otpmodal" class="modal fade" role="dialog" >
+  <div class="modal-dialog modal-md">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header modal_head modal_headCustom">
+        <h5 class="modal-title">OTP verification</h5>   
+        <button type="button" class="close" data-dismiss="modal" id="CloseModal" (click)="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row mt-3">
+          <div class="col-12 text-center mb-3">
+            <mat-label id="modalSpan"></mat-label>
+          </div>
+        <div class="col-12">
+            <div class="verification-code--inputs text-center">
+                <input type="tel" #Otp1 maxlength="1" id="otp1" placeholder="0" (keyup)="setfocus($event,'otp2',1)" (keypress)="preventNonNumericalInput($event)"/><span>-</span>
+                <input type="tel" #Otp2 maxlength="1" id="otp2" placeholder="0" (keyup)="setfocus($event,'otp3',2)" (keypress)="preventNonNumericalInput($event)"/><span>-</span>
+                <input type="tel" #Otp3 maxlength="1" id="otp3" placeholder="0" (keyup)="setfocus($event,'otp4',3)" (keypress)="preventNonNumericalInput($event)"/><span>-</span>
+                <input type="tel" #Otp4 maxlength="1" id="otp4" placeholder="0" (keyup)="setfocus($event,'otp5',4)" (keypress)="preventNonNumericalInput($event)"/><span>-</span>
+                <input type="tel" #Otp5 maxlength="1" id="otp5" placeholder="0" (keyup)="setfocus($event,'otp6',5)" (keypress)="preventNonNumericalInput($event)"/><span>-</span>
+                <input type="tel" #Otp6 maxlength="1" id="otp6" placeholder="0" (keyup)="setfocus($event,'otp6',6)" (keypress)="preventNonNumericalInput($event)"/>
+            </div>
+            <!-- <span id="matLabel" class="text-danger text-center"></span> -->
+          </div>
+          <div class="col-12 mt-1 otpTimer text-center" *ngIf="this.Mode!='E'">
+            <span class="didnotRecieve">Didn't recieve OTP? </span> <span  class="customTimer" id="counter_left">01:59</span><span id="resendOtp" class="customTimer" (click)="Update()">RESEND OTP</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="finalSubmitButton mt-3" (click)="submit()" [disabled]="Otp1.value=='' || Otp2.value=='' || Otp3.value=='' || Otp4.value=='' || Otp5.value=='' || Otp6.value==''">
+          
+          <div [hidden]="!show_loader">Submit </div>
+          <div [hidden]="show_loader" class="spinner-border text-light"></div>
+        
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+<!-- END -->
+<app-site-footer></app-site-footer><!--This is the footer section of this project-->

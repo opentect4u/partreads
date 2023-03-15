@@ -1,0 +1,80 @@
+.profile-card{width: 33%;float:left;border-radius: 14px;}
+.secondary-card{width: 65%;float:right;border-radius: 14px;}
+hr{height:0px!important}
+.image img {
+    transition: all 0.5s
+}
+
+.profile-card:hover .image img {
+    transform: scale(1.5)
+}
+
+.btn img{
+    /* height: 140px;
+    width: 140px;*/
+    border-radius: 50% 
+}
+
+.name {
+    font-size: 19px;
+    font-weight: 500;
+}
+
+.idd {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 14px;
+}
+
+.idd1 {
+    font-size: 12px
+}
+
+.number {
+    font-size: 22px;
+    font-weight: bold
+}
+
+.follow {
+    font-size: 12px;
+    font-weight: 500;
+    color: #444444
+}
+
+.btn1 {
+    height: 40px;
+    width: 150px;
+    border: none;
+    /* background-color: #000; */
+    color: #aeaeae;
+    font-size: 15px
+}
+
+.text span {
+    font-size: 13px;
+    color: #545454;
+    font-weight: 500
+}
+
+.icons i {
+    font-size: 19px
+}
+
+hr .new1 {
+    border: 1px solid
+}
+
+.join {
+    font-size: 14px;
+    color: #a0a0a0;
+    font-weight: bold
+}
+
+.date {
+    background-color: #ccc
+}
+mat-label{ font-size: 15px;color: #464ed0;font-weight: 500;}
+.customText{word-break: break-all;font-size: 14px;font-weight: 400;margin: 5px;width: 90%;float: right;}
+ul{list-style-type: none;}
+ul li label{color: #464ed0;margin: 11px;font-size: 16px;font-weight: 500;}
+ul li span{font-size: 16px;font-weight: 400;}
