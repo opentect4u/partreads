@@ -66,3 +66,27 @@
   background-color: #fdfcfc;
   color: rgb(5, 5, 5);
 }
+
+.fb:hover{
+/* color:#385898; */
+transform: scale(1.5,1.5);
+
+
+}
+
+.twi:hover{
+
+/* color:rgb(59, 169, 212) */
+transform: scale(1.5,1.5);
+
+}
+.insta:hover{
+  /* color: rgb(172, 13, 87); */
+  transform: scale(1.5,1.5);
+
+}
+.linkd:hover{
+  /* color: rgb(20, 76, 122); */
+  transform: scale(1.5,1.5);
+
+}

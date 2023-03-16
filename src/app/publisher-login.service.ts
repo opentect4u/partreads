@@ -9,7 +9,7 @@ import { GlobalConstants } from './globalvar/global';
 export class PublisherLoginService {
  url=GlobalConstants.apiURL+'/api/publisher/login';
   constructor(private http:HttpClient) {}
-   login_pub(pub:publog){
+   login_pub(pub:any){
       return this.http.post(this.url,pub)
       
   }

@@ -533,25 +533,25 @@ export class IndexpageComponent implements OnInit {
       this.email_flag = 0;
       this.show_loader = true;
     }else{
-    // this.s.submit_phone_email(this.f.Email_phone.value).subscribe(data => {
-    //   this.get_otp = '';
-    //   this.email_phone = '';
-    //   this.check_response = data;
-    //   if (this.check_response.success == 1) {
-    //     this.get_otp = this.check_response.otp;
-    //     this.email_phone = this.check_response.email_phone;
-    //     this.confirm_email = "";
-    //     this.step = 2;
-    //     this.update();
-    //     this.email_flag = 0;
-    //     this.show_loader = true;
-    //   }
-    //   else {
-    //     this.showToaster('Registered as a different type of user');
-    //   }
-    // }, error => {
-    //   this.showToaster('Something went wrong! Please try again later');
-    // })
+    this.s.submit_phone_email(this.f.Email_phone.value).subscribe(data => {
+      this.get_otp = '';
+      this.email_phone = '';
+      this.check_response = data;
+      if (this.check_response.success == 1) {
+        this.get_otp = this.check_response.otp;
+        this.email_phone = this.check_response.email_phone;
+        this.confirm_email = "";
+        this.step = 2;
+        this.update();
+        this.email_flag = 0;
+        this.show_loader = true;
+      }
+      else {
+        this.showToaster('Registered as a different type of user');
+      }
+    }, error => {
+      this.showToaster('Something went wrong! Please try again later');
+    })
     }
     
   }

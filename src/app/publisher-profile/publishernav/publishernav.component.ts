@@ -86,9 +86,12 @@ export class PublishernavComponent implements OnInit {
     else {//if user_id and password fields are not empty
        this.show_loader=false;
       if (this.email_flag == 1) {//if email is a valid email
+        const formData=new FormData()
+        formData.append('user_id',v1)
+        formData.append('user_pass',v2)
         this.login.user_id = v1;
         this.login.user_pass = v2;
-        this.publogin.login_pub(this.login).subscribe(data => {
+        this.publogin.login_pub(formData).subscribe(data => {
           // console.log('Success!', data)
           this.userData = data;
           if (this.userData.success == 1) {

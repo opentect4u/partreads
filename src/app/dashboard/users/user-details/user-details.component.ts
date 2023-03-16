@@ -46,7 +46,7 @@ export class UserDetailsComponent implements OnInit {
   u_type:any='';
   coupon_used:any=[];
   ngOnInit(): void {
-    debugger;
+    // debugger;
     this.id=this.activatedRoute.snapshot.params['id'];
     this.view.getUserDetails(this.id).subscribe(data=>{
       // console.log(data)
@@ -85,12 +85,17 @@ export class UserDetailsComponent implements OnInit {
       this.b_color[i]="#" + ("00000" + Math.floor(Math.random() * Math.pow(16, 6)).toString(16)).slice(-6);
         }
         if(this.details.used_coupon.length!=0){
-          for(let i=0;i<this.details.used_coupon.length;i++){
-            this.coupon_used.push({
-              coupon_code:this.details.used_coupon[i].coupon_code,
-              created_at:this.details.used_coupon[i].created_at,
-              book_name:this.details.used_coupon[i].book_details.book_name,
-            })
+            for(let i=0;i<this.details.used_coupon.length;i++){
+            console.log(this.details.used_coupon[i].coupon_code,this.details.used_coupon[i].created_at,this.details.used_coupon[i].book_details?.book_name)
+             if(this.details.used_coupon[i].book_details?.book_name){
+              this.coupon_used.push({
+                coupon_code:this.details.used_coupon[i].coupon_code,
+                created_at:this.details.used_coupon[i].created_at,
+                book_name:this.details.used_coupon[i].book_details?.book_name ?this.details.used_coupon[i].book_details?.book_name: 'N/A',
+              })
+             }
+           
+
          }
          this.fetchdata(this.coupon_used);
          this.dataSource=new MatTableDataSource(this.coupon_used)
